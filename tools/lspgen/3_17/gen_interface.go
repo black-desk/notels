@@ -6,24 +6,11 @@ import (
 	"text/template"
 )
 
-func comment(input any) string {
-	switch v := input.(type) {
-	case Request:
-		if v.Documentation != "" {
-			return "/*\n" + v.Documentation + "*/"
-		} else {
-			return ""
-		}
-	case Notification:
-		if v.Documentation != "" {
-			return "/*\n" + v.Documentation + "*/"
-		} else {
-			return ""
-		}
-	default:
-		log.Fatalw("unexpected type",
-			"input", input)
-		panic("")
+func comment(s string) string {
+	if s != "" {
+		return "/*\n" + s + "\n*/"
+	} else {
+		return ""
 	}
 }
 
