@@ -22,8 +22,8 @@ const (
 	SemanticTokenTypesNamespace = "namespace"
 
 	/*
-	Represents a generic type. Acts as a fallback for types which can't be mapped to
-	a specific type like class or enum.
+		Represents a generic type. Acts as a fallback for types which can't be mapped to
+		a specific type like class or enum.
 	*/
 	SemanticTokenTypesType = "type"
 
@@ -68,7 +68,7 @@ const (
 	SemanticTokenTypesOperator = "operator"
 
 	/*
-	@since 3.17.0
+		@since 3.17.0
 	*/
 	SemanticTokenTypesDecorator = "decorator"
 )
@@ -173,14 +173,14 @@ type DocumentDiagnosticReportKind string
 const (
 
 	/*
-	A diagnostic report with a full
-	set of problems.
+		A diagnostic report with a full
+		set of problems.
 	*/
 	DocumentDiagnosticReportKindFull = "full"
 
 	/*
-	A report indicating that the last
-	returned report is still accurate.
+		A report indicating that the last
+		returned report is still accurate.
 	*/
 	DocumentDiagnosticReportKindUnchanged = "unchanged"
 )
@@ -217,8 +217,8 @@ const (
 	ErrorCodesInternalError = -32603
 
 	/*
-	Error code indicating that a server received a notification or
-	request before the server has received the `initialize` request.
+		Error code indicating that a server received a notification or
+		request before the server has received the `initialize` request.
 	*/
 	ErrorCodesServerNotInitialized = -32002
 
@@ -249,39 +249,39 @@ type LSPErrorCodes int
 const (
 
 	/*
-	A request failed but it was syntactically correct, e.g the
-	method name was known and the parameters were valid. The error
-	message should contain human readable information about why
-	the request failed.
+		A request failed but it was syntactically correct, e.g the
+		method name was known and the parameters were valid. The error
+		message should contain human readable information about why
+		the request failed.
 
-	@since 3.17.0
+		@since 3.17.0
 	*/
 	LSPErrorCodesRequestFailed = -32803
 
 	/*
-	The server cancelled the request. This error code should
-	only be used for requests that explicitly support being
-	server cancellable.
+		The server cancelled the request. This error code should
+		only be used for requests that explicitly support being
+		server cancellable.
 
-	@since 3.17.0
+		@since 3.17.0
 	*/
 	LSPErrorCodesServerCancelled = -32802
 
 	/*
-	The server detected that the content of a document got
-	modified outside normal conditions. A server should
-	NOT send this error code if it detects a content change
-	in it unprocessed messages. The result even computed
-	on an older state might still be useful for the client.
+		The server detected that the content of a document got
+		modified outside normal conditions. A server should
+		NOT send this error code if it detects a content change
+		in it unprocessed messages. The result even computed
+		on an older state might still be useful for the client.
 
-	If a client decides that a result is not of any use anymore
-	the client should cancel the request.
+		If a client decides that a result is not of any use anymore
+		the client should cancel the request.
 	*/
 	LSPErrorCodesContentModified = -32801
 
 	/*
-	The client has canceled a request and a server as detected
-	the cancel.
+		The client has canceled a request and a server as detected
+		the cancel.
 	*/
 	LSPErrorCodesRequestCancelled = -32800
 )
@@ -311,17 +311,17 @@ type FoldingRangeKind string
 const (
 
 	/*
-	Folding range for a comment
+		Folding range for a comment
 	*/
 	FoldingRangeKindComment = "comment"
 
 	/*
-	Folding range for an import or include
+		Folding range for an import or include
 	*/
 	FoldingRangeKindImports = "imports"
 
 	/*
-	Folding range for a region (e.g. `#region`)
+		Folding range for a region (e.g. `#region`)
 	*/
 	FoldingRangeKindRegion = "region"
 )
@@ -450,7 +450,7 @@ type SymbolTag uint
 const (
 
 	/*
-	Render a symbol as obsolete, usually using a strike-out.
+		Render a symbol as obsolete, usually using a strike-out.
 	*/
 	SymbolTagDeprecated = 1
 )
@@ -479,27 +479,27 @@ type UniquenessLevel string
 const (
 
 	/*
-	The moniker is only unique inside a document
+		The moniker is only unique inside a document
 	*/
 	UniquenessLevelDocument = "document"
 
 	/*
-	The moniker is unique inside a project for which a dump got created
+		The moniker is unique inside a project for which a dump got created
 	*/
 	UniquenessLevelProject = "project"
 
 	/*
-	The moniker is unique inside the group to which a project belongs
+		The moniker is unique inside the group to which a project belongs
 	*/
 	UniquenessLevelGroup = "group"
 
 	/*
-	The moniker is unique inside the moniker scheme.
+		The moniker is unique inside the moniker scheme.
 	*/
 	UniquenessLevelScheme = "scheme"
 
 	/*
-	The moniker is globally unique
+		The moniker is globally unique
 	*/
 	UniquenessLevelGlobal = "global"
 )
@@ -532,18 +532,18 @@ type MonikerKind string
 const (
 
 	/*
-	The moniker represent a symbol that is imported into a project
+		The moniker represent a symbol that is imported into a project
 	*/
 	MonikerKindImport = "import"
 
 	/*
-	The moniker represents a symbol that is exported from a project
+		The moniker represents a symbol that is exported from a project
 	*/
 	MonikerKindExport = "export"
 
 	/*
-	The moniker represents a symbol that is local to a project (e.g. a local
-	variable of a function, a class not visible outside the project, ...)
+		The moniker represents a symbol that is local to a project (e.g. a local
+		variable of a function, a class not visible outside the project, ...)
 	*/
 	MonikerKindLocal = "local"
 )
@@ -574,12 +574,12 @@ type InlayHintKind uint
 const (
 
 	/*
-	An inlay hint that for a type annotation.
+		An inlay hint that for a type annotation.
 	*/
 	InlayHintKindType = 1
 
 	/*
-	An inlay hint that is for a parameter.
+		An inlay hint that is for a parameter.
 	*/
 	InlayHintKindParameter = 2
 )
@@ -607,22 +607,22 @@ type MessageType uint
 const (
 
 	/*
-	An error message.
+		An error message.
 	*/
 	MessageTypeError = 1
 
 	/*
-	A warning message.
+		A warning message.
 	*/
 	MessageTypeWarning = 2
 
 	/*
-	An information message.
+		An information message.
 	*/
 	MessageTypeInfo = 3
 
 	/*
-	A log message.
+		A log message.
 	*/
 	MessageTypeLog = 4
 )
@@ -653,20 +653,20 @@ type TextDocumentSyncKind uint
 const (
 
 	/*
-	Documents should not be synced at all.
+		Documents should not be synced at all.
 	*/
 	TextDocumentSyncKindNone = 0
 
 	/*
-	Documents are synced by always sending the full content
-	of the document.
+		Documents are synced by always sending the full content
+		of the document.
 	*/
 	TextDocumentSyncKindFull = 1
 
 	/*
-	Documents are synced by sending the full content on open.
-	After that only incremental updates to the document are
-	send.
+		Documents are synced by sending the full content on open.
+		After that only incremental updates to the document are
+		send.
 	*/
 	TextDocumentSyncKindIncremental = 2
 )
@@ -695,18 +695,18 @@ type TextDocumentSaveReason uint
 const (
 
 	/*
-	Manually triggered, e.g. by the user pressing save, by starting debugging,
-	or by an API call.
+		Manually triggered, e.g. by the user pressing save, by starting debugging,
+		or by an API call.
 	*/
 	TextDocumentSaveReasonManual = 1
 
 	/*
-	Automatic after a delay.
+		Automatic after a delay.
 	*/
 	TextDocumentSaveReasonAfterDelay = 2
 
 	/*
-	When the editor lost focus.
+		When the editor lost focus.
 	*/
 	TextDocumentSaveReasonFocusOut = 3
 )
@@ -833,7 +833,7 @@ type CompletionItemTag uint
 const (
 
 	/*
-	Render a completion as obsolete, usually using a strike-out.
+		Render a completion as obsolete, usually using a strike-out.
 	*/
 	CompletionItemTagDeprecated = 1
 )
@@ -861,19 +861,19 @@ type InsertTextFormat uint
 const (
 
 	/*
-	The primary text to be inserted is treated as a plain string.
+		The primary text to be inserted is treated as a plain string.
 	*/
 	InsertTextFormatPlainText = 1
 
 	/*
-	The primary text to be inserted is treated as a snippet.
+		The primary text to be inserted is treated as a snippet.
 
-	A snippet can define tab stops and placeholders with `$1`, `$2`
-	and `${3:foo}`. `$0` defines the final tab stop, it defaults to
-	the end of the snippet. Placeholders with equal identifiers are linked,
-	that is typing in one will update others too.
+		A snippet can define tab stops and placeholders with `$1`, `$2`
+		and `${3:foo}`. `$0` defines the final tab stop, it defaults to
+		the end of the snippet. Placeholders with equal identifiers are linked,
+		that is typing in one will update others too.
 
-	See also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax
+		See also: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#snippet_syntax
 	*/
 	InsertTextFormatSnippet = 2
 )
@@ -904,22 +904,22 @@ type InsertTextMode uint
 const (
 
 	/*
-	The insertion or replace strings is taken as it is. If the
-	value is multi line the lines below the cursor will be
-	inserted using the indentation defined in the string value.
-	The client will not apply any kind of adjustments to the
-	string.
+		The insertion or replace strings is taken as it is. If the
+		value is multi line the lines below the cursor will be
+		inserted using the indentation defined in the string value.
+		The client will not apply any kind of adjustments to the
+		string.
 	*/
 	InsertTextModeAsIs = 1
 
 	/*
-	The editor adjusts leading whitespace of new lines so that
-	they match the indentation up to the cursor of the line for
-	which the item is accepted.
+		The editor adjusts leading whitespace of new lines so that
+		they match the indentation up to the cursor of the line for
+		which the item is accepted.
 
-	Consider a line like this: <2tabs><cursor><3tabs>foo. Accepting a
-	multi line completion item is indented using 2 tabs and all
-	following lines inserted will be indented using 2 tabs as well.
+		Consider a line like this: <2tabs><cursor><3tabs>foo. Accepting a
+		multi line completion item is indented using 2 tabs and all
+		following lines inserted will be indented using 2 tabs as well.
 	*/
 	InsertTextModeAdjustIndentation = 2
 )
@@ -947,17 +947,17 @@ type DocumentHighlightKind uint
 const (
 
 	/*
-	A textual occurrence.
+		A textual occurrence.
 	*/
 	DocumentHighlightKindText = 1
 
 	/*
-	Read-access of a symbol, like reading a variable.
+		Read-access of a symbol, like reading a variable.
 	*/
 	DocumentHighlightKindRead = 2
 
 	/*
-	Write-access of a symbol, like writing to a variable.
+		Write-access of a symbol, like writing to a variable.
 	*/
 	DocumentHighlightKindWrite = 3
 )
@@ -986,78 +986,78 @@ type CodeActionKind string
 const (
 
 	/*
-	Empty kind.
+		Empty kind.
 	*/
 	CodeActionKindEmpty = ""
 
 	/*
-	Base kind for quickfix actions: 'quickfix'
+		Base kind for quickfix actions: 'quickfix'
 	*/
 	CodeActionKindQuickFix = "quickfix"
 
 	/*
-	Base kind for refactoring actions: 'refactor'
+		Base kind for refactoring actions: 'refactor'
 	*/
 	CodeActionKindRefactor = "refactor"
 
 	/*
-	Base kind for refactoring extraction actions: 'refactor.extract'
+		Base kind for refactoring extraction actions: 'refactor.extract'
 
-	Example extract actions:
+		Example extract actions:
 
-	- Extract method
-	- Extract function
-	- Extract variable
-	- Extract interface from class
-	- ...
+		- Extract method
+		- Extract function
+		- Extract variable
+		- Extract interface from class
+		- ...
 	*/
 	CodeActionKindRefactorExtract = "refactor.extract"
 
 	/*
-	Base kind for refactoring inline actions: 'refactor.inline'
+		Base kind for refactoring inline actions: 'refactor.inline'
 
-	Example inline actions:
+		Example inline actions:
 
-	- Inline function
-	- Inline variable
-	- Inline constant
-	- ...
+		- Inline function
+		- Inline variable
+		- Inline constant
+		- ...
 	*/
 	CodeActionKindRefactorInline = "refactor.inline"
 
 	/*
-	Base kind for refactoring rewrite actions: 'refactor.rewrite'
+		Base kind for refactoring rewrite actions: 'refactor.rewrite'
 
-	Example rewrite actions:
+		Example rewrite actions:
 
-	- Convert JavaScript function to class
-	- Add or remove parameter
-	- Encapsulate field
-	- Make method static
-	- Move method to base class
-	- ...
+		- Convert JavaScript function to class
+		- Add or remove parameter
+		- Encapsulate field
+		- Make method static
+		- Move method to base class
+		- ...
 	*/
 	CodeActionKindRefactorRewrite = "refactor.rewrite"
 
 	/*
-	Base kind for source actions: `source`
+		Base kind for source actions: `source`
 
-	Source code actions apply to the entire file.
+		Source code actions apply to the entire file.
 	*/
 	CodeActionKindSource = "source"
 
 	/*
-	Base kind for an organize imports source action: `source.organizeImports`
+		Base kind for an organize imports source action: `source.organizeImports`
 	*/
 	CodeActionKindSourceOrganizeImports = "source.organizeImports"
 
 	/*
-	Base kind for auto-fix source actions: `source.fixAll`.
+		Base kind for auto-fix source actions: `source.fixAll`.
 
-	Fix all actions automatically fix errors that have a clear fix that do not require user input.
-	They should not suppress errors or perform unsafe fixes such as generating new types or classes.
+		Fix all actions automatically fix errors that have a clear fix that do not require user input.
+		They should not suppress errors or perform unsafe fixes such as generating new types or classes.
 
-	@since 3.15.0
+		@since 3.15.0
 	*/
 	CodeActionKindSourceFixAll = "source.fixAll"
 )
@@ -1088,17 +1088,17 @@ type TraceValues string
 const (
 
 	/*
-	Turn tracing off.
+		Turn tracing off.
 	*/
 	TraceValuesOff = "off"
 
 	/*
-	Trace messages only.
+		Trace messages only.
 	*/
 	TraceValuesMessages = "messages"
 
 	/*
-	Verbose message tracing.
+		Verbose message tracing.
 	*/
 	TraceValuesVerbose = "verbose"
 )
@@ -1131,12 +1131,12 @@ type MarkupKind string
 const (
 
 	/*
-	Plain text is supported as a content format
+		Plain text is supported as a content format
 	*/
 	MarkupKindPlainText = "plaintext"
 
 	/*
-	Markdown is supported as a content format
+		Markdown is supported as a content format
 	*/
 	MarkupKindMarkdown = "markdown"
 )
@@ -1166,24 +1166,24 @@ type PositionEncodingKind string
 const (
 
 	/*
-	Character offsets count UTF-8 code units.
+		Character offsets count UTF-8 code units.
 	*/
 	PositionEncodingKindUTF8 = "utf-8"
 
 	/*
-	Character offsets count UTF-16 code units.
+		Character offsets count UTF-16 code units.
 
-	This is the default and must always be supported
-	by servers
+		This is the default and must always be supported
+		by servers
 	*/
 	PositionEncodingKindUTF16 = "utf-16"
 
 	/*
-	Character offsets count UTF-32 code units.
+		Character offsets count UTF-32 code units.
 
-	Implementation note: these are the same as Unicode code points,
-	so this `PositionEncodingKind` may also be used for an
-	encoding-agnostic representation of character offsets.
+		Implementation note: these are the same as Unicode code points,
+		so this `PositionEncodingKind` may also be used for an
+		encoding-agnostic representation of character offsets.
 	*/
 	PositionEncodingKindUTF32 = "utf-32"
 )
@@ -1212,17 +1212,17 @@ type FileChangeType uint
 const (
 
 	/*
-	The file got created.
+		The file got created.
 	*/
 	FileChangeTypeCreated = 1
 
 	/*
-	The file got changed.
+		The file got changed.
 	*/
 	FileChangeTypeChanged = 2
 
 	/*
-	The file got deleted.
+		The file got deleted.
 	*/
 	FileChangeTypeDeleted = 3
 )
@@ -1247,17 +1247,17 @@ type WatchKind uint
 const (
 
 	/*
-	Interested in create events.
+		Interested in create events.
 	*/
 	WatchKindCreate = 1
 
 	/*
-	Interested in change events
+		Interested in change events
 	*/
 	WatchKindChange = 2
 
 	/*
-	Interested in delete events
+		Interested in delete events
 	*/
 	WatchKindDelete = 4
 )
@@ -1286,22 +1286,22 @@ type DiagnosticSeverity uint
 const (
 
 	/*
-	Reports an error.
+		Reports an error.
 	*/
 	DiagnosticSeverityError = 1
 
 	/*
-	Reports a warning.
+		Reports a warning.
 	*/
 	DiagnosticSeverityWarning = 2
 
 	/*
-	Reports an information.
+		Reports an information.
 	*/
 	DiagnosticSeverityInformation = 3
 
 	/*
-	Reports a hint.
+		Reports a hint.
 	*/
 	DiagnosticSeverityHint = 4
 )
@@ -1333,17 +1333,17 @@ type DiagnosticTag uint
 const (
 
 	/*
-	Unused or unnecessary code.
+		Unused or unnecessary code.
 
-	Clients are allowed to render diagnostics with this tag faded out instead of having
-	an error squiggle.
+		Clients are allowed to render diagnostics with this tag faded out instead of having
+		an error squiggle.
 	*/
 	DiagnosticTagUnnecessary = 1
 
 	/*
-	Deprecated or obsolete code.
+		Deprecated or obsolete code.
 
-	Clients are allowed to rendered diagnostics with this tag strike through.
+		Clients are allowed to rendered diagnostics with this tag strike through.
 	*/
 	DiagnosticTagDeprecated = 2
 )
@@ -1371,19 +1371,19 @@ type CompletionTriggerKind uint
 const (
 
 	/*
-	Completion was triggered by typing an identifier (24x7 code
-	complete), manual invocation (e.g Ctrl+Space) or via API.
+		Completion was triggered by typing an identifier (24x7 code
+		complete), manual invocation (e.g Ctrl+Space) or via API.
 	*/
 	CompletionTriggerKindInvoked = 1
 
 	/*
-	Completion was triggered by a trigger character specified by
-	the `triggerCharacters` properties of the `CompletionRegistrationOptions`.
+		Completion was triggered by a trigger character specified by
+		the `triggerCharacters` properties of the `CompletionRegistrationOptions`.
 	*/
 	CompletionTriggerKindTriggerCharacter = 2
 
 	/*
-	Completion was re-triggered as current completion list is incomplete
+		Completion was re-triggered as current completion list is incomplete
 	*/
 	CompletionTriggerKindTriggerForIncompleteCompletions = 3
 )
@@ -1414,17 +1414,17 @@ type SignatureHelpTriggerKind uint
 const (
 
 	/*
-	Signature help was invoked manually by the user or by a command.
+		Signature help was invoked manually by the user or by a command.
 	*/
 	SignatureHelpTriggerKindInvoked = 1
 
 	/*
-	Signature help was triggered by a trigger character.
+		Signature help was triggered by a trigger character.
 	*/
 	SignatureHelpTriggerKindTriggerCharacter = 2
 
 	/*
-	Signature help was triggered by the cursor moving or by the document content changing.
+		Signature help was triggered by the cursor moving or by the document content changing.
 	*/
 	SignatureHelpTriggerKindContentChange = 3
 )
@@ -1455,15 +1455,15 @@ type CodeActionTriggerKind uint
 const (
 
 	/*
-	Code actions were explicitly requested by the user or by an extension.
+		Code actions were explicitly requested by the user or by an extension.
 	*/
 	CodeActionTriggerKindInvoked = 1
 
 	/*
-	Code actions were requested automatically.
+		Code actions were requested automatically.
 
-	This typically happens when current selection in a file changes, but can
-	also be triggered when file content changes.
+		This typically happens when current selection in a file changes, but can
+		also be triggered when file content changes.
 	*/
 	CodeActionTriggerKindAutomatic = 2
 )
@@ -1494,12 +1494,12 @@ type FileOperationPatternKind string
 const (
 
 	/*
-	The pattern matches a file only.
+		The pattern matches a file only.
 	*/
 	FileOperationPatternKindFile = "file"
 
 	/*
-	The pattern matches a folder only.
+		The pattern matches a folder only.
 	*/
 	FileOperationPatternKindFolder = "folder"
 )
@@ -1529,12 +1529,12 @@ type NotebookCellKind uint
 const (
 
 	/*
-	A markup-cell is formatted source that is used for display.
+		A markup-cell is formatted source that is used for display.
 	*/
 	NotebookCellKindMarkup = 1
 
 	/*
-	A code-cell is source code.
+		A code-cell is source code.
 	*/
 	NotebookCellKindCode = 2
 )
@@ -1558,17 +1558,17 @@ type ResourceOperationKind string
 const (
 
 	/*
-	Supports creating new files and folders.
+		Supports creating new files and folders.
 	*/
 	ResourceOperationKindCreate = "create"
 
 	/*
-	Supports renaming existing files and folders.
+		Supports renaming existing files and folders.
 	*/
 	ResourceOperationKindRename = "rename"
 
 	/*
-	Supports deleting existing files and folders.
+		Supports deleting existing files and folders.
 	*/
 	ResourceOperationKindDelete = "delete"
 )
@@ -1593,27 +1593,27 @@ type FailureHandlingKind string
 const (
 
 	/*
-	Applying the workspace change is simply aborted if one of the changes provided
-	fails. All operations executed before the failing operation stay executed.
+		Applying the workspace change is simply aborted if one of the changes provided
+		fails. All operations executed before the failing operation stay executed.
 	*/
 	FailureHandlingKindAbort = "abort"
 
 	/*
-	All operations are executed transactional. That means they either all
-	succeed or no changes at all are applied to the workspace.
+		All operations are executed transactional. That means they either all
+		succeed or no changes at all are applied to the workspace.
 	*/
 	FailureHandlingKindTransactional = "transactional"
 
 	/*
-	If the workspace edit contains only textual file changes they are executed transactional.
-	If resource changes (create, rename or delete file) are part of the change the failure
-	handling strategy is abort.
+		If the workspace edit contains only textual file changes they are executed transactional.
+		If resource changes (create, rename or delete file) are part of the change the failure
+		handling strategy is abort.
 	*/
 	FailureHandlingKindTextOnlyTransactional = "textOnlyTransactional"
 
 	/*
-	The client tries to undo the operations already executed. But there is no
-	guarantee that this is succeeding.
+		The client tries to undo the operations already executed. But there is no
+		guarantee that this is succeeding.
 	*/
 	FailureHandlingKindUndo = "undo"
 )
@@ -1639,8 +1639,8 @@ type PrepareSupportDefaultBehavior uint
 const (
 
 	/*
-	The client's default behavior is to select the identifier
-	according the to language's syntax rule.
+		The client's default behavior is to select the identifier
+		according the to language's syntax rule.
 	*/
 	PrepareSupportDefaultBehaviorIdentifier = 1
 )
