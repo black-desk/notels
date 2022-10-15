@@ -1,11 +1,17 @@
 // Code generated from metaModel.json by "lspgen". DO NOT EDIT
+
 package protocol
 
-import "context"
+import (
+	"context"
+)
 
+//jsonrpc2gen:proxy
 type LspClient interface {
 
-	/*The `workspace/workspaceFolders` is sent from the server to the client to fetch the open workspace folders.*/
+	/*
+	   The `workspace/workspaceFolders` is sent from the server to the client to fetch the open workspace folders.
+	*/
 	WorkspaceWorkspaceFolders(
 		ctx context.Context,
 	) (
@@ -106,7 +112,9 @@ type LspClient interface {
 		result WorkspaceCodeLensRefreshResult_,
 	) //jsonrpc2gen:"workspace/codeLens/refresh"
 
-	/*A request sent from the server to the client to modified certain resources.*/
+	/*
+	   A request sent from the server to the client to modified certain resources.
+	*/
 	WorkspaceApplyEdit(
 		ctx context.Context,
 		params WorkspaceApplyEditParams_,

@@ -1,8 +1,12 @@
 // Code generated from metaModel.json by "lspgen". DO NOT EDIT
+
 package protocol
 
-import "context"
+import (
+	"context"
+)
 
+//jsonrpc2gen:adaptor
 type LspServer interface {
 
 	/*
@@ -153,7 +157,9 @@ type LspServer interface {
 		partialResult CallHierarchyOutgoingCallsPartialResult_,
 	) //jsonrpc2gen:"callHierarchy/outgoingCalls"
 
-	/*@since 3.16.0*/
+	/*
+	   @since 3.16.0
+	*/
 	TextDocumentSemanticTokensFull(
 		ctx context.Context,
 		params TextDocumentSemanticTokensFullParams_,
@@ -162,12 +168,10 @@ type LspServer interface {
 		result TextDocumentSemanticTokensFullResult_,
 		partialResult TextDocumentSemanticTokensFullPartialResult_,
 	) //jsonrpc2gen:"textDocument/semanticTokens/full"
-	TextDocumentSemanticTokens(
-		ctx context.Context,
-		opt TextDocumentSemanticTokensOptions_,
-	) (err error) //jsonrpc2gen:"textDocument/semanticTokens"
 
-	/*@since 3.16.0*/
+	/*
+	   @since 3.16.0
+	*/
 	TextDocumentSemanticTokensFullDelta(
 		ctx context.Context,
 		params TextDocumentSemanticTokensFullDeltaParams_,
@@ -177,7 +181,9 @@ type LspServer interface {
 		partialResult TextDocumentSemanticTokensFullDeltaPartialResult_,
 	) //jsonrpc2gen:"textDocument/semanticTokens/full/delta"
 
-	/*@since 3.16.0*/
+	/*
+	   @since 3.16.0
+	*/
 	TextDocumentSemanticTokensRange(
 		ctx context.Context,
 		params TextDocumentSemanticTokensRangeParams_,
@@ -187,7 +193,9 @@ type LspServer interface {
 		partialResult TextDocumentSemanticTokensRangePartialResult_,
 	) //jsonrpc2gen:"textDocument/semanticTokens/range"
 
-	/*@since 3.16.0*/
+	/*
+	   @since 3.16.0
+	*/
 	WorkspaceSemanticTokensRefresh(
 		ctx context.Context,
 	) (
@@ -322,7 +330,9 @@ type LspServer interface {
 		partialResult TextDocumentInlineValuePartialResult_,
 	) //jsonrpc2gen:"textDocument/inlineValue"
 
-	/*@since 3.17.0*/
+	/*
+	   @since 3.17.0
+	*/
 	WorkspaceInlineValueRefresh(
 		ctx context.Context,
 	) (
@@ -361,7 +371,9 @@ type LspServer interface {
 		result InlayHintResolveResult_,
 	) //jsonrpc2gen:"inlayHint/resolve"
 
-	/*@since 3.17.0*/
+	/*
+	   @since 3.17.0
+	*/
 	WorkspaceInlayHintRefresh(
 		ctx context.Context,
 	) (
@@ -571,7 +583,9 @@ type LspServer interface {
 		partialResult TextDocumentDocumentSymbolPartialResult_,
 	) //jsonrpc2gen:"textDocument/documentSymbol"
 
-	/*A request to provide commands for the given text document and range.*/
+	/*
+	   A request to provide commands for the given text document and range.
+	*/
 	TextDocumentCodeAction(
 		ctx context.Context,
 		params TextDocumentCodeActionParams_,
@@ -628,7 +642,9 @@ type LspServer interface {
 		result WorkspaceSymbolResolveResult_,
 	) //jsonrpc2gen:"workspaceSymbol/resolve"
 
-	/*A request to provide code lens for the given text document.*/
+	/*
+	   A request to provide code lens for the given text document.
+	*/
 	TextDocumentCodeLens(
 		ctx context.Context,
 		params TextDocumentCodeLensParams_,
@@ -638,7 +654,9 @@ type LspServer interface {
 		partialResult TextDocumentCodeLensPartialResult_,
 	) //jsonrpc2gen:"textDocument/codeLens"
 
-	/*A request to resolve a command for a given code lens.*/
+	/*
+	   A request to resolve a command for a given code lens.
+	*/
 	CodeLensResolve(
 		ctx context.Context,
 		params CodeLensResolveParams_,
@@ -647,7 +665,9 @@ type LspServer interface {
 		result CodeLensResolveResult_,
 	) //jsonrpc2gen:"codeLens/resolve"
 
-	/*A request to provide document links*/
+	/*
+	   A request to provide document links
+	*/
 	TextDocumentDocumentLink(
 		ctx context.Context,
 		params TextDocumentDocumentLinkParams_,
@@ -670,7 +690,9 @@ type LspServer interface {
 		result DocumentLinkResolveResult_,
 	) //jsonrpc2gen:"documentLink/resolve"
 
-	/*A request to to format a whole document.*/
+	/*
+	   A request to to format a whole document.
+	*/
 	TextDocumentFormatting(
 		ctx context.Context,
 		params TextDocumentFormattingParams_,
@@ -679,7 +701,9 @@ type LspServer interface {
 		result TextDocumentFormattingResult_,
 	) //jsonrpc2gen:"textDocument/formatting"
 
-	/*A request to to format a range in a document.*/
+	/*
+	   A request to to format a range in a document.
+	*/
 	TextDocumentRangeFormatting(
 		ctx context.Context,
 		params TextDocumentRangeFormattingParams_,
@@ -688,7 +712,9 @@ type LspServer interface {
 		result TextDocumentRangeFormattingResult_,
 	) //jsonrpc2gen:"textDocument/rangeFormatting"
 
-	/*A request to format a document on type.*/
+	/*
+	   A request to format a document on type.
+	*/
 	TextDocumentOnTypeFormatting(
 		ctx context.Context,
 		params TextDocumentOnTypeFormattingParams_,
@@ -697,7 +723,9 @@ type LspServer interface {
 		result TextDocumentOnTypeFormattingResult_,
 	) //jsonrpc2gen:"textDocument/onTypeFormatting"
 
-	/*A request to rename a symbol.*/
+	/*
+	   A request to rename a symbol.
+	*/
 	TextDocumentRename(
 		ctx context.Context,
 		params TextDocumentRenameParams_,
@@ -803,9 +831,6 @@ type LspServer interface {
 	) (
 		err error,
 	) //jsonrpc2gen:"notebookDocument/didOpen"
-	NotebookDocumentSync(
-		ctx context.Context,
-	) (err error) //jsonrpc2gen:"notebookDocument/sync"
 
 	NotebookDocumentDidChange(
 		ctx context.Context,

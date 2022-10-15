@@ -10,13 +10,13 @@ func comment(input any) string {
 	switch v := input.(type) {
 	case Request:
 		if v.Documentation != "" {
-			return "/*" + v.Documentation + "*/"
+			return "/*\n" + v.Documentation + "*/"
 		} else {
 			return ""
 		}
 	case Notification:
 		if v.Documentation != "" {
-			return "/*" + v.Documentation + "*/"
+			return "/*\n" + v.Documentation + "*/"
 		} else {
 			return ""
 		}
@@ -60,45 +60,6 @@ func methodArgs(input any) string {
 			"input", input)
 		panic("")
 	}
-}
-
-func registrationMethodName(input any) string {
-	switch v := input.(type) {
-	case Request:
-		return goMethodName(v.RegistrationMethod)
-	case Notification:
-		return goMethodName(v.RegistrationMethod)
-	default:
-		log.Fatalw("unexpected type",
-			"input", input)
-		panic("")
-	}
-}
-
-func registrationMethodArgs(input any) string {
-	result := "(\nctx context.Context"
-	switch v := input.(type) {
-	case Request:
-		if v.RegistrationOptions != nil {
-			result += fmt.Sprintf(",\nopt %s", goMethodName(v.RegistrationMethod)+"Options_")
-		}
-		result += ",\n)"
-		return result
-	case Notification:
-		if v.RegistrationOptions != nil {
-			result += fmt.Sprintf(",\nopt %s", goMethodName(v.RegistrationMethod)+"Options_")
-		}
-		result += ",\n)"
-		return result
-	default:
-		log.Fatalw("unexpected type",
-			"input", input)
-		panic("")
-	}
-}
-
-func registrationMethodReturn(input any) string {
-	return "(err error)"
 }
 
 func jsonName(input any) string {
@@ -162,30 +123,13 @@ func genClient(model *MetaModel) {
 	}
 	defer clientGenFile.Close()
 
-	set := map[string]struct{}{}
-
 	clientTemplate, err := template.New("client").Funcs(map[string]any{
-		"shouldGen": func(name string) bool {
-			if name == "" {
-				return false
-			}
-			if _, ok := set[name]; !ok {
-				set[name] = struct{}{}
-				return true
-			} else {
-				return false
-			}
-		},
-		"comment":                    comment,
-		"methodName":                 methodName,
-		"methodArgs":                 methodArgs,
-		"methodReturn":               methodReturn,
-		"jsonName":                   jsonName,
-		"registrationMethodName":     registrationMethodName,
-		"registrationMethodArgs":     registrationMethodArgs,
-		"registrationMethodReturn":   registrationMethodReturn,
-		"jsonRegistrationMethodName": jsonRegistrationMethodName,
-	}).Parse(fmt.Sprintf(interfaceTemplate, "LspClient"))
+		"comment":      comment,
+		"methodName":   methodName,
+		"methodArgs":   methodArgs,
+		"methodReturn": methodReturn,
+		"jsonName":     jsonName,
+	}).Parse(fmt.Sprintf(interfaceTemplate, "proxy", "LspClient"))
 	if err != nil {
 		log.Fatalw("failed to parse template for lsp client",
 			"error", err)
@@ -224,30 +168,13 @@ func genServer(model *MetaModel) {
 	}
 	defer serverGenFile.Close()
 
-	set := map[string]struct{}{}
-
 	serverTemplate, err := template.New("server").Funcs(map[string]any{
-		"shouldGen": func(name string) bool {
-			if name == "" {
-				return false
-			}
-			if _, ok := set[name]; !ok {
-				set[name] = struct{}{}
-				return true
-			} else {
-				return false
-			}
-		},
-		"comment":                    comment,
-		"methodName":                 methodName,
-		"methodArgs":                 methodArgs,
-		"methodReturn":               methodReturn,
-		"jsonName":                   jsonName,
-		"registrationMethodName":     registrationMethodName,
-		"registrationMethodArgs":     registrationMethodArgs,
-		"registrationMethodReturn":   registrationMethodReturn,
-		"jsonRegistrationMethodName": jsonRegistrationMethodName,
-	}).Parse(fmt.Sprintf(interfaceTemplate, "LspServer"))
+		"comment":      comment,
+		"methodName":   methodName,
+		"methodArgs":   methodArgs,
+		"methodReturn": methodReturn,
+		"jsonName":     jsonName,
+	}).Parse(fmt.Sprintf(interfaceTemplate, "adaptor", "LspServer"))
 	if err != nil {
 		log.Fatalw("failed to parse template for lsp server",
 			"error", err)

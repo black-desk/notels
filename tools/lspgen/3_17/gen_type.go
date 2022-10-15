@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"sort"
 )
 
 func genEnumerations(model *MetaModel) {
@@ -100,7 +101,15 @@ func genExtra(model *MetaModel) {
 
 	}
 
+	typesSlice := []string{}
+
 	for t := range types {
+		typesSlice = append(typesSlice, t)
+	}
+
+	sort.Strings(typesSlice)
+
+	for _, t := range typesSlice {
 		extraTypeGenFile.Write([]byte(fmt.Sprintf("type %s any\n", t)))
 	}
 }
