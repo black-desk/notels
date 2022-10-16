@@ -11,8 +11,7 @@ import (
 //jsonrpc2gen:%s
 type %s interface {
 {{range .}}
-{{comment .Documentation}}
-{{methodName .}}{{methodArgs .}}{{methodReturn .}} //jsonrpc2gen:"{{jsonName .}}"
+{{comment .Documentation}} {{methodName .}}{{methodArgs .}}{{methodReturn .}} //jsonrpc2gen:"{{jsonName .}}"
 {{end}}
 }
 `
@@ -28,16 +27,11 @@ import (
 var EnumerationValidateFailed error = errors.New("enumeration validate failed")
 
 {{range .}}
-{{comment .Documentation}}
-{{$type := goEnumType .Type.Name}}
-{{$name := goMethodName .Name}}
-type {{$name}} {{$type}}
+{{comment .Documentation}} {{$type := goEnumType .Type.Name}} {{$name := goMethodName .Name}} type {{$name}} {{$type}}
 
 const (
         {{range .Values}}
-        {{comment .Documentation}}
-        {{goEnumName $name .Name}} = {{goEnumValue .Value}}
-        {{end}}
+        {{comment .Documentation}} {{goEnumName $name .Name}} = {{goEnumValue .Value}} {{end}}
 )
 
 var {{$name}}ValidateSlice = []{{$name}}{ {{range .Values}}

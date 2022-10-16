@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"text/template"
 )
 
 func comment(s string) string {
 	if s != "" {
-		return "/*\n" + s + "\n*/"
+		return "// " + strings.TrimLeft(strings.ReplaceAll(s, "\n", " "), " ")+"\n"
 	} else {
 		return ""
 	}
