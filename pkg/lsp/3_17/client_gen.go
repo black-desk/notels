@@ -15,7 +15,7 @@ type LspClient interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceWorkspaceFoldersResult_,
+		result WorkspaceWorkspaceFolders_Result,
 	) //jsonrpc2gen:"workspace/workspaceFolders"
 
 	// The 'workspace/configuration' request is sent from the server to the
@@ -28,20 +28,20 @@ type LspClient interface {
 	// is received.
 	WorkspaceConfiguration(
 		ctx context.Context,
-		params WorkspaceConfigurationParams_,
+		params ConfigurationParams,
 	) (
 		err error,
-		result WorkspaceConfigurationResult_,
+		result WorkspaceConfiguration_Result,
 	) //jsonrpc2gen:"workspace/configuration"
 
 	// The `window/workDoneProgress/create` request is sent from the server
 	// to the client to initiate progress reporting from the server.
 	WindowWorkDoneProgressCreate(
 		ctx context.Context,
-		params WindowWorkDoneProgressCreateParams_,
+		params WorkDoneProgressCreateParams,
 	) (
 		err error,
-		result WindowWorkDoneProgressCreateResult_,
+		result WindowWorkDoneProgressCreate_Result,
 	) //jsonrpc2gen:"window/workDoneProgress/create"
 
 	// A request to show a document. This request might open an external
@@ -50,20 +50,20 @@ type LspClient interface {
 	// open the URI in a WEB browser.  @since 3.16.0
 	WindowShowDocument(
 		ctx context.Context,
-		params WindowShowDocumentParams_,
+		params ShowDocumentParams,
 	) (
 		err error,
-		result WindowShowDocumentResult_,
+		result WindowShowDocument_Result,
 	) //jsonrpc2gen:"window/showDocument"
 
 	// The `client/registerCapability` request is sent from the server to
 	// the client to register a new capability handler on the client side.
 	ClientRegisterCapability(
 		ctx context.Context,
-		params ClientRegisterCapabilityParams_,
+		params RegistrationParams,
 	) (
 		err error,
-		result ClientRegisterCapabilityResult_,
+		result ClientRegisterCapability_Result,
 	) //jsonrpc2gen:"client/registerCapability"
 
 	// The `client/unregisterCapability` request is sent from the server to
@@ -71,20 +71,20 @@ type LspClient interface {
 	// on the client side.
 	ClientUnregisterCapability(
 		ctx context.Context,
-		params ClientUnregisterCapabilityParams_,
+		params UnregistrationParams,
 	) (
 		err error,
-		result ClientUnregisterCapabilityResult_,
+		result ClientUnregisterCapability_Result,
 	) //jsonrpc2gen:"client/unregisterCapability"
 
 	// The show message request is sent from the server to the client to
 	// show a message and a set of options actions to the user.
 	WindowShowMessageRequest(
 		ctx context.Context,
-		params WindowShowMessageRequestParams_,
+		params ShowMessageRequestParams,
 	) (
 		err error,
-		result WindowShowMessageRequestResult_,
+		result WindowShowMessageRequest_Result,
 	) //jsonrpc2gen:"window/showMessageRequest"
 
 	// A request to refresh all code actions  @since 3.16.0
@@ -92,24 +92,24 @@ type LspClient interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceCodeLensRefreshResult_,
+		result WorkspaceCodeLensRefresh_Result,
 	) //jsonrpc2gen:"workspace/codeLens/refresh"
 
 	// A request sent from the server to the client to modified certain
 	// resources.
 	WorkspaceApplyEdit(
 		ctx context.Context,
-		params WorkspaceApplyEditParams_,
+		params ApplyWorkspaceEditParams,
 	) (
 		err error,
-		result WorkspaceApplyEditResult_,
+		result WorkspaceApplyEdit_Result,
 	) //jsonrpc2gen:"workspace/applyEdit"
 
 	// The show message notification is sent from a server to a client to
 	// ask the client to display a particular message in the user interface.
 	WindowShowMessage(
 		ctx context.Context,
-		params WindowShowMessageParams_,
+		params ShowMessageParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"window/showMessage"
@@ -118,7 +118,7 @@ type LspClient interface {
 	// ask the client to log a particular message.
 	WindowLogMessage(
 		ctx context.Context,
-		params WindowLogMessageParams_,
+		params LogMessageParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"window/logMessage"
@@ -127,7 +127,7 @@ type LspClient interface {
 	// client to ask the client to log telemetry data.
 	TelemetryEvent(
 		ctx context.Context,
-		params TelemetryEventParams_,
+		params LSPAny,
 	) (
 		err error,
 	) //jsonrpc2gen:"telemetry/event"
@@ -136,28 +136,28 @@ type LspClient interface {
 	// signal results of validation runs.
 	TextDocumentPublishDiagnostics(
 		ctx context.Context,
-		params TextDocumentPublishDiagnosticsParams_,
+		params PublishDiagnosticsParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"textDocument/publishDiagnostics"
 
 	LspLogTrace(
 		ctx context.Context,
-		params LspLogTraceParams_,
+		params LogTraceParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/logTrace"
 
 	LspCancelRequest(
 		ctx context.Context,
-		params LspCancelRequestParams_,
+		params CancelParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/cancelRequest"
 
 	LspProgress(
 		ctx context.Context,
-		params LspProgressParams_,
+		params ProgressParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/progress"

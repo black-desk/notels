@@ -9,7 +9,7 @@ import (
 
 func comment(s string) string {
 	if s != "" {
-		return "// " + strings.TrimLeft(strings.ReplaceAll(s, "\n", " "), " ")+"\n"
+		return "// " + strings.TrimLeft(strings.ReplaceAll(s, "\n", " "), " ") + "\n"
 	} else {
 		return ""
 	}
@@ -33,13 +33,19 @@ func methodArgs(input any) string {
 	switch v := input.(type) {
 	case Request:
 		if v.Params != nil {
-			result += fmt.Sprintf(",\nparams %s", goMethodName(v.Method)+"Params_")
+			if len(v.Params) != 1 {
+				panic("---")
+			}
+			result += fmt.Sprintf(",\nparams %s", v.Params[0].goName())
 		}
 		result += ",\n)"
 		return result
 	case Notification:
 		if v.Params != nil {
-			result += fmt.Sprintf(",\nparams %s", goMethodName(v.Method)+"Params_")
+			if len(v.Params) != 1 {
+				panic("---")
+			}
+			result += fmt.Sprintf(",\nparams %s", v.Params[0].goName())
 		}
 		result += ",\n)"
 		return result
@@ -81,13 +87,13 @@ func methodReturn(input any) string {
 	switch v := input.(type) {
 	case Request:
 		if v.ErrorData != nil {
-			result += fmt.Sprintf(",\nerrorData %s", goMethodName(v.Method)+"ErrorData_")
+			result += fmt.Sprintf(",\nerrorData %s", goMethodName(v.Method)+"_ErrorData")
 		}
 		if v.Result != nil {
-			result += fmt.Sprintf(",\nresult %s", goMethodName(v.Method)+"Result_")
+			result += fmt.Sprintf(",\nresult %s", goMethodName(v.Method)+"_Result")
 		}
 		if v.PartialResult != nil {
-			result += fmt.Sprintf(",\npartialResult %s", goMethodName(v.Method)+"PartialResult_")
+			result += fmt.Sprintf(",\npartialResult %s", goMethodName(v.Method)+"_PartialResult")
 		}
 		result += ",\n)"
 		return result

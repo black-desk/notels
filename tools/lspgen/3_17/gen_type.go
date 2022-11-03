@@ -72,6 +72,8 @@ func genStructures(model *MetaModel) {
 	structuresGenFile.Write([]byte("package protocol\n"))
 	for _, structure := range model.Structures {
 		structuresGenFile.Write([]byte(fmt.Sprintf("/* %s */\ntype %s any\n", structure.Documentation, goMethodName(structure.Name))))
+		// structuresGenFile.Write([]byte(fmt.Sprintf("func lspgenUnmarshalJSONTo%s([]byte) (res *%s,err error){return}\n", goMethodName(structure.Name), goMethodName(structure.Name))))
+		// structuresGenFile.Write([]byte(fmt.Sprintf("func lspgenUnmarshalJSONTo%sSlice([]byte) (res *[]%s,err error){return}\n", goMethodName(structure.Name), goMethodName(structure.Name))))
 	}
 }
 
@@ -107,33 +109,27 @@ func genExtra(model *MetaModel) {
 
 	for _, request := range model.Requests {
 		if request.ErrorData != nil {
-			types[goMethodName(request.Method)+"ErrorData_"] = struct{}{}
-		}
-		if request.Params != nil {
-			types[goMethodName(request.Method)+"Params_"] = struct{}{}
+			types[goMethodName(request.Method)+"_ErrorData"] = struct{}{}
 		}
 		if request.PartialResult != nil {
-			types[goMethodName(request.Method)+"PartialResult_"] = struct{}{}
+			types[goMethodName(request.Method)+"_PartialResult"] = struct{}{}
 		}
 		if request.RegistrationOptions != nil {
 			if request.RegistrationMethod != "" {
 
-				types[goMethodName(request.RegistrationMethod)+"Options_"] = struct{}{}
+				types[goMethodName(request.RegistrationMethod)+"_Options"] = struct{}{}
 			} else {
-				types[goMethodName(request.Method)+"RegistrationOptions_"] = struct{}{}
+				types[goMethodName(request.Method)+"_RegistrationOptions"] = struct{}{}
 			}
 		}
 		if request.Result != nil {
-			types[goMethodName(request.Method)+"Result_"] = struct{}{}
+			types[goMethodName(request.Method)+"_Result"] = struct{}{}
 		}
 	}
 
 	for _, notifi := range model.Notifications {
-		if notifi.Params != nil {
-			types[goMethodName(notifi.Method)+"Params_"] = struct{}{}
-		}
 		if notifi.RegistrationOptions != nil {
-			types[goMethodName(notifi.Method)+"RegistrationOption_"] = struct{}{}
+			types[goMethodName(notifi.Method)+"_RegistrationOption"] = struct{}{}
 		}
 
 	}
