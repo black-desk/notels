@@ -27,8 +27,10 @@ func Watch(workspacePath string) error {
 				}
 				log.Debugw("fs event arrived", "event", event)
 				if event.Has(fsnotify.Write) {
+					event.Name != html
 					log.Infow("ready run md2html")
-					// log.Println("modified file:", event.Name)
+					log.Println("modified file:")
+
 				}
 			case err, ok := <-watcher.Errors:
 				if !ok {
