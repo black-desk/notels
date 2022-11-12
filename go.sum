@@ -1,3 +1,7 @@
+github.com/Xuanwo/gg v0.3.0 h1:jHasK7tJ4o/IjpcxPbabQ4zVO+hln85DvNYhq5GamcA=
+github.com/Xuanwo/gg v0.3.0/go.mod h1:0fLiiSxR87u2UA0ZNZiKZXuz3jnJdbDHWtU2xpdcH3s=
+github.com/Xuanwo/go-bufferpool v0.2.0 h1:DXzqJD9lJufXbT/03GrcEvYOs4gXYUj9/g5yi6Q9rUw=
+github.com/Xuanwo/go-bufferpool v0.2.0/go.mod h1:Mle++9GGouhOwGj52i9PJLNAPmW2nb8PWBP7JJzNCzk=
 github.com/benbjohnson/clock v1.1.0 h1:Q92kusRqC1XV2MjkWETPvjJVqKetz1OzxZB7mHJLju8=
 github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
