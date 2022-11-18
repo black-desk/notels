@@ -9,10 +9,7 @@ type ImplementationParams any
 
 inside a text file.
 */
-type Location struct {
-        Uri DocumentUri `json:"uri"`
-        Range Range `json:"range"`
-}
+type Location any
 
 /*  */
 type ImplementationRegistrationOptions any

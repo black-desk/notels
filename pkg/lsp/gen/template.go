@@ -64,7 +64,7 @@ import (
 {{end}}
 `
 
-var interfaceUnmarshalMethodTemplate string =`
+var interfaceUnmarshalMethodTemplate string = `
 {{$name := goTypeAliasesName .}}
 func lspgenUnmarshalJSONto{{$name}}(
         raw json.RawMessage,

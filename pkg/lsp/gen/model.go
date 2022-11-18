@@ -41,21 +41,21 @@ type Notification struct {
 	Params              []Type `json:"params"`
 	Proposed            bool   `json:"proposed"`
 	RegistrationMethod  string `json:"registrationMethod"`
-	RegistrationOptions *Type   `json:"registrationOptions"`
+	RegistrationOptions *Type  `json:"registrationOptions"`
 	Since               string `json:"since"`
 }
 
 type Request struct {
 	Documentation       string `json:"documentation"`
-	ErrorData           *Type   `json:"errorData"`
+	ErrorData           *Type  `json:"errorData"`
 	MessageDirection    string `json:"messageDirection"`
 	Method              string `json:"method"`
 	Params              []Type `json:"params"`
-	PartialResult       *Type   `json:"partialResult"`
+	PartialResult       *Type  `json:"partialResult"`
 	Proposed            bool   `json:"proposed"`
 	RegistrationMethod  string `json:"registrationMethod"`
-	RegistrationOptions *Type   `json:"registrationOptions"`
-	Result              *Type   `json:"result"`
+	RegistrationOptions *Type  `json:"registrationOptions"`
+	Result              *Type  `json:"result"`
 	Since               string `json:"since"`
 }
 

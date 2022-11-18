@@ -107,7 +107,7 @@ func (t *Type) goName() string {
 	if t.Kind == "or" {
 		return t.Items[0].goName() + "Or" + t.Items[1].goName()
 	} else if t.Kind == "array" {
-		return  t.Element.goName()+"Array"
+		return t.Element.goName() + "Array"
 	} else if t.Kind == "and" {
 		return t.Items[0].goName() + "And" + t.Items[1].goName()
 	}

@@ -9,7 +9,10 @@ import (
 
 func comment(s string) string {
 	if s != "" {
-		return "// " + strings.TrimLeft(strings.ReplaceAll(s, "\n", " "), " ") + "\n"
+		return "// " + strings.TrimLeft(
+			strings.ReplaceAll(s, "\n", " "),
+			" ",
+		) + "\n"
 	} else {
 		return ""
 	}
@@ -109,7 +112,11 @@ func methodReturn(input any) string {
 
 func genClient(model *MetaModel) {
 	fileName := "client_gen.go"
-	clientGenFile, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+	clientGenFile, err := os.OpenFile(
+		fileName,
+		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
+		0644,
+	)
 	if err != nil {
 		log.Fatalw("failed to open file",
 			"name", fileName,
@@ -154,7 +161,11 @@ func genClient(model *MetaModel) {
 func genServer(model *MetaModel) {
 
 	fileName := "server_gen.go"
-	serverGenFile, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+	serverGenFile, err := os.OpenFile(
+		fileName,
+		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
+		0644,
+	)
 	if err != nil {
 		log.Fatalw("failed to open file",
 			"name", fileName,
