@@ -34,13 +34,10 @@ func genEnumerations(model *MetaModel) {
 			for _, value := range enumeration.Values {
 				tmp.AddField(
 					goEnumName(name, value.Name),
-					goEnumValue(value.Value),
-				)
+					goEnumValue(value.Value))
 			}
 		}
 
-		source.NewVar().
-			AddDecl(name + "VarlidateSlice")
 	}
 
 	fileName := "enumerations_gen.go"
