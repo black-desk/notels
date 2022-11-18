@@ -1,21 +1,22 @@
 package main
 
 import (
+	"encoding/json"
 	"io"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"github.com/goccy/go-json"
-
 	"github.com/black-desk/notels/internal/utils/logger"
+	"github.com/black-desk/notels/pkg/lsp/gen/internal/model"
+	"github.com/black-desk/notels/pkg/lsp/gen/internal/types"
 )
 
 const (
 	metaModelJsonFileName = "metaModel.json"
 )
 
-var log = logger.New("lspgen")
+var log = logger.Get("lspgen")
 
 func main() {
 	wd, err := os.Getwd()
@@ -39,7 +40,7 @@ func main() {
 			"error", err)
 	}
 
-	metaModel := MetaModel{}
+	metaModel := model.MetaModel{}
 
 	err = json.Unmarshal(content, &metaModel)
 	if err != nil {
@@ -56,7 +57,7 @@ func main() {
 		"requests", len(metaModel.Requests),
 	)
 
-	genEnumerations(&metaModel)
+	types.GenEnumerations(&metaModel)
 
 	genStructures(&metaModel)
 

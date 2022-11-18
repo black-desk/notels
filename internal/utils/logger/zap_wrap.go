@@ -7,7 +7,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-func New(name string) *zap.SugaredLogger {
+func newLogger(name string) *zap.SugaredLogger {
 
 	var err error
 
@@ -27,5 +27,9 @@ func New(name string) *zap.SugaredLogger {
 		panic(err)
 	}
 
-	return logger.Named(name).Sugar()
+	slogger := logger.Named(name).Sugar()
+
+	loggerMap.Store(name, slogger)
+
+	return slogger
 }

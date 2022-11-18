@@ -3,27 +3,19 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 	"text/template"
-)
 
-func comment(s string) string {
-	if s != "" {
-		return "// " + strings.TrimLeft(
-			strings.ReplaceAll(s, "\n", " "),
-			" ",
-		) + "\n"
-	} else {
-		return ""
-	}
-}
+	"github.com/black-desk/notels/pkg/lsp/gen/internal/components"
+	"github.com/black-desk/notels/pkg/lsp/gen/internal/model"
+	"github.com/black-desk/notels/pkg/lsp/gen/internal/naming"
+)
 
 func methodName(input any) string {
 	switch v := input.(type) {
-	case Request:
-		return goMethodName(v.Method)
-	case Notification:
-		return goMethodName(v.Method)
+	case model.Request:
+		return naming.MethodName(v.Method)
+	case model.Notification:
+		return naming.MethodName(v.Method)
 	default:
 		log.Fatalw("unexpected type",
 			"input", input)
@@ -34,21 +26,21 @@ func methodName(input any) string {
 func methodArgs(input any) string {
 	result := "(\nctx context.Context"
 	switch v := input.(type) {
-	case Request:
+	case model.Request:
 		if v.Params != nil {
 			if len(v.Params) != 1 {
 				panic("---")
 			}
-			result += fmt.Sprintf(",\nparams %s", v.Params[0].goName())
+			result += fmt.Sprintf(",\nparams %s", v.Params[0].GoName())
 		}
 		result += ",\n)"
 		return result
-	case Notification:
+	case model.Notification:
 		if v.Params != nil {
 			if len(v.Params) != 1 {
 				panic("---")
 			}
-			result += fmt.Sprintf(",\nparams %s", v.Params[0].goName())
+			result += fmt.Sprintf(",\nparams %s", v.Params[0].GoName())
 		}
 		result += ",\n)"
 		return result
@@ -61,9 +53,9 @@ func methodArgs(input any) string {
 
 func jsonName(input any) string {
 	switch v := input.(type) {
-	case Request:
+	case model.Request:
 		return v.Method
-	case Notification:
+	case model.Notification:
 		return v.Method
 	default:
 		log.Fatalw("unexpected type",
@@ -74,9 +66,9 @@ func jsonName(input any) string {
 
 func jsonRegistrationMethodName(input any) string {
 	switch v := input.(type) {
-	case Request:
+	case model.Request:
 		return v.RegistrationMethod
-	case Notification:
+	case model.Notification:
 		return v.RegistrationMethod
 	default:
 		log.Fatalw("unexpected type",
@@ -88,19 +80,19 @@ func jsonRegistrationMethodName(input any) string {
 func methodReturn(input any) string {
 	result := "(\nerr error"
 	switch v := input.(type) {
-	case Request:
+	case model.Request:
 		if v.ErrorData != nil {
-			result += fmt.Sprintf(",\nerrorData %s", goMethodName(v.Method)+"_ErrorData")
+			result += fmt.Sprintf(",\nerrorData %s", naming.MethodName(v.Method)+"_ErrorData")
 		}
 		if v.Result != nil {
-			result += fmt.Sprintf(",\nresult %s", goMethodName(v.Method)+"_Result")
+			result += fmt.Sprintf(",\nresult %s", naming.MethodName(v.Method)+"_Result")
 		}
 		if v.PartialResult != nil {
-			result += fmt.Sprintf(",\npartialResult %s", goMethodName(v.Method)+"_PartialResult")
+			result += fmt.Sprintf(",\npartialResult %s", naming.MethodName(v.Method)+"_PartialResult")
 		}
 		result += ",\n)"
 		return result
-	case Notification:
+	case model.Notification:
 		result += ",\n)"
 		return result
 	default:
@@ -110,7 +102,7 @@ func methodReturn(input any) string {
 	}
 }
 
-func genClient(model *MetaModel) {
+func genClient(model *model.MetaModel) {
 	fileName := "client_gen.go"
 	clientGenFile, err := os.OpenFile(
 		fileName,
@@ -125,7 +117,7 @@ func genClient(model *MetaModel) {
 	defer clientGenFile.Close()
 
 	clientTemplate, err := template.New("client").Funcs(map[string]any{
-		"comment":      comment,
+		"comment":      components.Comment,
 		"methodName":   methodName,
 		"methodArgs":   methodArgs,
 		"methodReturn": methodReturn,
@@ -158,7 +150,7 @@ func genClient(model *MetaModel) {
 
 }
 
-func genServer(model *MetaModel) {
+func genServer(model *model.MetaModel) {
 
 	fileName := "server_gen.go"
 	serverGenFile, err := os.OpenFile(
@@ -174,7 +166,7 @@ func genServer(model *MetaModel) {
 	defer serverGenFile.Close()
 
 	serverTemplate, err := template.New("server").Funcs(map[string]any{
-		"comment":      comment,
+		"comment":      components.Comment,
 		"methodName":   methodName,
 		"methodArgs":   methodArgs,
 		"methodReturn": methodReturn,

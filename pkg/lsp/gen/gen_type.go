@@ -1,71 +1,15 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
-	"strings"
-	"text/template"
+
+	"github.com/black-desk/notels/pkg/lsp/gen/internal/model"
+	"github.com/black-desk/notels/pkg/lsp/gen/internal/naming"
 )
 
-func genEnumerations(model *MetaModel) {
-	fileName := "enumerations_gen.go"
-	enumerationGenFile, err := os.OpenFile(
-		fileName,
-		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
-		0644,
-	)
-	if err != nil {
-		log.Fatalw("failed to open file",
-			"name", fileName,
-			"error", err)
-	}
-	defer enumerationGenFile.Close()
-
-	serverTemplate, err := template.New("enumerations").
-		Funcs(map[string]any{
-			"comment":      comment,
-			"goMethodName": goMethodName,
-			"goEnumType": func(s string) string {
-				switch s {
-				case "string":
-					return "string"
-				case "integer":
-					return "int"
-				case "uinteger":
-					return "uint"
-				default:
-					log.Fatalw("unexpected type",
-						"s", s)
-					panic("")
-				}
-
-			},
-			"goEnumName": func(t string, name string) string {
-				return t + strings.ToUpper(name[0:1]) + name[1:]
-			},
-			"goEnumValue": func(value json.RawMessage) string {
-				return string(value)
-			},
-		}).
-		Parse(enumerationsTemplate)
-	if err != nil {
-		log.Fatalw("failed to parse template for enum",
-			"error", err)
-	}
-
-	data := model.Enumerations
-
-	err = serverTemplate.Execute(enumerationGenFile, data)
-
-	if err != nil {
-		log.Fatalw("failed to execute template for enum",
-			"error", err)
-	}
-}
-
-func genStructures(model *MetaModel) {
+func genStructures(model *model.MetaModel) {
 	fileName := "structures_gen.go"
 	structuresGenFile, err := os.OpenFile(
 		fileName,
@@ -103,7 +47,7 @@ func genStructures(model *MetaModel) {
 	}
 }
 
-func genTypeAliases(model *MetaModel) {
+func genTypeAliases(model *model.MetaModel) {
 	fileName := "typeAliases_gen.go"
 	typeAliasesGenFile, err := os.OpenFile(
 		fileName,
@@ -126,14 +70,14 @@ func genTypeAliases(model *MetaModel) {
 				fmt.Sprintf(
 					"/* %s */\ntype %s any\n",
 					alias.Documentation,
-					goMethodName(alias.Name),
+					naming.MethodName(alias.Name),
 				),
 			),
 		)
 	}
 }
 
-func genExtra(model *MetaModel) {
+func genExtra(model *model.MetaModel) {
 	fileName := "extraType_gen.go"
 	extraTypeGenFile, err := os.OpenFile(
 		fileName,

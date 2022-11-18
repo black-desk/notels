@@ -4,7 +4,6 @@ go 1.19
 
 require (
 	github.com/fsnotify/fsnotify v1.6.0
-	github.com/goccy/go-json v0.9.11
 	github.com/spf13/cobra v1.6.1
 	go.uber.org/zap v1.23.0
 )
