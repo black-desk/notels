@@ -4,6 +4,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/goccy/go-json"
 
@@ -17,26 +18,6 @@ const (
 var log = logger.New("lspgen")
 
 func main() {
-
-	metaModel := loadMetaModel()
-
-	genEnumerations(metaModel)
-
-	genStructures(metaModel)
-
-	genTypeAliases(metaModel)
-
-	genClient(metaModel)
-
-	genServer(metaModel)
-
-	genExtra(metaModel)
-
-	log.Info("done")
-}
-
-func loadMetaModel() *MetaModel {
-
 	wd, err := os.Getwd()
 	if err != nil {
 		log.Fatalw("failed to getwd",
@@ -75,5 +56,27 @@ func loadMetaModel() *MetaModel {
 		"requests", len(metaModel.Requests),
 	)
 
-	return &metaModel
+	genEnumerations(&metaModel)
+
+	genStructures(&metaModel)
+
+	genTypeAliases(&metaModel)
+
+	genClient(&metaModel)
+
+	genServer(&metaModel)
+
+	genExtra(&metaModel)
+
+	log.Info("done")
+}
+
+func goMethodName(json string) string {
+	json = strings.Replace(json, "$", "Lsp", -1)
+	tmp := strings.Split(json, "/")
+	for i, s := range tmp {
+		tmp[i] = strings.ToUpper(s[0:1]) + s[1:]
+	}
+	json = strings.Join(tmp, "")
+	return json
 }

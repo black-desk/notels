@@ -21,6 +21,5 @@ type Boolean bool
 type interfaceUnmarshalJSONError []error
 
 func (e *interfaceUnmarshalJSONError) Error() string {
-	return fmt.Errorf("failed to unmarshal json to interface: %v", *e).
-		Error()
+	return fmt.Errorf("failed to unmarshal json to interface: %v", *e).Error()
 }
