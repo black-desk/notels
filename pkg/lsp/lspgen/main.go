@@ -8,8 +8,9 @@ import (
 	"strings"
 
 	"github.com/black-desk/notels/internal/utils/logger"
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/model"
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/types"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/interfaces"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/types"
 )
 
 const (
@@ -63,9 +64,8 @@ func main() {
 
 	genTypeAliases(&metaModel)
 
-	genClient(&metaModel)
-
-	genServer(&metaModel)
+	interfaces.GenClient(&metaModel)
+	interfaces.GenServer(&metaModel)
 
 	genExtra(&metaModel)
 

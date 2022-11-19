@@ -41,7 +41,6 @@ type LspClient interface {
 		params WorkDoneProgressCreateParams,
 	) (
 		err error,
-		result WindowWorkDoneProgressCreate_Result,
 	) //jsonrpc2gen:"window/workDoneProgress/create"
 
 	// A request to show a document. This request might open an external
@@ -63,7 +62,6 @@ type LspClient interface {
 		params RegistrationParams,
 	) (
 		err error,
-		result ClientRegisterCapability_Result,
 	) //jsonrpc2gen:"client/registerCapability"
 
 	// The `client/unregisterCapability` request is sent from the server to
@@ -74,7 +72,6 @@ type LspClient interface {
 		params UnregistrationParams,
 	) (
 		err error,
-		result ClientUnregisterCapability_Result,
 	) //jsonrpc2gen:"client/unregisterCapability"
 
 	// The show message request is sent from the server to the client to
@@ -92,7 +89,6 @@ type LspClient interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceCodeLensRefresh_Result,
 	) //jsonrpc2gen:"workspace/codeLens/refresh"
 
 	// A request sent from the server to the client to modified certain

@@ -140,6 +140,7 @@ type LspServer interface {
 	) //jsonrpc2gen:"callHierarchy/outgoingCalls"
 
 	// @since 3.16.0
+	// registration method: textDocument/semanticTokens
 	TextDocumentSemanticTokensFull(
 		ctx context.Context,
 		params SemanticTokensParams,
@@ -150,6 +151,7 @@ type LspServer interface {
 	) //jsonrpc2gen:"textDocument/semanticTokens/full"
 
 	// @since 3.16.0
+	// registration method: textDocument/semanticTokens
 	TextDocumentSemanticTokensFullDelta(
 		ctx context.Context,
 		params SemanticTokensDeltaParams,
@@ -160,6 +162,7 @@ type LspServer interface {
 	) //jsonrpc2gen:"textDocument/semanticTokens/full/delta"
 
 	// @since 3.16.0
+	// registration method: textDocument/semanticTokens
 	TextDocumentSemanticTokensRange(
 		ctx context.Context,
 		params SemanticTokensRangeParams,
@@ -174,7 +177,6 @@ type LspServer interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceSemanticTokensRefresh_Result,
 	) //jsonrpc2gen:"workspace/semanticTokens/refresh"
 
 	// A request to provide ranges that can be edited together.  @since
@@ -283,7 +285,6 @@ type LspServer interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceInlineValueRefresh_Result,
 	) //jsonrpc2gen:"workspace/inlineValue/refresh"
 
 	// A request to provide inlay hints in a document. The request's
@@ -316,7 +317,6 @@ type LspServer interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceInlayHintRefresh_Result,
 	) //jsonrpc2gen:"workspace/inlayHint/refresh"
 
 	// The document diagnostic request definition.  @since 3.17.0
@@ -346,7 +346,6 @@ type LspServer interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceDiagnosticRefresh_Result,
 	) //jsonrpc2gen:"workspace/diagnostic/refresh"
 
 	// The initialize request is sent from the client to the server. It is
@@ -370,7 +369,6 @@ type LspServer interface {
 		ctx context.Context,
 	) (
 		err error,
-		result Shutdown_Result,
 	) //jsonrpc2gen:"shutdown"
 
 	// A document will save request is sent from the client to the server
@@ -691,6 +689,7 @@ type LspServer interface {
 	) //jsonrpc2gen:"workspace/didDeleteFiles"
 
 	// A notification sent when a notebook opens.  @since 3.17.0
+	// registration method: notebookDocument/sync
 	NotebookDocumentDidOpen(
 		ctx context.Context,
 		params DidOpenNotebookDocumentParams,
@@ -698,6 +697,7 @@ type LspServer interface {
 		err error,
 	) //jsonrpc2gen:"notebookDocument/didOpen"
 
+	// registration method: notebookDocument/sync
 	NotebookDocumentDidChange(
 		ctx context.Context,
 		params DidChangeNotebookDocumentParams,
@@ -706,6 +706,7 @@ type LspServer interface {
 	) //jsonrpc2gen:"notebookDocument/didChange"
 
 	// A notification sent when a notebook document is saved.  @since 3.17.0
+	// registration method: notebookDocument/sync
 	NotebookDocumentDidSave(
 		ctx context.Context,
 		params DidSaveNotebookDocumentParams,
@@ -714,6 +715,7 @@ type LspServer interface {
 	) //jsonrpc2gen:"notebookDocument/didSave"
 
 	// A notification sent when a notebook closes.  @since 3.17.0
+	// registration method: notebookDocument/sync
 	NotebookDocumentDidClose(
 		ctx context.Context,
 		params DidCloseNotebookDocumentParams,

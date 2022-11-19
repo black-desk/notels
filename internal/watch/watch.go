@@ -6,7 +6,7 @@ import (
 	"github.com/black-desk/notels/internal/utils/logger"
 )
 
-var log = logger.New("notels.watch")
+var log = logger.Get("notels.watch")
 
 func Watch(workspacePath string) error {
 	log.Debugw("Watch called",

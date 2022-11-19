@@ -8,7 +8,7 @@ import (
 
 var log = logger.Get("lspgen")
 
-func MethodName(lspJsonRPCMethodName string) string {
+func MethodNameFromString(lspJsonRPCMethodName string) string {
 	lspJsonRPCMethodName = strings.Replace(
 		lspJsonRPCMethodName,
 		"$",

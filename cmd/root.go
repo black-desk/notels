@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var log = logger.New("notels")
+var log = logger.Get("notels")
 
 var rootCmd = &cobra.Command{
 	Use:   "notels",

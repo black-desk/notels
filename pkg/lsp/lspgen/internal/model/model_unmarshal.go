@@ -2,8 +2,6 @@ package model
 
 import (
 	"encoding/json"
-
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/naming"
 )
 
 // UnmarshalJSON implements json.Unmarshaler
@@ -103,21 +101,6 @@ func (r *Request) UnmarshalJSON(data []byte) error {
 }
 
 var _ json.Unmarshaler = &Request{}
-
-func (t *Type) GoName() string {
-	if t.Name != "" {
-		return naming.MethodName(t.Name)
-	}
-	if t.Kind == "or" {
-		return t.Items[0].GoName() + "Or" + t.Items[1].GoName()
-	} else if t.Kind == "array" {
-		return t.Element.GoName() + "Array"
-	} else if t.Kind == "and" {
-		return t.Items[0].GoName() + "And" + t.Items[1].GoName()
-	}
-	log.Fatalw("----")
-	panic("")
-}
 
 // UnmarshalJSON implements json.Unmarshaler
 func (t *Type) UnmarshalJSON(data []byte) error {

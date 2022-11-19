@@ -5,8 +5,8 @@ import (
 	"os"
 	"sort"
 
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/model"
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/naming"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/naming"
 )
 
 func genStructures(model *model.MetaModel) {
@@ -70,7 +70,7 @@ func genTypeAliases(model *model.MetaModel) {
 				fmt.Sprintf(
 					"/* %s */\ntype %s any\n",
 					alias.Documentation,
-					naming.MethodName(alias.Name),
+					naming.MethodNameFromString(alias.Name),
 				),
 			),
 		)

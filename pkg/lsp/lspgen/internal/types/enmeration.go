@@ -7,19 +7,13 @@ import (
 	"text/template"
 
 	"github.com/black-desk/notels/internal/utils/logger"
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/components"
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/model"
-	"github.com/black-desk/notels/pkg/lsp/gen/internal/naming"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/common"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/naming"
 )
 
 var log = logger.Get("lspgen")
 
-// typeCheck
-// getType
-// getName
-// getComment
-// getEnumName
-// getEnumValue
 var enumTemplate string = `// Code generated from metaModel.json by "lspgen". DO NOT EDIT
 
 {{/* type check to ensure data is []model.Enumeration */}}
@@ -66,32 +60,6 @@ var EnumerationValidateFailed error = errors.New(
 {{end}}
 `
 
-var enumTemplateTypeCheck = func([]model.Enumeration) string {
-	return ""
-}
-var enumTemplateGetType = func(s string) string {
-	switch s {
-	case "string":
-		return "string"
-	case "integer":
-		return "int"
-	case "uinteger":
-		return "uint"
-	default:
-		log.Fatalw("unexpected type",
-			"s", s)
-		panic("")
-	}
-}
-var enumTemplateGetName = naming.MethodName
-var enumTemplateGetComment = components.Comment
-var enumTemplateGetEnumName = func(t string, name string) string {
-	return t + strings.ToUpper(name[0:1]) + name[1:]
-}
-var enumTemplateGetEnumValue = func(value json.RawMessage) string {
-	return string(value)
-}
-
 func GenEnumerations(metaModel *model.MetaModel) {
 
 	fileName := "enumerations_gen.go"
@@ -131,4 +99,30 @@ func GenEnumerations(metaModel *model.MetaModel) {
 		log.Fatalw("failed to execute template for enum",
 			"error", err)
 	}
+}
+
+var enumTemplateTypeCheck = func([]model.Enumeration) string {
+	return ""
+}
+var enumTemplateGetType = func(s string) string {
+	switch s {
+	case "string":
+		return "string"
+	case "integer":
+		return "int"
+	case "uinteger":
+		return "uint"
+	default:
+		log.Fatalw("unexpected type",
+			"s", s)
+		panic("")
+	}
+}
+var enumTemplateGetName = naming.MethodNameFromString
+var enumTemplateGetComment = common.Comment
+var enumTemplateGetEnumName = func(t string, name string) string {
+	return t + strings.ToUpper(name[0:1]) + name[1:]
+}
+var enumTemplateGetEnumValue = func(value json.RawMessage) string {
+	return string(value)
 }
