@@ -8,6 +8,7 @@ import (
 
 	"github.com/black-desk/notels/internal/utils/logger"
 	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/common"
+	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/extra"
 	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
 	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/naming"
 )
@@ -23,6 +24,7 @@ package protocol
 
 import (
         "errors"
+        "encoding/json"
 )
 
 var EnumerationValidateFailed error = errors.New(
@@ -49,9 +51,17 @@ var EnumerationValidateFailed error = errors.New(
                 {{end}}
         }
 
-        func (this *{{$name}}) Validate() error {
-                for _,x := range _{{$name}} {
-                        if *this == x {
+        func (this *{{$name}}) UnmarshalJSON(data []byte) error {
+                type {{$name}}Unmarshal {{$name}}
+                var tmpUnmarshal {{$name}}Unmarshal
+                err := json.Unmarshal(data, &tmpUnmarshal)
+                if err != nil {
+                        return err
+                }
+                tmp := {{$name}}(tmpUnmarshal)
+                for _, x := range _{{$name}} {
+                        if tmp == x {
+                                this = &tmp
                                 return nil
                         }
                 }
@@ -118,7 +128,10 @@ var enumTemplateGetType = func(s string) string {
 		panic("")
 	}
 }
-var enumTemplateGetName = naming.MethodNameFromString
+var enumTemplateGetName = func(name string) (ret string) {
+	defer extra.RemoveType(ret)
+	return naming.MethodNameFromString(name)
+}
 var enumTemplateGetComment = common.Comment
 var enumTemplateGetEnumName = func(t string, name string) string {
 	return t + strings.ToUpper(name[0:1]) + name[1:]

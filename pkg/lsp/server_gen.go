@@ -147,7 +147,7 @@ type LspServer interface {
 	) (
 		err error,
 		result TextDocumentSemanticTokensFull_Result,
-		partialResult TextDocumentSemanticTokensFull_PartialResult,
+		partialResult SemanticTokensPartialResult,
 	) //jsonrpc2gen:"textDocument/semanticTokens/full"
 
 	// @since 3.16.0
@@ -169,7 +169,7 @@ type LspServer interface {
 	) (
 		err error,
 		result TextDocumentSemanticTokensRange_Result,
-		partialResult TextDocumentSemanticTokensRange_PartialResult,
+		partialResult SemanticTokensPartialResult,
 	) //jsonrpc2gen:"textDocument/semanticTokens/range"
 
 	// @since 3.16.0
@@ -309,7 +309,7 @@ type LspServer interface {
 		params InlayHint,
 	) (
 		err error,
-		result InlayHintResolve_Result,
+		result InlayHint,
 	) //jsonrpc2gen:"inlayHint/resolve"
 
 	// @since 3.17.0
@@ -325,9 +325,9 @@ type LspServer interface {
 		params DocumentDiagnosticParams,
 	) (
 		err error,
-		errorData TextDocumentDiagnostic_ErrorData,
-		result TextDocumentDiagnostic_Result,
-		partialResult TextDocumentDiagnostic_PartialResult,
+		errorData DiagnosticServerCancellationData,
+		result DocumentDiagnosticReport,
+		partialResult DocumentDiagnosticReportPartialResult,
 	) //jsonrpc2gen:"textDocument/diagnostic"
 
 	// The workspace diagnostic request definition.  @since 3.17.0
@@ -336,9 +336,9 @@ type LspServer interface {
 		params WorkspaceDiagnosticParams,
 	) (
 		err error,
-		errorData WorkspaceDiagnostic_ErrorData,
-		result WorkspaceDiagnostic_Result,
-		partialResult WorkspaceDiagnostic_PartialResult,
+		errorData DiagnosticServerCancellationData,
+		result WorkspaceDiagnosticReport,
+		partialResult WorkspaceDiagnosticReportPartialResult,
 	) //jsonrpc2gen:"workspace/diagnostic"
 
 	// The diagnostic refresh request definition.  @since 3.17.0
@@ -358,8 +358,8 @@ type LspServer interface {
 		params InitializeParams,
 	) (
 		err error,
-		errorData Initialize_ErrorData,
-		result Initialize_Result,
+		errorData InitializeError,
+		result InitializeResult,
 	) //jsonrpc2gen:"initialize"
 
 	// A shutdown request is sent from the client to the server. It is sent
@@ -415,7 +415,7 @@ type LspServer interface {
 		params CompletionItem,
 	) (
 		err error,
-		result CompletionItemResolve_Result,
+		result CompletionItem,
 	) //jsonrpc2gen:"completionItem/resolve"
 
 	// Request to request hover information at a given text document
@@ -513,7 +513,7 @@ type LspServer interface {
 		params CodeAction,
 	) (
 		err error,
-		result CodeActionResolve_Result,
+		result CodeAction,
 	) //jsonrpc2gen:"codeAction/resolve"
 
 	// A request to list project-wide symbols matching the query string
@@ -539,7 +539,7 @@ type LspServer interface {
 		params WorkspaceSymbol,
 	) (
 		err error,
-		result WorkspaceSymbolResolve_Result,
+		result WorkspaceSymbol,
 	) //jsonrpc2gen:"workspaceSymbol/resolve"
 
 	// A request to provide code lens for the given text document.
@@ -558,7 +558,7 @@ type LspServer interface {
 		params CodeLens,
 	) (
 		err error,
-		result CodeLensResolve_Result,
+		result CodeLens,
 	) //jsonrpc2gen:"codeLens/resolve"
 
 	// A request to provide document links
@@ -580,7 +580,7 @@ type LspServer interface {
 		params DocumentLink,
 	) (
 		err error,
-		result DocumentLinkResolve_Result,
+		result DocumentLink,
 	) //jsonrpc2gen:"documentLink/resolve"
 
 	// A request to to format a whole document.

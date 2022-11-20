@@ -60,14 +60,14 @@ func main() {
 
 	types.GenEnumerations(&metaModel)
 
-	genStructures(&metaModel)
+	// genStructures(&metaModel)
 
-	genTypeAliases(&metaModel)
+	types.GenAlias(&metaModel)
 
 	interfaces.GenClient(&metaModel)
 	interfaces.GenServer(&metaModel)
 
-	genExtra(&metaModel)
+	types.GenExtra()
 
 	log.Info("done")
 }

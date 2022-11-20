@@ -52,7 +52,7 @@ type LspClient interface {
 		params ShowDocumentParams,
 	) (
 		err error,
-		result WindowShowDocument_Result,
+		result ShowDocumentResult,
 	) //jsonrpc2gen:"window/showDocument"
 
 	// The `client/registerCapability` request is sent from the server to
@@ -98,7 +98,7 @@ type LspClient interface {
 		params ApplyWorkspaceEditParams,
 	) (
 		err error,
-		result WorkspaceApplyEdit_Result,
+		result ApplyWorkspaceEditResult,
 	) //jsonrpc2gen:"workspace/applyEdit"
 
 	// The show message notification is sent from a server to a client to

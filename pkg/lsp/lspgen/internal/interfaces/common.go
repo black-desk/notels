@@ -47,8 +47,10 @@ var interfaceTemplateGetMethodArgs = func(input any) string {
 			if len(v.Params) != 1 {
 				panic("should not happen")
 			}
+			name := fmt.Sprintf("%s_Params",
+				naming.MethodNameFromString(v.Method))
 			result += fmt.Sprintf(",\nparams %s",
-				naming.TypeName(&v.Params[0]))
+				naming.TypeName(&v.Params[0], name))
 		}
 		result += ",\n)"
 		return result
@@ -57,8 +59,10 @@ var interfaceTemplateGetMethodArgs = func(input any) string {
 			if len(v.Params) != 1 {
 				panic("should not happen")
 			}
+			name := fmt.Sprintf("%s_Params",
+				naming.MethodNameFromString(v.Method))
 			result += fmt.Sprintf(",\nparams %s",
-				naming.TypeName(&v.Params[0]))
+				naming.TypeName(&v.Params[0], name))
 		}
 		result += ",\n)"
 		return result
@@ -73,17 +77,23 @@ var interfaceTemplateGetMethodReturn = func(input any) string {
 	switch v := input.(type) {
 	case model.Request:
 		if v.ErrorData != nil {
-			result += fmt.Sprintf(",\nerrorData %s_ErrorData",
+			name := fmt.Sprintf("%s_ErrorData",
 				naming.MethodNameFromString(v.Method))
+			result += fmt.Sprintf(",\nerrorData %s",
+				naming.TypeName(v.ErrorData, name))
 		}
 		if v.Result != nil &&
 			!(v.Result.Kind == "base" && v.Result.Name == "null") {
-			result += fmt.Sprintf(",\nresult %s_Result",
+			name := fmt.Sprintf("%s_Result",
 				naming.MethodNameFromString(v.Method))
+			result += fmt.Sprintf(",\nresult %s",
+				naming.TypeName(v.Result, name))
 		}
 		if v.PartialResult != nil {
-			result += fmt.Sprintf(",\npartialResult %s_PartialResult",
+			name := fmt.Sprintf("%s_PartialResult",
 				naming.MethodNameFromString(v.Method))
+			result += fmt.Sprintf(",\npartialResult %s",
+				naming.TypeName(v.PartialResult, name))
 		}
 		result += ",\n)"
 		return result
@@ -117,5 +127,4 @@ func getRegistrationMethodNameFromMessage(input any) string {
 			"input", input)
 		panic("")
 	}
-
 }
