@@ -34,7 +34,19 @@ var interfaceTemplateFuncs = map[string]any{
 }
 
 var interfaceTemplateGetComment = Comment
-var interfaceTemplateGetMethodName = MethodNameFromMessage
+var interfaceTemplateGetMethodName = func(input any) string {
+	switch v := input.(type) {
+	case Request:
+		return MethodNameFromString(v.Method)
+	case Notification:
+		return MethodNameFromString(v.Method)
+	default:
+		log.Fatalw("unexpected type",
+			"input", input)
+		panic("")
+	}
+}
+
 var interfaceTemplateGetMethodArgs = func(input any) string {
 	result := "(\nctx context.Context"
 	switch v := input.(type) {
