@@ -10,12 +10,14 @@ var typeAliasTemplate = `// Code generated from metaModel.json by "lspgen". DO N
 package protocol
 
 {{range .}}
-        type {{getName .Name}} = struct{}
+        {{$name := getName .Name}}
+        type {{$name}} = {{getTypeName "" $name .Type}}
 {{end}}
 `
 
 var typeTemplateFuncs = map[string]any{
-	"getName": MethodNameFromString,
+	"getName":     MethodNameFromString,
+	"getTypeName": typeName,
 }
 
 func genTypeAliases(metaModel *MetaModel) {

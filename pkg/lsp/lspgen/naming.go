@@ -34,7 +34,16 @@ func typeName(prefix string, current string, t *Type) string {
 		return baseTypeName(t.Name)
 	}
 	if t.Kind == "array" {
-		return "[]" + typeName(prefix+"_"+current, "Element", t.Element)
+		if len(prefix) != 0 {
+			return "[]" + typeName(
+				prefix+"_"+current,
+				"Element",
+				t.Element,
+			)
+		} else {
+			return "[]" + typeName(current, "Element", t.Element)
+
+		}
 	}
 	if t.Kind == "or" {
 		if len(t.Items) == 2 && t.Items[0].Name == "null" {
@@ -53,15 +62,29 @@ func typeName(prefix string, current string, t *Type) string {
 				return name
 			}
 		}
-		RegisterType(prefix+"_"+current+"__Or", t)
-		return prefix + "_" + current + "__Or"
+		if len(prefix) != 0 {
+			RegisterType(prefix+"_"+current+"__Or", t)
+			return prefix + "_" + current + "__Or"
+
+		} else {
+			RegisterType(current+"__Or", t)
+			return current + "__Or"
+		}
 	}
 	if t.Kind == "map" {
-		return "map[" + typeName(
-			prefix+"_"+current,
-			"Key",
-			t.Key,
-		) + "]" + typeValueName(prefix+"_"+current, "Value", t.Value)
+		if len(prefix) != 0 {
+			return "map[" + typeName(
+				prefix+"_"+current,
+				"Key",
+				t.Key,
+			) + "]" + typeValueName(prefix+"_"+current, "Value", t.Value)
+		} else {
+			return "map[" + typeName(
+				current,
+				"Key",
+				t.Key,
+			) + "]" + typeValueName(current, "Value", t.Value)
+		}
 	}
 	if t.Kind == "literal" {
 		RegisterType(prefix+"_"+current, t)

@@ -2,42 +2,42 @@
 
 package protocol
 
-type Definition = struct{}
+type Definition = Definition__Or
 
-type DefinitionLink = struct{}
+type DefinitionLink = LocationLink
 
-type LSPArray = struct{}
+type LSPArray = []LSPAny
 
-type LSPAny = struct{}
+type LSPAny = LSPAny__Or
 
-type Declaration = struct{}
+type Declaration = Declaration__Or
 
-type DeclarationLink = struct{}
+type DeclarationLink = LocationLink
 
-type InlineValue = struct{}
+type InlineValue = InlineValue__Or
 
-type DocumentDiagnosticReport = struct{}
+type DocumentDiagnosticReport = DocumentDiagnosticReport__Or
 
-type PrepareRenameResult = struct{}
+type PrepareRenameResult = PrepareRenameResult__Or
 
-type ProgressToken = struct{}
+type ProgressToken = ProgressToken__Or
 
-type DocumentSelector = struct{}
+type DocumentSelector = []DocumentFilter
 
-type ChangeAnnotationIdentifier = struct{}
+type ChangeAnnotationIdentifier = string
 
-type WorkspaceDocumentDiagnosticReport = struct{}
+type WorkspaceDocumentDiagnosticReport = WorkspaceDocumentDiagnosticReport__Or
 
-type TextDocumentContentChangeEvent = struct{}
+type TextDocumentContentChangeEvent = TextDocumentContentChangeEvent__Or
 
-type MarkedString = struct{}
+type MarkedString = MarkedString__Or
 
-type DocumentFilter = struct{}
+type DocumentFilter = DocumentFilter__Or
 
-type GlobPattern = struct{}
+type GlobPattern = GlobPattern__Or
 
-type TextDocumentFilter = struct{}
+type TextDocumentFilter = TextDocumentFilter__Or
 
-type NotebookDocumentFilter = struct{}
+type NotebookDocumentFilter = NotebookDocumentFilter__Or
 
-type Pattern = struct{}
+type Pattern = string
