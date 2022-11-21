@@ -1,12 +1,8 @@
-package model
+package main
 
 import (
 	"encoding/json"
-
-	"github.com/black-desk/notels/internal/utils/logger"
 )
-
-var log = logger.Get("lspgen")
 
 type MetaModel struct {
 	MetaData struct {

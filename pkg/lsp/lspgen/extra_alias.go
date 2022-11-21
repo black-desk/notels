@@ -1,10 +1,8 @@
-package types
+package main
 
 import (
 	"fmt"
 	"os"
-
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/extra"
 )
 
 func GenExtra() {
@@ -25,7 +23,7 @@ func GenExtra() {
 	)
 	extraTypeGenFile.Write([]byte("package protocol\n"))
 
-	for name, t := range extra.TypesToGenerate {
+	for name, t := range TypesToGenerate {
 		if t != nil {
 			extraTypeGenFile.Write(
 				[]byte(fmt.Sprintf("type %s any\n", name)),

@@ -5,19 +5,11 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"strings"
-
-	"github.com/black-desk/notels/internal/utils/logger"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/interfaces"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/types"
 )
 
 const (
 	metaModelJsonFileName = "metaModel.json"
 )
-
-var log = logger.Get("lspgen")
 
 func main() {
 	wd, err := os.Getwd()
@@ -26,7 +18,7 @@ func main() {
 			"error", err)
 	}
 
-	log.Infow("codegen start", "working directory", wd)
+	log.Infow("start", "working directory", wd)
 
 	metaModelJsonFile, err := os.Open(metaModelJsonFileName)
 	if err != nil {
@@ -41,7 +33,7 @@ func main() {
 			"error", err)
 	}
 
-	metaModel := model.MetaModel{}
+	metaModel := MetaModel{}
 
 	err = json.Unmarshal(content, &metaModel)
 	if err != nil {
@@ -58,26 +50,12 @@ func main() {
 		"requests", len(metaModel.Requests),
 	)
 
-	types.GenEnumerations(&metaModel)
+	genEnumerations(&metaModel)
+	genStruct(&metaModel)
+	// genTypeAliases(&metaModel)
 
-	// genStructures(&metaModel)
-
-	types.GenAlias(&metaModel)
-
-	interfaces.GenClient(&metaModel)
-	interfaces.GenServer(&metaModel)
-
-	types.GenExtra()
+	genClient(&metaModel)
+	genServer(&metaModel)
 
 	log.Info("done")
-}
-
-func goMethodName(json string) string {
-	json = strings.Replace(json, "$", "Lsp", -1)
-	tmp := strings.Split(json, "/")
-	for i, s := range tmp {
-		tmp[i] = strings.ToUpper(s[0:1]) + s[1:]
-	}
-	json = strings.Join(tmp, "")
-	return json
 }

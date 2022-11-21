@@ -1,16 +1,14 @@
-package interfaces
+package main
 
 import (
 	"fmt"
 	"os"
 	"text/template"
-
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
 )
 
 var serverTemplate = fmt.Sprintf(interfaceTemplate, "adaptor", "LspServer")
 
-func GenServer(metaModel *model.MetaModel) {
+func genServer(metaModel *MetaModel) {
 	fileName := "server_gen.go"
 	serverGenFile, err := os.OpenFile(
 		fileName,

@@ -1,19 +1,10 @@
-package types
+package main
 
 import (
-	"encoding/json"
 	"os"
 	"strings"
 	"text/template"
-
-	"github.com/black-desk/notels/internal/utils/logger"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/common"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/extra"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/naming"
 )
-
-var log = logger.Get("lspgen")
 
 var enumTemplate string = `// Code generated from metaModel.json by "lspgen". DO NOT EDIT
 
@@ -67,11 +58,27 @@ var EnumerationValidateFailed error = errors.New(
                 }
                 return EnumerationValidateFailed
         }
+
+        func (this *{{$name}}) MarshalJSON() ([]byte, error) {
+                if err := func() error {
+                        for _, x := range _{{$name}} {
+                                if *this == x {
+                                        return nil
+                                }
+                        }
+                        return EnumerationValidateFailed
+                }(); err != nil {
+                        return nil, err
+                }
+
+                type {{$name}}Marshal {{$name}}
+                tmpMarshal := {{$name}}Marshal(*this)
+                return json.Marshal(tmpMarshal)
+        }
 {{end}}
 `
 
-func GenEnumerations(metaModel *model.MetaModel) {
-
+func genEnumerations(metaModel *MetaModel) {
 	fileName := "enumerations_gen.go"
 	enumerationGenFile, err := os.OpenFile(
 		fileName,
@@ -111,31 +118,18 @@ func GenEnumerations(metaModel *model.MetaModel) {
 	}
 }
 
-var enumTemplateTypeCheck = func([]model.Enumeration) string {
+var enumTemplateTypeCheck = func([]Enumeration) string {
 	return ""
 }
-var enumTemplateGetType = func(s string) string {
-	switch s {
-	case "string":
-		return "string"
-	case "integer":
-		return "int"
-	case "uinteger":
-		return "uint"
-	default:
-		log.Fatalw("unexpected type",
-			"s", s)
-		panic("")
-	}
-}
+var enumTemplateGetType = baseTypeName
 var enumTemplateGetName = func(name string) (ret string) {
-	defer extra.RemoveType(ret)
-	return naming.MethodNameFromString(name)
+	defer RemoveType(ret)
+	return MethodNameFromString(name)
 }
-var enumTemplateGetComment = common.Comment
+var enumTemplateGetComment = Comment
 var enumTemplateGetEnumName = func(t string, name string) string {
 	return t + strings.ToUpper(name[0:1]) + name[1:]
 }
-var enumTemplateGetEnumValue = func(value json.RawMessage) string {
+var enumTemplateGetEnumValue = func(value []byte) string {
 	return string(value)
 }

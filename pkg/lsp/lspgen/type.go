@@ -1,16 +1,13 @@
-package naming
+package main
 
 import (
 	"strings"
-
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/extra"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
 )
 
-func TypeName(t *model.Type, alias string) (ret string) {
+func TypeName(t *Type, alias string) (ret string) {
 
 	defer func() {
-		extra.RegisterType(ret, t)
+		RegisterType(ret, t)
 	}()
 
 	if t.Name != "" {

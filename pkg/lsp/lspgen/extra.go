@@ -1,12 +1,8 @@
-package extra
+package main
 
-import (
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
-)
+var TypesToGenerate = map[string]*Type{}
 
-var TypesToGenerate = map[string]*model.Type{}
-
-func RegisterType(name string, t *model.Type) {
+func RegisterType(name string, t *Type) {
 	if _, ok := TypesToGenerate[name]; !ok {
 		TypesToGenerate[name] = t
 	}

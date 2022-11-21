@@ -1,11 +1,8 @@
-package types
+package main
 
 import (
 	"os"
 	"text/template"
-
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/model"
-	"github.com/black-desk/notels/pkg/lsp/lspgen/internal/naming"
 )
 
 var typeTemplate = `// Code generated from metaModel.json by "lspgen". DO NOT EDIT
@@ -18,16 +15,16 @@ package protocol
 `
 
 var typeTemplateFuncs = map[string]any{
-	"getName":     naming.MethodNameFromString,
+	"getName":     MethodNameFromString,
 	"getTypeName": typeTemplateGetTypeName,
 }
 
-var typeTemplateGetTypeName = func(t *model.Type) string {
-	name := naming.TypeName(t, "")
+var typeTemplateGetTypeName = func(t *Type) string {
+	name := TypeName(t, "")
 	return name
 }
 
-func GenAlias(metaModel *model.MetaModel) {
+func GenAlias(metaModel *MetaModel) {
 	fileName := "alias_gen.go"
 	aliasGenFile, err := os.OpenFile(
 		fileName,

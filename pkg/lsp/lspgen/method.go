@@ -1,12 +1,8 @@
-package naming
+package main
 
 import (
 	"strings"
-
-	"github.com/black-desk/notels/internal/utils/logger"
 )
-
-var log = logger.Get("lspgen")
 
 func MethodNameFromString(lspJsonRPCMethodName string) string {
 	lspJsonRPCMethodName = strings.Replace(
