@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"sort"
 )
 
 func genExtra() {
@@ -23,11 +24,17 @@ func genExtra() {
 	)
 	extraTypeGenFile.Write([]byte("package protocol\n"))
 
-	for name, t := range TypesToGenerate {
-		if t != nil {
-			extraTypeGenFile.Write(
-				[]byte(fmt.Sprintf("type %s struct{}\n", name)),
-			)
-		}
+	tmp := []string{}
+
+	for name := range TypesToGenerate {
+		tmp = append(tmp, name)
+	}
+
+	sort.Strings(tmp)
+
+	for _, name := range tmp {
+		extraTypeGenFile.Write(
+			[]byte(fmt.Sprintf("type %s struct{}\n", name)),
+		)
 	}
 }
