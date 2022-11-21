@@ -175,7 +175,7 @@ type TextDocumentRegistrationOptions struct {
 	// A document selector to identify the scope of the registration. If set
 	// to null the document selector provided on the client side will be
 	// used.
-	DocumentSelector TextDocumentRegistrationOptions_DocumentSelector__Or `json:"documentSelector"`
+	DocumentSelector *DocumentSelector `json:"documentSelector"`
 }
 
 // Parameters for a [FoldingRangeRequest](#FoldingRangeRequest).
@@ -613,7 +613,7 @@ type CreateFilesParams struct {
 type WorkspaceEdit struct {
 
 	// Holds changes to existing resources.
-	Changes *map[DocumentUri]interface{} `json:"changes"`
+	Changes *map[DocumentUri][]TextEdit `json:"changes"`
 
 	// Depending on the client capability
 	// `workspace.workspaceEdit.resourceOperations` document changes are
@@ -632,7 +632,7 @@ type WorkspaceEdit struct {
 	// `AnnotatedTextEdit`s or create, rename and delete file / folder
 	// operations.  Whether clients honor this property depends on the
 	// client capability `workspace.changeAnnotationSupport`.  @since 3.16.0
-	ChangeAnnotations *map[ChangeAnnotationIdentifier]interface{} `json:"changeAnnotations"`
+	ChangeAnnotations *map[ChangeAnnotationIdentifier]ChangeAnnotation `json:"changeAnnotations"`
 }
 
 // The options to register for file operations.  @since 3.16.0
@@ -907,7 +907,7 @@ type DocumentDiagnosticParams struct {
 
 // A partial result for a document diagnostic report.  @since 3.17.0
 type DocumentDiagnosticReportPartialResult struct {
-	RelatedDocuments map[DocumentUri]interface{} `json:"relatedDocuments"`
+	RelatedDocuments map[DocumentUri]DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or `json:"relatedDocuments"`
 }
 
 // Cancellation data returned from a diagnostic request.  @since 3.17.0
@@ -2632,7 +2632,7 @@ type RelatedFullDocumentDiagnosticReport struct {
 	// in a file B which A depends on. An example of such a language is
 	// C/C++ where marco definitions in a file a.cpp and result in errors in
 	// a header file b.hpp.  @since 3.17.0
-	RelatedDocuments *map[DocumentUri]interface{} `json:"relatedDocuments"`
+	RelatedDocuments *map[DocumentUri]RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
 }
 
 // An unchanged diagnostic report with a set of related documents.  @since
@@ -2648,7 +2648,7 @@ type RelatedUnchangedDocumentDiagnosticReport struct {
 	// in a file B which A depends on. An example of such a language is
 	// C/C++ where marco definitions in a file a.cpp and result in errors in
 	// a header file b.hpp.  @since 3.17.0
-	RelatedDocuments *map[DocumentUri]interface{} `json:"relatedDocuments"`
+	RelatedDocuments *map[DocumentUri]RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
 }
 
 // A diagnostic report with a full set of problems.  @since 3.17.0
@@ -2812,7 +2812,7 @@ type XInitializeParams struct {
 	// The process Id of the parent process that started the server.  Is
 	// `null` if the process has not been started by another process. If the
 	// parent process is not alive then the server should exit.
-	ProcessId XInitializeParams_ProcessId__Or `json:"processId"`
+	ProcessId *int64 `json:"processId"`
 
 	// Information about the client  @since 3.15.0
 	ClientInfo *XInitializeParams_ClientInfo `json:"clientInfo"`
@@ -2825,12 +2825,12 @@ type XInitializeParams struct {
 
 	// The rootPath of the workspace. Is null if no folder is open.
 	// @deprecated in favour of rootUri.
-	RootPath *XInitializeParams_RootPath__Or `json:"rootPath"`
+	RootPath **string `json:"rootPath"`
 
 	// The rootUri of the workspace. Is null if no folder is open. If both
 	// `rootPath` and `rootUri` are set `rootUri` wins.  @deprecated in
 	// favour of workspaceFolders.
-	RootUri XInitializeParams_RootUri__Or `json:"rootUri"`
+	RootUri *DocumentUri `json:"rootUri"`
 
 	// The capabilities provided by the client (editor or tool)
 	Capabilities ClientCapabilities `json:"capabilities"`
@@ -2848,7 +2848,7 @@ type WorkspaceFoldersInitializeParams struct {
 	// starts.  This property is only available if the client supports
 	// workspace folders. It can be `null` if the client supports workspace
 	// folders but none are configured.  @since 3.6.0
-	WorkspaceFolders *WorkspaceFoldersInitializeParams_WorkspaceFolders__Or `json:"workspaceFolders"`
+	WorkspaceFolders *[]WorkspaceFolder `json:"workspaceFolders"`
 }
 
 // Defines the capabilities provided by a language server.
@@ -3425,7 +3425,7 @@ type OptionalVersionedTextDocumentIdentifier struct {
 	// before) the server can send `null` to indicate that the version is
 	// unknown and the content on disk is the truth (as specified with
 	// document content ownership).
-	Version OptionalVersionedTextDocumentIdentifier_Version__Or `json:"version"`
+	Version *int64 `json:"version"`
 }
 
 // A special text edit with an additional change annotation.  @since 3.16.0.
@@ -3517,7 +3517,7 @@ type WorkspaceFullDocumentDiagnosticReport struct {
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version WorkspaceFullDocumentDiagnosticReport_Version__Or `json:"version"`
+	Version *int64 `json:"version"`
 }
 
 // An unchanged document diagnostic report for a workspace diagnostic result.
@@ -3533,7 +3533,7 @@ type WorkspaceUnchangedDocumentDiagnosticReport struct {
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version WorkspaceUnchangedDocumentDiagnosticReport_Version__Or `json:"version"`
+	Version *int64 `json:"version"`
 }
 
 // LSP object definition. @since 3.17.0

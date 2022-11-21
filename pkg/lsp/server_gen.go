@@ -74,7 +74,7 @@ type LspServer interface {
 		params *FoldingRangeParams,
 	) (
 		err error,
-		result TextDocumentFoldingRange_Result__Or,
+		result []FoldingRange,
 		partialResult []FoldingRange,
 	) //jsonrpc2gen:"textDocument/foldingRange"
 
@@ -102,7 +102,7 @@ type LspServer interface {
 		params *SelectionRangeParams,
 	) (
 		err error,
-		result TextDocumentSelectionRange_Result__Or,
+		result []SelectionRange,
 		partialResult []SelectionRange,
 	) //jsonrpc2gen:"textDocument/selectionRange"
 
@@ -114,7 +114,7 @@ type LspServer interface {
 		params *CallHierarchyPrepareParams,
 	) (
 		err error,
-		result TextDocumentPrepareCallHierarchy_Result__Or,
+		result []CallHierarchyItem,
 	) //jsonrpc2gen:"textDocument/prepareCallHierarchy"
 
 	// A request to resolve the incoming calls for a given
@@ -124,7 +124,7 @@ type LspServer interface {
 		params *CallHierarchyIncomingCallsParams,
 	) (
 		err error,
-		result CallHierarchyIncomingCalls_Result__Or,
+		result []CallHierarchyIncomingCall,
 		partialResult []CallHierarchyIncomingCall,
 	) //jsonrpc2gen:"callHierarchy/incomingCalls"
 
@@ -135,7 +135,7 @@ type LspServer interface {
 		params *CallHierarchyOutgoingCallsParams,
 	) (
 		err error,
-		result CallHierarchyOutgoingCalls_Result__Or,
+		result []CallHierarchyOutgoingCall,
 		partialResult []CallHierarchyOutgoingCall,
 	) //jsonrpc2gen:"callHierarchy/outgoingCalls"
 
@@ -146,7 +146,7 @@ type LspServer interface {
 		params *SemanticTokensParams,
 	) (
 		err error,
-		result TextDocumentSemanticTokensFull_Result__Or,
+		result *SemanticTokens,
 		partialResult SemanticTokensPartialResult,
 	) //jsonrpc2gen:"textDocument/semanticTokens/full"
 
@@ -168,7 +168,7 @@ type LspServer interface {
 		params *SemanticTokensRangeParams,
 	) (
 		err error,
-		result TextDocumentSemanticTokensRange_Result__Or,
+		result *SemanticTokens,
 		partialResult SemanticTokensPartialResult,
 	) //jsonrpc2gen:"textDocument/semanticTokens/range"
 
@@ -186,7 +186,7 @@ type LspServer interface {
 		params *LinkedEditingRangeParams,
 	) (
 		err error,
-		result TextDocumentLinkedEditingRange_Result__Or,
+		result *LinkedEditingRanges,
 	) //jsonrpc2gen:"textDocument/linkedEditingRange"
 
 	// The will create files request is sent from the client to the server
@@ -197,7 +197,7 @@ type LspServer interface {
 		params *CreateFilesParams,
 	) (
 		err error,
-		result WorkspaceWillCreateFiles_Result__Or,
+		result *WorkspaceEdit,
 	) //jsonrpc2gen:"workspace/willCreateFiles"
 
 	// The will rename files request is sent from the client to the server
@@ -208,7 +208,7 @@ type LspServer interface {
 		params *RenameFilesParams,
 	) (
 		err error,
-		result WorkspaceWillRenameFiles_Result__Or,
+		result *WorkspaceEdit,
 	) //jsonrpc2gen:"workspace/willRenameFiles"
 
 	// The did delete files notification is sent from the client to the
@@ -218,7 +218,7 @@ type LspServer interface {
 		params *DeleteFilesParams,
 	) (
 		err error,
-		result WorkspaceWillDeleteFiles_Result__Or,
+		result *WorkspaceEdit,
 	) //jsonrpc2gen:"workspace/willDeleteFiles"
 
 	// A request to get the moniker of a symbol at a given text document
@@ -230,7 +230,7 @@ type LspServer interface {
 		params *MonikerParams,
 	) (
 		err error,
-		result TextDocumentMoniker_Result__Or,
+		result []Moniker,
 		partialResult []Moniker,
 	) //jsonrpc2gen:"textDocument/moniker"
 
@@ -242,7 +242,7 @@ type LspServer interface {
 		params *TypeHierarchyPrepareParams,
 	) (
 		err error,
-		result TextDocumentPrepareTypeHierarchy_Result__Or,
+		result []TypeHierarchyItem,
 	) //jsonrpc2gen:"textDocument/prepareTypeHierarchy"
 
 	// A request to resolve the supertypes for a given `TypeHierarchyItem`.
@@ -252,7 +252,7 @@ type LspServer interface {
 		params *TypeHierarchySupertypesParams,
 	) (
 		err error,
-		result TypeHierarchySupertypes_Result__Or,
+		result []TypeHierarchyItem,
 		partialResult []TypeHierarchyItem,
 	) //jsonrpc2gen:"typeHierarchy/supertypes"
 
@@ -263,7 +263,7 @@ type LspServer interface {
 		params *TypeHierarchySubtypesParams,
 	) (
 		err error,
-		result TypeHierarchySubtypes_Result__Or,
+		result []TypeHierarchyItem,
 		partialResult []TypeHierarchyItem,
 	) //jsonrpc2gen:"typeHierarchy/subtypes"
 
@@ -276,7 +276,7 @@ type LspServer interface {
 		params *InlineValueParams,
 	) (
 		err error,
-		result TextDocumentInlineValue_Result__Or,
+		result []InlineValue,
 		partialResult []InlineValue,
 	) //jsonrpc2gen:"textDocument/inlineValue"
 
@@ -296,7 +296,7 @@ type LspServer interface {
 		params *InlayHintParams,
 	) (
 		err error,
-		result TextDocumentInlayHint_Result__Or,
+		result []InlayHint,
 		partialResult []InlayHint,
 	) //jsonrpc2gen:"textDocument/inlayHint"
 
@@ -382,7 +382,7 @@ type LspServer interface {
 		params *WillSaveTextDocumentParams,
 	) (
 		err error,
-		result TextDocumentWillSaveWaitUntil_Result__Or,
+		result []TextEdit,
 	) //jsonrpc2gen:"textDocument/willSaveWaitUntil"
 
 	// Request to request completion at a given text document position. The
@@ -427,7 +427,7 @@ type LspServer interface {
 		params *HoverParams,
 	) (
 		err error,
-		result TextDocumentHover_Result__Or,
+		result *Hover,
 	) //jsonrpc2gen:"textDocument/hover"
 
 	TextDocumentSignatureHelp(
@@ -435,7 +435,7 @@ type LspServer interface {
 		params *SignatureHelpParams,
 	) (
 		err error,
-		result TextDocumentSignatureHelp_Result__Or,
+		result *SignatureHelp,
 	) //jsonrpc2gen:"textDocument/signatureHelp"
 
 	// A request to resolve the definition location of a symbol at a given
@@ -462,7 +462,7 @@ type LspServer interface {
 		params *ReferenceParams,
 	) (
 		err error,
-		result TextDocumentReferences_Result__Or,
+		result []Location,
 		partialResult []Location,
 	) //jsonrpc2gen:"textDocument/references"
 
@@ -476,7 +476,7 @@ type LspServer interface {
 		params *DocumentHighlightParams,
 	) (
 		err error,
-		result TextDocumentDocumentHighlight_Result__Or,
+		result []DocumentHighlight,
 		partialResult []DocumentHighlight,
 	) //jsonrpc2gen:"textDocument/documentHighlight"
 
@@ -500,7 +500,7 @@ type LspServer interface {
 		params *CodeActionParams,
 	) (
 		err error,
-		result TextDocumentCodeAction_Result__Or,
+		result []TextDocumentCodeAction_Result_Element__Or,
 		partialResult []TextDocumentCodeAction_PartialResult_Element__Or,
 	) //jsonrpc2gen:"textDocument/codeAction"
 
@@ -548,7 +548,7 @@ type LspServer interface {
 		params *CodeLensParams,
 	) (
 		err error,
-		result TextDocumentCodeLens_Result__Or,
+		result []CodeLens,
 		partialResult []CodeLens,
 	) //jsonrpc2gen:"textDocument/codeLens"
 
@@ -567,7 +567,7 @@ type LspServer interface {
 		params *DocumentLinkParams,
 	) (
 		err error,
-		result TextDocumentDocumentLink_Result__Or,
+		result []DocumentLink,
 		partialResult []DocumentLink,
 	) //jsonrpc2gen:"textDocument/documentLink"
 
@@ -589,7 +589,7 @@ type LspServer interface {
 		params *DocumentFormattingParams,
 	) (
 		err error,
-		result TextDocumentFormatting_Result__Or,
+		result []TextEdit,
 	) //jsonrpc2gen:"textDocument/formatting"
 
 	// A request to to format a range in a document.
@@ -598,7 +598,7 @@ type LspServer interface {
 		params *DocumentRangeFormattingParams,
 	) (
 		err error,
-		result TextDocumentRangeFormatting_Result__Or,
+		result []TextEdit,
 	) //jsonrpc2gen:"textDocument/rangeFormatting"
 
 	// A request to format a document on type.
@@ -607,7 +607,7 @@ type LspServer interface {
 		params *DocumentOnTypeFormattingParams,
 	) (
 		err error,
-		result TextDocumentOnTypeFormatting_Result__Or,
+		result []TextEdit,
 	) //jsonrpc2gen:"textDocument/onTypeFormatting"
 
 	// A request to rename a symbol.
@@ -616,7 +616,7 @@ type LspServer interface {
 		params *RenameParams,
 	) (
 		err error,
-		result TextDocumentRename_Result__Or,
+		result *WorkspaceEdit,
 	) //jsonrpc2gen:"textDocument/rename"
 
 	// A request to test and perform the setup necessary for a rename.
@@ -626,7 +626,7 @@ type LspServer interface {
 		params *PrepareRenameParams,
 	) (
 		err error,
-		result TextDocumentPrepareRename_Result__Or,
+		result *PrepareRenameResult,
 	) //jsonrpc2gen:"textDocument/prepareRename"
 
 	// A request send from the client to the server to execute a command.
@@ -637,7 +637,7 @@ type LspServer interface {
 		params *ExecuteCommandParams,
 	) (
 		err error,
-		result WorkspaceExecuteCommand_Result__Or,
+		result *LSPAny,
 	) //jsonrpc2gen:"workspace/executeCommand"
 
 	// The `workspace/didChangeWorkspaceFolders` notification is sent from

@@ -67,6 +67,22 @@ func typeName(prefix string, current string, t *Type) string {
 		return "[]" + typeName(prefix+"_"+current, "Element", t.Element)
 	}
 	if t.Kind == "or" {
+		if len(t.Items) == 2 && t.Items[0].Name == "null" {
+			name := typeName(prefix, current, &t.Items[1])
+			if name[0:1] != "[" {
+				return "*" + name
+			} else {
+				return name
+			}
+		}
+		if len(t.Items) == 2 && t.Items[1].Name == "null" {
+			name := typeName(prefix, current, &t.Items[0])
+			if name[0:1] != "[" {
+				return "*" + name
+			} else {
+				return name
+			}
+		}
 		RegisterType(prefix+"_"+current+"__Or", t)
 		return prefix + "_" + current + "__Or"
 	}
@@ -75,7 +91,7 @@ func typeName(prefix string, current string, t *Type) string {
 			prefix+"_"+current,
 			"Key",
 			t.Key,
-		) + "]interface{}"
+		) + "]" + typeValueName(prefix+"_"+current, "Value", t.Value)
 	}
 	if t.Kind == "literal" {
 		RegisterType(prefix+"_"+current, t)
@@ -88,6 +104,22 @@ func typeName(prefix string, current string, t *Type) string {
 		"kind", t.Kind,
 	)
 	panic("")
+}
+
+func typeValueName(prefix string, current string, tv TypeValue) string {
+	switch v := tv.(type) {
+	case *Type:
+		return typeName(prefix, current, v)
+	case *String:
+		return "string"
+	// case *StructureLiteral:
+	default:
+		log.Fatalw("unexpected kind",
+			"kind", tv,
+		)
+		panic("")
+	}
+
 }
 
 var structureTemplateGetAnno = func(name string) string {

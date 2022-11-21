@@ -15,7 +15,7 @@ type LspClient interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceWorkspaceFolders_Result__Or,
+		result []WorkspaceFolder,
 	) //jsonrpc2gen:"workspace/workspaceFolders"
 
 	// The 'workspace/configuration' request is sent from the server to the
@@ -81,7 +81,7 @@ type LspClient interface {
 		params *ShowMessageRequestParams,
 	) (
 		err error,
-		result WindowShowMessageRequest_Result__Or,
+		result *MessageActionItem,
 	) //jsonrpc2gen:"window/showMessageRequest"
 
 	// A request to refresh all code actions  @since 3.16.0
