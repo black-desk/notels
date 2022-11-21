@@ -52,10 +52,12 @@ func main() {
 
 	genEnumerations(&metaModel)
 	genStruct(&metaModel)
-	// genTypeAliases(&metaModel)
+	genTypeAliases(&metaModel)
 
 	genClient(&metaModel)
 	genServer(&metaModel)
+
+	genExtra()
 
 	log.Info("done")
 }

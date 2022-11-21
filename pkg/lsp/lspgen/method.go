@@ -16,5 +16,5 @@ func MethodNameFromString(lspJsonRPCMethodName string) string {
 		tmp[i] = strings.ToUpper(s[0:1]) + s[1:]
 	}
 	lspJsonRPCMethodName = strings.Join(tmp, "")
-	return lspJsonRPCMethodName
+	return fix(lspJsonRPCMethodName)
 }

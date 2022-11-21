@@ -13,11 +13,6 @@ var structTemplate string = `// Code generated from metaModel.json by "lspgen". 
 
 package protocol
 
-import (
-        "errors"
-        "encoding/json"
-)
-
 {{range .}}
         {{$name := getName .Name}}
         {{getComment .Documentation}}
@@ -54,9 +49,16 @@ var structureTemplateGetTypeProps = func(t *Type) string {
 
 var structureTemplateGetTypeName = typeName
 
+func fix(name string) string {
+	if name == "_InitializeParams" {
+		return "XInitializeParams"
+	}
+	return name
+}
+
 func typeName(prefix string, current string, t *Type) string {
 	if t.Kind == "reference" {
-		return t.Name
+		return fix(t.Name)
 	}
 	if t.Kind == "base" {
 		return baseTypeName(t.Name)
@@ -65,7 +67,7 @@ func typeName(prefix string, current string, t *Type) string {
 		return "[]" + typeName(prefix+"_"+current, "Element", t.Element)
 	}
 	if t.Kind == "or" {
-		// register
+		RegisterType(prefix+"_"+current+"__Or", t)
 		return prefix + "_" + current + "__Or"
 	}
 	if t.Kind == "map" {
@@ -76,6 +78,7 @@ func typeName(prefix string, current string, t *Type) string {
 		) + "]interface{}"
 	}
 	if t.Kind == "literal" {
+		RegisterType(prefix+"_"+current, t)
 		return prefix + "_" + current
 	}
 	if t.Kind == "stringLiteral" {

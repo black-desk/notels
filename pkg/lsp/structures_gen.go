@@ -2,11 +2,6 @@
 
 package protocol
 
-import (
-	"encoding/json"
-	"errors"
-)
-
 type ImplementationParams struct {
 
 	// extends
@@ -1023,7 +1018,7 @@ type InitializeParams struct {
 
 	// extends
 
-	_InitializeParams
+	XInitializeParams
 
 	WorkspaceFoldersInitializeParams
 }
@@ -2808,7 +2803,7 @@ type Unregistration struct {
 }
 
 // The initialize parameters
-type _InitializeParams struct {
+type XInitializeParams struct {
 
 	// mixins
 
@@ -2817,10 +2812,10 @@ type _InitializeParams struct {
 	// The process Id of the parent process that started the server.  Is
 	// `null` if the process has not been started by another process. If the
 	// parent process is not alive then the server should exit.
-	ProcessId _InitializeParams_ProcessId__Or `json:"processId"`
+	ProcessId XInitializeParams_ProcessId__Or `json:"processId"`
 
 	// Information about the client  @since 3.15.0
-	ClientInfo *_InitializeParams_ClientInfo `json:"clientInfo"`
+	ClientInfo *XInitializeParams_ClientInfo `json:"clientInfo"`
 
 	// The locale the client is currently showing the user interface in.
 	// This must not necessarily be the locale of the operating system.
@@ -2830,12 +2825,12 @@ type _InitializeParams struct {
 
 	// The rootPath of the workspace. Is null if no folder is open.
 	// @deprecated in favour of rootUri.
-	RootPath *_InitializeParams_RootPath__Or `json:"rootPath"`
+	RootPath *XInitializeParams_RootPath__Or `json:"rootPath"`
 
 	// The rootUri of the workspace. Is null if no folder is open. If both
 	// `rootPath` and `rootUri` are set `rootUri` wins.  @deprecated in
 	// favour of workspaceFolders.
-	RootUri _InitializeParams_RootUri__Or `json:"rootUri"`
+	RootUri XInitializeParams_RootUri__Or `json:"rootUri"`
 
 	// The capabilities provided by the client (editor or tool)
 	Capabilities ClientCapabilities `json:"capabilities"`
@@ -2844,7 +2839,7 @@ type _InitializeParams struct {
 	InitializationOptions *LSPAny `json:"initializationOptions"`
 
 	// The initial trace setting. If omitted trace is disabled ('off').
-	Trace *_InitializeParams_Trace__Or `json:"trace"`
+	Trace *XInitializeParams_Trace__Or `json:"trace"`
 }
 
 type WorkspaceFoldersInitializeParams struct {

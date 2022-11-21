@@ -16,11 +16,11 @@ type LspServer interface {
 	// resolves to such.
 	TextDocumentImplementation(
 		ctx context.Context,
-		params ImplementationParams,
+		params *ImplementationParams,
 	) (
 		err error,
-		result TextDocumentImplementation_Result,
-		partialResult TextDocumentImplementation_PartialResult,
+		result TextDocumentImplementation_Result__Or,
+		partialResult TextDocumentImplementation_PartialResult__Or,
 	) //jsonrpc2gen:"textDocument/implementation"
 
 	// A request to resolve the type definition locations of a symbol at a
@@ -30,11 +30,11 @@ type LspServer interface {
 	// resolves to such.
 	TextDocumentTypeDefinition(
 		ctx context.Context,
-		params TypeDefinitionParams,
+		params *TypeDefinitionParams,
 	) (
 		err error,
-		result TextDocumentTypeDefinition_Result,
-		partialResult TextDocumentTypeDefinition_PartialResult,
+		result TextDocumentTypeDefinition_Result__Or,
+		partialResult TextDocumentTypeDefinition_PartialResult__Or,
 	) //jsonrpc2gen:"textDocument/typeDefinition"
 
 	// A request to list all color symbols found in a given text document.
@@ -44,11 +44,11 @@ type LspServer interface {
 	// to such.
 	TextDocumentDocumentColor(
 		ctx context.Context,
-		params DocumentColorParams,
+		params *DocumentColorParams,
 	) (
 		err error,
-		result TextDocumentDocumentColor_Result,
-		partialResult TextDocumentDocumentColor_PartialResult,
+		result []ColorInformation,
+		partialResult []ColorInformation,
 	) //jsonrpc2gen:"textDocument/documentColor"
 
 	// A request to list all presentation for a color. The request's
@@ -58,11 +58,11 @@ type LspServer interface {
 	// resolves to such.
 	TextDocumentColorPresentation(
 		ctx context.Context,
-		params ColorPresentationParams,
+		params *ColorPresentationParams,
 	) (
 		err error,
-		result TextDocumentColorPresentation_Result,
-		partialResult TextDocumentColorPresentation_PartialResult,
+		result []ColorPresentation,
+		partialResult []ColorPresentation,
 	) //jsonrpc2gen:"textDocument/colorPresentation"
 
 	// A request to provide folding ranges in a document. The request's
@@ -71,11 +71,11 @@ type LspServer interface {
 	// Thenable that resolves to such.
 	TextDocumentFoldingRange(
 		ctx context.Context,
-		params FoldingRangeParams,
+		params *FoldingRangeParams,
 	) (
 		err error,
-		result TextDocumentFoldingRange_Result,
-		partialResult TextDocumentFoldingRange_PartialResult,
+		result TextDocumentFoldingRange_Result__Or,
+		partialResult []FoldingRange,
 	) //jsonrpc2gen:"textDocument/foldingRange"
 
 	// A request to resolve the type definition locations of a symbol at a
@@ -86,11 +86,11 @@ type LspServer interface {
 	// such.
 	TextDocumentDeclaration(
 		ctx context.Context,
-		params DeclarationParams,
+		params *DeclarationParams,
 	) (
 		err error,
-		result TextDocumentDeclaration_Result,
-		partialResult TextDocumentDeclaration_PartialResult,
+		result TextDocumentDeclaration_Result__Or,
+		partialResult TextDocumentDeclaration_PartialResult__Or,
 	) //jsonrpc2gen:"textDocument/declaration"
 
 	// A request to provide selection ranges in a document. The request's
@@ -99,11 +99,11 @@ type LspServer interface {
 	// Thenable that resolves to such.
 	TextDocumentSelectionRange(
 		ctx context.Context,
-		params SelectionRangeParams,
+		params *SelectionRangeParams,
 	) (
 		err error,
-		result TextDocumentSelectionRange_Result,
-		partialResult TextDocumentSelectionRange_PartialResult,
+		result TextDocumentSelectionRange_Result__Or,
+		partialResult []SelectionRange,
 	) //jsonrpc2gen:"textDocument/selectionRange"
 
 	// A request to result a `CallHierarchyItem` in a document at a given
@@ -111,42 +111,42 @@ type LspServer interface {
 	// hierarchy.  @since 3.16.0
 	TextDocumentPrepareCallHierarchy(
 		ctx context.Context,
-		params CallHierarchyPrepareParams,
+		params *CallHierarchyPrepareParams,
 	) (
 		err error,
-		result TextDocumentPrepareCallHierarchy_Result,
+		result TextDocumentPrepareCallHierarchy_Result__Or,
 	) //jsonrpc2gen:"textDocument/prepareCallHierarchy"
 
 	// A request to resolve the incoming calls for a given
 	// `CallHierarchyItem`.  @since 3.16.0
 	CallHierarchyIncomingCalls(
 		ctx context.Context,
-		params CallHierarchyIncomingCallsParams,
+		params *CallHierarchyIncomingCallsParams,
 	) (
 		err error,
-		result CallHierarchyIncomingCalls_Result,
-		partialResult CallHierarchyIncomingCalls_PartialResult,
+		result CallHierarchyIncomingCalls_Result__Or,
+		partialResult []CallHierarchyIncomingCall,
 	) //jsonrpc2gen:"callHierarchy/incomingCalls"
 
 	// A request to resolve the outgoing calls for a given
 	// `CallHierarchyItem`.  @since 3.16.0
 	CallHierarchyOutgoingCalls(
 		ctx context.Context,
-		params CallHierarchyOutgoingCallsParams,
+		params *CallHierarchyOutgoingCallsParams,
 	) (
 		err error,
-		result CallHierarchyOutgoingCalls_Result,
-		partialResult CallHierarchyOutgoingCalls_PartialResult,
+		result CallHierarchyOutgoingCalls_Result__Or,
+		partialResult []CallHierarchyOutgoingCall,
 	) //jsonrpc2gen:"callHierarchy/outgoingCalls"
 
 	// @since 3.16.0
 	// registration method: textDocument/semanticTokens
 	TextDocumentSemanticTokensFull(
 		ctx context.Context,
-		params SemanticTokensParams,
+		params *SemanticTokensParams,
 	) (
 		err error,
-		result TextDocumentSemanticTokensFull_Result,
+		result TextDocumentSemanticTokensFull_Result__Or,
 		partialResult SemanticTokensPartialResult,
 	) //jsonrpc2gen:"textDocument/semanticTokens/full"
 
@@ -154,21 +154,21 @@ type LspServer interface {
 	// registration method: textDocument/semanticTokens
 	TextDocumentSemanticTokensFullDelta(
 		ctx context.Context,
-		params SemanticTokensDeltaParams,
+		params *SemanticTokensDeltaParams,
 	) (
 		err error,
-		result TextDocumentSemanticTokensFullDelta_Result,
-		partialResult TextDocumentSemanticTokensFullDelta_PartialResult,
+		result TextDocumentSemanticTokensFullDelta_Result__Or,
+		partialResult TextDocumentSemanticTokensFullDelta_PartialResult__Or,
 	) //jsonrpc2gen:"textDocument/semanticTokens/full/delta"
 
 	// @since 3.16.0
 	// registration method: textDocument/semanticTokens
 	TextDocumentSemanticTokensRange(
 		ctx context.Context,
-		params SemanticTokensRangeParams,
+		params *SemanticTokensRangeParams,
 	) (
 		err error,
-		result TextDocumentSemanticTokensRange_Result,
+		result TextDocumentSemanticTokensRange_Result__Or,
 		partialResult SemanticTokensPartialResult,
 	) //jsonrpc2gen:"textDocument/semanticTokens/range"
 
@@ -183,10 +183,10 @@ type LspServer interface {
 	// 3.16.0
 	TextDocumentLinkedEditingRange(
 		ctx context.Context,
-		params LinkedEditingRangeParams,
+		params *LinkedEditingRangeParams,
 	) (
 		err error,
-		result TextDocumentLinkedEditingRange_Result,
+		result TextDocumentLinkedEditingRange_Result__Or,
 	) //jsonrpc2gen:"textDocument/linkedEditingRange"
 
 	// The will create files request is sent from the client to the server
@@ -194,10 +194,10 @@ type LspServer interface {
 	// triggered from within the client.  @since 3.16.0
 	WorkspaceWillCreateFiles(
 		ctx context.Context,
-		params CreateFilesParams,
+		params *CreateFilesParams,
 	) (
 		err error,
-		result WorkspaceWillCreateFiles_Result,
+		result WorkspaceWillCreateFiles_Result__Or,
 	) //jsonrpc2gen:"workspace/willCreateFiles"
 
 	// The will rename files request is sent from the client to the server
@@ -205,20 +205,20 @@ type LspServer interface {
 	// from within the client.  @since 3.16.0
 	WorkspaceWillRenameFiles(
 		ctx context.Context,
-		params RenameFilesParams,
+		params *RenameFilesParams,
 	) (
 		err error,
-		result WorkspaceWillRenameFiles_Result,
+		result WorkspaceWillRenameFiles_Result__Or,
 	) //jsonrpc2gen:"workspace/willRenameFiles"
 
 	// The did delete files notification is sent from the client to the
 	// server when files were deleted from within the client.  @since 3.16.0
 	WorkspaceWillDeleteFiles(
 		ctx context.Context,
-		params DeleteFilesParams,
+		params *DeleteFilesParams,
 	) (
 		err error,
-		result WorkspaceWillDeleteFiles_Result,
+		result WorkspaceWillDeleteFiles_Result__Or,
 	) //jsonrpc2gen:"workspace/willDeleteFiles"
 
 	// A request to get the moniker of a symbol at a given text document
@@ -227,11 +227,11 @@ type LspServer interface {
 	// response is of type [Moniker[]](#Moniker[]) or `null`.
 	TextDocumentMoniker(
 		ctx context.Context,
-		params MonikerParams,
+		params *MonikerParams,
 	) (
 		err error,
-		result TextDocumentMoniker_Result,
-		partialResult TextDocumentMoniker_PartialResult,
+		result TextDocumentMoniker_Result__Or,
+		partialResult []Moniker,
 	) //jsonrpc2gen:"textDocument/moniker"
 
 	// A request to result a `TypeHierarchyItem` in a document at a given
@@ -239,32 +239,32 @@ type LspServer interface {
 	// hierarchy.  @since 3.17.0
 	TextDocumentPrepareTypeHierarchy(
 		ctx context.Context,
-		params TypeHierarchyPrepareParams,
+		params *TypeHierarchyPrepareParams,
 	) (
 		err error,
-		result TextDocumentPrepareTypeHierarchy_Result,
+		result TextDocumentPrepareTypeHierarchy_Result__Or,
 	) //jsonrpc2gen:"textDocument/prepareTypeHierarchy"
 
 	// A request to resolve the supertypes for a given `TypeHierarchyItem`.
 	// @since 3.17.0
 	TypeHierarchySupertypes(
 		ctx context.Context,
-		params TypeHierarchySupertypesParams,
+		params *TypeHierarchySupertypesParams,
 	) (
 		err error,
-		result TypeHierarchySupertypes_Result,
-		partialResult TypeHierarchySupertypes_PartialResult,
+		result TypeHierarchySupertypes_Result__Or,
+		partialResult []TypeHierarchyItem,
 	) //jsonrpc2gen:"typeHierarchy/supertypes"
 
 	// A request to resolve the subtypes for a given `TypeHierarchyItem`.
 	// @since 3.17.0
 	TypeHierarchySubtypes(
 		ctx context.Context,
-		params TypeHierarchySubtypesParams,
+		params *TypeHierarchySubtypesParams,
 	) (
 		err error,
-		result TypeHierarchySubtypes_Result,
-		partialResult TypeHierarchySubtypes_PartialResult,
+		result TypeHierarchySubtypes_Result__Or,
+		partialResult []TypeHierarchyItem,
 	) //jsonrpc2gen:"typeHierarchy/subtypes"
 
 	// A request to provide inline values in a document. The request's
@@ -273,11 +273,11 @@ type LspServer interface {
 	// that resolves to such.  @since 3.17.0
 	TextDocumentInlineValue(
 		ctx context.Context,
-		params InlineValueParams,
+		params *InlineValueParams,
 	) (
 		err error,
-		result TextDocumentInlineValue_Result,
-		partialResult TextDocumentInlineValue_PartialResult,
+		result TextDocumentInlineValue_Result__Or,
+		partialResult []InlineValue,
 	) //jsonrpc2gen:"textDocument/inlineValue"
 
 	// @since 3.17.0
@@ -293,11 +293,11 @@ type LspServer interface {
 	// resolves to such.  @since 3.17.0
 	TextDocumentInlayHint(
 		ctx context.Context,
-		params InlayHintParams,
+		params *InlayHintParams,
 	) (
 		err error,
-		result TextDocumentInlayHint_Result,
-		partialResult TextDocumentInlayHint_PartialResult,
+		result TextDocumentInlayHint_Result__Or,
+		partialResult []InlayHint,
 	) //jsonrpc2gen:"textDocument/inlayHint"
 
 	// A request to resolve additional properties for an inlay hint. The
@@ -306,7 +306,7 @@ type LspServer interface {
 	// such.  @since 3.17.0
 	InlayHintResolve(
 		ctx context.Context,
-		params InlayHint,
+		params *InlayHint,
 	) (
 		err error,
 		result InlayHint,
@@ -322,7 +322,7 @@ type LspServer interface {
 	// The document diagnostic request definition.  @since 3.17.0
 	TextDocumentDiagnostic(
 		ctx context.Context,
-		params DocumentDiagnosticParams,
+		params *DocumentDiagnosticParams,
 	) (
 		err error,
 		errorData DiagnosticServerCancellationData,
@@ -333,7 +333,7 @@ type LspServer interface {
 	// The workspace diagnostic request definition.  @since 3.17.0
 	WorkspaceDiagnostic(
 		ctx context.Context,
-		params WorkspaceDiagnosticParams,
+		params *WorkspaceDiagnosticParams,
 	) (
 		err error,
 		errorData DiagnosticServerCancellationData,
@@ -355,7 +355,7 @@ type LspServer interface {
 	// Thenable that resolves to such.
 	Initialize(
 		ctx context.Context,
-		params InitializeParams,
+		params *InitializeParams,
 	) (
 		err error,
 		errorData InitializeError,
@@ -379,10 +379,10 @@ type LspServer interface {
 	// request. This is done to keep the save fast and reliable.
 	TextDocumentWillSaveWaitUntil(
 		ctx context.Context,
-		params WillSaveTextDocumentParams,
+		params *WillSaveTextDocumentParams,
 	) (
 		err error,
-		result TextDocumentWillSaveWaitUntil_Result,
+		result TextDocumentWillSaveWaitUntil_Result__Or,
 	) //jsonrpc2gen:"textDocument/willSaveWaitUntil"
 
 	// Request to request completion at a given text document position. The
@@ -398,11 +398,11 @@ type LspServer interface {
 	// `insertText`, and `textEdit`, must not be changed during resolve.
 	TextDocumentCompletion(
 		ctx context.Context,
-		params CompletionParams,
+		params *CompletionParams,
 	) (
 		err error,
-		result TextDocumentCompletion_Result,
-		partialResult TextDocumentCompletion_PartialResult,
+		result TextDocumentCompletion_Result__Or,
+		partialResult []CompletionItem,
 	) //jsonrpc2gen:"textDocument/completion"
 
 	// Request to resolve additional information for a given completion
@@ -412,7 +412,7 @@ type LspServer interface {
 	// such.
 	CompletionItemResolve(
 		ctx context.Context,
-		params CompletionItem,
+		params *CompletionItem,
 	) (
 		err error,
 		result CompletionItem,
@@ -424,18 +424,18 @@ type LspServer interface {
 	// [Hover](#Hover) or a Thenable that resolves to such.
 	TextDocumentHover(
 		ctx context.Context,
-		params HoverParams,
+		params *HoverParams,
 	) (
 		err error,
-		result TextDocumentHover_Result,
+		result TextDocumentHover_Result__Or,
 	) //jsonrpc2gen:"textDocument/hover"
 
 	TextDocumentSignatureHelp(
 		ctx context.Context,
-		params SignatureHelpParams,
+		params *SignatureHelpParams,
 	) (
 		err error,
-		result TextDocumentSignatureHelp_Result,
+		result TextDocumentSignatureHelp_Result__Or,
 	) //jsonrpc2gen:"textDocument/signatureHelp"
 
 	// A request to resolve the definition location of a symbol at a given
@@ -446,11 +446,11 @@ type LspServer interface {
 	// such.
 	TextDocumentDefinition(
 		ctx context.Context,
-		params DefinitionParams,
+		params *DefinitionParams,
 	) (
 		err error,
-		result TextDocumentDefinition_Result,
-		partialResult TextDocumentDefinition_PartialResult,
+		result TextDocumentDefinition_Result__Or,
+		partialResult TextDocumentDefinition_PartialResult__Or,
 	) //jsonrpc2gen:"textDocument/definition"
 
 	// A request to resolve project-wide references for the symbol denoted
@@ -459,11 +459,11 @@ type LspServer interface {
 	// [Location[]](#Location) or a Thenable that resolves to such.
 	TextDocumentReferences(
 		ctx context.Context,
-		params ReferenceParams,
+		params *ReferenceParams,
 	) (
 		err error,
-		result TextDocumentReferences_Result,
-		partialResult TextDocumentReferences_PartialResult,
+		result TextDocumentReferences_Result__Or,
+		partialResult []Location,
 	) //jsonrpc2gen:"textDocument/references"
 
 	// Request to resolve a [DocumentHighlight](#DocumentHighlight) for a
@@ -473,11 +473,11 @@ type LspServer interface {
 	// that resolves to such.
 	TextDocumentDocumentHighlight(
 		ctx context.Context,
-		params DocumentHighlightParams,
+		params *DocumentHighlightParams,
 	) (
 		err error,
-		result TextDocumentDocumentHighlight_Result,
-		partialResult TextDocumentDocumentHighlight_PartialResult,
+		result TextDocumentDocumentHighlight_Result__Or,
+		partialResult []DocumentHighlight,
 	) //jsonrpc2gen:"textDocument/documentHighlight"
 
 	// A request to list all symbols found in a given text document. The
@@ -487,21 +487,21 @@ type LspServer interface {
 	// resolves to such.
 	TextDocumentDocumentSymbol(
 		ctx context.Context,
-		params DocumentSymbolParams,
+		params *DocumentSymbolParams,
 	) (
 		err error,
-		result TextDocumentDocumentSymbol_Result,
-		partialResult TextDocumentDocumentSymbol_PartialResult,
+		result TextDocumentDocumentSymbol_Result__Or,
+		partialResult TextDocumentDocumentSymbol_PartialResult__Or,
 	) //jsonrpc2gen:"textDocument/documentSymbol"
 
 	// A request to provide commands for the given text document and range.
 	TextDocumentCodeAction(
 		ctx context.Context,
-		params CodeActionParams,
+		params *CodeActionParams,
 	) (
 		err error,
-		result TextDocumentCodeAction_Result,
-		partialResult TextDocumentCodeAction_PartialResult,
+		result TextDocumentCodeAction_Result__Or,
+		partialResult []TextDocumentCodeAction_PartialResult_Element__Or,
 	) //jsonrpc2gen:"textDocument/codeAction"
 
 	// Request to resolve additional information for a given code action.The
@@ -510,7 +510,7 @@ type LspServer interface {
 	// such.
 	CodeActionResolve(
 		ctx context.Context,
-		params CodeAction,
+		params *CodeAction,
 	) (
 		err error,
 		result CodeAction,
@@ -525,18 +525,18 @@ type LspServer interface {
 	// `workspace.symbol.resolveSupport`.
 	WorkspaceSymbol(
 		ctx context.Context,
-		params WorkspaceSymbolParams,
+		params *WorkspaceSymbolParams,
 	) (
 		err error,
-		result WorkspaceSymbol_Result,
-		partialResult WorkspaceSymbol_PartialResult,
+		result WorkspaceSymbol_Result__Or,
+		partialResult WorkspaceSymbol_PartialResult__Or,
 	) //jsonrpc2gen:"workspace/symbol"
 
 	// A request to resolve the range inside the workspace symbol's
 	// location.  @since 3.17.0
 	WorkspaceSymbolResolve(
 		ctx context.Context,
-		params WorkspaceSymbol,
+		params *WorkspaceSymbol,
 	) (
 		err error,
 		result WorkspaceSymbol,
@@ -545,17 +545,17 @@ type LspServer interface {
 	// A request to provide code lens for the given text document.
 	TextDocumentCodeLens(
 		ctx context.Context,
-		params CodeLensParams,
+		params *CodeLensParams,
 	) (
 		err error,
-		result TextDocumentCodeLens_Result,
-		partialResult TextDocumentCodeLens_PartialResult,
+		result TextDocumentCodeLens_Result__Or,
+		partialResult []CodeLens,
 	) //jsonrpc2gen:"textDocument/codeLens"
 
 	// A request to resolve a command for a given code lens.
 	CodeLensResolve(
 		ctx context.Context,
-		params CodeLens,
+		params *CodeLens,
 	) (
 		err error,
 		result CodeLens,
@@ -564,11 +564,11 @@ type LspServer interface {
 	// A request to provide document links
 	TextDocumentDocumentLink(
 		ctx context.Context,
-		params DocumentLinkParams,
+		params *DocumentLinkParams,
 	) (
 		err error,
-		result TextDocumentDocumentLink_Result,
-		partialResult TextDocumentDocumentLink_PartialResult,
+		result TextDocumentDocumentLink_Result__Or,
+		partialResult []DocumentLink,
 	) //jsonrpc2gen:"textDocument/documentLink"
 
 	// Request to resolve additional information for a given document link.
@@ -577,7 +577,7 @@ type LspServer interface {
 	// resolves to such.
 	DocumentLinkResolve(
 		ctx context.Context,
-		params DocumentLink,
+		params *DocumentLink,
 	) (
 		err error,
 		result DocumentLink,
@@ -586,47 +586,47 @@ type LspServer interface {
 	// A request to to format a whole document.
 	TextDocumentFormatting(
 		ctx context.Context,
-		params DocumentFormattingParams,
+		params *DocumentFormattingParams,
 	) (
 		err error,
-		result TextDocumentFormatting_Result,
+		result TextDocumentFormatting_Result__Or,
 	) //jsonrpc2gen:"textDocument/formatting"
 
 	// A request to to format a range in a document.
 	TextDocumentRangeFormatting(
 		ctx context.Context,
-		params DocumentRangeFormattingParams,
+		params *DocumentRangeFormattingParams,
 	) (
 		err error,
-		result TextDocumentRangeFormatting_Result,
+		result TextDocumentRangeFormatting_Result__Or,
 	) //jsonrpc2gen:"textDocument/rangeFormatting"
 
 	// A request to format a document on type.
 	TextDocumentOnTypeFormatting(
 		ctx context.Context,
-		params DocumentOnTypeFormattingParams,
+		params *DocumentOnTypeFormattingParams,
 	) (
 		err error,
-		result TextDocumentOnTypeFormatting_Result,
+		result TextDocumentOnTypeFormatting_Result__Or,
 	) //jsonrpc2gen:"textDocument/onTypeFormatting"
 
 	// A request to rename a symbol.
 	TextDocumentRename(
 		ctx context.Context,
-		params RenameParams,
+		params *RenameParams,
 	) (
 		err error,
-		result TextDocumentRename_Result,
+		result TextDocumentRename_Result__Or,
 	) //jsonrpc2gen:"textDocument/rename"
 
 	// A request to test and perform the setup necessary for a rename.
 	// @since 3.16 - support for default behavior
 	TextDocumentPrepareRename(
 		ctx context.Context,
-		params PrepareRenameParams,
+		params *PrepareRenameParams,
 	) (
 		err error,
-		result TextDocumentPrepareRename_Result,
+		result TextDocumentPrepareRename_Result__Or,
 	) //jsonrpc2gen:"textDocument/prepareRename"
 
 	// A request send from the client to the server to execute a command.
@@ -634,10 +634,10 @@ type LspServer interface {
 	// to the workspace.
 	WorkspaceExecuteCommand(
 		ctx context.Context,
-		params ExecuteCommandParams,
+		params *ExecuteCommandParams,
 	) (
 		err error,
-		result WorkspaceExecuteCommand_Result,
+		result WorkspaceExecuteCommand_Result__Or,
 	) //jsonrpc2gen:"workspace/executeCommand"
 
 	// The `workspace/didChangeWorkspaceFolders` notification is sent from
@@ -645,7 +645,7 @@ type LspServer interface {
 	// changes.
 	WorkspaceDidChangeWorkspaceFolders(
 		ctx context.Context,
-		params DidChangeWorkspaceFoldersParams,
+		params *DidChangeWorkspaceFoldersParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"workspace/didChangeWorkspaceFolders"
@@ -655,7 +655,7 @@ type LspServer interface {
 	// side.
 	WindowWorkDoneProgressCancel(
 		ctx context.Context,
-		params WorkDoneProgressCancelParams,
+		params *WorkDoneProgressCancelParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"window/workDoneProgress/cancel"
@@ -664,7 +664,7 @@ type LspServer interface {
 	// server when files were created from within the client.  @since 3.16.0
 	WorkspaceDidCreateFiles(
 		ctx context.Context,
-		params CreateFilesParams,
+		params *CreateFilesParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"workspace/didCreateFiles"
@@ -673,7 +673,7 @@ type LspServer interface {
 	// server when files were renamed from within the client.  @since 3.16.0
 	WorkspaceDidRenameFiles(
 		ctx context.Context,
-		params RenameFilesParams,
+		params *RenameFilesParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"workspace/didRenameFiles"
@@ -683,7 +683,7 @@ type LspServer interface {
 	// triggered from within the client.  @since 3.16.0
 	WorkspaceDidDeleteFiles(
 		ctx context.Context,
-		params DeleteFilesParams,
+		params *DeleteFilesParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"workspace/didDeleteFiles"
@@ -692,7 +692,7 @@ type LspServer interface {
 	// registration method: notebookDocument/sync
 	NotebookDocumentDidOpen(
 		ctx context.Context,
-		params DidOpenNotebookDocumentParams,
+		params *DidOpenNotebookDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"notebookDocument/didOpen"
@@ -700,7 +700,7 @@ type LspServer interface {
 	// registration method: notebookDocument/sync
 	NotebookDocumentDidChange(
 		ctx context.Context,
-		params DidChangeNotebookDocumentParams,
+		params *DidChangeNotebookDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"notebookDocument/didChange"
@@ -709,7 +709,7 @@ type LspServer interface {
 	// registration method: notebookDocument/sync
 	NotebookDocumentDidSave(
 		ctx context.Context,
-		params DidSaveNotebookDocumentParams,
+		params *DidSaveNotebookDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"notebookDocument/didSave"
@@ -718,7 +718,7 @@ type LspServer interface {
 	// registration method: notebookDocument/sync
 	NotebookDocumentDidClose(
 		ctx context.Context,
-		params DidCloseNotebookDocumentParams,
+		params *DidCloseNotebookDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"notebookDocument/didClose"
@@ -728,7 +728,7 @@ type LspServer interface {
 	// send requests from the server to the client.
 	Initialized(
 		ctx context.Context,
-		params InitializedParams,
+		params *InitializedParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"initialized"
@@ -746,7 +746,7 @@ type LspServer interface {
 	// contains the changed configuration as defined by the language client.
 	WorkspaceDidChangeConfiguration(
 		ctx context.Context,
-		params DidChangeConfigurationParams,
+		params *DidChangeConfigurationParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"workspace/didChangeConfiguration"
@@ -762,7 +762,7 @@ type LspServer interface {
 	// the max open count is one.
 	TextDocumentDidOpen(
 		ctx context.Context,
-		params DidOpenTextDocumentParams,
+		params *DidOpenTextDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"textDocument/didOpen"
@@ -771,7 +771,7 @@ type LspServer interface {
 	// server to signal changes to a text document.
 	TextDocumentDidChange(
 		ctx context.Context,
-		params DidChangeTextDocumentParams,
+		params *DidChangeTextDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"textDocument/didChange"
@@ -786,7 +786,7 @@ type LspServer interface {
 	// a previous open notification to be sent.
 	TextDocumentDidClose(
 		ctx context.Context,
-		params DidCloseTextDocumentParams,
+		params *DidCloseTextDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"textDocument/didClose"
@@ -795,7 +795,7 @@ type LspServer interface {
 	// when the document got saved in the client.
 	TextDocumentDidSave(
 		ctx context.Context,
-		params DidSaveTextDocumentParams,
+		params *DidSaveTextDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"textDocument/didSave"
@@ -804,7 +804,7 @@ type LspServer interface {
 	// server before the document is actually saved.
 	TextDocumentWillSave(
 		ctx context.Context,
-		params WillSaveTextDocumentParams,
+		params *WillSaveTextDocumentParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"textDocument/willSave"
@@ -814,28 +814,28 @@ type LspServer interface {
 	// client.
 	WorkspaceDidChangeWatchedFiles(
 		ctx context.Context,
-		params DidChangeWatchedFilesParams,
+		params *DidChangeWatchedFilesParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"workspace/didChangeWatchedFiles"
 
 	LspSetTrace(
 		ctx context.Context,
-		params SetTraceParams,
+		params *SetTraceParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/setTrace"
 
 	LspCancelRequest(
 		ctx context.Context,
-		params CancelParams,
+		params *CancelParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/cancelRequest"
 
 	LspProgress(
 		ctx context.Context,
-		params ProgressParams,
+		params *ProgressParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/progress"

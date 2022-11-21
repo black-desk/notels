@@ -68,51 +68,28 @@ const (
 )
 
 var _SemanticTokenTypes = []SemanticTokenTypes{
-
 	SemanticTokenTypesNamespace,
-
 	SemanticTokenTypesType,
-
 	SemanticTokenTypesClass,
-
 	SemanticTokenTypesEnum,
-
 	SemanticTokenTypesInterface,
-
 	SemanticTokenTypesStruct,
-
 	SemanticTokenTypesTypeParameter,
-
 	SemanticTokenTypesParameter,
-
 	SemanticTokenTypesVariable,
-
 	SemanticTokenTypesProperty,
-
 	SemanticTokenTypesEnumMember,
-
 	SemanticTokenTypesEvent,
-
 	SemanticTokenTypesFunction,
-
 	SemanticTokenTypesMethod,
-
 	SemanticTokenTypesMacro,
-
 	SemanticTokenTypesKeyword,
-
 	SemanticTokenTypesModifier,
-
 	SemanticTokenTypesComment,
-
 	SemanticTokenTypesString,
-
 	SemanticTokenTypesNumber,
-
 	SemanticTokenTypesRegexp,
-
 	SemanticTokenTypesOperator,
-
 	SemanticTokenTypesDecorator,
 }
 
@@ -178,25 +155,15 @@ const (
 )
 
 var _SemanticTokenModifiers = []SemanticTokenModifiers{
-
 	SemanticTokenModifiersDeclaration,
-
 	SemanticTokenModifiersDefinition,
-
 	SemanticTokenModifiersReadonly,
-
 	SemanticTokenModifiersStatic,
-
 	SemanticTokenModifiersDeprecated,
-
 	SemanticTokenModifiersAbstract,
-
 	SemanticTokenModifiersAsync,
-
 	SemanticTokenModifiersModification,
-
 	SemanticTokenModifiersDocumentation,
-
 	SemanticTokenModifiersDefaultLibrary,
 }
 
@@ -247,9 +214,7 @@ const (
 )
 
 var _DocumentDiagnosticReportKind = []DocumentDiagnosticReportKind{
-
 	DocumentDiagnosticReportKindFull,
-
 	DocumentDiagnosticReportKindUnchanged,
 }
 
@@ -309,19 +274,12 @@ const (
 )
 
 var _ErrorCodes = []ErrorCodes{
-
 	ErrorCodesParseError,
-
 	ErrorCodesInvalidRequest,
-
 	ErrorCodesMethodNotFound,
-
 	ErrorCodesInvalidParams,
-
 	ErrorCodesInternalError,
-
 	ErrorCodesServerNotInitialized,
-
 	ErrorCodesUnknownErrorCode,
 }
 
@@ -388,13 +346,9 @@ const (
 )
 
 var _LSPErrorCodes = []LSPErrorCodes{
-
 	LSPErrorCodesRequestFailed,
-
 	LSPErrorCodesServerCancelled,
-
 	LSPErrorCodesContentModified,
-
 	LSPErrorCodesRequestCancelled,
 }
 
@@ -448,11 +402,8 @@ const (
 )
 
 var _FoldingRangeKind = []FoldingRangeKind{
-
 	FoldingRangeKindComment,
-
 	FoldingRangeKindImports,
-
 	FoldingRangeKindRegion,
 }
 
@@ -548,57 +499,31 @@ const (
 )
 
 var _SymbolKind = []SymbolKind{
-
 	SymbolKindFile,
-
 	SymbolKindModule,
-
 	SymbolKindNamespace,
-
 	SymbolKindPackage,
-
 	SymbolKindClass,
-
 	SymbolKindMethod,
-
 	SymbolKindProperty,
-
 	SymbolKindField,
-
 	SymbolKindConstructor,
-
 	SymbolKindEnum,
-
 	SymbolKindInterface,
-
 	SymbolKindFunction,
-
 	SymbolKindVariable,
-
 	SymbolKindConstant,
-
 	SymbolKindString,
-
 	SymbolKindNumber,
-
 	SymbolKindBoolean,
-
 	SymbolKindArray,
-
 	SymbolKindObject,
-
 	SymbolKindKey,
-
 	SymbolKindNull,
-
 	SymbolKindEnumMember,
-
 	SymbolKindStruct,
-
 	SymbolKindEvent,
-
 	SymbolKindOperator,
-
 	SymbolKindTypeParameter,
 }
 
@@ -647,7 +572,6 @@ const (
 )
 
 var _SymbolTag = []SymbolTag{
-
 	SymbolTagDeprecated,
 }
 
@@ -707,15 +631,10 @@ const (
 )
 
 var _UniquenessLevel = []UniquenessLevel{
-
 	UniquenessLevelDocument,
-
 	UniquenessLevelProject,
-
 	UniquenessLevelGroup,
-
 	UniquenessLevelScheme,
-
 	UniquenessLevelGlobal,
 }
 
@@ -771,11 +690,8 @@ const (
 )
 
 var _MonikerKind = []MonikerKind{
-
 	MonikerKindImport,
-
 	MonikerKindExport,
-
 	MonikerKindLocal,
 }
 
@@ -826,9 +742,7 @@ const (
 )
 
 var _InlayHintKind = []InlayHintKind{
-
 	InlayHintKindType,
-
 	InlayHintKindParameter,
 }
 
@@ -885,13 +799,9 @@ const (
 )
 
 var _MessageType = []MessageType{
-
 	MessageTypeError,
-
 	MessageTypeWarning,
-
 	MessageTypeInfo,
-
 	MessageTypeLog,
 }
 
@@ -948,11 +858,8 @@ const (
 )
 
 var _TextDocumentSyncKind = []TextDocumentSyncKind{
-
 	TextDocumentSyncKindNone,
-
 	TextDocumentSyncKindFull,
-
 	TextDocumentSyncKindIncremental,
 }
 
@@ -1007,11 +914,8 @@ const (
 )
 
 var _TextDocumentSaveReason = []TextDocumentSaveReason{
-
 	TextDocumentSaveReasonManual,
-
 	TextDocumentSaveReasonAfterDelay,
-
 	TextDocumentSaveReasonFocusOut,
 }
 
@@ -1105,55 +1009,30 @@ const (
 )
 
 var _CompletionItemKind = []CompletionItemKind{
-
 	CompletionItemKindText,
-
 	CompletionItemKindMethod,
-
 	CompletionItemKindFunction,
-
 	CompletionItemKindConstructor,
-
 	CompletionItemKindField,
-
 	CompletionItemKindVariable,
-
 	CompletionItemKindClass,
-
 	CompletionItemKindInterface,
-
 	CompletionItemKindModule,
-
 	CompletionItemKindProperty,
-
 	CompletionItemKindUnit,
-
 	CompletionItemKindValue,
-
 	CompletionItemKindEnum,
-
 	CompletionItemKindKeyword,
-
 	CompletionItemKindSnippet,
-
 	CompletionItemKindColor,
-
 	CompletionItemKindFile,
-
 	CompletionItemKindReference,
-
 	CompletionItemKindFolder,
-
 	CompletionItemKindEnumMember,
-
 	CompletionItemKindConstant,
-
 	CompletionItemKindStruct,
-
 	CompletionItemKindEvent,
-
 	CompletionItemKindOperator,
-
 	CompletionItemKindTypeParameter,
 }
 
@@ -1202,7 +1081,6 @@ const (
 )
 
 var _CompletionItemTag = []CompletionItemTag{
-
 	CompletionItemTagDeprecated,
 }
 
@@ -1259,9 +1137,7 @@ const (
 )
 
 var _InsertTextFormat = []InsertTextFormat{
-
 	InsertTextFormatPlainText,
-
 	InsertTextFormatSnippet,
 }
 
@@ -1320,9 +1196,7 @@ const (
 )
 
 var _InsertTextMode = []InsertTextMode{
-
 	InsertTextModeAsIs,
-
 	InsertTextModeAdjustIndentation,
 }
 
@@ -1376,11 +1250,8 @@ const (
 )
 
 var _DocumentHighlightKind = []DocumentHighlightKind{
-
 	DocumentHighlightKindText,
-
 	DocumentHighlightKindRead,
-
 	DocumentHighlightKindWrite,
 }
 
@@ -1464,23 +1335,14 @@ const (
 )
 
 var _CodeActionKind = []CodeActionKind{
-
 	CodeActionKindEmpty,
-
 	CodeActionKindQuickFix,
-
 	CodeActionKindRefactor,
-
 	CodeActionKindRefactorExtract,
-
 	CodeActionKindRefactorInline,
-
 	CodeActionKindRefactorRewrite,
-
 	CodeActionKindSource,
-
 	CodeActionKindSourceOrganizeImports,
-
 	CodeActionKindSourceFixAll,
 }
 
@@ -1533,11 +1395,8 @@ const (
 )
 
 var _TraceValues = []TraceValues{
-
 	TraceValuesOff,
-
 	TraceValuesMessages,
-
 	TraceValuesVerbose,
 }
 
@@ -1591,9 +1450,7 @@ const (
 )
 
 var _MarkupKind = []MarkupKind{
-
 	MarkupKindPlainText,
-
 	MarkupKindMarkdown,
 }
 
@@ -1651,11 +1508,8 @@ const (
 )
 
 var _PositionEncodingKind = []PositionEncodingKind{
-
 	PositionEncodingKindUTF8,
-
 	PositionEncodingKindUTF16,
-
 	PositionEncodingKindUTF32,
 }
 
@@ -1709,11 +1563,8 @@ const (
 )
 
 var _FileChangeType = []FileChangeType{
-
 	FileChangeTypeCreated,
-
 	FileChangeTypeChanged,
-
 	FileChangeTypeDeleted,
 }
 
@@ -1766,11 +1617,8 @@ const (
 )
 
 var _WatchKind = []WatchKind{
-
 	WatchKindCreate,
-
 	WatchKindChange,
-
 	WatchKindDelete,
 }
 
@@ -1827,13 +1675,9 @@ const (
 )
 
 var _DiagnosticSeverity = []DiagnosticSeverity{
-
 	DiagnosticSeverityError,
-
 	DiagnosticSeverityWarning,
-
 	DiagnosticSeverityInformation,
-
 	DiagnosticSeverityHint,
 }
 
@@ -1887,9 +1731,7 @@ const (
 )
 
 var _DiagnosticTag = []DiagnosticTag{
-
 	DiagnosticTagUnnecessary,
-
 	DiagnosticTagDeprecated,
 }
 
@@ -1946,11 +1788,8 @@ const (
 )
 
 var _CompletionTriggerKind = []CompletionTriggerKind{
-
 	CompletionTriggerKindInvoked,
-
 	CompletionTriggerKindTriggerCharacter,
-
 	CompletionTriggerKindTriggerForIncompleteCompletions,
 }
 
@@ -2005,11 +1844,8 @@ const (
 )
 
 var _SignatureHelpTriggerKind = []SignatureHelpTriggerKind{
-
 	SignatureHelpTriggerKindInvoked,
-
 	SignatureHelpTriggerKindTriggerCharacter,
-
 	SignatureHelpTriggerKindContentChange,
 }
 
@@ -2063,9 +1899,7 @@ const (
 )
 
 var _CodeActionTriggerKind = []CodeActionTriggerKind{
-
 	CodeActionTriggerKindInvoked,
-
 	CodeActionTriggerKindAutomatic,
 }
 
@@ -2117,9 +1951,7 @@ const (
 )
 
 var _FileOperationPatternKind = []FileOperationPatternKind{
-
 	FileOperationPatternKindFile,
-
 	FileOperationPatternKindFolder,
 }
 
@@ -2170,9 +2002,7 @@ const (
 )
 
 var _NotebookCellKind = []NotebookCellKind{
-
 	NotebookCellKindMarkup,
-
 	NotebookCellKindCode,
 }
 
@@ -2225,11 +2055,8 @@ const (
 )
 
 var _ResourceOperationKind = []ResourceOperationKind{
-
 	ResourceOperationKindCreate,
-
 	ResourceOperationKindRename,
-
 	ResourceOperationKindDelete,
 }
 
@@ -2291,13 +2118,9 @@ const (
 )
 
 var _FailureHandlingKind = []FailureHandlingKind{
-
 	FailureHandlingKindAbort,
-
 	FailureHandlingKindTransactional,
-
 	FailureHandlingKindTextOnlyTransactional,
-
 	FailureHandlingKindUndo,
 }
 
@@ -2345,7 +2168,6 @@ const (
 )
 
 var _PrepareSupportDefaultBehavior = []PrepareSupportDefaultBehavior{
-
 	PrepareSupportDefaultBehaviorIdentifier,
 }
 
@@ -2390,7 +2212,6 @@ const (
 )
 
 var _TokenFormat = []TokenFormat{
-
 	TokenFormatRelative,
 }
 

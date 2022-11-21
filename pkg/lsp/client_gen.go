@@ -15,7 +15,7 @@ type LspClient interface {
 		ctx context.Context,
 	) (
 		err error,
-		result WorkspaceWorkspaceFolders_Result,
+		result WorkspaceWorkspaceFolders_Result__Or,
 	) //jsonrpc2gen:"workspace/workspaceFolders"
 
 	// The 'workspace/configuration' request is sent from the server to the
@@ -28,17 +28,17 @@ type LspClient interface {
 	// is received.
 	WorkspaceConfiguration(
 		ctx context.Context,
-		params ConfigurationParams,
+		params *ConfigurationParams,
 	) (
 		err error,
-		result WorkspaceConfiguration_Result,
+		result []LSPAny,
 	) //jsonrpc2gen:"workspace/configuration"
 
 	// The `window/workDoneProgress/create` request is sent from the server
 	// to the client to initiate progress reporting from the server.
 	WindowWorkDoneProgressCreate(
 		ctx context.Context,
-		params WorkDoneProgressCreateParams,
+		params *WorkDoneProgressCreateParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"window/workDoneProgress/create"
@@ -49,7 +49,7 @@ type LspClient interface {
 	// open the URI in a WEB browser.  @since 3.16.0
 	WindowShowDocument(
 		ctx context.Context,
-		params ShowDocumentParams,
+		params *ShowDocumentParams,
 	) (
 		err error,
 		result ShowDocumentResult,
@@ -59,7 +59,7 @@ type LspClient interface {
 	// the client to register a new capability handler on the client side.
 	ClientRegisterCapability(
 		ctx context.Context,
-		params RegistrationParams,
+		params *RegistrationParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"client/registerCapability"
@@ -69,7 +69,7 @@ type LspClient interface {
 	// on the client side.
 	ClientUnregisterCapability(
 		ctx context.Context,
-		params UnregistrationParams,
+		params *UnregistrationParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"client/unregisterCapability"
@@ -78,10 +78,10 @@ type LspClient interface {
 	// show a message and a set of options actions to the user.
 	WindowShowMessageRequest(
 		ctx context.Context,
-		params ShowMessageRequestParams,
+		params *ShowMessageRequestParams,
 	) (
 		err error,
-		result WindowShowMessageRequest_Result,
+		result WindowShowMessageRequest_Result__Or,
 	) //jsonrpc2gen:"window/showMessageRequest"
 
 	// A request to refresh all code actions  @since 3.16.0
@@ -95,7 +95,7 @@ type LspClient interface {
 	// resources.
 	WorkspaceApplyEdit(
 		ctx context.Context,
-		params ApplyWorkspaceEditParams,
+		params *ApplyWorkspaceEditParams,
 	) (
 		err error,
 		result ApplyWorkspaceEditResult,
@@ -105,7 +105,7 @@ type LspClient interface {
 	// ask the client to display a particular message in the user interface.
 	WindowShowMessage(
 		ctx context.Context,
-		params ShowMessageParams,
+		params *ShowMessageParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"window/showMessage"
@@ -114,7 +114,7 @@ type LspClient interface {
 	// ask the client to log a particular message.
 	WindowLogMessage(
 		ctx context.Context,
-		params LogMessageParams,
+		params *LogMessageParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"window/logMessage"
@@ -123,7 +123,7 @@ type LspClient interface {
 	// client to ask the client to log telemetry data.
 	TelemetryEvent(
 		ctx context.Context,
-		params LSPAny,
+		params *LSPAny,
 	) (
 		err error,
 	) //jsonrpc2gen:"telemetry/event"
@@ -132,28 +132,28 @@ type LspClient interface {
 	// signal results of validation runs.
 	TextDocumentPublishDiagnostics(
 		ctx context.Context,
-		params PublishDiagnosticsParams,
+		params *PublishDiagnosticsParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"textDocument/publishDiagnostics"
 
 	LspLogTrace(
 		ctx context.Context,
-		params LogTraceParams,
+		params *LogTraceParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/logTrace"
 
 	LspCancelRequest(
 		ctx context.Context,
-		params CancelParams,
+		params *CancelParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/cancelRequest"
 
 	LspProgress(
 		ctx context.Context,
-		params ProgressParams,
+		params *ProgressParams,
 	) (
 		err error,
 	) //jsonrpc2gen:"$/progress"

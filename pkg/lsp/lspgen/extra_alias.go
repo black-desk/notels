@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func GenExtra() {
+func genExtra() {
 	fileName := "extraType_gen.go"
 	extraTypeGenFile, err := os.OpenFile(
 		fileName,
@@ -26,7 +26,7 @@ func GenExtra() {
 	for name, t := range TypesToGenerate {
 		if t != nil {
 			extraTypeGenFile.Write(
-				[]byte(fmt.Sprintf("type %s any\n", name)),
+				[]byte(fmt.Sprintf("type %s struct{}\n", name)),
 			)
 		}
 	}

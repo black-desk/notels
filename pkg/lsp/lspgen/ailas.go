@@ -5,26 +5,20 @@ import (
 	"text/template"
 )
 
-var typeTemplate = `// Code generated from metaModel.json by "lspgen". DO NOT EDIT
+var typeAliasTemplate = `// Code generated from metaModel.json by "lspgen". DO NOT EDIT
 
 package protocol
 
 {{range .}}
-        type {{getName .Name}} = {{getTypeName .Type}}
+        type {{getName .Name}} = struct{}
 {{end}}
 `
 
 var typeTemplateFuncs = map[string]any{
-	"getName":     MethodNameFromString,
-	"getTypeName": typeTemplateGetTypeName,
+	"getName": MethodNameFromString,
 }
 
-var typeTemplateGetTypeName = func(t *Type) string {
-	name := TypeName(t, "")
-	return name
-}
-
-func GenAlias(metaModel *MetaModel) {
+func genTypeAliases(metaModel *MetaModel) {
 	fileName := "alias_gen.go"
 	aliasGenFile, err := os.OpenFile(
 		fileName,
@@ -40,7 +34,7 @@ func GenAlias(metaModel *MetaModel) {
 
 	codeTemplate, err := template.New("alias").
 		Funcs(typeTemplateFuncs).
-		Parse(typeTemplate)
+		Parse(typeAliasTemplate)
 	if err != nil {
 		log.Fatalw("failed to parse template for enum",
 			"error", err)

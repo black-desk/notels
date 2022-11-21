@@ -36,10 +36,8 @@ var EnumerationValidateFailed error = errors.New(
                 {{end}}
         )
 
-        var _{{$name}} = []{{$name}}{
-                {{range .Values}}
-                        {{getEnumName $name .Name}},
-                {{end}}
+        var _{{$name}} = []{{$name}}{ {{range .Values}}
+                {{getEnumName $name .Name}}, {{end}}
         }
 
         func (this *{{$name}}) UnmarshalJSON(data []byte) error {
