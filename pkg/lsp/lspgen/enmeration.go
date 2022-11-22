@@ -78,6 +78,8 @@ var EnumerationValidateFailed = func (name string) error {
 `
 
 func genEnumerations(metaModel *MetaModel) {
+	log.Info("generating enumerations")
+
 	fileName := "enumerations_gen.go"
 	enumerationGenFile, err := os.OpenFile(
 		fileName,

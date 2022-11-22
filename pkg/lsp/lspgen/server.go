@@ -9,6 +9,8 @@ import (
 var serverTemplate = fmt.Sprintf(interfaceTemplate, "adaptor", "LspServer")
 
 func genServer(metaModel *MetaModel) {
+	log.Info("generating lsp server interface")
+
 	fileName := "server_gen.go"
 	serverGenFile, err := os.OpenFile(
 		fileName,

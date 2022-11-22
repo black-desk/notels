@@ -21,6 +21,8 @@ var typeAliasTemplateFuncs = map[string]any{
 }
 
 func genTypeAliases(metaModel *MetaModel) {
+	log.Info("generating type aliases")
+
 	fileName := "alias_gen.go"
 	aliasGenFile, err := os.OpenFile(
 		fileName,

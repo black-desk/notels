@@ -112,6 +112,8 @@ var structureTemplateHasRequireField = func(p []Property) bool {
 }
 
 func genStruct(metaModel *MetaModel) {
+	log.Info("generating structures")
+
 	fileName := "structures_gen.go"
 	structuresGenFile, err := os.OpenFile(
 		fileName,

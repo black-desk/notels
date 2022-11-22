@@ -9,6 +9,8 @@ import (
 var clientTemplate = fmt.Sprintf(interfaceTemplate, "proxy", "LspClient")
 
 func genClient(metaModel *MetaModel) {
+	log.Info("generating lsp client interface")
+
 	fileName := "client_gen.go"
 	clientGenFile, err := os.OpenFile(
 		fileName,

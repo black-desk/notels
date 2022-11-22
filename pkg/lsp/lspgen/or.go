@@ -15,6 +15,9 @@ type OrTypeWithName struct {
 }
 
 func RegisterOr(name string, t *Type) {
+	if name == "NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or" {
+		log.Info(OrToGenerate[name])
+	}
 	if t.Items == nil || len(t.Items) < 2 {
 		log.Fatalw("Or type should have Items field")
 		panic("")
@@ -22,6 +25,9 @@ func RegisterOr(name string, t *Type) {
 	if _, ok := OrToGenerate[name]; !ok {
 		OrToGenerate[name] = t
 		parseOr(name, t)
+	}
+	if name == "NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or" {
+		log.Info(OrToGenerate[name])
 	}
 }
 
@@ -118,7 +124,7 @@ func genOr() {
 	data := []OrTypeWithName{}
 
 	keys := []string{}
-	for k, _ := range OrToGenerate {
+	for k := range OrToGenerate {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
