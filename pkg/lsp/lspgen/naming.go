@@ -63,11 +63,11 @@ func typeName(prefix string, current string, t *Type) string {
 			}
 		}
 		if len(prefix) != 0 {
-			RegisterType(prefix+"_"+current+"__Or", t)
+			RegisterOr(prefix+"_"+current+"__Or", t)
 			return prefix + "_" + current + "__Or"
 
 		} else {
-			RegisterType(current+"__Or", t)
+			RegisterOr(current+"__Or", t)
 			return current + "__Or"
 		}
 	}
@@ -87,11 +87,15 @@ func typeName(prefix string, current string, t *Type) string {
 		}
 	}
 	if t.Kind == "literal" {
-		RegisterType(prefix+"_"+current, t)
+		RegisterLiteral(prefix+"_"+current, t.Value.(*StructureLiteral))
 		return prefix + "_" + current
 	}
 	if t.Kind == "stringLiteral" {
 		return "string"
+	}
+	if t.Kind == "tuple" {
+		RegisterTuple(prefix+"_"+current, t)
+		return prefix + "_" + current + "_Tuple"
 	}
 	log.Fatalw("unexpected kind",
 		"kind", t.Kind,

@@ -91,9 +91,9 @@ type TypeValue interface {
 }
 
 type StructureLiteral struct {
-	Properties []Property `json:"properties"`
-	Proposed   bool       `json:"proposed"`
-	Since      string     `json:"since"`
+	Properties *[]Property `json:"properties"`
+	Proposed   bool        `json:"proposed"`
+	Since      string      `json:"since"`
 }
 
 type String string

@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // UnmarshalJSON implements json.Unmarshaler
@@ -148,13 +149,8 @@ func toTypeValue(data json.RawMessage) TypeValue {
 	if data == nil {
 		return nil
 	}
-	var tmpType Type
-	err := json.Unmarshal(data, &tmpType)
-	if err == nil {
-		return &tmpType
-	}
 	var tmpStructureLiteral StructureLiteral
-	err = json.Unmarshal(data, &tmpStructureLiteral)
+	err := json.Unmarshal(data, &tmpStructureLiteral)
 	if err == nil {
 		return &tmpStructureLiteral
 	}
@@ -162,6 +158,11 @@ func toTypeValue(data json.RawMessage) TypeValue {
 	err = json.Unmarshal(data, &tmpString)
 	if err == nil {
 		return &tmpString
+	}
+	var tmpType Type
+	err = json.Unmarshal(data, &tmpType)
+	if err == nil {
+		return &tmpType
 	}
 	panic("all failed: " + string(data))
 }
@@ -174,4 +175,19 @@ func (*String) isTypeValue() {
 // isTypeValue implements TypeValue
 func (*StructureLiteral) isTypeValue() {
 	panic("unimplemented")
+}
+
+func (s *StructureLiteral) UnmarshalJSON(data []byte) error {
+	type StructureLiteralUnmarshal StructureLiteral
+	var tmp StructureLiteralUnmarshal
+	err := json.Unmarshal(data, &tmp)
+	if err != nil {
+		return err
+	}
+	if tmp.Properties == nil {
+		return fmt.Errorf("-")
+	}
+	*s = StructureLiteral(tmp)
+	return nil
+
 }

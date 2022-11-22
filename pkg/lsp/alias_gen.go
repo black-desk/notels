@@ -24,7 +24,7 @@ type ProgressToken = ProgressToken__Or
 
 type DocumentSelector = []DocumentFilter
 
-type ChangeAnnotationIdentifier = string
+type ChangeAnnotationIdentifier = String
 
 type WorkspaceDocumentDiagnosticReport = WorkspaceDocumentDiagnosticReport__Or
 
@@ -40,4 +40,4 @@ type TextDocumentFilter = TextDocumentFilter__Or
 
 type NotebookDocumentFilter = NotebookDocumentFilter__Or
 
-type Pattern = string
+type Pattern = String

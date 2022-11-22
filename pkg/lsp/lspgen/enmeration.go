@@ -122,7 +122,6 @@ var enumTemplateTypeCheck = func([]Enumeration) string {
 }
 var enumTemplateGetType = baseTypeName
 var enumTemplateGetName = func(name string) (ret string) {
-	defer RemoveType(ret)
 	return MethodNameFromString(name)
 }
 var enumTemplateGetComment = Comment

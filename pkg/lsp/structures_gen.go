@@ -113,7 +113,7 @@ type WorkspaceFolder struct {
 
 	// The name of the workspace folder. Used to refer to this workspace
 	// folder in the user interface.
-	Name *string `json:"name"`
+	Name *String `json:"name"`
 }
 
 func (this *WorkspaceFolder) UnmarshalJSON(data []byte) error {
@@ -393,7 +393,7 @@ type ColorPresentation struct {
 	// The label of this color presentation. It will be shown on the color
 	// picker header. By default this is also the text that is inserted when
 	// selecting this color presentation.
-	Label *string `json:"label"`
+	Label *String `json:"label"`
 
 	// An [edit](#TextEdit) which is applied to a document when selecting
 	// this presentation for the color.  When `falsy` the
@@ -435,7 +435,7 @@ func (this *ColorPresentation) MarshalJSON() ([]byte, error) {
 }
 
 type WorkDoneProgressOptions struct {
-	WorkDoneProgress *bool `json:"workDoneProgress"`
+	WorkDoneProgress *Boolean `json:"workDoneProgress"`
 }
 
 // General text document registration options.
@@ -526,20 +526,20 @@ type FoldingRange struct {
 	// The zero-based start line of the range to fold. The folded area
 	// starts after the line's last character. To be valid, the end must be
 	// zero or larger and smaller than the number of lines in the document.
-	StartLine *uint64 `json:"startLine"`
+	StartLine *Uinteger `json:"startLine"`
 
 	// The zero-based character offset from where the folded range starts.
 	// If not defined, defaults to the length of the start line.
-	StartCharacter *uint64 `json:"startCharacter"`
+	StartCharacter *Uinteger `json:"startCharacter"`
 
 	// The zero-based end line of the range to fold. The folded area ends
 	// with the line's last character. To be valid, the end must be zero or
 	// larger and smaller than the number of lines in the document.
-	EndLine *uint64 `json:"endLine"`
+	EndLine *Uinteger `json:"endLine"`
 
 	// The zero-based character offset before the folded range ends. If not
 	// defined, defaults to the length of the end line.
-	EndCharacter *uint64 `json:"endCharacter"`
+	EndCharacter *Uinteger `json:"endCharacter"`
 
 	// Describes the kind of the folding range such as `comment' or
 	// 'region'. The kind is used to categorize folding ranges and used by
@@ -551,7 +551,7 @@ type FoldingRange struct {
 	// The text that the client should show when the specified range is
 	// collapsed. If not defined or not supported by the client, a default
 	// will be chosen by the client.  @since 3.17.0
-	CollapsedText *string `json:"collapsedText"`
+	CollapsedText *String `json:"collapsedText"`
 }
 
 func (this *FoldingRange) UnmarshalJSON(data []byte) error {
@@ -819,7 +819,7 @@ type CallHierarchyPrepareParams struct {
 type CallHierarchyItem struct {
 
 	// The name of this item.
-	Name *string `json:"name"`
+	Name *String `json:"name"`
 
 	// The kind of this item.
 	Kind *SymbolKind `json:"kind"`
@@ -828,7 +828,7 @@ type CallHierarchyItem struct {
 	Tags []SymbolTag `json:"tags"`
 
 	// More detail for this item, e.g. the signature of a function.
-	Detail *string `json:"detail"`
+	Detail *String `json:"detail"`
 
 	// The resource identifier of this item.
 	Uri *DocumentUri `json:"uri"`
@@ -1150,10 +1150,10 @@ type SemanticTokens struct {
 	// the client will include the result id in the next semantic token
 	// request. A server can then instead of computing all semantic tokens
 	// again simply send a delta.
-	ResultId *string `json:"resultId"`
+	ResultId *String `json:"resultId"`
 
 	// The actual tokens.
-	Data []uint64 `json:"data"`
+	Data []Uinteger `json:"data"`
 }
 
 func (this *SemanticTokens) UnmarshalJSON(data []byte) error {
@@ -1185,7 +1185,7 @@ func (this *SemanticTokens) MarshalJSON() ([]byte, error) {
 
 // @since 3.16.0
 type SemanticTokensPartialResult struct {
-	Data []uint64 `json:"data"`
+	Data []Uinteger `json:"data"`
 }
 
 func (this *SemanticTokensPartialResult) UnmarshalJSON(data []byte) error {
@@ -1246,7 +1246,7 @@ type SemanticTokensDeltaParams struct {
 	// The result id of a previous response. The result Id can either point
 	// to a full response or a delta response depending on what was received
 	// last.
-	PreviousResultId *string `json:"previousResultId"`
+	PreviousResultId *String `json:"previousResultId"`
 }
 
 func (this *SemanticTokensDeltaParams) UnmarshalJSON(data []byte) error {
@@ -1286,7 +1286,7 @@ func (this *SemanticTokensDeltaParams) MarshalJSON() ([]byte, error) {
 
 // @since 3.16.0
 type SemanticTokensDelta struct {
-	ResultId *string `json:"resultId"`
+	ResultId *String `json:"resultId"`
 
 	// The semantic token edits to transform a previous result into a new
 	// result.
@@ -1416,12 +1416,12 @@ type ShowDocumentParams struct {
 	// Indicates to show the resource in an external program. To show for
 	// example `https://code.visualstudio.com/` in the default WEB browser
 	// set `external` to `true`.
-	External *bool `json:"external"`
+	External *Boolean `json:"external"`
 
 	// An optional property to indicate whether the editor showing the
 	// document should take focus or not. Clients might ignore this property
 	// if an external program is started.
-	TakeFocus *bool `json:"takeFocus"`
+	TakeFocus *Boolean `json:"takeFocus"`
 
 	// An optional selection range if the document is a text document.
 	// Clients might ignore the property if an external program is started
@@ -1460,7 +1460,7 @@ func (this *ShowDocumentParams) MarshalJSON() ([]byte, error) {
 type ShowDocumentResult struct {
 
 	// A boolean indicating if the show was successful.
-	Success *bool `json:"success"`
+	Success *Boolean `json:"success"`
 }
 
 func (this *ShowDocumentResult) UnmarshalJSON(data []byte) error {
@@ -1512,7 +1512,7 @@ type LinkedEditingRanges struct {
 	// An optional word pattern (regular expression) that describes valid
 	// contents for the given ranges. If no pattern is provided, the client
 	// configuration's word pattern will be used.
-	WordPattern *string `json:"wordPattern"`
+	WordPattern *String `json:"wordPattern"`
 }
 
 func (this *LinkedEditingRanges) UnmarshalJSON(data []byte) error {
@@ -1754,11 +1754,11 @@ type MonikerParams struct {
 type Moniker struct {
 
 	// The scheme of the moniker. For example tsc or .Net
-	Scheme *string `json:"scheme"`
+	Scheme *String `json:"scheme"`
 
 	// The identifier of the moniker. The value is opaque in LSIF however
 	// schema owners are allowed to define the structure if they want.
-	Identifier *string `json:"identifier"`
+	Identifier *String `json:"identifier"`
 
 	// The scope in which the moniker is unique
 	Unique *UniquenessLevel `json:"unique"`
@@ -1836,7 +1836,7 @@ type TypeHierarchyPrepareParams struct {
 type TypeHierarchyItem struct {
 
 	// The name of this item.
-	Name *string `json:"name"`
+	Name *String `json:"name"`
 
 	// The kind of this item.
 	Kind *SymbolKind `json:"kind"`
@@ -1845,7 +1845,7 @@ type TypeHierarchyItem struct {
 	Tags []SymbolTag `json:"tags"`
 
 	// More detail for this item, e.g. the signature of a function.
-	Detail *string `json:"detail"`
+	Detail *String `json:"detail"`
 
 	// The resource identifier of this item.
 	Uri *DocumentUri `json:"uri"`
@@ -2175,12 +2175,12 @@ type InlayHint struct {
 	// editor's background color, not the background color of the hint
 	// itself. That means padding can be used to visually align/separate an
 	// inlay hint.
-	PaddingLeft *bool `json:"paddingLeft"`
+	PaddingLeft *Boolean `json:"paddingLeft"`
 
 	// Render padding after the hint.  Note: Padding should use the editor's
 	// background color, not the background color of the hint itself. That
 	// means padding can be used to visually align/separate an inlay hint.
-	PaddingRight *bool `json:"paddingRight"`
+	PaddingRight *Boolean `json:"paddingRight"`
 
 	// A data entry field that is preserved on an inlay hint between a
 	// `textDocument/inlayHint` and a `inlayHint/resolve` request.
@@ -2249,10 +2249,10 @@ type DocumentDiagnosticParams struct {
 	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The additional identifier  provided during registration.
-	Identifier *string `json:"identifier"`
+	Identifier *String `json:"identifier"`
 
 	// The result id of a previous response if provided.
-	PreviousResultId *string `json:"previousResultId"`
+	PreviousResultId *String `json:"previousResultId"`
 }
 
 func (this *DocumentDiagnosticParams) UnmarshalJSON(data []byte) error {
@@ -2322,7 +2322,7 @@ func (this *DocumentDiagnosticReportPartialResult) MarshalJSON() ([]byte, error)
 
 // Cancellation data returned from a diagnostic request.  @since 3.17.0
 type DiagnosticServerCancellationData struct {
-	RetriggerRequest *bool `json:"retriggerRequest"`
+	RetriggerRequest *Boolean `json:"retriggerRequest"`
 }
 
 func (this *DiagnosticServerCancellationData) UnmarshalJSON(data []byte) error {
@@ -2380,7 +2380,7 @@ type WorkspaceDiagnosticParams struct {
 	PartialResultParams
 
 	// The additional identifier provided during registration.
-	Identifier *string `json:"identifier"`
+	Identifier *String `json:"identifier"`
 
 	// The currently known diagnostic reports with their previous result
 	// ids.
@@ -2799,7 +2799,7 @@ type InitializeError struct {
 	// show the message provided by the ResponseError to the user (2) user
 	// selects retry or cancel (3) if user selected retry the initialize
 	// method is sent again.
-	Retry *bool `json:"retry"`
+	Retry *Boolean `json:"retry"`
 }
 
 func (this *InitializeError) UnmarshalJSON(data []byte) error {
@@ -2879,7 +2879,7 @@ type ShowMessageParams struct {
 	Type *MessageType `json:"type"`
 
 	// The actual message.
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 }
 
 func (this *ShowMessageParams) UnmarshalJSON(data []byte) error {
@@ -2923,7 +2923,7 @@ type ShowMessageRequestParams struct {
 	Type *MessageType `json:"type"`
 
 	// The actual message.
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 
 	// The message action items to present.
 	Actions []MessageActionItem `json:"actions"`
@@ -2967,7 +2967,7 @@ func (this *ShowMessageRequestParams) MarshalJSON() ([]byte, error) {
 type MessageActionItem struct {
 
 	// A short title like 'Retry', 'Open Log' etc.
-	Title *string `json:"title"`
+	Title *String `json:"title"`
 }
 
 func (this *MessageActionItem) UnmarshalJSON(data []byte) error {
@@ -3004,7 +3004,7 @@ type LogMessageParams struct {
 	Type *MessageType `json:"type"`
 
 	// The actual message.
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 }
 
 func (this *LogMessageParams) UnmarshalJSON(data []byte) error {
@@ -3223,7 +3223,7 @@ type DidSaveTextDocumentParams struct {
 
 	// Optional the content when saved. Depends on the includeText value
 	// when the save notification was requested.
-	Text *string `json:"text"`
+	Text *String `json:"text"`
 }
 
 func (this *DidSaveTextDocumentParams) UnmarshalJSON(data []byte) error {
@@ -3320,7 +3320,7 @@ type TextEdit struct {
 	Range *Range `json:"range"`
 
 	// The string to be inserted. For delete operations use an empty string.
-	NewText *string `json:"newText"`
+	NewText *String `json:"newText"`
 }
 
 func (this *TextEdit) UnmarshalJSON(data []byte) error {
@@ -3442,7 +3442,7 @@ type PublishDiagnosticsParams struct {
 
 	// Optional the version number of the document the diagnostics are
 	// published for.  @since 3.15.0
-	Version *int64 `json:"version"`
+	Version *Integer `json:"version"`
 
 	// An array of diagnostic information items.
 	Diagnostics []Diagnostic `json:"diagnostics"`
@@ -3510,7 +3510,7 @@ type CompletionItem struct {
 	// default the text that is inserted when selecting this completion.  If
 	// label details are provided the label itself should be an unqualified
 	// name of the completion item.
-	Label *string `json:"label"`
+	Label *String `json:"label"`
 
 	// Additional details for the label  @since 3.17.0
 	LabelDetails *CompletionItemLabelDetails `json:"labelDetails"`
@@ -3524,27 +3524,27 @@ type CompletionItem struct {
 
 	// A human-readable string with additional information about this item,
 	// like type or symbol information.
-	Detail *string `json:"detail"`
+	Detail *String `json:"detail"`
 
 	// A human-readable string that represents a doc-comment.
 	Documentation *CompletionItem_Documentation__Or `json:"documentation"`
 
 	// Indicates if this item is deprecated. @deprecated Use `tags` instead.
-	Deprecated *bool `json:"deprecated"`
+	Deprecated *Boolean `json:"deprecated"`
 
 	// Select this item when showing.  *Note* that only one completion item
 	// can be selected and that the tool / client decides which item that
 	// is. The rule is that the *first* item of those that match best is
 	// selected.
-	Preselect *bool `json:"preselect"`
+	Preselect *Boolean `json:"preselect"`
 
 	// A string that should be used when comparing this item with other
 	// items. When `falsy` the [label](#CompletionItem.label) is used.
-	SortText *string `json:"sortText"`
+	SortText *String `json:"sortText"`
 
 	// A string that should be used when filtering a set of completion
 	// items. When `falsy` the [label](#CompletionItem.label) is used.
-	FilterText *string `json:"filterText"`
+	FilterText *String `json:"filterText"`
 
 	// A string that should be inserted into a document when selecting this
 	// completion. When `falsy` the [label](#CompletionItem.label) is used.
@@ -3555,7 +3555,7 @@ type CompletionItem struct {
 	// provided it will only insert `sole`. Therefore it is recommended to
 	// use `textEdit` instead since it avoids additional client side
 	// interpretation.
-	InsertText *string `json:"insertText"`
+	InsertText *String `json:"insertText"`
 
 	// The format of the insert text. The format applies to both the
 	// `insertText` property and the `newText` property of a provided
@@ -3595,7 +3595,7 @@ type CompletionItem struct {
 	// `completionList.itemDefaults`.  If not provided and a list's default
 	// range is provided the label property is used as a text.  @since
 	// 3.17.0
-	TextEditText *string `json:"textEditText"`
+	TextEditText *String `json:"textEditText"`
 
 	// An optional array of additional [text edits](#TextEdit) that are
 	// applied when selecting this completion. Edits must not overlap
@@ -3610,7 +3610,7 @@ type CompletionItem struct {
 	// is active will accept it first and then type that character. *Note*
 	// that all commit characters should have `length=1` and that
 	// superfluous characters will be ignored.
-	CommitCharacters []string `json:"commitCharacters"`
+	CommitCharacters []String `json:"commitCharacters"`
 
 	// An optional [command](#Command) that is executed *after* inserting
 	// this completion. *Note* that additional modifications to the current
@@ -3658,7 +3658,7 @@ type CompletionList struct {
 	// This list it not complete. Further typing results in recomputing this
 	// list.  Recomputed lists have all their items replaced (not appended)
 	// in the incomplete completion sessions.
-	IsIncomplete *bool `json:"isIncomplete"`
+	IsIncomplete *Boolean `json:"isIncomplete"`
 
 	// In many cases the items of an actual completion result share the same
 	// value for properties like `commitCharacters` or the range of a text
@@ -3810,7 +3810,7 @@ type SignatureHelp struct {
 	// should make an active decision about the active signature and
 	// shouldn't rely on a default value.  In future version of the protocol
 	// this property might become mandatory to better express this.
-	ActiveSignature *uint64 `json:"activeSignature"`
+	ActiveSignature *Uinteger `json:"activeSignature"`
 
 	// The active parameter of the active signature. If omitted or the value
 	// lies outside the range of `signatures[activeSignature].parameters`
@@ -3818,7 +3818,7 @@ type SignatureHelp struct {
 	// signature has no parameters it is ignored. In future version of the
 	// protocol this property might become mandatory to better express the
 	// active parameter if the active signature does have any.
-	ActiveParameter *uint64 `json:"activeParameter"`
+	ActiveParameter *Uinteger `json:"activeParameter"`
 }
 
 func (this *SignatureHelp) UnmarshalJSON(data []byte) error {
@@ -4048,7 +4048,7 @@ type SymbolInformation struct {
 	BaseSymbolInformation
 
 	// Indicates if this symbol is deprecated.  @deprecated Use tags instead
-	Deprecated *bool `json:"deprecated"`
+	Deprecated *Boolean `json:"deprecated"`
 
 	// The location of this symbol. The location's range is used by a tool
 	// to reveal the location in the editor. If the symbol is selected in
@@ -4097,10 +4097,10 @@ type DocumentSymbol struct {
 	// The name of this symbol. Will be displayed in the user interface and
 	// therefore must not be an empty string or a string only consisting of
 	// white spaces.
-	Name *string `json:"name"`
+	Name *String `json:"name"`
 
 	// More detail for this symbol, e.g the signature of a function.
-	Detail *string `json:"detail"`
+	Detail *String `json:"detail"`
 
 	// The kind of this symbol.
 	Kind *SymbolKind `json:"kind"`
@@ -4109,7 +4109,7 @@ type DocumentSymbol struct {
 	Tags []SymbolTag `json:"tags"`
 
 	// Indicates if this symbol is deprecated.  @deprecated Use tags instead
-	Deprecated *bool `json:"deprecated"`
+	Deprecated *Boolean `json:"deprecated"`
 
 	// The range enclosing this symbol not including leading/trailing
 	// whitespace but everything else like comments. This information is
@@ -4255,10 +4255,10 @@ func (this *CodeActionParams) MarshalJSON() ([]byte, error) {
 type Command struct {
 
 	// Title of the command, like `save`.
-	Title *string `json:"title"`
+	Title *String `json:"title"`
 
 	// The identifier of the actual command handler.
-	Command *string `json:"command"`
+	Command *String `json:"command"`
 
 	// Arguments that the command handler should be invoked with.
 	Arguments []LSPAny `json:"arguments"`
@@ -4306,7 +4306,7 @@ func (this *Command) MarshalJSON() ([]byte, error) {
 type CodeAction struct {
 
 	// A short, human-readable, title for this code action.
-	Title *string `json:"title"`
+	Title *String `json:"title"`
 
 	// The kind of the code action.  Used to filter code actions.
 	Kind *CodeActionKind `json:"kind"`
@@ -4319,7 +4319,7 @@ type CodeAction struct {
 	// should be marked preferred if it properly addresses the underlying
 	// error. A refactoring should be marked preferred if it is the most
 	// reasonable choice of actions to take.  @since 3.15.0
-	IsPreferred *bool `json:"isPreferred"`
+	IsPreferred *Boolean `json:"isPreferred"`
 
 	// Marks that the code action cannot currently be applied.  Clients
 	// should follow the following guidelines regarding disabled code
@@ -4395,7 +4395,7 @@ type WorkspaceSymbolParams struct {
 
 	// A query string to filter symbols by. Clients may send an empty string
 	// here to request all symbols.
-	Query *string `json:"query"`
+	Query *String `json:"query"`
 }
 
 func (this *WorkspaceSymbolParams) UnmarshalJSON(data []byte) error {
@@ -4625,14 +4625,14 @@ type DocumentLink struct {
 
 	// The uri this link points to. If missing a resolve request is sent
 	// later.
-	Target *string `json:"target"`
+	Target *String `json:"target"`
 
 	// The tooltip text when you hover over this link.  If a tooltip is
 	// provided, is will be displayed in a string that includes instructions
 	// on how to trigger the link, such as `{0} (ctrl + click)`. The
 	// specific instructions vary depending on OS, user settings, and
 	// localization.  @since 3.15.0
-	Tooltip *string `json:"tooltip"`
+	Tooltip *String `json:"tooltip"`
 
 	// A data entry field that is preserved on a document link between a
 	// DocumentLinkRequest and a DocumentLinkResolveRequest.
@@ -4830,7 +4830,7 @@ type DocumentOnTypeFormattingParams struct {
 	// type request. That is not necessarily the last character that got
 	// inserted into the document since the client could auto insert
 	// characters as well (e.g. like automatic brace completion).
-	Ch *string `json:"ch"`
+	Ch *String `json:"ch"`
 
 	// The formatting options.
 	Options *FormattingOptions `json:"options"`
@@ -4922,7 +4922,7 @@ type RenameParams struct {
 	// The new name of the symbol. If the given name is not valid the
 	// request must return a [ResponseError](#ResponseError) with an
 	// appropriate message set.
-	NewName *string `json:"newName"`
+	NewName *String `json:"newName"`
 }
 
 func (this *RenameParams) UnmarshalJSON(data []byte) error {
@@ -4997,7 +4997,7 @@ type ExecuteCommandParams struct {
 	WorkDoneProgressParams
 
 	// The identifier of the actual command handler.
-	Command *string `json:"command"`
+	Command *String `json:"command"`
 
 	// Arguments that the command should be invoked with.
 	Arguments []LSPAny `json:"arguments"`
@@ -5044,7 +5044,7 @@ type ApplyWorkspaceEditParams struct {
 	// An optional label of the workspace edit. This label is presented in
 	// the user interface for example on an undo stack to undo the workspace
 	// edit.
-	Label *string `json:"label"`
+	Label *String `json:"label"`
 
 	// The edits to apply.
 	Edit *WorkspaceEdit `json:"edit"`
@@ -5082,18 +5082,18 @@ func (this *ApplyWorkspaceEditParams) MarshalJSON() ([]byte, error) {
 type ApplyWorkspaceEditResult struct {
 
 	// Indicates whether the edit was applied or not.
-	Applied *bool `json:"applied"`
+	Applied *Boolean `json:"applied"`
 
 	// An optional textual description for why the edit was not applied.
 	// This may be used by the server for diagnostic logging or to provide a
 	// suitable error for a request that triggered the edit.
-	FailureReason *string `json:"failureReason"`
+	FailureReason *String `json:"failureReason"`
 
 	// Depending on the client's failure handling strategy `failedChange`
 	// might contain the index of the change that failed. This property is
 	// only available if the client signals a `failureHandlingStrategy` in
 	// its client capabilities.
-	FailedChange *uint64 `json:"failedChange"`
+	FailedChange *Uinteger `json:"failedChange"`
 }
 
 func (this *ApplyWorkspaceEditResult) UnmarshalJSON(data []byte) error {
@@ -5129,18 +5129,18 @@ type WorkDoneProgressBegin struct {
 	// Mandatory title of the progress operation. Used to briefly inform
 	// about the kind of operation being performed.  Examples: "Indexing" or
 	// "Linking dependencies".
-	Title *string `json:"title"`
+	Title *String `json:"title"`
 
 	// Controls if a cancel button should show to allow the user to cancel
 	// the long running operation. Clients that don't support cancellation
 	// are allowed to ignore the setting.
-	Cancellable *bool `json:"cancellable"`
+	Cancellable *Boolean `json:"cancellable"`
 
 	// Optional, more detailed associated progress message. Contains
 	// complementary information to the `title`.  Examples: "3/25 files",
 	// "project/src/module2", "node_modules/some_dep". If unset, the
 	// previous progress message (if any) is still valid.
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 
 	// Optional progress percentage to display (value 100 is considered
 	// 100%). If not provided infinite progress is assumed and clients are
@@ -5148,7 +5148,7 @@ type WorkDoneProgressBegin struct {
 	// notifications.  The value should be steadily rising. Clients are free
 	// to ignore values that are not following this rule. The value range is
 	// [0, 100].
-	Percentage *uint64 `json:"percentage"`
+	Percentage *Uinteger `json:"percentage"`
 }
 
 func (this *WorkDoneProgressBegin) UnmarshalJSON(data []byte) error {
@@ -5192,13 +5192,13 @@ type WorkDoneProgressReport struct {
 	// Controls enablement state of a cancel button.  Clients that don't
 	// support cancellation or don't support controlling the button's
 	// enablement state are allowed to ignore the property.
-	Cancellable *bool `json:"cancellable"`
+	Cancellable *Boolean `json:"cancellable"`
 
 	// Optional, more detailed associated progress message. Contains
 	// complementary information to the `title`.  Examples: "3/25 files",
 	// "project/src/module2", "node_modules/some_dep". If unset, the
 	// previous progress message (if any) is still valid.
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 
 	// Optional progress percentage to display (value 100 is considered
 	// 100%). If not provided infinite progress is assumed and clients are
@@ -5206,7 +5206,7 @@ type WorkDoneProgressReport struct {
 	// notifications.  The value should be steadily rising. Clients are free
 	// to ignore values that are not following this rule. The value range is
 	// [0, 100]
-	Percentage *uint64 `json:"percentage"`
+	Percentage *Uinteger `json:"percentage"`
 }
 
 func (this *WorkDoneProgressReport) UnmarshalJSON(data []byte) error {
@@ -5241,7 +5241,7 @@ type WorkDoneProgressEnd struct {
 
 	// Optional, a final message indicating to for example indicate the
 	// outcome of the operation.
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 }
 
 func (this *WorkDoneProgressEnd) UnmarshalJSON(data []byte) error {
@@ -5303,9 +5303,9 @@ func (this *SetTraceParams) MarshalJSON() ([]byte, error) {
 }
 
 type LogTraceParams struct {
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 
-	Verbose *string `json:"verbose"`
+	Verbose *String `json:"verbose"`
 }
 
 func (this *LogTraceParams) UnmarshalJSON(data []byte) error {
@@ -5599,7 +5599,7 @@ type StaticRegistrationOptions struct {
 
 	// The id used to register the request. The id can be used to deregister
 	// the request again. See also Registration#id.
-	Id *string `json:"id"`
+	Id *String `json:"id"`
 }
 
 type TypeDefinitionOptions struct {
@@ -5661,10 +5661,10 @@ func (this *WorkspaceFoldersChangeEvent) MarshalJSON() ([]byte, error) {
 type ConfigurationItem struct {
 
 	// The scope to get the configuration section for.
-	ScopeUri *string `json:"scopeUri"`
+	ScopeUri *String `json:"scopeUri"`
 
 	// The configuration section asked for.
-	Section *string `json:"section"`
+	Section *String `json:"section"`
 }
 
 // A literal to identify a text document in the client.
@@ -5705,16 +5705,16 @@ func (this *TextDocumentIdentifier) MarshalJSON() ([]byte, error) {
 type Color struct {
 
 	// The red component of this color in the range [0-1].
-	Red *float64 `json:"red"`
+	Red *Decimal `json:"red"`
 
 	// The green component of this color in the range [0-1].
-	Green *float64 `json:"green"`
+	Green *Decimal `json:"green"`
 
 	// The blue component of this color in the range [0-1].
-	Blue *float64 `json:"blue"`
+	Blue *Decimal `json:"blue"`
 
 	// The alpha component of this color in the range [0-1].
-	Alpha *float64 `json:"alpha"`
+	Alpha *Decimal `json:"alpha"`
 }
 
 func (this *Color) UnmarshalJSON(data []byte) error {
@@ -5819,13 +5819,13 @@ type Position struct {
 	// greater than the number of lines in a document, it defaults back to
 	// the number of lines in the document. If a line number is negative, it
 	// defaults to 0.
-	Line *uint64 `json:"line"`
+	Line *Uinteger `json:"line"`
 
 	// Character offset on a line in a document (zero-based).  The meaning
 	// of this offset is determined by the negotiated
 	// `PositionEncodingKind`.  If the character value is greater than the
 	// line length it defaults back to the line length.
-	Character *uint64 `json:"character"`
+	Character *Uinteger `json:"character"`
 }
 
 func (this *Position) UnmarshalJSON(data []byte) error {
@@ -5927,13 +5927,13 @@ func (this *SemanticTokensOptions) MarshalJSON() ([]byte, error) {
 type SemanticTokensEdit struct {
 
 	// The start offset of the edit.
-	Start *uint64 `json:"start"`
+	Start *Uinteger `json:"start"`
 
 	// The count of elements to remove.
-	DeleteCount *uint64 `json:"deleteCount"`
+	DeleteCount *Uinteger `json:"deleteCount"`
 
 	// The elements to insert.
-	Data []uint64 `json:"data"`
+	Data []Uinteger `json:"data"`
 }
 
 func (this *SemanticTokensEdit) UnmarshalJSON(data []byte) error {
@@ -5982,7 +5982,7 @@ type LinkedEditingRangeOptions struct {
 type FileCreate struct {
 
 	// A file:// URI for the location of the file/folder being created.
-	Uri *string `json:"uri"`
+	Uri *String `json:"uri"`
 }
 
 func (this *FileCreate) UnmarshalJSON(data []byte) error {
@@ -6234,15 +6234,15 @@ type ChangeAnnotation struct {
 
 	// A human-readable string describing the actual change. The string is
 	// rendered prominent in the user interface.
-	Label *string `json:"label"`
+	Label *String `json:"label"`
 
 	// A flag which indicates that user confirmation is needed before
 	// applying the change.
-	NeedsConfirmation *bool `json:"needsConfirmation"`
+	NeedsConfirmation *Boolean `json:"needsConfirmation"`
 
 	// A human-readable string which is rendered less prominent in the user
 	// interface.
-	Description *string `json:"description"`
+	Description *String `json:"description"`
 }
 
 func (this *ChangeAnnotation) UnmarshalJSON(data []byte) error {
@@ -6277,7 +6277,7 @@ func (this *ChangeAnnotation) MarshalJSON() ([]byte, error) {
 type FileOperationFilter struct {
 
 	// A Uri scheme like `file` or `untitled`.
-	Scheme *string `json:"scheme"`
+	Scheme *String `json:"scheme"`
 
 	// The actual file operation pattern.
 	Pattern *FileOperationPattern `json:"pattern"`
@@ -6315,10 +6315,10 @@ type FileRename struct {
 
 	// A file:// URI for the original location of the file/folder being
 	// renamed.
-	OldUri *string `json:"oldUri"`
+	OldUri *String `json:"oldUri"`
 
 	// A file:// URI for the new location of the file/folder being renamed.
-	NewUri *string `json:"newUri"`
+	NewUri *String `json:"newUri"`
 }
 
 func (this *FileRename) UnmarshalJSON(data []byte) error {
@@ -6360,7 +6360,7 @@ func (this *FileRename) MarshalJSON() ([]byte, error) {
 type FileDelete struct {
 
 	// A file:// URI for the location of the file/folder being deleted.
-	Uri *string `json:"uri"`
+	Uri *String `json:"uri"`
 }
 
 func (this *FileDelete) UnmarshalJSON(data []byte) error {
@@ -6409,7 +6409,7 @@ type TypeHierarchyOptions struct {
 type InlineValueContext struct {
 
 	// The stack frame (as a DAP Id) where the execution has stopped.
-	FrameId *int64 `json:"frameId"`
+	FrameId *Integer `json:"frameId"`
 
 	// The document range where execution has stopped. Typically the end
 	// position of the range denotes the line where the inline values are
@@ -6459,7 +6459,7 @@ type InlineValueText struct {
 	Range *Range `json:"range"`
 
 	// The text of the inline value.
-	Text *string `json:"text"`
+	Text *String `json:"text"`
 }
 
 func (this *InlineValueText) UnmarshalJSON(data []byte) error {
@@ -6507,10 +6507,10 @@ type InlineValueVariableLookup struct {
 	Range *Range `json:"range"`
 
 	// If specified the name of the variable to look up.
-	VariableName *string `json:"variableName"`
+	VariableName *String `json:"variableName"`
 
 	// How to perform the lookup.
-	CaseSensitiveLookup *bool `json:"caseSensitiveLookup"`
+	CaseSensitiveLookup *Boolean `json:"caseSensitiveLookup"`
 }
 
 func (this *InlineValueVariableLookup) UnmarshalJSON(data []byte) error {
@@ -6560,7 +6560,7 @@ type InlineValueEvaluatableExpression struct {
 	Range *Range `json:"range"`
 
 	// If specified the expression overrides the extracted expression.
-	Expression *string `json:"expression"`
+	Expression *String `json:"expression"`
 }
 
 func (this *InlineValueEvaluatableExpression) UnmarshalJSON(data []byte) error {
@@ -6607,7 +6607,7 @@ type InlineValueOptions struct {
 type InlayHintLabelPart struct {
 
 	// The value of this label part.
-	Value *string `json:"value"`
+	Value *String `json:"value"`
 
 	// The tooltip text when you hover over this label part. Depending on
 	// the client capability `inlayHint.resolveSupport` clients might
@@ -6677,7 +6677,7 @@ type MarkupContent struct {
 	Kind *MarkupKind `json:"kind"`
 
 	// The content itself
-	Value *string `json:"value"`
+	Value *String `json:"value"`
 }
 
 func (this *MarkupContent) UnmarshalJSON(data []byte) error {
@@ -6724,7 +6724,7 @@ type InlayHintOptions struct {
 
 	// The server provides support to resolve additional information for an
 	// inlay hint item.
-	ResolveProvider *bool `json:"resolveProvider"`
+	ResolveProvider *Boolean `json:"resolveProvider"`
 }
 
 // A full diagnostic report with a set of related documents.  @since 3.17.0
@@ -6766,7 +6766,7 @@ type FullDocumentDiagnosticReport struct {
 
 	// An optional result id. If provided it will be sent on the next
 	// diagnostic request for the same document.
-	ResultId *string `json:"resultId"`
+	ResultId *String `json:"resultId"`
 
 	// The actual items.
 	Items []Diagnostic `json:"items"`
@@ -6822,7 +6822,7 @@ type UnchangedDocumentDiagnosticReport struct {
 
 	// A result id which will be sent on the next diagnostic request for the
 	// same document.
-	ResultId *string `json:"resultId"`
+	ResultId *String `json:"resultId"`
 }
 
 func (this *UnchangedDocumentDiagnosticReport) UnmarshalJSON(
@@ -6879,16 +6879,16 @@ type DiagnosticOptions struct {
 
 	// An optional identifier under which the diagnostics are managed by the
 	// client.
-	Identifier *string `json:"identifier"`
+	Identifier *String `json:"identifier"`
 
 	// Whether the language has inter file dependencies meaning that editing
 	// code in one file can result in a different diagnostic set in another
 	// file. Inter file dependencies are common for most programming
 	// languages and typically uncommon for linters.
-	InterFileDependencies *bool `json:"interFileDependencies"`
+	InterFileDependencies *Boolean `json:"interFileDependencies"`
 
 	// The server provides support for workspace diagnostics as well.
-	WorkspaceDiagnostics *bool `json:"workspaceDiagnostics"`
+	WorkspaceDiagnostics *Boolean `json:"workspaceDiagnostics"`
 }
 
 func (this *DiagnosticOptions) UnmarshalJSON(data []byte) error {
@@ -6933,7 +6933,7 @@ type PreviousResultId struct {
 	Uri *DocumentUri `json:"uri"`
 
 	// The value of the previous result id.
-	Value *string `json:"value"`
+	Value *String `json:"value"`
 }
 
 func (this *PreviousResultId) UnmarshalJSON(data []byte) error {
@@ -6978,11 +6978,11 @@ type NotebookDocument struct {
 	Uri *URI `json:"uri"`
 
 	// The type of the notebook.
-	NotebookType *string `json:"notebookType"`
+	NotebookType *String `json:"notebookType"`
 
 	// The version number of this document (it will increase after each
 	// change, including undo/redo).
-	Version *int64 `json:"version"`
+	Version *Integer `json:"version"`
 
 	// Additional metadata stored with the notebook document.  Note: should
 	// always be an object literal (e.g. LSPObject)
@@ -7050,14 +7050,14 @@ type TextDocumentItem struct {
 	Uri *DocumentUri `json:"uri"`
 
 	// The text document's language identifier.
-	LanguageId *string `json:"languageId"`
+	LanguageId *String `json:"languageId"`
 
 	// The version number of this document (it will increase after each
 	// change, including undo/redo).
-	Version *int64 `json:"version"`
+	Version *Integer `json:"version"`
 
 	// The content of the opened text document.
-	Text *string `json:"text"`
+	Text *String `json:"text"`
 }
 
 func (this *TextDocumentItem) UnmarshalJSON(data []byte) error {
@@ -7115,7 +7115,7 @@ func (this *TextDocumentItem) MarshalJSON() ([]byte, error) {
 type VersionedNotebookDocumentIdentifier struct {
 
 	// The version number of this notebook document.
-	Version *int64 `json:"version"`
+	Version *Integer `json:"version"`
 
 	// The notebook document's uri.
 	Uri *URI `json:"uri"`
@@ -7219,10 +7219,10 @@ type Registration struct {
 
 	// The id used to register the request. The id can be used to deregister
 	// the request again.
-	Id *string `json:"id"`
+	Id *String `json:"id"`
 
 	// The method / capability to register for.
-	Method *string `json:"method"`
+	Method *String `json:"method"`
 
 	// Options necessary for the registration.
 	RegisterOptions *LSPAny `json:"registerOptions"`
@@ -7268,10 +7268,10 @@ type Unregistration struct {
 
 	// The id used to unregister the request or notification. Usually an id
 	// provided during the register request.
-	Id *string `json:"id"`
+	Id *String `json:"id"`
 
 	// The method to unregister for.
-	Method *string `json:"method"`
+	Method *String `json:"method"`
 }
 
 func (this *Unregistration) UnmarshalJSON(data []byte) error {
@@ -7319,7 +7319,7 @@ type XInitializeParams struct {
 	// The process Id of the parent process that started the server.  Is
 	// `null` if the process has not been started by another process. If the
 	// parent process is not alive then the server should exit.
-	ProcessId **int64 `json:"processId"`
+	ProcessId **Integer `json:"processId"`
 
 	// Information about the client  @since 3.15.0
 	ClientInfo *XInitializeParams_ClientInfo `json:"clientInfo"`
@@ -7328,11 +7328,11 @@ type XInitializeParams struct {
 	// This must not necessarily be the locale of the operating system.
 	// Uses IETF language tags as the value's syntax (See
 	// https://en.wikipedia.org/wiki/IETF_language_tag)  @since 3.16.0
-	Locale *string `json:"locale"`
+	Locale *String `json:"locale"`
 
 	// The rootPath of the workspace. Is null if no folder is open.
 	// @deprecated in favour of rootUri.
-	RootPath **string `json:"rootPath"`
+	RootPath **String `json:"rootPath"`
 
 	// The rootUri of the workspace. Is null if no folder is open. If both
 	// `rootPath` and `rootUri` are set `rootUri` wins.  @deprecated in
@@ -7528,7 +7528,7 @@ type VersionedTextDocumentIdentifier struct {
 	TextDocumentIdentifier
 
 	// The version number of this document.
-	Version *int64 `json:"version"`
+	Version *Integer `json:"version"`
 }
 
 func (this *VersionedTextDocumentIdentifier) UnmarshalJSON(data []byte) error {
@@ -7566,7 +7566,7 @@ func (this *VersionedTextDocumentIdentifier) MarshalJSON() ([]byte, error) {
 type SaveOptions struct {
 
 	// The client is supposed to include the content on save.
-	IncludeText *bool `json:"includeText"`
+	IncludeText *Boolean `json:"includeText"`
 }
 
 // An event describing a file change.
@@ -7673,10 +7673,10 @@ type Diagnostic struct {
 	// A human-readable string describing the source of this diagnostic,
 	// e.g. 'typescript' or 'super lint'. It usually appears in the user
 	// interface.
-	Source *string `json:"source"`
+	Source *String `json:"source"`
 
 	// The diagnostic's message. It usually appears in the user interface
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 
 	// Additional metadata about the diagnostic.  @since 3.15.0
 	Tags []DiagnosticTag `json:"tags"`
@@ -7737,7 +7737,7 @@ type CompletionContext struct {
 	// The trigger character (a single character) that has trigger code
 	// complete. Is undefined if `triggerKind !==
 	// CompletionTriggerKind.TriggerCharacter`
-	TriggerCharacter *string `json:"triggerCharacter"`
+	TriggerCharacter *String `json:"triggerCharacter"`
 }
 
 func (this *CompletionContext) UnmarshalJSON(data []byte) error {
@@ -7773,12 +7773,12 @@ type CompletionItemLabelDetails struct {
 	// An optional string which is rendered less prominently directly after
 	// {@link CompletionItem.label label}, without any spacing. Should be
 	// used for function signatures and type annotations.
-	Detail *string `json:"detail"`
+	Detail *String `json:"detail"`
 
 	// An optional string which is rendered less prominently after {@link
 	// CompletionItem.detail}. Should be used for fully qualified names and
 	// file paths.
-	Description *string `json:"description"`
+	Description *String `json:"description"`
 }
 
 // A special text edit to provide an insert and a replace operation.  @since
@@ -7786,7 +7786,7 @@ type CompletionItemLabelDetails struct {
 type InsertReplaceEdit struct {
 
 	// The string to be inserted.
-	NewText *string `json:"newText"`
+	NewText *String `json:"newText"`
 
 	// The range if the insert is requested
 	Insert *Range `json:"insert"`
@@ -7854,7 +7854,7 @@ type CompletionOptions struct {
 	// here.  If code complete should automatically be trigger on characters
 	// not being valid inside an identifier (for example `.` in JavaScript)
 	// list them in `triggerCharacters`.
-	TriggerCharacters []string `json:"triggerCharacters"`
+	TriggerCharacters []String `json:"triggerCharacters"`
 
 	// The list of all possible characters that commit a completion. This
 	// field can be used if clients don't support individual commit
@@ -7863,11 +7863,11 @@ type CompletionOptions struct {
 	//  If a server provides both `allCommitCharacters` and commit
 	// characters on an individual completion item the ones on the
 	// completion item win.  @since 3.2.0
-	AllCommitCharacters []string `json:"allCommitCharacters"`
+	AllCommitCharacters []String `json:"allCommitCharacters"`
 
 	// The server provides support to resolve additional information for a
 	// completion item.
-	ResolveProvider *bool `json:"resolveProvider"`
+	ResolveProvider *Boolean `json:"resolveProvider"`
 
 	// The server supports the following `CompletionItem` specific
 	// capabilities.  @since 3.17.0
@@ -7892,13 +7892,13 @@ type SignatureHelpContext struct {
 	// Character that caused signature help to be triggered.  This is
 	// undefined when `triggerKind !==
 	// SignatureHelpTriggerKind.TriggerCharacter`
-	TriggerCharacter *string `json:"triggerCharacter"`
+	TriggerCharacter *String `json:"triggerCharacter"`
 
 	// `true` if signature help was already showing when it was triggered.
 	// Retriggers occurs when the signature help is already active and can
 	// be caused by actions such as typing a trigger character, a cursor
 	// move, or document content changes.
-	IsRetrigger *bool `json:"isRetrigger"`
+	IsRetrigger *Boolean `json:"isRetrigger"`
 
 	// The currently active `SignatureHelp`.  The `activeSignatureHelp` has
 	// its `SignatureHelp.activeSignature` field updated based on the user
@@ -7946,7 +7946,7 @@ func (this *SignatureHelpContext) MarshalJSON() ([]byte, error) {
 type SignatureInformation struct {
 
 	// The label of this signature. Will be shown in the UI.
-	Label *string `json:"label"`
+	Label *String `json:"label"`
 
 	// The human-readable doc-comment of this signature. Will be shown in
 	// the UI but can be omitted.
@@ -7957,7 +7957,7 @@ type SignatureInformation struct {
 
 	// The index of the active parameter.  If provided, this is used in
 	// place of `SignatureHelp.activeParameter`.  @since 3.16.0
-	ActiveParameter *uint64 `json:"activeParameter"`
+	ActiveParameter *Uinteger `json:"activeParameter"`
 }
 
 func (this *SignatureInformation) UnmarshalJSON(data []byte) error {
@@ -7995,13 +7995,13 @@ type SignatureHelpOptions struct {
 	WorkDoneProgressOptions
 
 	// List of characters that trigger signature help automatically.
-	TriggerCharacters []string `json:"triggerCharacters"`
+	TriggerCharacters []String `json:"triggerCharacters"`
 
 	// List of characters that re-trigger signature help.  These trigger
 	// characters are only active when signature help is already showing.
 	// All trigger characters are also counted as re-trigger characters.
 	// @since 3.15.0
-	RetriggerCharacters []string `json:"retriggerCharacters"`
+	RetriggerCharacters []String `json:"retriggerCharacters"`
 }
 
 // Server Capabilities for a [DefinitionRequest](#DefinitionRequest).
@@ -8016,7 +8016,7 @@ type DefinitionOptions struct {
 type ReferenceContext struct {
 
 	// Include the declaration of the current symbol.
-	IncludeDeclaration *bool `json:"includeDeclaration"`
+	IncludeDeclaration *Boolean `json:"includeDeclaration"`
 }
 
 func (this *ReferenceContext) UnmarshalJSON(data []byte) error {
@@ -8066,7 +8066,7 @@ type DocumentHighlightOptions struct {
 type BaseSymbolInformation struct {
 
 	// The name of this symbol.
-	Name *string `json:"name"`
+	Name *String `json:"name"`
 
 	// The kind of this symbol.
 	Kind *SymbolKind `json:"kind"`
@@ -8078,7 +8078,7 @@ type BaseSymbolInformation struct {
 	// for user interface purposes (e.g. to render a qualifier in the user
 	// interface if necessary). It can't be used to re-infer a hierarchy for
 	// the document symbols.
-	ContainerName *string `json:"containerName"`
+	ContainerName *String `json:"containerName"`
 }
 
 func (this *BaseSymbolInformation) UnmarshalJSON(data []byte) error {
@@ -8125,7 +8125,7 @@ type DocumentSymbolOptions struct {
 
 	// A human-readable string that is shown when multiple outlines trees
 	// are shown for the same document.  @since 3.16.0
-	Label *string `json:"label"`
+	Label *String `json:"label"`
 }
 
 // Contains additional diagnostic information about the context in which a [code
@@ -8190,7 +8190,7 @@ type CodeActionOptions struct {
 
 	// The server provides support to resolve additional information for a
 	// code action.  @since 3.16.0
-	ResolveProvider *bool `json:"resolveProvider"`
+	ResolveProvider *Boolean `json:"resolveProvider"`
 }
 
 // Server capabilities for a [WorkspaceSymbolRequest](#WorkspaceSymbolRequest).
@@ -8202,7 +8202,7 @@ type WorkspaceSymbolOptions struct {
 
 	// The server provides support to resolve additional information for a
 	// workspace symbol.  @since 3.17.0
-	ResolveProvider *bool `json:"resolveProvider"`
+	ResolveProvider *Boolean `json:"resolveProvider"`
 }
 
 // Code Lens provider options of a [CodeLensRequest](#CodeLensRequest).
@@ -8213,7 +8213,7 @@ type CodeLensOptions struct {
 	WorkDoneProgressOptions
 
 	// Code lens has a resolve provider as well.
-	ResolveProvider *bool `json:"resolveProvider"`
+	ResolveProvider *Boolean `json:"resolveProvider"`
 }
 
 // Provider options for a [DocumentLinkRequest](#DocumentLinkRequest).
@@ -8224,28 +8224,28 @@ type DocumentLinkOptions struct {
 	WorkDoneProgressOptions
 
 	// Document links have a resolve provider as well.
-	ResolveProvider *bool `json:"resolveProvider"`
+	ResolveProvider *Boolean `json:"resolveProvider"`
 }
 
 // Value-object describing what options formatting should use.
 type FormattingOptions struct {
 
 	// Size of a tab in spaces.
-	TabSize *uint64 `json:"tabSize"`
+	TabSize *Uinteger `json:"tabSize"`
 
 	// Prefer spaces over tabs.
-	InsertSpaces *bool `json:"insertSpaces"`
+	InsertSpaces *Boolean `json:"insertSpaces"`
 
 	// Trim trailing whitespace on a line.  @since 3.15.0
-	TrimTrailingWhitespace *bool `json:"trimTrailingWhitespace"`
+	TrimTrailingWhitespace *Boolean `json:"trimTrailingWhitespace"`
 
 	// Insert a newline character at the end of the file if one does not
 	// exist.  @since 3.15.0
-	InsertFinalNewline *bool `json:"insertFinalNewline"`
+	InsertFinalNewline *Boolean `json:"insertFinalNewline"`
 
 	// Trim all newlines after the final newline at the end of the file.
 	// @since 3.15.0
-	TrimFinalNewlines *bool `json:"trimFinalNewlines"`
+	TrimFinalNewlines *Boolean `json:"trimFinalNewlines"`
 }
 
 func (this *FormattingOptions) UnmarshalJSON(data []byte) error {
@@ -8306,10 +8306,10 @@ type DocumentRangeFormattingOptions struct {
 type DocumentOnTypeFormattingOptions struct {
 
 	// A character on which formatting should be triggered, like `{`.
-	FirstTriggerCharacter *string `json:"firstTriggerCharacter"`
+	FirstTriggerCharacter *String `json:"firstTriggerCharacter"`
 
 	// More trigger characters.
-	MoreTriggerCharacter []string `json:"moreTriggerCharacter"`
+	MoreTriggerCharacter []String `json:"moreTriggerCharacter"`
 }
 
 func (this *DocumentOnTypeFormattingOptions) UnmarshalJSON(data []byte) error {
@@ -8352,7 +8352,7 @@ type RenameOptions struct {
 
 	// Renames should be checked and tested before being executed.  @since
 	// version 3.12.0
-	PrepareProvider *bool `json:"prepareProvider"`
+	PrepareProvider *Boolean `json:"prepareProvider"`
 }
 
 // The server capabilities of a [ExecuteCommandRequest](#ExecuteCommandRequest).
@@ -8363,7 +8363,7 @@ type ExecuteCommandOptions struct {
 	WorkDoneProgressOptions
 
 	// The commands to be executed on the server
-	Commands []string `json:"commands"`
+	Commands []String `json:"commands"`
 }
 
 func (this *ExecuteCommandOptions) UnmarshalJSON(data []byte) error {
@@ -8397,10 +8397,10 @@ func (this *ExecuteCommandOptions) MarshalJSON() ([]byte, error) {
 type SemanticTokensLegend struct {
 
 	// The token types a server uses.
-	TokenTypes []string `json:"tokenTypes"`
+	TokenTypes []String `json:"tokenTypes"`
 
 	// The token modifiers a server uses.
-	TokenModifiers []string `json:"tokenModifiers"`
+	TokenModifiers []String `json:"tokenModifiers"`
 }
 
 func (this *SemanticTokensLegend) UnmarshalJSON(data []byte) error {
@@ -8452,7 +8452,7 @@ type OptionalVersionedTextDocumentIdentifier struct {
 	// before) the server can send `null` to indicate that the version is
 	// unknown and the content on disk is the truth (as specified with
 	// document content ownership).
-	Version **int64 `json:"version"`
+	Version **Integer `json:"version"`
 }
 
 func (this *OptionalVersionedTextDocumentIdentifier) UnmarshalJSON(
@@ -8530,7 +8530,7 @@ func (this *AnnotatedTextEdit) MarshalJSON() ([]byte, error) {
 type ResourceOperation struct {
 
 	// The resource operation kind.
-	Kind *string `json:"kind"`
+	Kind *String `json:"kind"`
 
 	// An optional annotation identifier describing the operation.  @since
 	// 3.16.0
@@ -8568,30 +8568,30 @@ func (this *ResourceOperation) MarshalJSON() ([]byte, error) {
 type CreateFileOptions struct {
 
 	// Overwrite existing file. Overwrite wins over `ignoreIfExists`
-	Overwrite *bool `json:"overwrite"`
+	Overwrite *Boolean `json:"overwrite"`
 
 	// Ignore if exists.
-	IgnoreIfExists *bool `json:"ignoreIfExists"`
+	IgnoreIfExists *Boolean `json:"ignoreIfExists"`
 }
 
 // Rename file options
 type RenameFileOptions struct {
 
 	// Overwrite target if existing. Overwrite wins over `ignoreIfExists`
-	Overwrite *bool `json:"overwrite"`
+	Overwrite *Boolean `json:"overwrite"`
 
 	// Ignores if target exists.
-	IgnoreIfExists *bool `json:"ignoreIfExists"`
+	IgnoreIfExists *Boolean `json:"ignoreIfExists"`
 }
 
 // Delete file options
 type DeleteFileOptions struct {
 
 	// Delete the content recursively if a folder is denoted.
-	Recursive *bool `json:"recursive"`
+	Recursive *Boolean `json:"recursive"`
 
 	// Ignore the operation if the file doesn't exist.
-	IgnoreIfNotExists *bool `json:"ignoreIfNotExists"`
+	IgnoreIfNotExists *Boolean `json:"ignoreIfNotExists"`
 }
 
 // A pattern to describe in which file operation requests or notifications the
@@ -8608,7 +8608,7 @@ type FileOperationPattern struct {
 	// `example.0`, `example.1`, …) - `[!...]` to negate a range of
 	// characters to match in a path segment (e.g., `example.[!0-9]` to
 	// match on `example.a`, `example.b`, but not `example.0`)
-	Glob *string `json:"glob"`
+	Glob *String `json:"glob"`
 
 	// Whether to match files or folders with this pattern.  Matches both if
 	// undefined.
@@ -8658,7 +8658,7 @@ type WorkspaceFullDocumentDiagnosticReport struct {
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version **int64 `json:"version"`
+	Version **Integer `json:"version"`
 }
 
 func (this *WorkspaceFullDocumentDiagnosticReport) UnmarshalJSON(
@@ -8719,7 +8719,7 @@ type WorkspaceUnchangedDocumentDiagnosticReport struct {
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version **int64 `json:"version"`
+	Version **Integer `json:"version"`
 }
 
 func (this *WorkspaceUnchangedDocumentDiagnosticReport) UnmarshalJSON(
@@ -8830,10 +8830,10 @@ func (this *NotebookCell) MarshalJSON() ([]byte, error) {
 type NotebookCellArrayChange struct {
 
 	// The start oftest of the cell that changed.
-	Start *uint64 `json:"start"`
+	Start *Uinteger `json:"start"`
 
 	// The deleted cells
-	DeleteCount *uint64 `json:"deleteCount"`
+	DeleteCount *Uinteger `json:"deleteCount"`
 
 	// The new cells, if any
 	Cells []NotebookCell `json:"cells"`
@@ -8901,7 +8901,7 @@ type TextDocumentSyncOptions struct {
 
 	// Open and close notifications are sent to the server. If omitted open
 	// close notification should not be sent.
-	OpenClose *bool `json:"openClose"`
+	OpenClose *Boolean `json:"openClose"`
 
 	// Change notifications are sent to the server. See
 	// TextDocumentSyncKind.None, TextDocumentSyncKind.Full and
@@ -8911,11 +8911,11 @@ type TextDocumentSyncOptions struct {
 
 	// If present will save notifications are sent to the server. If omitted
 	// the notification should not be sent.
-	WillSave *bool `json:"willSave"`
+	WillSave *Boolean `json:"willSave"`
 
 	// If present will save wait until requests are sent to the server. If
 	// omitted the request should not be sent.
-	WillSaveWaitUntil *bool `json:"willSaveWaitUntil"`
+	WillSaveWaitUntil *Boolean `json:"willSaveWaitUntil"`
 
 	// If present save notifications are sent to the server. If omitted the
 	// notification should not be sent.
@@ -8934,7 +8934,7 @@ type NotebookDocumentSyncOptions struct {
 
 	// Whether save notification should be forwarded to the server. Will
 	// only be honored if mode === `notebook`.
-	Save *bool `json:"save"`
+	Save *Boolean `json:"save"`
 }
 
 func (this *NotebookDocumentSyncOptions) UnmarshalJSON(data []byte) error {
@@ -8981,7 +8981,7 @@ type NotebookDocumentSyncRegistrationOptions struct {
 type WorkspaceFoldersServerCapabilities struct {
 
 	// The server has support for workspace folders
-	Supported *bool `json:"supported"`
+	Supported *Boolean `json:"supported"`
 
 	// Whether the server wants to receive workspace folder change
 	// notifications.  If a string is provided the string is treated as an
@@ -9058,7 +9058,7 @@ type DiagnosticRelatedInformation struct {
 	Location *Location `json:"location"`
 
 	// The message of this related diagnostic information.
-	Message *string `json:"message"`
+	Message *String `json:"message"`
 }
 
 func (this *DiagnosticRelatedInformation) UnmarshalJSON(data []byte) error {
@@ -9156,7 +9156,7 @@ type NotebookCellTextDocumentFilter struct {
 
 	// A language id like `python`.  Will be matched against the language id
 	// of the notebook cell document. '*' matches every language.
-	Language *string `json:"language"`
+	Language *String `json:"language"`
 }
 
 func (this *NotebookCellTextDocumentFilter) UnmarshalJSON(data []byte) error {
@@ -9192,17 +9192,17 @@ func (this *NotebookCellTextDocumentFilter) MarshalJSON() ([]byte, error) {
 type FileOperationPatternOptions struct {
 
 	// The pattern should be matched ignoring casing.
-	IgnoreCase *bool `json:"ignoreCase"`
+	IgnoreCase *Boolean `json:"ignoreCase"`
 }
 
 type ExecutionSummary struct {
 
 	// A strict monotonically increasing value indicating the execution
 	// order of a cell inside a notebook.
-	ExecutionOrder *uint64 `json:"executionOrder"`
+	ExecutionOrder *Uinteger `json:"executionOrder"`
 
 	// Whether the execution was successful or not if known by the client.
-	Success *bool `json:"success"`
+	Success *Boolean `json:"success"`
 }
 
 func (this *ExecutionSummary) UnmarshalJSON(data []byte) error {
@@ -9237,7 +9237,7 @@ type WorkspaceClientCapabilities struct {
 
 	// The client supports applying batch edits to the workspace by
 	// supporting the request 'workspace/applyEdit'
-	ApplyEdit *bool `json:"applyEdit"`
+	ApplyEdit *Boolean `json:"applyEdit"`
 
 	// Capabilities specific to `WorkspaceEdit`s.
 	WorkspaceEdit *WorkspaceEditClientCapabilities `json:"workspaceEdit"`
@@ -9257,10 +9257,10 @@ type WorkspaceClientCapabilities struct {
 	ExecuteCommand *ExecuteCommandClientCapabilities `json:"executeCommand"`
 
 	// The client has support for workspace folders.  @since 3.6.0
-	WorkspaceFolders *bool `json:"workspaceFolders"`
+	WorkspaceFolders *Boolean `json:"workspaceFolders"`
 
 	// The client supports `workspace/configuration` requests.  @since 3.6.0
-	Configuration *bool `json:"configuration"`
+	Configuration *Boolean `json:"configuration"`
 
 	// Capabilities specific to the semantic token requests scoped to the
 	// workspace.  @since 3.16.0.
@@ -9445,7 +9445,7 @@ type WindowClientCapabilities struct {
 	// notifications. If set servers are allowed to report a
 	// `workDoneProgress` property in the request specific server
 	// capabilities.  @since 3.15.0
-	WorkDoneProgress *bool `json:"workDoneProgress"`
+	WorkDoneProgress *Boolean `json:"workDoneProgress"`
 
 	// Capabilities specific to the showMessage request.  @since 3.16.0
 	ShowMessage *ShowMessageRequestClientCapabilities `json:"showMessage"`
@@ -9534,7 +9534,7 @@ func (this *RelativePattern) MarshalJSON() ([]byte, error) {
 type WorkspaceEditClientCapabilities struct {
 
 	// The client supports versioned document changes in `WorkspaceEdit`s
-	DocumentChanges *bool `json:"documentChanges"`
+	DocumentChanges *Boolean `json:"documentChanges"`
 
 	// The resource operations the client supports. Clients should at least
 	// support 'create', 'rename' and 'delete' files and folders.  @since
@@ -9549,7 +9549,7 @@ type WorkspaceEditClientCapabilities struct {
 	// setting. If set to `true` the client will normalize line ending
 	// characters in a workspace edit to the client-specified new line
 	// character.  @since 3.16.0
-	NormalizesLineEndings *bool `json:"normalizesLineEndings"`
+	NormalizesLineEndings *Boolean `json:"normalizesLineEndings"`
 
 	// Whether the client in general supports change annotations on text
 	// edits, create file, rename file and delete file changes.  @since
@@ -9560,7 +9560,7 @@ type WorkspaceEditClientCapabilities struct {
 type DidChangeConfigurationClientCapabilities struct {
 
 	// Did change configuration notification supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 type DidChangeWatchedFilesClientCapabilities struct {
@@ -9568,18 +9568,18 @@ type DidChangeWatchedFilesClientCapabilities struct {
 	// Did change watched files notification supports dynamic registration.
 	// Please note that the current protocol doesn't support static
 	// configuration for file changes from the server side.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Whether the client has support for {@link  RelativePattern relative
 	// pattern} or not.  @since 3.17.0
-	RelativePatternSupport *bool `json:"relativePatternSupport"`
+	RelativePatternSupport *Boolean `json:"relativePatternSupport"`
 }
 
 // Client capabilities for a [WorkspaceSymbolRequest](#WorkspaceSymbolRequest).
 type WorkspaceSymbolClientCapabilities struct {
 
 	// Symbol request supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Specific capabilities for the `SymbolKind` in the `workspace/symbol`
 	// request.
@@ -9599,7 +9599,7 @@ type WorkspaceSymbolClientCapabilities struct {
 type ExecuteCommandClientCapabilities struct {
 
 	// Execute command supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // @since 3.16.0
@@ -9611,7 +9611,7 @@ type SemanticTokensWorkspaceClientCapabilities struct {
 	// It should be used with absolute care and is useful for situation
 	// where a server for example detects a project wide change that
 	// requires such a calculation.
-	RefreshSupport *bool `json:"refreshSupport"`
+	RefreshSupport *Boolean `json:"refreshSupport"`
 }
 
 // @since 3.16.0
@@ -9623,7 +9623,7 @@ type CodeLensWorkspaceClientCapabilities struct {
 	// should be used with absolute care and is useful for situation where a
 	// server for example detect a project wide change that requires such a
 	// calculation.
-	RefreshSupport *bool `json:"refreshSupport"`
+	RefreshSupport *Boolean `json:"refreshSupport"`
 }
 
 // Capabilities relating to events from file operations by the user in the
@@ -9633,25 +9633,25 @@ type FileOperationClientCapabilities struct {
 
 	// Whether the client supports dynamic registration for file
 	// requests/notifications.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client has support for sending didCreateFiles notifications.
-	DidCreate *bool `json:"didCreate"`
+	DidCreate *Boolean `json:"didCreate"`
 
 	// The client has support for sending willCreateFiles requests.
-	WillCreate *bool `json:"willCreate"`
+	WillCreate *Boolean `json:"willCreate"`
 
 	// The client has support for sending didRenameFiles notifications.
-	DidRename *bool `json:"didRename"`
+	DidRename *Boolean `json:"didRename"`
 
 	// The client has support for sending willRenameFiles requests.
-	WillRename *bool `json:"willRename"`
+	WillRename *Boolean `json:"willRename"`
 
 	// The client has support for sending didDeleteFiles notifications.
-	DidDelete *bool `json:"didDelete"`
+	DidDelete *Boolean `json:"didDelete"`
 
 	// The client has support for sending willDeleteFiles requests.
-	WillDelete *bool `json:"willDelete"`
+	WillDelete *Boolean `json:"willDelete"`
 }
 
 // Client workspace capabilities specific to inline values.  @since 3.17.0
@@ -9663,7 +9663,7 @@ type InlineValueWorkspaceClientCapabilities struct {
 	// It should be used with absolute care and is useful for situation
 	// where a server for example detects a project wide change that
 	// requires such a calculation.
-	RefreshSupport *bool `json:"refreshSupport"`
+	RefreshSupport *Boolean `json:"refreshSupport"`
 }
 
 // Client workspace capabilities specific to inlay hints.  @since 3.17.0
@@ -9675,7 +9675,7 @@ type InlayHintWorkspaceClientCapabilities struct {
 	// should be used with absolute care and is useful for situation where a
 	// server for example detects a project wide change that requires such a
 	// calculation.
-	RefreshSupport *bool `json:"refreshSupport"`
+	RefreshSupport *Boolean `json:"refreshSupport"`
 }
 
 // Workspace client capabilities specific to diagnostic pull requests.  @since
@@ -9688,31 +9688,31 @@ type DiagnosticWorkspaceClientCapabilities struct {
 	// shown. It should be used with absolute care and is useful for
 	// situation where a server for example detects a project wide change
 	// that requires such a calculation.
-	RefreshSupport *bool `json:"refreshSupport"`
+	RefreshSupport *Boolean `json:"refreshSupport"`
 }
 
 type TextDocumentSyncClientCapabilities struct {
 
 	// Whether text document synchronization supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports sending will save notifications.
-	WillSave *bool `json:"willSave"`
+	WillSave *Boolean `json:"willSave"`
 
 	// The client supports sending a will save request and waits for a
 	// response providing text edits which will be applied to the document
 	// before it is saved.
-	WillSaveWaitUntil *bool `json:"willSaveWaitUntil"`
+	WillSaveWaitUntil *Boolean `json:"willSaveWaitUntil"`
 
 	// The client supports did save notifications.
-	DidSave *bool `json:"didSave"`
+	DidSave *Boolean `json:"didSave"`
 }
 
 // Completion client capabilities
 type CompletionClientCapabilities struct {
 
 	// Whether completion supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports the following `CompletionItem` specific
 	// capabilities.
@@ -9727,7 +9727,7 @@ type CompletionClientCapabilities struct {
 
 	// The client supports to send additional context information for a
 	// `textDocument/completion` request.
-	ContextSupport *bool `json:"contextSupport"`
+	ContextSupport *Boolean `json:"contextSupport"`
 
 	// The client supports the following `CompletionList` specific
 	// capabilities.  @since 3.17.0
@@ -9737,7 +9737,7 @@ type CompletionClientCapabilities struct {
 type HoverClientCapabilities struct {
 
 	// Whether hover supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Client supports the following content formats for the content
 	// property. The order describes the preferred format of the client.
@@ -9748,7 +9748,7 @@ type HoverClientCapabilities struct {
 type SignatureHelpClientCapabilities struct {
 
 	// Whether signature help supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports the following `SignatureInformation` specific
 	// properties.
@@ -9758,7 +9758,7 @@ type SignatureHelpClientCapabilities struct {
 	// `textDocument/signatureHelp` request. A client that opts into
 	// contextSupport will also support the `retriggerCharacters` on
 	// `SignatureHelpOptions`.  @since 3.15.0
-	ContextSupport *bool `json:"contextSupport"`
+	ContextSupport *Boolean `json:"contextSupport"`
 }
 
 // @since 3.14.0
@@ -9767,22 +9767,22 @@ type DeclarationClientCapabilities struct {
 	// Whether declaration supports dynamic registration. If this is set to
 	// `true` the client supports the new `DeclarationRegistrationOptions`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports additional metadata in the form of declaration
 	// links.
-	LinkSupport *bool `json:"linkSupport"`
+	LinkSupport *Boolean `json:"linkSupport"`
 }
 
 // Client Capabilities for a [DefinitionRequest](#DefinitionRequest).
 type DefinitionClientCapabilities struct {
 
 	// Whether definition supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports additional metadata in the form of definition
 	// links.  @since 3.14.0
-	LinkSupport *bool `json:"linkSupport"`
+	LinkSupport *Boolean `json:"linkSupport"`
 }
 
 // Since 3.6.0
@@ -9792,11 +9792,11 @@ type TypeDefinitionClientCapabilities struct {
 	// to `true` the client supports the new
 	// `TypeDefinitionRegistrationOptions` return value for the
 	// corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports additional metadata in the form of definition
 	// links.  Since 3.14.0
-	LinkSupport *bool `json:"linkSupport"`
+	LinkSupport *Boolean `json:"linkSupport"`
 }
 
 // @since 3.6.0
@@ -9806,18 +9806,18 @@ type ImplementationClientCapabilities struct {
 	// to `true` the client supports the new
 	// `ImplementationRegistrationOptions` return value for the
 	// corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports additional metadata in the form of definition
 	// links.  @since 3.14.0
-	LinkSupport *bool `json:"linkSupport"`
+	LinkSupport *Boolean `json:"linkSupport"`
 }
 
 // Client Capabilities for a [ReferencesRequest](#ReferencesRequest).
 type ReferenceClientCapabilities struct {
 
 	// Whether references supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Client Capabilities for a
@@ -9825,21 +9825,21 @@ type ReferenceClientCapabilities struct {
 type DocumentHighlightClientCapabilities struct {
 
 	// Whether document highlight supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Client Capabilities for a [DocumentSymbolRequest](#DocumentSymbolRequest).
 type DocumentSymbolClientCapabilities struct {
 
 	// Whether document symbol supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Specific capabilities for the `SymbolKind` in the
 	// `textDocument/documentSymbol` request.
 	SymbolKind *DocumentSymbolClientCapabilities_SymbolKind `json:"symbolKind"`
 
 	// The client supports hierarchical document symbols.
-	HierarchicalDocumentSymbolSupport *bool `json:"hierarchicalDocumentSymbolSupport"`
+	HierarchicalDocumentSymbolSupport *Boolean `json:"hierarchicalDocumentSymbolSupport"`
 
 	// The client supports tags on `SymbolInformation`. Tags are supported
 	// on `DocumentSymbol` if `hierarchicalDocumentSymbolSupport` is set to
@@ -9849,14 +9849,14 @@ type DocumentSymbolClientCapabilities struct {
 
 	// The client supports an additional label presented in the UI when
 	// registering a document symbol provider.  @since 3.16.0
-	LabelSupport *bool `json:"labelSupport"`
+	LabelSupport *Boolean `json:"labelSupport"`
 }
 
 // The Client Capabilities of a [CodeActionRequest](#CodeActionRequest).
 type CodeActionClientCapabilities struct {
 
 	// Whether code action supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client support code action literals of type `CodeAction` as a
 	// valid response of the `textDocument/codeAction` request. If the
@@ -9866,15 +9866,15 @@ type CodeActionClientCapabilities struct {
 
 	// Whether code action supports the `isPreferred` property.  @since
 	// 3.15.0
-	IsPreferredSupport *bool `json:"isPreferredSupport"`
+	IsPreferredSupport *Boolean `json:"isPreferredSupport"`
 
 	// Whether code action supports the `disabled` property.  @since 3.16.0
-	DisabledSupport *bool `json:"disabledSupport"`
+	DisabledSupport *Boolean `json:"disabledSupport"`
 
 	// Whether code action supports the `data` property which is preserved
 	// between a `textDocument/codeAction` and a `codeAction/resolve`
 	// request.  @since 3.16.0
-	DataSupport *bool `json:"dataSupport"`
+	DataSupport *Boolean `json:"dataSupport"`
 
 	// Whether the client supports resolving additional code action
 	// properties via a separate `codeAction/resolve` request.  @since
@@ -9885,25 +9885,25 @@ type CodeActionClientCapabilities struct {
 	// resource operations returned via the `CodeAction#edit` property by
 	// for example presenting the workspace edit in the user interface and
 	// asking for confirmation.  @since 3.16.0
-	HonorsChangeAnnotations *bool `json:"honorsChangeAnnotations"`
+	HonorsChangeAnnotations *Boolean `json:"honorsChangeAnnotations"`
 }
 
 // The client capabilities  of a [CodeLensRequest](#CodeLensRequest).
 type CodeLensClientCapabilities struct {
 
 	// Whether code lens supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // The client capabilities of a [DocumentLinkRequest](#DocumentLinkRequest).
 type DocumentLinkClientCapabilities struct {
 
 	// Whether document link supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Whether the client supports the `tooltip` property on `DocumentLink`.
 	//  @since 3.15.0
-	TooltipSupport *bool `json:"tooltipSupport"`
+	TooltipSupport *Boolean `json:"tooltipSupport"`
 }
 
 type DocumentColorClientCapabilities struct {
@@ -9912,7 +9912,7 @@ type DocumentColorClientCapabilities struct {
 	// to `true` the client supports the new
 	// `DocumentColorRegistrationOptions` return value for the corresponding
 	// server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Client capabilities of a
@@ -9920,7 +9920,7 @@ type DocumentColorClientCapabilities struct {
 type DocumentFormattingClientCapabilities struct {
 
 	// Whether formatting supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Client capabilities of a
@@ -9928,7 +9928,7 @@ type DocumentFormattingClientCapabilities struct {
 type DocumentRangeFormattingClientCapabilities struct {
 
 	// Whether range formatting supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Client capabilities of a
@@ -9936,17 +9936,17 @@ type DocumentRangeFormattingClientCapabilities struct {
 type DocumentOnTypeFormattingClientCapabilities struct {
 
 	// Whether on type formatting supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 type RenameClientCapabilities struct {
 
 	// Whether rename supports dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Client supports testing for validity of rename operations before
 	// execution.  @since 3.12.0
-	PrepareSupport *bool `json:"prepareSupport"`
+	PrepareSupport *Boolean `json:"prepareSupport"`
 
 	// Client supports the default behavior result.  The value indicates the
 	// default behavior used by the client.  @since 3.16.0
@@ -9956,7 +9956,7 @@ type RenameClientCapabilities struct {
 	// resource operations returned via the rename request's workspace edit
 	// by for example presenting the workspace edit in the user interface
 	// and asking for confirmation.  @since 3.16.0
-	HonorsChangeAnnotations *bool `json:"honorsChangeAnnotations"`
+	HonorsChangeAnnotations *Boolean `json:"honorsChangeAnnotations"`
 }
 
 type FoldingRangeClientCapabilities struct {
@@ -9965,17 +9965,17 @@ type FoldingRangeClientCapabilities struct {
 	// range providers. If this is set to `true` the client supports the new
 	// `FoldingRangeRegistrationOptions` return value for the corresponding
 	// server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The maximum number of folding ranges that the client prefers to
 	// receive per document. The value serves as a hint, servers are free to
 	// follow the limit.
-	RangeLimit *uint64 `json:"rangeLimit"`
+	RangeLimit *Uinteger `json:"rangeLimit"`
 
 	// If set, the client signals that it only supports folding complete
 	// lines. If set, client will ignore specified `startCharacter` and
 	// `endCharacter` properties in a FoldingRange.
-	LineFoldingOnly *bool `json:"lineFoldingOnly"`
+	LineFoldingOnly *Boolean `json:"lineFoldingOnly"`
 
 	// Specific options for the folding range kind.  @since 3.17.0
 	FoldingRangeKind *FoldingRangeClientCapabilities_FoldingRangeKind `json:"foldingRangeKind"`
@@ -9990,14 +9990,14 @@ type SelectionRangeClientCapabilities struct {
 	// range providers. If this is set to `true` the client supports the new
 	// `SelectionRangeRegistrationOptions` return value for the
 	// corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // The publish diagnostic client capabilities.
 type PublishDiagnosticsClientCapabilities struct {
 
 	// Whether the clients accepts diagnostics with related information.
-	RelatedInformation *bool `json:"relatedInformation"`
+	RelatedInformation *Boolean `json:"relatedInformation"`
 
 	// Client supports the tag property to provide meta data about a
 	// diagnostic. Clients supporting tags have to handle unknown tags
@@ -10007,15 +10007,15 @@ type PublishDiagnosticsClientCapabilities struct {
 	// Whether the client interprets the version property of the
 	// `textDocument/publishDiagnostics` notification's parameter.  @since
 	// 3.15.0
-	VersionSupport *bool `json:"versionSupport"`
+	VersionSupport *Boolean `json:"versionSupport"`
 
 	// Client supports a codeDescription property  @since 3.16.0
-	CodeDescriptionSupport *bool `json:"codeDescriptionSupport"`
+	CodeDescriptionSupport *Boolean `json:"codeDescriptionSupport"`
 
 	// Whether code action supports the `data` property which is preserved
 	// between a `textDocument/publishDiagnostics` and
 	// `textDocument/codeAction` request.  @since 3.16.0
-	DataSupport *bool `json:"dataSupport"`
+	DataSupport *Boolean `json:"dataSupport"`
 }
 
 // @since 3.16.0
@@ -10025,7 +10025,7 @@ type CallHierarchyClientCapabilities struct {
 	// to `true` the client supports the new
 	// `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // @since 3.16.0
@@ -10035,7 +10035,7 @@ type SemanticTokensClientCapabilities struct {
 	// to `true` the client supports the new
 	// `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Which requests the client supports and might send to the server
 	// depending on the server's capability. Please note that clients might
@@ -10048,25 +10048,25 @@ type SemanticTokensClientCapabilities struct {
 	Requests *SemanticTokensClientCapabilities_Requests `json:"requests"`
 
 	// The token types that the client supports.
-	TokenTypes []string `json:"tokenTypes"`
+	TokenTypes []String `json:"tokenTypes"`
 
 	// The token modifiers that the client supports.
-	TokenModifiers []string `json:"tokenModifiers"`
+	TokenModifiers []String `json:"tokenModifiers"`
 
 	// The token formats the clients supports.
 	Formats []TokenFormat `json:"formats"`
 
 	// Whether the client supports tokens that can overlap each other.
-	OverlappingTokenSupport *bool `json:"overlappingTokenSupport"`
+	OverlappingTokenSupport *Boolean `json:"overlappingTokenSupport"`
 
 	// Whether the client supports tokens that can span multiple lines.
-	MultilineTokenSupport *bool `json:"multilineTokenSupport"`
+	MultilineTokenSupport *Boolean `json:"multilineTokenSupport"`
 
 	// Whether the client allows the server to actively cancel a semantic
 	// token request, e.g. supports returning LSPErrorCodes.ServerCancelled.
 	// If a server does the client needs to retrigger the request.  @since
 	// 3.17.0
-	ServerCancelSupport *bool `json:"serverCancelSupport"`
+	ServerCancelSupport *Boolean `json:"serverCancelSupport"`
 
 	// Whether the client uses semantic tokens to augment existing syntax
 	// tokens. If set to `true` client side created syntax tokens and
@@ -10074,7 +10074,7 @@ type SemanticTokensClientCapabilities struct {
 	// client only uses the returned semantic tokens for colorization.  If
 	// the value is `undefined` then the client behavior is not specified.
 	// @since 3.17.0
-	AugmentsSyntaxTokens *bool `json:"augmentsSyntaxTokens"`
+	AugmentsSyntaxTokens *Boolean `json:"augmentsSyntaxTokens"`
 }
 
 func (this *SemanticTokensClientCapabilities) UnmarshalJSON(data []byte) error {
@@ -10151,7 +10151,7 @@ type LinkedEditingRangeClientCapabilities struct {
 	// to `true` the client supports the new
 	// `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Client capabilities specific to the moniker request.  @since 3.16.0
@@ -10160,7 +10160,7 @@ type MonikerClientCapabilities struct {
 	// Whether moniker supports dynamic registration. If this is set to
 	// `true` the client supports the new `MonikerRegistrationOptions`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // @since 3.17.0
@@ -10170,7 +10170,7 @@ type TypeHierarchyClientCapabilities struct {
 	// to `true` the client supports the new
 	// `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Client capabilities specific to inline values.  @since 3.17.0
@@ -10178,14 +10178,14 @@ type InlineValueClientCapabilities struct {
 
 	// Whether implementation supports dynamic registration for inline value
 	// providers.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 }
 
 // Inlay hint client capabilities.  @since 3.17.0
 type InlayHintClientCapabilities struct {
 
 	// Whether inlay hints support dynamic registration.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Indicates which properties a client can resolve lazily on an inlay
 	// hint.
@@ -10199,11 +10199,11 @@ type DiagnosticClientCapabilities struct {
 	// to `true` the client supports the new
 	// `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// Whether the clients supports related documents for document
 	// diagnostic pulls.
-	RelatedDocumentSupport *bool `json:"relatedDocumentSupport"`
+	RelatedDocumentSupport *Boolean `json:"relatedDocumentSupport"`
 }
 
 // Notebook specific client capabilities.  @since 3.17.0
@@ -10213,10 +10213,10 @@ type NotebookDocumentSyncClientCapabilities struct {
 	// to `true` the client supports the new
 	// `(TextDocumentRegistrationOptions & StaticRegistrationOptions)`
 	// return value for the corresponding server capability as well.
-	DynamicRegistration *bool `json:"dynamicRegistration"`
+	DynamicRegistration *Boolean `json:"dynamicRegistration"`
 
 	// The client supports sending execution summary data per cell.
-	ExecutionSummarySupport *bool `json:"executionSummarySupport"`
+	ExecutionSummarySupport *Boolean `json:"executionSummarySupport"`
 }
 
 // Show message request client capabilities
@@ -10230,7 +10230,7 @@ type ShowMessageRequestClientCapabilities struct {
 type ShowDocumentClientCapabilities struct {
 
 	// The client has support for the showDocument request.
-	Support *bool `json:"support"`
+	Support *Boolean `json:"support"`
 }
 
 func (this *ShowDocumentClientCapabilities) UnmarshalJSON(data []byte) error {
@@ -10266,10 +10266,10 @@ func (this *ShowDocumentClientCapabilities) MarshalJSON() ([]byte, error) {
 type RegularExpressionsClientCapabilities struct {
 
 	// The engine's name.
-	Engine *string `json:"engine"`
+	Engine *String `json:"engine"`
 
 	// The engine's version.
-	Version *string `json:"version"`
+	Version *String `json:"version"`
 }
 
 func (this *RegularExpressionsClientCapabilities) UnmarshalJSON(
@@ -10309,14 +10309,14 @@ func (this *RegularExpressionsClientCapabilities) MarshalJSON() ([]byte, error) 
 type MarkdownClientCapabilities struct {
 
 	// The name of the parser.
-	Parser *string `json:"parser"`
+	Parser *String `json:"parser"`
 
 	// The version of the parser.
-	Version *string `json:"version"`
+	Version *String `json:"version"`
 
 	// A list of HTML tags that the client allows / supports in Markdown.
 	// @since 3.17.0
-	AllowedTags []string `json:"allowedTags"`
+	AllowedTags []String `json:"allowedTags"`
 }
 
 func (this *MarkdownClientCapabilities) UnmarshalJSON(data []byte) error {

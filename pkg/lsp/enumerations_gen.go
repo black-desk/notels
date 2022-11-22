@@ -14,7 +14,7 @@ var EnumerationValidateFailed = func(name string) error {
 // A set of predefined token types. This set is not fixed an clients can specify
 // additional token types via the corresponding client capabilities.  @since
 // 3.16.0
-type SemanticTokenTypes string
+type SemanticTokenTypes String
 
 const (
 	SemanticTokenTypesNamespace = "namespace"
@@ -130,7 +130,7 @@ func (this *SemanticTokenTypes) MarshalJSON() ([]byte, error) {
 // A set of predefined token modifiers. This set is not fixed an clients can
 // specify additional token types via the corresponding client capabilities.
 // @since 3.16.0
-type SemanticTokenModifiers string
+type SemanticTokenModifiers String
 
 const (
 	SemanticTokenModifiersDeclaration = "declaration"
@@ -202,7 +202,7 @@ func (this *SemanticTokenModifiers) MarshalJSON() ([]byte, error) {
 }
 
 // The document diagnostic report kinds.  @since 3.17.0
-type DocumentDiagnosticReportKind string
+type DocumentDiagnosticReportKind String
 
 const (
 
@@ -253,7 +253,7 @@ func (this *DocumentDiagnosticReportKind) MarshalJSON() ([]byte, error) {
 }
 
 // Predefined error codes.
-type ErrorCodes int64
+type ErrorCodes Integer
 
 const (
 	ErrorCodesParseError = -32700
@@ -317,7 +317,7 @@ func (this *ErrorCodes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(tmpMarshal)
 }
 
-type LSPErrorCodes int64
+type LSPErrorCodes Integer
 
 const (
 
@@ -387,7 +387,7 @@ func (this *LSPErrorCodes) MarshalJSON() ([]byte, error) {
 }
 
 // A set of predefined range kinds.
-type FoldingRangeKind string
+type FoldingRangeKind String
 
 const (
 
@@ -442,7 +442,7 @@ func (this *FoldingRangeKind) MarshalJSON() ([]byte, error) {
 }
 
 // A symbol kind.
-type SymbolKind uint64
+type SymbolKind Uinteger
 
 const (
 	SymbolKindFile = 1
@@ -563,7 +563,7 @@ func (this *SymbolKind) MarshalJSON() ([]byte, error) {
 
 // Symbol tags are extra annotations that tweak the rendering of a symbol.
 // @since 3.16
-type SymbolTag uint64
+type SymbolTag Uinteger
 
 const (
 
@@ -610,7 +610,7 @@ func (this *SymbolTag) MarshalJSON() ([]byte, error) {
 }
 
 // Moniker uniqueness level to define scope of the moniker.  @since 3.16.0
-type UniquenessLevel string
+type UniquenessLevel String
 
 const (
 
@@ -673,7 +673,7 @@ func (this *UniquenessLevel) MarshalJSON() ([]byte, error) {
 }
 
 // The moniker kind.  @since 3.16.0
-type MonikerKind string
+type MonikerKind String
 
 const (
 
@@ -730,7 +730,7 @@ func (this *MonikerKind) MarshalJSON() ([]byte, error) {
 }
 
 // Inlay hint kinds.  @since 3.17.0
-type InlayHintKind uint64
+type InlayHintKind Uinteger
 
 const (
 
@@ -781,7 +781,7 @@ func (this *InlayHintKind) MarshalJSON() ([]byte, error) {
 }
 
 // The message type
-type MessageType uint64
+type MessageType Uinteger
 
 const (
 
@@ -841,7 +841,7 @@ func (this *MessageType) MarshalJSON() ([]byte, error) {
 
 // Defines how the host (editor) should sync document changes to the language
 // server.
-type TextDocumentSyncKind uint64
+type TextDocumentSyncKind Uinteger
 
 const (
 
@@ -898,7 +898,7 @@ func (this *TextDocumentSyncKind) MarshalJSON() ([]byte, error) {
 }
 
 // Represents reasons why a text document is saved.
-type TextDocumentSaveReason uint64
+type TextDocumentSaveReason Uinteger
 
 const (
 
@@ -954,7 +954,7 @@ func (this *TextDocumentSaveReason) MarshalJSON() ([]byte, error) {
 }
 
 // The kind of a completion entry.
-type CompletionItemKind uint64
+type CompletionItemKind Uinteger
 
 const (
 	CompletionItemKindText = 1
@@ -1072,7 +1072,7 @@ func (this *CompletionItemKind) MarshalJSON() ([]byte, error) {
 
 // Completion item tags are extra annotations that tweak the rendering of a
 // completion item.  @since 3.15.0
-type CompletionItemTag uint64
+type CompletionItemTag Uinteger
 
 const (
 
@@ -1120,7 +1120,7 @@ func (this *CompletionItemTag) MarshalJSON() ([]byte, error) {
 
 // Defines whether the insert text in a completion item should be interpreted as
 // plain text or a snippet.
-type InsertTextFormat uint64
+type InsertTextFormat Uinteger
 
 const (
 
@@ -1177,7 +1177,7 @@ func (this *InsertTextFormat) MarshalJSON() ([]byte, error) {
 
 // How whitespace and indentation is handled during completion item insertion.
 // @since 3.16.0
-type InsertTextMode uint64
+type InsertTextMode Uinteger
 
 const (
 
@@ -1235,7 +1235,7 @@ func (this *InsertTextMode) MarshalJSON() ([]byte, error) {
 }
 
 // A document highlight kind.
-type DocumentHighlightKind uint64
+type DocumentHighlightKind Uinteger
 
 const (
 
@@ -1290,7 +1290,7 @@ func (this *DocumentHighlightKind) MarshalJSON() ([]byte, error) {
 }
 
 // A set of predefined code action kinds
-type CodeActionKind string
+type CodeActionKind String
 
 const (
 
@@ -1380,7 +1380,7 @@ func (this *CodeActionKind) MarshalJSON() ([]byte, error) {
 	return json.Marshal(tmpMarshal)
 }
 
-type TraceValues string
+type TraceValues String
 
 const (
 
@@ -1438,7 +1438,7 @@ func (this *TraceValues) MarshalJSON() ([]byte, error) {
 // like `Hover`, `ParameterInfo` or `CompletionItem`.  Please note that
 // `MarkupKinds` must not start with a `$`. This kinds are reserved for internal
 // usage.
-type MarkupKind string
+type MarkupKind String
 
 const (
 
@@ -1489,7 +1489,7 @@ func (this *MarkupKind) MarshalJSON() ([]byte, error) {
 }
 
 // A set of predefined position encoding kinds.  @since 3.17.0
-type PositionEncodingKind string
+type PositionEncodingKind String
 
 const (
 
@@ -1548,7 +1548,7 @@ func (this *PositionEncodingKind) MarshalJSON() ([]byte, error) {
 }
 
 // The file event type
-type FileChangeType uint64
+type FileChangeType Uinteger
 
 const (
 
@@ -1602,7 +1602,7 @@ func (this *FileChangeType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(tmpMarshal)
 }
 
-type WatchKind uint64
+type WatchKind Uinteger
 
 const (
 
@@ -1657,7 +1657,7 @@ func (this *WatchKind) MarshalJSON() ([]byte, error) {
 }
 
 // The diagnostic's severity.
-type DiagnosticSeverity uint64
+type DiagnosticSeverity Uinteger
 
 const (
 
@@ -1716,7 +1716,7 @@ func (this *DiagnosticSeverity) MarshalJSON() ([]byte, error) {
 }
 
 // The diagnostic tags.  @since 3.15.0
-type DiagnosticTag uint64
+type DiagnosticTag Uinteger
 
 const (
 
@@ -1770,7 +1770,7 @@ func (this *DiagnosticTag) MarshalJSON() ([]byte, error) {
 }
 
 // How a completion was triggered
-type CompletionTriggerKind uint64
+type CompletionTriggerKind Uinteger
 
 const (
 
@@ -1828,7 +1828,7 @@ func (this *CompletionTriggerKind) MarshalJSON() ([]byte, error) {
 }
 
 // How a signature help was triggered.  @since 3.15.0
-type SignatureHelpTriggerKind uint64
+type SignatureHelpTriggerKind Uinteger
 
 const (
 
@@ -1884,7 +1884,7 @@ func (this *SignatureHelpTriggerKind) MarshalJSON() ([]byte, error) {
 }
 
 // The reason why code actions were requested.  @since 3.17.0
-type CodeActionTriggerKind uint64
+type CodeActionTriggerKind Uinteger
 
 const (
 
@@ -1939,7 +1939,7 @@ func (this *CodeActionTriggerKind) MarshalJSON() ([]byte, error) {
 
 // A pattern kind describing if a glob pattern matches a file a folder or both.
 // @since 3.16.0
-type FileOperationPatternKind string
+type FileOperationPatternKind String
 
 const (
 
@@ -1990,7 +1990,7 @@ func (this *FileOperationPatternKind) MarshalJSON() ([]byte, error) {
 }
 
 // A notebook cell kind.  @since 3.17.0
-type NotebookCellKind uint64
+type NotebookCellKind Uinteger
 
 const (
 
@@ -2040,7 +2040,7 @@ func (this *NotebookCellKind) MarshalJSON() ([]byte, error) {
 	return json.Marshal(tmpMarshal)
 }
 
-type ResourceOperationKind string
+type ResourceOperationKind String
 
 const (
 
@@ -2094,7 +2094,7 @@ func (this *ResourceOperationKind) MarshalJSON() ([]byte, error) {
 	return json.Marshal(tmpMarshal)
 }
 
-type FailureHandlingKind string
+type FailureHandlingKind String
 
 const (
 
@@ -2158,7 +2158,7 @@ func (this *FailureHandlingKind) MarshalJSON() ([]byte, error) {
 	return json.Marshal(tmpMarshal)
 }
 
-type PrepareSupportDefaultBehavior uint64
+type PrepareSupportDefaultBehavior Uinteger
 
 const (
 
@@ -2205,7 +2205,7 @@ func (this *PrepareSupportDefaultBehavior) MarshalJSON() ([]byte, error) {
 	return json.Marshal(tmpMarshal)
 }
 
-type TokenFormat string
+type TokenFormat String
 
 const (
 	TokenFormatRelative = "relative"

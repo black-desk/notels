@@ -18,6 +18,8 @@ type String string
 
 type Boolean bool
 
+type Null struct{}
+
 type interfaceUnmarshalJSONError []error
 
 func (e *interfaceUnmarshalJSONError) Error() string {
