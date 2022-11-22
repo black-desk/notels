@@ -1,6 +1,6 @@
 // Code generated from metaModel.json by "lspgen". DO NOT EDIT
 
-package protocol
+package lsp
 
 import (
 	"encoding/json"
