@@ -1,0 +1,50 @@
+--- metaModel.json	2022-11-22 21:56:05.393549075 +0800
++++ ../../../metaModel.json	2022-11-22 21:54:47.464768329 +0800
+@@ -193,17 +193,8 @@
+ 				}
+ 			},
+ 			"registrationOptions": {
+-				"kind": "and",
+-				"items": [
+-					{
+-						"kind": "reference",
+-						"name": "WorkDoneProgressOptions"
+-					},
+-					{
+-						"kind": "reference",
+-						"name": "TextDocumentRegistrationOptions"
+-					}
+-				]
++				"kind": "reference",
++				"name": "TextDocumentRegistrationOptions"
+ 			},
+ 			"documentation": "A request to list all presentation for a color. The request's\nparameter is of type {@link ColorPresentationParams} the\nresponse is of type {@link ColorInformation ColorInformation[]} or a Thenable\nthat resolves to such."
+ 		},
+@@ -7759,25 +7750,8 @@
+ 				{
+ 					"name": "trace",
+ 					"type": {
+-						"kind": "or",
+-						"items": [
+-							{
+-								"kind": "stringLiteral",
+-								"value": "off"
+-							},
+-							{
+-								"kind": "stringLiteral",
+-								"value": "messages"
+-							},
+-							{
+-								"kind": "stringLiteral",
+-								"value": "compact"
+-							},
+-							{
+-								"kind": "stringLiteral",
+-								"value": "verbose"
+-							}
+-						]
++						"kind": "reference",
++						"name": "TraceValues"
+ 					},
+ 					"optional": true,
+ 					"documentation": "The initial trace setting. If omitted trace is disabled ('off')."
