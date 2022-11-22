@@ -61,8 +61,8 @@ func main() {
 	genClient(&metaModel)
 	genServer(&metaModel)
 
-	genLiteral()
 	genOr()
+	genLiteral()
 	genTuple()
 
 	log.Info("done")

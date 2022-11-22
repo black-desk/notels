@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"sort"
 	"text/template"
 )
 
@@ -122,10 +123,17 @@ func genLiteral() {
 	}
 
 	data := []StructureLiteralWithName{}
-	for k, v := range LiteralToGenerate {
+
+	keys := []string{}
+
+	for k := range LiteralToGenerate {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
 		data = append(data, StructureLiteralWithName{
 			Name:    k,
-			Literal: v,
+			Literal: LiteralToGenerate[k],
 		})
 	}
 
