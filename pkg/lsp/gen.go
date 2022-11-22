@@ -5,7 +5,7 @@ package protocol
 //go:generate wget -O metaModel.json https://raw.githubusercontent.com/microsoft/vscode-languageserver-node/f2864f8fb946ad8ff82928d5087d84210f77aa2d/protocol/metaModel.json
 //go:generate wget -O metaModel.schema.json https://raw.githubusercontent.com/microsoft/vscode-languageserver-node/f2864f8fb946ad8ff82928d5087d84210f77aa2d/protocol/metaModel.schema.json
 
-// The original metaModel.json has some problems.
+// The original metaModel.json has some problems, such as:
 // - https://github.com/microsoft/vscode-languageserver-node/issues/1125
 // - https://github.com/microsoft/vscode-languageserver-node/issues/1103
 // fix-metaModel.patch will fix them

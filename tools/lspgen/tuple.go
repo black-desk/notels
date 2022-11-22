@@ -136,5 +136,4 @@ func genTuple() {
 		log.Fatalw("failed to execute template for tuples",
 			"error", err)
 	}
-
 }

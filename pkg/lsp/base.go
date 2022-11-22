@@ -38,10 +38,3 @@ func (this *Null) MarshalJSON() ([]byte, error) {
 	var tmp *int = nil
 	return json.Marshal(tmp)
 }
-
-type interfaceUnmarshalJSONError []error
-
-func (e *interfaceUnmarshalJSONError) Error() string {
-	return fmt.Errorf("failed to unmarshal json to interface: %v", *e).
-		Error()
-}
