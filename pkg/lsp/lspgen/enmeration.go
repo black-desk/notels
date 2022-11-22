@@ -14,13 +14,14 @@ var enumTemplate string = `// Code generated from metaModel.json by "lspgen". DO
 package protocol
 
 import (
-        "errors"
+        "fmt"
         "encoding/json"
 )
 
-var EnumerationValidateFailed error = errors.New(
-        "enumeration validate failed",
-)
+var EnumerationValidateFailed = func (name string) error {
+        return fmt.Errorf( "enumeration \"%s\"validate failed", name)
+}
+
 
 {{range .}}
         {{$type := getType .Type.Name}}
@@ -54,7 +55,7 @@ var EnumerationValidateFailed error = errors.New(
                                 return nil
                         }
                 }
-                return EnumerationValidateFailed
+                return EnumerationValidateFailed("{{$name}}")
         }
 
         func (this *{{$name}}) MarshalJSON() ([]byte, error) {
@@ -64,7 +65,7 @@ var EnumerationValidateFailed error = errors.New(
                                         return nil
                                 }
                         }
-                        return EnumerationValidateFailed
+                        return EnumerationValidateFailed("{{$name}}")
                 }(); err != nil {
                         return nil, err
                 }

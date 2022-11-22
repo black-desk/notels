@@ -4,12 +4,12 @@ package protocol
 
 import (
 	"encoding/json"
-	"errors"
+	"fmt"
 )
 
-var EnumerationValidateFailed error = errors.New(
-	"enumeration validate failed",
-)
+var EnumerationValidateFailed = func(name string) error {
+	return fmt.Errorf("enumeration \"%s\"validate failed", name)
+}
 
 // A set of predefined token types. This set is not fixed an clients can specify
 // additional token types via the corresponding client capabilities.  @since
@@ -107,7 +107,7 @@ func (this *SemanticTokenTypes) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("SemanticTokenTypes")
 }
 
 func (this *SemanticTokenTypes) MarshalJSON() ([]byte, error) {
@@ -117,7 +117,7 @@ func (this *SemanticTokenTypes) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("SemanticTokenTypes")
 	}(); err != nil {
 		return nil, err
 	}
@@ -181,7 +181,7 @@ func (this *SemanticTokenModifiers) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("SemanticTokenModifiers")
 }
 
 func (this *SemanticTokenModifiers) MarshalJSON() ([]byte, error) {
@@ -191,7 +191,7 @@ func (this *SemanticTokenModifiers) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("SemanticTokenModifiers")
 	}(); err != nil {
 		return nil, err
 	}
@@ -232,7 +232,7 @@ func (this *DocumentDiagnosticReportKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("DocumentDiagnosticReportKind")
 }
 
 func (this *DocumentDiagnosticReportKind) MarshalJSON() ([]byte, error) {
@@ -242,7 +242,7 @@ func (this *DocumentDiagnosticReportKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("DocumentDiagnosticReportKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -297,7 +297,7 @@ func (this *ErrorCodes) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("ErrorCodes")
 }
 
 func (this *ErrorCodes) MarshalJSON() ([]byte, error) {
@@ -307,7 +307,7 @@ func (this *ErrorCodes) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("ErrorCodes")
 	}(); err != nil {
 		return nil, err
 	}
@@ -366,7 +366,7 @@ func (this *LSPErrorCodes) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("LSPErrorCodes")
 }
 
 func (this *LSPErrorCodes) MarshalJSON() ([]byte, error) {
@@ -376,7 +376,7 @@ func (this *LSPErrorCodes) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("LSPErrorCodes")
 	}(); err != nil {
 		return nil, err
 	}
@@ -421,7 +421,7 @@ func (this *FoldingRangeKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("FoldingRangeKind")
 }
 
 func (this *FoldingRangeKind) MarshalJSON() ([]byte, error) {
@@ -431,7 +431,7 @@ func (this *FoldingRangeKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("FoldingRangeKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -541,7 +541,7 @@ func (this *SymbolKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("SymbolKind")
 }
 
 func (this *SymbolKind) MarshalJSON() ([]byte, error) {
@@ -551,7 +551,7 @@ func (this *SymbolKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("SymbolKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -589,7 +589,7 @@ func (this *SymbolTag) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("SymbolTag")
 }
 
 func (this *SymbolTag) MarshalJSON() ([]byte, error) {
@@ -599,7 +599,7 @@ func (this *SymbolTag) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("SymbolTag")
 	}(); err != nil {
 		return nil, err
 	}
@@ -652,7 +652,7 @@ func (this *UniquenessLevel) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("UniquenessLevel")
 }
 
 func (this *UniquenessLevel) MarshalJSON() ([]byte, error) {
@@ -662,7 +662,7 @@ func (this *UniquenessLevel) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("UniquenessLevel")
 	}(); err != nil {
 		return nil, err
 	}
@@ -709,7 +709,7 @@ func (this *MonikerKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("MonikerKind")
 }
 
 func (this *MonikerKind) MarshalJSON() ([]byte, error) {
@@ -719,7 +719,7 @@ func (this *MonikerKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("MonikerKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -760,7 +760,7 @@ func (this *InlayHintKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("InlayHintKind")
 }
 
 func (this *InlayHintKind) MarshalJSON() ([]byte, error) {
@@ -770,7 +770,7 @@ func (this *InlayHintKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("InlayHintKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -819,7 +819,7 @@ func (this *MessageType) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("MessageType")
 }
 
 func (this *MessageType) MarshalJSON() ([]byte, error) {
@@ -829,7 +829,7 @@ func (this *MessageType) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("MessageType")
 	}(); err != nil {
 		return nil, err
 	}
@@ -877,7 +877,7 @@ func (this *TextDocumentSyncKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("TextDocumentSyncKind")
 }
 
 func (this *TextDocumentSyncKind) MarshalJSON() ([]byte, error) {
@@ -887,7 +887,7 @@ func (this *TextDocumentSyncKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("TextDocumentSyncKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -933,7 +933,7 @@ func (this *TextDocumentSaveReason) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("TextDocumentSaveReason")
 }
 
 func (this *TextDocumentSaveReason) MarshalJSON() ([]byte, error) {
@@ -943,7 +943,7 @@ func (this *TextDocumentSaveReason) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("TextDocumentSaveReason")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1050,7 +1050,7 @@ func (this *CompletionItemKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("CompletionItemKind")
 }
 
 func (this *CompletionItemKind) MarshalJSON() ([]byte, error) {
@@ -1060,7 +1060,7 @@ func (this *CompletionItemKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("CompletionItemKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1098,7 +1098,7 @@ func (this *CompletionItemTag) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("CompletionItemTag")
 }
 
 func (this *CompletionItemTag) MarshalJSON() ([]byte, error) {
@@ -1108,7 +1108,7 @@ func (this *CompletionItemTag) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("CompletionItemTag")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1155,7 +1155,7 @@ func (this *InsertTextFormat) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("InsertTextFormat")
 }
 
 func (this *InsertTextFormat) MarshalJSON() ([]byte, error) {
@@ -1165,7 +1165,7 @@ func (this *InsertTextFormat) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("InsertTextFormat")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1214,7 +1214,7 @@ func (this *InsertTextMode) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("InsertTextMode")
 }
 
 func (this *InsertTextMode) MarshalJSON() ([]byte, error) {
@@ -1224,7 +1224,7 @@ func (this *InsertTextMode) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("InsertTextMode")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1269,7 +1269,7 @@ func (this *DocumentHighlightKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("DocumentHighlightKind")
 }
 
 func (this *DocumentHighlightKind) MarshalJSON() ([]byte, error) {
@@ -1279,7 +1279,7 @@ func (this *DocumentHighlightKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("DocumentHighlightKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1360,7 +1360,7 @@ func (this *CodeActionKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("CodeActionKind")
 }
 
 func (this *CodeActionKind) MarshalJSON() ([]byte, error) {
@@ -1370,7 +1370,7 @@ func (this *CodeActionKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("CodeActionKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1414,7 +1414,7 @@ func (this *TraceValues) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("TraceValues")
 }
 
 func (this *TraceValues) MarshalJSON() ([]byte, error) {
@@ -1424,7 +1424,7 @@ func (this *TraceValues) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("TraceValues")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1468,7 +1468,7 @@ func (this *MarkupKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("MarkupKind")
 }
 
 func (this *MarkupKind) MarshalJSON() ([]byte, error) {
@@ -1478,7 +1478,7 @@ func (this *MarkupKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("MarkupKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1527,7 +1527,7 @@ func (this *PositionEncodingKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("PositionEncodingKind")
 }
 
 func (this *PositionEncodingKind) MarshalJSON() ([]byte, error) {
@@ -1537,7 +1537,7 @@ func (this *PositionEncodingKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("PositionEncodingKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1582,7 +1582,7 @@ func (this *FileChangeType) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("FileChangeType")
 }
 
 func (this *FileChangeType) MarshalJSON() ([]byte, error) {
@@ -1592,7 +1592,7 @@ func (this *FileChangeType) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("FileChangeType")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1636,7 +1636,7 @@ func (this *WatchKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("WatchKind")
 }
 
 func (this *WatchKind) MarshalJSON() ([]byte, error) {
@@ -1646,7 +1646,7 @@ func (this *WatchKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("WatchKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1695,7 +1695,7 @@ func (this *DiagnosticSeverity) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("DiagnosticSeverity")
 }
 
 func (this *DiagnosticSeverity) MarshalJSON() ([]byte, error) {
@@ -1705,7 +1705,7 @@ func (this *DiagnosticSeverity) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("DiagnosticSeverity")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1749,7 +1749,7 @@ func (this *DiagnosticTag) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("DiagnosticTag")
 }
 
 func (this *DiagnosticTag) MarshalJSON() ([]byte, error) {
@@ -1759,7 +1759,7 @@ func (this *DiagnosticTag) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("DiagnosticTag")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1807,7 +1807,7 @@ func (this *CompletionTriggerKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("CompletionTriggerKind")
 }
 
 func (this *CompletionTriggerKind) MarshalJSON() ([]byte, error) {
@@ -1817,7 +1817,7 @@ func (this *CompletionTriggerKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("CompletionTriggerKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1863,7 +1863,7 @@ func (this *SignatureHelpTriggerKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("SignatureHelpTriggerKind")
 }
 
 func (this *SignatureHelpTriggerKind) MarshalJSON() ([]byte, error) {
@@ -1873,7 +1873,7 @@ func (this *SignatureHelpTriggerKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("SignatureHelpTriggerKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1917,7 +1917,7 @@ func (this *CodeActionTriggerKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("CodeActionTriggerKind")
 }
 
 func (this *CodeActionTriggerKind) MarshalJSON() ([]byte, error) {
@@ -1927,7 +1927,7 @@ func (this *CodeActionTriggerKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("CodeActionTriggerKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -1969,7 +1969,7 @@ func (this *FileOperationPatternKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("FileOperationPatternKind")
 }
 
 func (this *FileOperationPatternKind) MarshalJSON() ([]byte, error) {
@@ -1979,7 +1979,7 @@ func (this *FileOperationPatternKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("FileOperationPatternKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -2020,7 +2020,7 @@ func (this *NotebookCellKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("NotebookCellKind")
 }
 
 func (this *NotebookCellKind) MarshalJSON() ([]byte, error) {
@@ -2030,7 +2030,7 @@ func (this *NotebookCellKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("NotebookCellKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -2074,7 +2074,7 @@ func (this *ResourceOperationKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("ResourceOperationKind")
 }
 
 func (this *ResourceOperationKind) MarshalJSON() ([]byte, error) {
@@ -2084,7 +2084,7 @@ func (this *ResourceOperationKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("ResourceOperationKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -2138,7 +2138,7 @@ func (this *FailureHandlingKind) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("FailureHandlingKind")
 }
 
 func (this *FailureHandlingKind) MarshalJSON() ([]byte, error) {
@@ -2148,7 +2148,7 @@ func (this *FailureHandlingKind) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("FailureHandlingKind")
 	}(); err != nil {
 		return nil, err
 	}
@@ -2185,7 +2185,7 @@ func (this *PrepareSupportDefaultBehavior) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("PrepareSupportDefaultBehavior")
 }
 
 func (this *PrepareSupportDefaultBehavior) MarshalJSON() ([]byte, error) {
@@ -2195,7 +2195,7 @@ func (this *PrepareSupportDefaultBehavior) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("PrepareSupportDefaultBehavior")
 	}(); err != nil {
 		return nil, err
 	}
@@ -2229,7 +2229,7 @@ func (this *TokenFormat) UnmarshalJSON(data []byte) error {
 			return nil
 		}
 	}
-	return EnumerationValidateFailed
+	return EnumerationValidateFailed("TokenFormat")
 }
 
 func (this *TokenFormat) MarshalJSON() ([]byte, error) {
@@ -2239,7 +2239,7 @@ func (this *TokenFormat) MarshalJSON() ([]byte, error) {
 				return nil
 			}
 		}
-		return EnumerationValidateFailed
+		return EnumerationValidateFailed("TokenFormat")
 	}(); err != nil {
 		return nil, err
 	}

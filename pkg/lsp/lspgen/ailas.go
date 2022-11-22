@@ -15,7 +15,7 @@ package protocol
 {{end}}
 `
 
-var typeTemplateFuncs = map[string]any{
+var typeAliasTemplateFuncs = map[string]any{
 	"getName":     MethodNameFromString,
 	"getTypeName": typeName,
 }
@@ -35,7 +35,7 @@ func genTypeAliases(metaModel *MetaModel) {
 	defer aliasGenFile.Close()
 
 	codeTemplate, err := template.New("alias").
-		Funcs(typeTemplateFuncs).
+		Funcs(typeAliasTemplateFuncs).
 		Parse(typeAliasTemplate)
 	if err != nil {
 		log.Fatalw("failed to parse template for enum",

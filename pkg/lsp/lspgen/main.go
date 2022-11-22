@@ -5,11 +5,15 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+
+	"github.com/black-desk/notels/internal/utils/logger"
 )
 
 const (
 	metaModelJsonFileName = "metaModel.json"
 )
+
+var log = logger.Get("lspgen")
 
 func main() {
 	wd, err := os.Getwd()

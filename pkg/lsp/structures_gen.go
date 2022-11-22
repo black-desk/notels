@@ -2,6 +2,15 @@
 
 package protocol
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+var StructureValidateFailed = func(name string) error {
+	return fmt.Errorf("structure \"%s\"validate failed", name)
+}
+
 type ImplementationParams struct {
 
 	// extends
@@ -17,9 +26,44 @@ type ImplementationParams struct {
 
 // Represents a location inside a resource, such as a line inside a text file.
 type Location struct {
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
+}
+
+func (this *Location) UnmarshalJSON(data []byte) error {
+	type LocationUnmarshal Location
+	var tmpUnmarshal LocationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("Location")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("Location")
+	}
+
+	*this = Location(tmpUnmarshal)
+	return nil
+}
+
+func (this *Location) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("Location")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("Location")
+	}
+
+	type LocationMarshal Location
+	tmpMarshal := LocationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type ImplementationRegistrationOptions struct {
@@ -65,23 +109,116 @@ type TypeDefinitionRegistrationOptions struct {
 type WorkspaceFolder struct {
 
 	// The associated URI for this workspace folder.
-	Uri URI `json:"uri"`
+	Uri *URI `json:"uri"`
 
 	// The name of the workspace folder. Used to refer to this workspace
 	// folder in the user interface.
-	Name string `json:"name"`
+	Name *string `json:"name"`
+}
+
+func (this *WorkspaceFolder) UnmarshalJSON(data []byte) error {
+	type WorkspaceFolderUnmarshal WorkspaceFolder
+	var tmpUnmarshal WorkspaceFolderUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("WorkspaceFolder")
+	}
+
+	if tmpUnmarshal.Name == nil {
+		return StructureValidateFailed("WorkspaceFolder")
+	}
+
+	*this = WorkspaceFolder(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceFolder) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("WorkspaceFolder")
+	}
+
+	if this.Name == nil {
+		return nil, StructureValidateFailed("WorkspaceFolder")
+	}
+
+	type WorkspaceFolderMarshal WorkspaceFolder
+	tmpMarshal := WorkspaceFolderMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameters of a `workspace/didChangeWorkspaceFolders` notification.
 type DidChangeWorkspaceFoldersParams struct {
 
 	// The actual workspace folder change event.
-	Event WorkspaceFoldersChangeEvent `json:"event"`
+	Event *WorkspaceFoldersChangeEvent `json:"event"`
+}
+
+func (this *DidChangeWorkspaceFoldersParams) UnmarshalJSON(data []byte) error {
+	type DidChangeWorkspaceFoldersParamsUnmarshal DidChangeWorkspaceFoldersParams
+	var tmpUnmarshal DidChangeWorkspaceFoldersParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Event == nil {
+		return StructureValidateFailed(
+			"DidChangeWorkspaceFoldersParams",
+		)
+	}
+
+	*this = DidChangeWorkspaceFoldersParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidChangeWorkspaceFoldersParams) MarshalJSON() ([]byte, error) {
+
+	if this.Event == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeWorkspaceFoldersParams",
+		)
+	}
+
+	type DidChangeWorkspaceFoldersParamsMarshal DidChangeWorkspaceFoldersParams
+	tmpMarshal := DidChangeWorkspaceFoldersParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameters of a configuration request.
 type ConfigurationParams struct {
 	Items []ConfigurationItem `json:"items"`
+}
+
+func (this *ConfigurationParams) UnmarshalJSON(data []byte) error {
+	type ConfigurationParamsUnmarshal ConfigurationParams
+	var tmpUnmarshal ConfigurationParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Items == nil {
+		return StructureValidateFailed("ConfigurationParams")
+	}
+
+	*this = ConfigurationParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ConfigurationParams) MarshalJSON() ([]byte, error) {
+
+	if this.Items == nil {
+		return nil, StructureValidateFailed("ConfigurationParams")
+	}
+
+	type ConfigurationParamsMarshal ConfigurationParams
+	tmpMarshal := ConfigurationParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type PartialResultParams struct {
@@ -101,17 +238,79 @@ type DocumentColorParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
+}
+
+func (this *DocumentColorParams) UnmarshalJSON(data []byte) error {
+	type DocumentColorParamsUnmarshal DocumentColorParams
+	var tmpUnmarshal DocumentColorParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DocumentColorParams")
+	}
+
+	*this = DocumentColorParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentColorParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("DocumentColorParams")
+	}
+
+	type DocumentColorParamsMarshal DocumentColorParams
+	tmpMarshal := DocumentColorParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents a color range from a document.
 type ColorInformation struct {
 
 	// The range in the document where this color appears.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The actual color value for this color range.
-	Color Color `json:"color"`
+	Color *Color `json:"color"`
+}
+
+func (this *ColorInformation) UnmarshalJSON(data []byte) error {
+	type ColorInformationUnmarshal ColorInformation
+	var tmpUnmarshal ColorInformationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("ColorInformation")
+	}
+
+	if tmpUnmarshal.Color == nil {
+		return StructureValidateFailed("ColorInformation")
+	}
+
+	*this = ColorInformation(tmpUnmarshal)
+	return nil
+}
+
+func (this *ColorInformation) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("ColorInformation")
+	}
+
+	if this.Color == nil {
+		return nil, StructureValidateFailed("ColorInformation")
+	}
+
+	type ColorInformationMarshal ColorInformation
+	tmpMarshal := ColorInformationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type DocumentColorRegistrationOptions struct {
@@ -137,13 +336,56 @@ type ColorPresentationParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The color to request presentations for.
-	Color Color `json:"color"`
+	Color *Color `json:"color"`
 
 	// The range where the color would be inserted. Serves as a context.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
+}
+
+func (this *ColorPresentationParams) UnmarshalJSON(data []byte) error {
+	type ColorPresentationParamsUnmarshal ColorPresentationParams
+	var tmpUnmarshal ColorPresentationParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("ColorPresentationParams")
+	}
+
+	if tmpUnmarshal.Color == nil {
+		return StructureValidateFailed("ColorPresentationParams")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("ColorPresentationParams")
+	}
+
+	*this = ColorPresentationParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ColorPresentationParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("ColorPresentationParams")
+	}
+
+	if this.Color == nil {
+		return nil, StructureValidateFailed("ColorPresentationParams")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("ColorPresentationParams")
+	}
+
+	type ColorPresentationParamsMarshal ColorPresentationParams
+	tmpMarshal := ColorPresentationParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type ColorPresentation struct {
@@ -151,7 +393,7 @@ type ColorPresentation struct {
 	// The label of this color presentation. It will be shown on the color
 	// picker header. By default this is also the text that is inserted when
 	// selecting this color presentation.
-	Label string `json:"label"`
+	Label *string `json:"label"`
 
 	// An [edit](#TextEdit) which is applied to a document when selecting
 	// this presentation for the color.  When `falsy` the
@@ -162,7 +404,34 @@ type ColorPresentation struct {
 	// applied when selecting this color presentation. Edits must not
 	// overlap with the main [edit](#ColorPresentation.textEdit) nor with
 	// themselves.
-	AdditionalTextEdits *[]TextEdit `json:"additionalTextEdits"`
+	AdditionalTextEdits []TextEdit `json:"additionalTextEdits"`
+}
+
+func (this *ColorPresentation) UnmarshalJSON(data []byte) error {
+	type ColorPresentationUnmarshal ColorPresentation
+	var tmpUnmarshal ColorPresentationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Label == nil {
+		return StructureValidateFailed("ColorPresentation")
+	}
+
+	*this = ColorPresentation(tmpUnmarshal)
+	return nil
+}
+
+func (this *ColorPresentation) MarshalJSON() ([]byte, error) {
+
+	if this.Label == nil {
+		return nil, StructureValidateFailed("ColorPresentation")
+	}
+
+	type ColorPresentationMarshal ColorPresentation
+	tmpMarshal := ColorPresentationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type WorkDoneProgressOptions struct {
@@ -175,7 +444,38 @@ type TextDocumentRegistrationOptions struct {
 	// A document selector to identify the scope of the registration. If set
 	// to null the document selector provided on the client side will be
 	// used.
-	DocumentSelector *DocumentSelector `json:"documentSelector"`
+	DocumentSelector **DocumentSelector `json:"documentSelector"`
+}
+
+func (this *TextDocumentRegistrationOptions) UnmarshalJSON(data []byte) error {
+	type TextDocumentRegistrationOptionsUnmarshal TextDocumentRegistrationOptions
+	var tmpUnmarshal TextDocumentRegistrationOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.DocumentSelector == nil {
+		return StructureValidateFailed(
+			"TextDocumentRegistrationOptions",
+		)
+	}
+
+	*this = TextDocumentRegistrationOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *TextDocumentRegistrationOptions) MarshalJSON() ([]byte, error) {
+
+	if this.DocumentSelector == nil {
+		return nil, StructureValidateFailed(
+			"TextDocumentRegistrationOptions",
+		)
+	}
+
+	type TextDocumentRegistrationOptionsMarshal TextDocumentRegistrationOptions
+	tmpMarshal := TextDocumentRegistrationOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Parameters for a [FoldingRangeRequest](#FoldingRangeRequest).
@@ -188,7 +488,34 @@ type FoldingRangeParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
+}
+
+func (this *FoldingRangeParams) UnmarshalJSON(data []byte) error {
+	type FoldingRangeParamsUnmarshal FoldingRangeParams
+	var tmpUnmarshal FoldingRangeParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("FoldingRangeParams")
+	}
+
+	*this = FoldingRangeParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *FoldingRangeParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("FoldingRangeParams")
+	}
+
+	type FoldingRangeParamsMarshal FoldingRangeParams
+	tmpMarshal := FoldingRangeParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents a folding range. To be valid, start and end line must be bigger
@@ -199,7 +526,7 @@ type FoldingRange struct {
 	// The zero-based start line of the range to fold. The folded area
 	// starts after the line's last character. To be valid, the end must be
 	// zero or larger and smaller than the number of lines in the document.
-	StartLine uint64 `json:"startLine"`
+	StartLine *uint64 `json:"startLine"`
 
 	// The zero-based character offset from where the folded range starts.
 	// If not defined, defaults to the length of the start line.
@@ -208,7 +535,7 @@ type FoldingRange struct {
 	// The zero-based end line of the range to fold. The folded area ends
 	// with the line's last character. To be valid, the end must be zero or
 	// larger and smaller than the number of lines in the document.
-	EndLine uint64 `json:"endLine"`
+	EndLine *uint64 `json:"endLine"`
 
 	// The zero-based character offset before the folded range ends. If not
 	// defined, defaults to the length of the end line.
@@ -225,6 +552,41 @@ type FoldingRange struct {
 	// collapsed. If not defined or not supported by the client, a default
 	// will be chosen by the client.  @since 3.17.0
 	CollapsedText *string `json:"collapsedText"`
+}
+
+func (this *FoldingRange) UnmarshalJSON(data []byte) error {
+	type FoldingRangeUnmarshal FoldingRange
+	var tmpUnmarshal FoldingRangeUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.StartLine == nil {
+		return StructureValidateFailed("FoldingRange")
+	}
+
+	if tmpUnmarshal.EndLine == nil {
+		return StructureValidateFailed("FoldingRange")
+	}
+
+	*this = FoldingRange(tmpUnmarshal)
+	return nil
+}
+
+func (this *FoldingRange) MarshalJSON() ([]byte, error) {
+
+	if this.StartLine == nil {
+		return nil, StructureValidateFailed("FoldingRange")
+	}
+
+	if this.EndLine == nil {
+		return nil, StructureValidateFailed("FoldingRange")
+	}
+
+	type FoldingRangeMarshal FoldingRange
+	tmpMarshal := FoldingRangeMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type FoldingRangeRegistrationOptions struct {
@@ -276,10 +638,45 @@ type SelectionRangeParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The positions inside the text document.
 	Positions []Position `json:"positions"`
+}
+
+func (this *SelectionRangeParams) UnmarshalJSON(data []byte) error {
+	type SelectionRangeParamsUnmarshal SelectionRangeParams
+	var tmpUnmarshal SelectionRangeParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("SelectionRangeParams")
+	}
+
+	if tmpUnmarshal.Positions == nil {
+		return StructureValidateFailed("SelectionRangeParams")
+	}
+
+	*this = SelectionRangeParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *SelectionRangeParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("SelectionRangeParams")
+	}
+
+	if this.Positions == nil {
+		return nil, StructureValidateFailed("SelectionRangeParams")
+	}
+
+	type SelectionRangeParamsMarshal SelectionRangeParams
+	tmpMarshal := SelectionRangeParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A selection range represents a part of a selection hierarchy. A selection
@@ -287,11 +684,38 @@ type SelectionRangeParams struct {
 type SelectionRange struct {
 
 	// The [range](#Range) of this selection range.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The parent selection range containing this range. Therefore
 	// `parent.range` must contain `this.range`.
 	Parent *SelectionRange `json:"parent"`
+}
+
+func (this *SelectionRange) UnmarshalJSON(data []byte) error {
+	type SelectionRangeUnmarshal SelectionRange
+	var tmpUnmarshal SelectionRangeUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("SelectionRange")
+	}
+
+	*this = SelectionRange(tmpUnmarshal)
+	return nil
+}
+
+func (this *SelectionRange) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("SelectionRange")
+	}
+
+	type SelectionRangeMarshal SelectionRange
+	tmpMarshal := SelectionRangeMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type SelectionRangeRegistrationOptions struct {
@@ -310,13 +734,71 @@ type SelectionRangeRegistrationOptions struct {
 type WorkDoneProgressCreateParams struct {
 
 	// The token to be used to report progress.
-	Token ProgressToken `json:"token"`
+	Token *ProgressToken `json:"token"`
+}
+
+func (this *WorkDoneProgressCreateParams) UnmarshalJSON(data []byte) error {
+	type WorkDoneProgressCreateParamsUnmarshal WorkDoneProgressCreateParams
+	var tmpUnmarshal WorkDoneProgressCreateParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Token == nil {
+		return StructureValidateFailed("WorkDoneProgressCreateParams")
+	}
+
+	*this = WorkDoneProgressCreateParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkDoneProgressCreateParams) MarshalJSON() ([]byte, error) {
+
+	if this.Token == nil {
+		return nil, StructureValidateFailed(
+			"WorkDoneProgressCreateParams",
+		)
+	}
+
+	type WorkDoneProgressCreateParamsMarshal WorkDoneProgressCreateParams
+	tmpMarshal := WorkDoneProgressCreateParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type WorkDoneProgressCancelParams struct {
 
 	// The token to be used to report progress.
-	Token ProgressToken `json:"token"`
+	Token *ProgressToken `json:"token"`
+}
+
+func (this *WorkDoneProgressCancelParams) UnmarshalJSON(data []byte) error {
+	type WorkDoneProgressCancelParamsUnmarshal WorkDoneProgressCancelParams
+	var tmpUnmarshal WorkDoneProgressCancelParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Token == nil {
+		return StructureValidateFailed("WorkDoneProgressCancelParams")
+	}
+
+	*this = WorkDoneProgressCancelParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkDoneProgressCancelParams) MarshalJSON() ([]byte, error) {
+
+	if this.Token == nil {
+		return nil, StructureValidateFailed(
+			"WorkDoneProgressCancelParams",
+		)
+	}
+
+	type WorkDoneProgressCancelParamsMarshal WorkDoneProgressCancelParams
+	tmpMarshal := WorkDoneProgressCancelParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameter of a `textDocument/prepareCallHierarchy` request.  @since
@@ -337,32 +819,91 @@ type CallHierarchyPrepareParams struct {
 type CallHierarchyItem struct {
 
 	// The name of this item.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 
 	// The kind of this item.
-	Kind SymbolKind `json:"kind"`
+	Kind *SymbolKind `json:"kind"`
 
 	// Tags for this item.
-	Tags *[]SymbolTag `json:"tags"`
+	Tags []SymbolTag `json:"tags"`
 
 	// More detail for this item, e.g. the signature of a function.
 	Detail *string `json:"detail"`
 
 	// The resource identifier of this item.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// The range enclosing this symbol not including leading/trailing
 	// whitespace but everything else, e.g. comments and code.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The range that should be selected and revealed when this symbol is
 	// being picked, e.g. the name of a function. Must be contained by the
 	// [`range`](#CallHierarchyItem.range).
-	SelectionRange Range `json:"selectionRange"`
+	SelectionRange *Range `json:"selectionRange"`
 
 	// A data entry field that is preserved between a call hierarchy prepare
 	// and incoming calls or outgoing calls requests.
 	Data *LSPAny `json:"data"`
+}
+
+func (this *CallHierarchyItem) UnmarshalJSON(data []byte) error {
+	type CallHierarchyItemUnmarshal CallHierarchyItem
+	var tmpUnmarshal CallHierarchyItemUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Name == nil {
+		return StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if tmpUnmarshal.SelectionRange == nil {
+		return StructureValidateFailed("CallHierarchyItem")
+	}
+
+	*this = CallHierarchyItem(tmpUnmarshal)
+	return nil
+}
+
+func (this *CallHierarchyItem) MarshalJSON() ([]byte, error) {
+
+	if this.Name == nil {
+		return nil, StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("CallHierarchyItem")
+	}
+
+	if this.SelectionRange == nil {
+		return nil, StructureValidateFailed("CallHierarchyItem")
+	}
+
+	type CallHierarchyItemMarshal CallHierarchyItem
+	tmpMarshal := CallHierarchyItemMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Call hierarchy options used during static or dynamic registration.  @since
@@ -389,7 +930,38 @@ type CallHierarchyIncomingCallsParams struct {
 
 	PartialResultParams
 
-	Item CallHierarchyItem `json:"item"`
+	Item *CallHierarchyItem `json:"item"`
+}
+
+func (this *CallHierarchyIncomingCallsParams) UnmarshalJSON(data []byte) error {
+	type CallHierarchyIncomingCallsParamsUnmarshal CallHierarchyIncomingCallsParams
+	var tmpUnmarshal CallHierarchyIncomingCallsParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Item == nil {
+		return StructureValidateFailed(
+			"CallHierarchyIncomingCallsParams",
+		)
+	}
+
+	*this = CallHierarchyIncomingCallsParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *CallHierarchyIncomingCallsParams) MarshalJSON() ([]byte, error) {
+
+	if this.Item == nil {
+		return nil, StructureValidateFailed(
+			"CallHierarchyIncomingCallsParams",
+		)
+	}
+
+	type CallHierarchyIncomingCallsParamsMarshal CallHierarchyIncomingCallsParams
+	tmpMarshal := CallHierarchyIncomingCallsParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents an incoming call, e.g. a caller of a method or constructor.
@@ -397,11 +969,46 @@ type CallHierarchyIncomingCallsParams struct {
 type CallHierarchyIncomingCall struct {
 
 	// The item that makes the call.
-	From CallHierarchyItem `json:"from"`
+	From *CallHierarchyItem `json:"from"`
 
 	// The ranges at which the calls appear. This is relative to the caller
 	// denoted by [`this.from`](#CallHierarchyIncomingCall.from).
 	FromRanges []Range `json:"fromRanges"`
+}
+
+func (this *CallHierarchyIncomingCall) UnmarshalJSON(data []byte) error {
+	type CallHierarchyIncomingCallUnmarshal CallHierarchyIncomingCall
+	var tmpUnmarshal CallHierarchyIncomingCallUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.From == nil {
+		return StructureValidateFailed("CallHierarchyIncomingCall")
+	}
+
+	if tmpUnmarshal.FromRanges == nil {
+		return StructureValidateFailed("CallHierarchyIncomingCall")
+	}
+
+	*this = CallHierarchyIncomingCall(tmpUnmarshal)
+	return nil
+}
+
+func (this *CallHierarchyIncomingCall) MarshalJSON() ([]byte, error) {
+
+	if this.From == nil {
+		return nil, StructureValidateFailed("CallHierarchyIncomingCall")
+	}
+
+	if this.FromRanges == nil {
+		return nil, StructureValidateFailed("CallHierarchyIncomingCall")
+	}
+
+	type CallHierarchyIncomingCallMarshal CallHierarchyIncomingCall
+	tmpMarshal := CallHierarchyIncomingCallMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameter of a `callHierarchy/outgoingCalls` request.  @since 3.16.0
@@ -413,7 +1020,38 @@ type CallHierarchyOutgoingCallsParams struct {
 
 	PartialResultParams
 
-	Item CallHierarchyItem `json:"item"`
+	Item *CallHierarchyItem `json:"item"`
+}
+
+func (this *CallHierarchyOutgoingCallsParams) UnmarshalJSON(data []byte) error {
+	type CallHierarchyOutgoingCallsParamsUnmarshal CallHierarchyOutgoingCallsParams
+	var tmpUnmarshal CallHierarchyOutgoingCallsParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Item == nil {
+		return StructureValidateFailed(
+			"CallHierarchyOutgoingCallsParams",
+		)
+	}
+
+	*this = CallHierarchyOutgoingCallsParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *CallHierarchyOutgoingCallsParams) MarshalJSON() ([]byte, error) {
+
+	if this.Item == nil {
+		return nil, StructureValidateFailed(
+			"CallHierarchyOutgoingCallsParams",
+		)
+	}
+
+	type CallHierarchyOutgoingCallsParamsMarshal CallHierarchyOutgoingCallsParams
+	tmpMarshal := CallHierarchyOutgoingCallsParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents an outgoing call, e.g. calling a getter from a method or a method
@@ -421,13 +1059,48 @@ type CallHierarchyOutgoingCallsParams struct {
 type CallHierarchyOutgoingCall struct {
 
 	// The item that is called.
-	To CallHierarchyItem `json:"to"`
+	To *CallHierarchyItem `json:"to"`
 
 	// The range at which this item is called. This is the range relative to
 	// the caller, e.g the item passed to
 	// [`provideCallHierarchyOutgoingCalls`](#CallHierarchyItemProvider.provideCallHierarchyOutgoingCalls)
 	// and not [`this.to`](#CallHierarchyOutgoingCall.to).
 	FromRanges []Range `json:"fromRanges"`
+}
+
+func (this *CallHierarchyOutgoingCall) UnmarshalJSON(data []byte) error {
+	type CallHierarchyOutgoingCallUnmarshal CallHierarchyOutgoingCall
+	var tmpUnmarshal CallHierarchyOutgoingCallUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.To == nil {
+		return StructureValidateFailed("CallHierarchyOutgoingCall")
+	}
+
+	if tmpUnmarshal.FromRanges == nil {
+		return StructureValidateFailed("CallHierarchyOutgoingCall")
+	}
+
+	*this = CallHierarchyOutgoingCall(tmpUnmarshal)
+	return nil
+}
+
+func (this *CallHierarchyOutgoingCall) MarshalJSON() ([]byte, error) {
+
+	if this.To == nil {
+		return nil, StructureValidateFailed("CallHierarchyOutgoingCall")
+	}
+
+	if this.FromRanges == nil {
+		return nil, StructureValidateFailed("CallHierarchyOutgoingCall")
+	}
+
+	type CallHierarchyOutgoingCallMarshal CallHierarchyOutgoingCall
+	tmpMarshal := CallHierarchyOutgoingCallMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // @since 3.16.0
@@ -440,7 +1113,34 @@ type SemanticTokensParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
+}
+
+func (this *SemanticTokensParams) UnmarshalJSON(data []byte) error {
+	type SemanticTokensParamsUnmarshal SemanticTokensParams
+	var tmpUnmarshal SemanticTokensParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("SemanticTokensParams")
+	}
+
+	*this = SemanticTokensParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("SemanticTokensParams")
+	}
+
+	type SemanticTokensParamsMarshal SemanticTokensParams
+	tmpMarshal := SemanticTokensParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // @since 3.16.0
@@ -456,9 +1156,65 @@ type SemanticTokens struct {
 	Data []uint64 `json:"data"`
 }
 
+func (this *SemanticTokens) UnmarshalJSON(data []byte) error {
+	type SemanticTokensUnmarshal SemanticTokens
+	var tmpUnmarshal SemanticTokensUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Data == nil {
+		return StructureValidateFailed("SemanticTokens")
+	}
+
+	*this = SemanticTokens(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokens) MarshalJSON() ([]byte, error) {
+
+	if this.Data == nil {
+		return nil, StructureValidateFailed("SemanticTokens")
+	}
+
+	type SemanticTokensMarshal SemanticTokens
+	tmpMarshal := SemanticTokensMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // @since 3.16.0
 type SemanticTokensPartialResult struct {
 	Data []uint64 `json:"data"`
+}
+
+func (this *SemanticTokensPartialResult) UnmarshalJSON(data []byte) error {
+	type SemanticTokensPartialResultUnmarshal SemanticTokensPartialResult
+	var tmpUnmarshal SemanticTokensPartialResultUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Data == nil {
+		return StructureValidateFailed("SemanticTokensPartialResult")
+	}
+
+	*this = SemanticTokensPartialResult(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensPartialResult) MarshalJSON() ([]byte, error) {
+
+	if this.Data == nil {
+		return nil, StructureValidateFailed(
+			"SemanticTokensPartialResult",
+		)
+	}
+
+	type SemanticTokensPartialResultMarshal SemanticTokensPartialResult
+	tmpMarshal := SemanticTokensPartialResultMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // @since 3.16.0
@@ -485,12 +1241,47 @@ type SemanticTokensDeltaParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The result id of a previous response. The result Id can either point
 	// to a full response or a delta response depending on what was received
 	// last.
-	PreviousResultId string `json:"previousResultId"`
+	PreviousResultId *string `json:"previousResultId"`
+}
+
+func (this *SemanticTokensDeltaParams) UnmarshalJSON(data []byte) error {
+	type SemanticTokensDeltaParamsUnmarshal SemanticTokensDeltaParams
+	var tmpUnmarshal SemanticTokensDeltaParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("SemanticTokensDeltaParams")
+	}
+
+	if tmpUnmarshal.PreviousResultId == nil {
+		return StructureValidateFailed("SemanticTokensDeltaParams")
+	}
+
+	*this = SemanticTokensDeltaParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensDeltaParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("SemanticTokensDeltaParams")
+	}
+
+	if this.PreviousResultId == nil {
+		return nil, StructureValidateFailed("SemanticTokensDeltaParams")
+	}
+
+	type SemanticTokensDeltaParamsMarshal SemanticTokensDeltaParams
+	tmpMarshal := SemanticTokensDeltaParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // @since 3.16.0
@@ -502,9 +1293,67 @@ type SemanticTokensDelta struct {
 	Edits []SemanticTokensEdit `json:"edits"`
 }
 
+func (this *SemanticTokensDelta) UnmarshalJSON(data []byte) error {
+	type SemanticTokensDeltaUnmarshal SemanticTokensDelta
+	var tmpUnmarshal SemanticTokensDeltaUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Edits == nil {
+		return StructureValidateFailed("SemanticTokensDelta")
+	}
+
+	*this = SemanticTokensDelta(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensDelta) MarshalJSON() ([]byte, error) {
+
+	if this.Edits == nil {
+		return nil, StructureValidateFailed("SemanticTokensDelta")
+	}
+
+	type SemanticTokensDeltaMarshal SemanticTokensDelta
+	tmpMarshal := SemanticTokensDeltaMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // @since 3.16.0
 type SemanticTokensDeltaPartialResult struct {
 	Edits []SemanticTokensEdit `json:"edits"`
+}
+
+func (this *SemanticTokensDeltaPartialResult) UnmarshalJSON(data []byte) error {
+	type SemanticTokensDeltaPartialResultUnmarshal SemanticTokensDeltaPartialResult
+	var tmpUnmarshal SemanticTokensDeltaPartialResultUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Edits == nil {
+		return StructureValidateFailed(
+			"SemanticTokensDeltaPartialResult",
+		)
+	}
+
+	*this = SemanticTokensDeltaPartialResult(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensDeltaPartialResult) MarshalJSON() ([]byte, error) {
+
+	if this.Edits == nil {
+		return nil, StructureValidateFailed(
+			"SemanticTokensDeltaPartialResult",
+		)
+	}
+
+	type SemanticTokensDeltaPartialResultMarshal SemanticTokensDeltaPartialResult
+	tmpMarshal := SemanticTokensDeltaPartialResultMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // @since 3.16.0
@@ -517,17 +1366,52 @@ type SemanticTokensRangeParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The range the semantic tokens are requested for.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
+}
+
+func (this *SemanticTokensRangeParams) UnmarshalJSON(data []byte) error {
+	type SemanticTokensRangeParamsUnmarshal SemanticTokensRangeParams
+	var tmpUnmarshal SemanticTokensRangeParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("SemanticTokensRangeParams")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("SemanticTokensRangeParams")
+	}
+
+	*this = SemanticTokensRangeParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensRangeParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("SemanticTokensRangeParams")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("SemanticTokensRangeParams")
+	}
+
+	type SemanticTokensRangeParamsMarshal SemanticTokensRangeParams
+	tmpMarshal := SemanticTokensRangeParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Params to show a document.  @since 3.16.0
 type ShowDocumentParams struct {
 
 	// The document uri to show.
-	Uri URI `json:"uri"`
+	Uri *URI `json:"uri"`
 
 	// Indicates to show the resource in an external program. To show for
 	// example `https://code.visualstudio.com/` in the default WEB browser
@@ -545,11 +1429,65 @@ type ShowDocumentParams struct {
 	Selection *Range `json:"selection"`
 }
 
+func (this *ShowDocumentParams) UnmarshalJSON(data []byte) error {
+	type ShowDocumentParamsUnmarshal ShowDocumentParams
+	var tmpUnmarshal ShowDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("ShowDocumentParams")
+	}
+
+	*this = ShowDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ShowDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("ShowDocumentParams")
+	}
+
+	type ShowDocumentParamsMarshal ShowDocumentParams
+	tmpMarshal := ShowDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // The result of a showDocument request.  @since 3.16.0
 type ShowDocumentResult struct {
 
 	// A boolean indicating if the show was successful.
-	Success bool `json:"success"`
+	Success *bool `json:"success"`
+}
+
+func (this *ShowDocumentResult) UnmarshalJSON(data []byte) error {
+	type ShowDocumentResultUnmarshal ShowDocumentResult
+	var tmpUnmarshal ShowDocumentResultUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Success == nil {
+		return StructureValidateFailed("ShowDocumentResult")
+	}
+
+	*this = ShowDocumentResult(tmpUnmarshal)
+	return nil
+}
+
+func (this *ShowDocumentResult) MarshalJSON() ([]byte, error) {
+
+	if this.Success == nil {
+		return nil, StructureValidateFailed("ShowDocumentResult")
+	}
+
+	type ShowDocumentResultMarshal ShowDocumentResult
+	tmpMarshal := ShowDocumentResultMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type LinkedEditingRangeParams struct {
@@ -577,6 +1515,33 @@ type LinkedEditingRanges struct {
 	WordPattern *string `json:"wordPattern"`
 }
 
+func (this *LinkedEditingRanges) UnmarshalJSON(data []byte) error {
+	type LinkedEditingRangesUnmarshal LinkedEditingRanges
+	var tmpUnmarshal LinkedEditingRangesUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Ranges == nil {
+		return StructureValidateFailed("LinkedEditingRanges")
+	}
+
+	*this = LinkedEditingRanges(tmpUnmarshal)
+	return nil
+}
+
+func (this *LinkedEditingRanges) MarshalJSON() ([]byte, error) {
+
+	if this.Ranges == nil {
+		return nil, StructureValidateFailed("LinkedEditingRanges")
+	}
+
+	type LinkedEditingRangesMarshal LinkedEditingRanges
+	tmpMarshal := LinkedEditingRangesMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type LinkedEditingRangeRegistrationOptions struct {
 
 	// extends
@@ -598,6 +1563,33 @@ type CreateFilesParams struct {
 	Files []FileCreate `json:"files"`
 }
 
+func (this *CreateFilesParams) UnmarshalJSON(data []byte) error {
+	type CreateFilesParamsUnmarshal CreateFilesParams
+	var tmpUnmarshal CreateFilesParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Files == nil {
+		return StructureValidateFailed("CreateFilesParams")
+	}
+
+	*this = CreateFilesParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *CreateFilesParams) MarshalJSON() ([]byte, error) {
+
+	if this.Files == nil {
+		return nil, StructureValidateFailed("CreateFilesParams")
+	}
+
+	type CreateFilesParamsMarshal CreateFilesParams
+	tmpMarshal := CreateFilesParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // A workspace edit represents changes to many resources managed in the
 // workspace. The edit should either provide `changes` or `documentChanges`. If
 // documentChanges are present they are preferred over `changes` if the client
@@ -613,7 +1605,7 @@ type CreateFilesParams struct {
 type WorkspaceEdit struct {
 
 	// Holds changes to existing resources.
-	Changes *map[DocumentUri][]TextEdit `json:"changes"`
+	Changes map[DocumentUri][]TextEdit `json:"changes"`
 
 	// Depending on the client capability
 	// `workspace.workspaceEdit.resourceOperations` document changes are
@@ -626,13 +1618,13 @@ type WorkspaceEdit struct {
 	// client capability.  If a client neither supports `documentChanges`
 	// nor `workspace.workspaceEdit.resourceOperations` then only plain
 	// `TextEdit`s using the `changes` property are supported.
-	DocumentChanges *[]WorkspaceEdit_DocumentChanges_Element__Or `json:"documentChanges"`
+	DocumentChanges []WorkspaceEdit_DocumentChanges_Element__Or `json:"documentChanges"`
 
 	// A map of change annotations that can be referenced in
 	// `AnnotatedTextEdit`s or create, rename and delete file / folder
 	// operations.  Whether clients honor this property depends on the
 	// client capability `workspace.changeAnnotationSupport`.  @since 3.16.0
-	ChangeAnnotations *map[ChangeAnnotationIdentifier]ChangeAnnotation `json:"changeAnnotations"`
+	ChangeAnnotations map[ChangeAnnotationIdentifier]ChangeAnnotation `json:"changeAnnotations"`
 }
 
 // The options to register for file operations.  @since 3.16.0
@@ -640,6 +1632,37 @@ type FileOperationRegistrationOptions struct {
 
 	// The actual filters.
 	Filters []FileOperationFilter `json:"filters"`
+}
+
+func (this *FileOperationRegistrationOptions) UnmarshalJSON(data []byte) error {
+	type FileOperationRegistrationOptionsUnmarshal FileOperationRegistrationOptions
+	var tmpUnmarshal FileOperationRegistrationOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Filters == nil {
+		return StructureValidateFailed(
+			"FileOperationRegistrationOptions",
+		)
+	}
+
+	*this = FileOperationRegistrationOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileOperationRegistrationOptions) MarshalJSON() ([]byte, error) {
+
+	if this.Filters == nil {
+		return nil, StructureValidateFailed(
+			"FileOperationRegistrationOptions",
+		)
+	}
+
+	type FileOperationRegistrationOptionsMarshal FileOperationRegistrationOptions
+	tmpMarshal := FileOperationRegistrationOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameters sent in notifications/requests for user-initiated renames of
@@ -652,12 +1675,66 @@ type RenameFilesParams struct {
 	Files []FileRename `json:"files"`
 }
 
+func (this *RenameFilesParams) UnmarshalJSON(data []byte) error {
+	type RenameFilesParamsUnmarshal RenameFilesParams
+	var tmpUnmarshal RenameFilesParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Files == nil {
+		return StructureValidateFailed("RenameFilesParams")
+	}
+
+	*this = RenameFilesParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *RenameFilesParams) MarshalJSON() ([]byte, error) {
+
+	if this.Files == nil {
+		return nil, StructureValidateFailed("RenameFilesParams")
+	}
+
+	type RenameFilesParamsMarshal RenameFilesParams
+	tmpMarshal := RenameFilesParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // The parameters sent in notifications/requests for user-initiated deletes of
 // files.  @since 3.16.0
 type DeleteFilesParams struct {
 
 	// An array of all files/folders deleted in this operation.
 	Files []FileDelete `json:"files"`
+}
+
+func (this *DeleteFilesParams) UnmarshalJSON(data []byte) error {
+	type DeleteFilesParamsUnmarshal DeleteFilesParams
+	var tmpUnmarshal DeleteFilesParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Files == nil {
+		return StructureValidateFailed("DeleteFilesParams")
+	}
+
+	*this = DeleteFilesParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DeleteFilesParams) MarshalJSON() ([]byte, error) {
+
+	if this.Files == nil {
+		return nil, StructureValidateFailed("DeleteFilesParams")
+	}
+
+	type DeleteFilesParamsMarshal DeleteFilesParams
+	tmpMarshal := DeleteFilesParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type MonikerParams struct {
@@ -677,17 +1754,60 @@ type MonikerParams struct {
 type Moniker struct {
 
 	// The scheme of the moniker. For example tsc or .Net
-	Scheme string `json:"scheme"`
+	Scheme *string `json:"scheme"`
 
 	// The identifier of the moniker. The value is opaque in LSIF however
 	// schema owners are allowed to define the structure if they want.
-	Identifier string `json:"identifier"`
+	Identifier *string `json:"identifier"`
 
 	// The scope in which the moniker is unique
-	Unique UniquenessLevel `json:"unique"`
+	Unique *UniquenessLevel `json:"unique"`
 
 	// The moniker kind if known.
 	Kind *MonikerKind `json:"kind"`
+}
+
+func (this *Moniker) UnmarshalJSON(data []byte) error {
+	type MonikerUnmarshal Moniker
+	var tmpUnmarshal MonikerUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Scheme == nil {
+		return StructureValidateFailed("Moniker")
+	}
+
+	if tmpUnmarshal.Identifier == nil {
+		return StructureValidateFailed("Moniker")
+	}
+
+	if tmpUnmarshal.Unique == nil {
+		return StructureValidateFailed("Moniker")
+	}
+
+	*this = Moniker(tmpUnmarshal)
+	return nil
+}
+
+func (this *Moniker) MarshalJSON() ([]byte, error) {
+
+	if this.Scheme == nil {
+		return nil, StructureValidateFailed("Moniker")
+	}
+
+	if this.Identifier == nil {
+		return nil, StructureValidateFailed("Moniker")
+	}
+
+	if this.Unique == nil {
+		return nil, StructureValidateFailed("Moniker")
+	}
+
+	type MonikerMarshal Moniker
+	tmpMarshal := MonikerMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type MonikerRegistrationOptions struct {
@@ -716,34 +1836,93 @@ type TypeHierarchyPrepareParams struct {
 type TypeHierarchyItem struct {
 
 	// The name of this item.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 
 	// The kind of this item.
-	Kind SymbolKind `json:"kind"`
+	Kind *SymbolKind `json:"kind"`
 
 	// Tags for this item.
-	Tags *[]SymbolTag `json:"tags"`
+	Tags []SymbolTag `json:"tags"`
 
 	// More detail for this item, e.g. the signature of a function.
 	Detail *string `json:"detail"`
 
 	// The resource identifier of this item.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// The range enclosing this symbol not including leading/trailing
 	// whitespace but everything else, e.g. comments and code.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The range that should be selected and revealed when this symbol is
 	// being picked, e.g. the name of a function. Must be contained by the
 	// [`range`](#TypeHierarchyItem.range).
-	SelectionRange Range `json:"selectionRange"`
+	SelectionRange *Range `json:"selectionRange"`
 
 	// A data entry field that is preserved between a type hierarchy prepare
 	// and supertypes or subtypes requests. It could also be used to
 	// identify the type hierarchy in the server, helping improve the
 	// performance on resolving supertypes and subtypes.
 	Data *LSPAny `json:"data"`
+}
+
+func (this *TypeHierarchyItem) UnmarshalJSON(data []byte) error {
+	type TypeHierarchyItemUnmarshal TypeHierarchyItem
+	var tmpUnmarshal TypeHierarchyItemUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Name == nil {
+		return StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if tmpUnmarshal.SelectionRange == nil {
+		return StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	*this = TypeHierarchyItem(tmpUnmarshal)
+	return nil
+}
+
+func (this *TypeHierarchyItem) MarshalJSON() ([]byte, error) {
+
+	if this.Name == nil {
+		return nil, StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	if this.SelectionRange == nil {
+		return nil, StructureValidateFailed("TypeHierarchyItem")
+	}
+
+	type TypeHierarchyItemMarshal TypeHierarchyItem
+	tmpMarshal := TypeHierarchyItemMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Type hierarchy options used during static or dynamic registration.  @since
@@ -770,7 +1949,36 @@ type TypeHierarchySupertypesParams struct {
 
 	PartialResultParams
 
-	Item TypeHierarchyItem `json:"item"`
+	Item *TypeHierarchyItem `json:"item"`
+}
+
+func (this *TypeHierarchySupertypesParams) UnmarshalJSON(data []byte) error {
+	type TypeHierarchySupertypesParamsUnmarshal TypeHierarchySupertypesParams
+	var tmpUnmarshal TypeHierarchySupertypesParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Item == nil {
+		return StructureValidateFailed("TypeHierarchySupertypesParams")
+	}
+
+	*this = TypeHierarchySupertypesParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *TypeHierarchySupertypesParams) MarshalJSON() ([]byte, error) {
+
+	if this.Item == nil {
+		return nil, StructureValidateFailed(
+			"TypeHierarchySupertypesParams",
+		)
+	}
+
+	type TypeHierarchySupertypesParamsMarshal TypeHierarchySupertypesParams
+	tmpMarshal := TypeHierarchySupertypesParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameter of a `typeHierarchy/subtypes` request.  @since 3.17.0
@@ -782,7 +1990,36 @@ type TypeHierarchySubtypesParams struct {
 
 	PartialResultParams
 
-	Item TypeHierarchyItem `json:"item"`
+	Item *TypeHierarchyItem `json:"item"`
+}
+
+func (this *TypeHierarchySubtypesParams) UnmarshalJSON(data []byte) error {
+	type TypeHierarchySubtypesParamsUnmarshal TypeHierarchySubtypesParams
+	var tmpUnmarshal TypeHierarchySubtypesParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Item == nil {
+		return StructureValidateFailed("TypeHierarchySubtypesParams")
+	}
+
+	*this = TypeHierarchySubtypesParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *TypeHierarchySubtypesParams) MarshalJSON() ([]byte, error) {
+
+	if this.Item == nil {
+		return nil, StructureValidateFailed(
+			"TypeHierarchySubtypesParams",
+		)
+	}
+
+	type TypeHierarchySubtypesParamsMarshal TypeHierarchySubtypesParams
+	tmpMarshal := TypeHierarchySubtypesParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A parameter literal used in inline value requests.  @since 3.17.0
@@ -793,14 +2030,57 @@ type InlineValueParams struct {
 	WorkDoneProgressParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The document range for which inline values should be computed.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// Additional information about the context in which inline values were
 	// requested.
-	Context InlineValueContext `json:"context"`
+	Context *InlineValueContext `json:"context"`
+}
+
+func (this *InlineValueParams) UnmarshalJSON(data []byte) error {
+	type InlineValueParamsUnmarshal InlineValueParams
+	var tmpUnmarshal InlineValueParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("InlineValueParams")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("InlineValueParams")
+	}
+
+	if tmpUnmarshal.Context == nil {
+		return StructureValidateFailed("InlineValueParams")
+	}
+
+	*this = InlineValueParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlineValueParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("InlineValueParams")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("InlineValueParams")
+	}
+
+	if this.Context == nil {
+		return nil, StructureValidateFailed("InlineValueParams")
+	}
+
+	type InlineValueParamsMarshal InlineValueParams
+	tmpMarshal := InlineValueParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Inline value options used during static or dynamic registration.  @since
@@ -826,22 +2106,57 @@ type InlayHintParams struct {
 	WorkDoneProgressParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The document range for which inlay hints should be computed.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
+}
+
+func (this *InlayHintParams) UnmarshalJSON(data []byte) error {
+	type InlayHintParamsUnmarshal InlayHintParams
+	var tmpUnmarshal InlayHintParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("InlayHintParams")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("InlayHintParams")
+	}
+
+	*this = InlayHintParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlayHintParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("InlayHintParams")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("InlayHintParams")
+	}
+
+	type InlayHintParamsMarshal InlayHintParams
+	tmpMarshal := InlayHintParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Inlay hint information.  @since 3.17.0
 type InlayHint struct {
 
 	// The position of this hint.
-	Position Position `json:"position"`
+	Position *Position `json:"position"`
 
 	// The label of this hint. A human readable string or an array of
 	// InlayHintLabelPart label parts.  *Note* that neither the string nor
 	// the label part can be empty.
-	Label InlayHint_Label__Or `json:"label"`
+	Label *InlayHint_Label__Or `json:"label"`
 
 	// The kind of this hint. Can be omitted in which case the client should
 	// fall back to a reasonable default.
@@ -851,7 +2166,7 @@ type InlayHint struct {
 	// hint.  *Note* that edits are expected to change the document so that
 	// the inlay hint (or its nearest variant) is now part of the document
 	// and the inlay hint itself is now obsolete.
-	TextEdits *[]TextEdit `json:"textEdits"`
+	TextEdits []TextEdit `json:"textEdits"`
 
 	// The tooltip text when you hover over this item.
 	Tooltip *InlayHint_Tooltip__Or `json:"tooltip"`
@@ -870,6 +2185,41 @@ type InlayHint struct {
 	// A data entry field that is preserved on an inlay hint between a
 	// `textDocument/inlayHint` and a `inlayHint/resolve` request.
 	Data *LSPAny `json:"data"`
+}
+
+func (this *InlayHint) UnmarshalJSON(data []byte) error {
+	type InlayHintUnmarshal InlayHint
+	var tmpUnmarshal InlayHintUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Position == nil {
+		return StructureValidateFailed("InlayHint")
+	}
+
+	if tmpUnmarshal.Label == nil {
+		return StructureValidateFailed("InlayHint")
+	}
+
+	*this = InlayHint(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlayHint) MarshalJSON() ([]byte, error) {
+
+	if this.Position == nil {
+		return nil, StructureValidateFailed("InlayHint")
+	}
+
+	if this.Label == nil {
+		return nil, StructureValidateFailed("InlayHint")
+	}
+
+	type InlayHintMarshal InlayHint
+	tmpMarshal := InlayHintMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Inlay hint options used during static or dynamic registration.  @since 3.17.0
@@ -896,7 +2246,7 @@ type DocumentDiagnosticParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The additional identifier  provided during registration.
 	Identifier *string `json:"identifier"`
@@ -905,14 +2255,105 @@ type DocumentDiagnosticParams struct {
 	PreviousResultId *string `json:"previousResultId"`
 }
 
+func (this *DocumentDiagnosticParams) UnmarshalJSON(data []byte) error {
+	type DocumentDiagnosticParamsUnmarshal DocumentDiagnosticParams
+	var tmpUnmarshal DocumentDiagnosticParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DocumentDiagnosticParams")
+	}
+
+	*this = DocumentDiagnosticParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentDiagnosticParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("DocumentDiagnosticParams")
+	}
+
+	type DocumentDiagnosticParamsMarshal DocumentDiagnosticParams
+	tmpMarshal := DocumentDiagnosticParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // A partial result for a document diagnostic report.  @since 3.17.0
 type DocumentDiagnosticReportPartialResult struct {
 	RelatedDocuments map[DocumentUri]DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or `json:"relatedDocuments"`
 }
 
+func (this *DocumentDiagnosticReportPartialResult) UnmarshalJSON(
+	data []byte,
+) error {
+	type DocumentDiagnosticReportPartialResultUnmarshal DocumentDiagnosticReportPartialResult
+	var tmpUnmarshal DocumentDiagnosticReportPartialResultUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.RelatedDocuments == nil {
+		return StructureValidateFailed(
+			"DocumentDiagnosticReportPartialResult",
+		)
+	}
+
+	*this = DocumentDiagnosticReportPartialResult(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentDiagnosticReportPartialResult) MarshalJSON() ([]byte, error) {
+
+	if this.RelatedDocuments == nil {
+		return nil, StructureValidateFailed(
+			"DocumentDiagnosticReportPartialResult",
+		)
+	}
+
+	type DocumentDiagnosticReportPartialResultMarshal DocumentDiagnosticReportPartialResult
+	tmpMarshal := DocumentDiagnosticReportPartialResultMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Cancellation data returned from a diagnostic request.  @since 3.17.0
 type DiagnosticServerCancellationData struct {
-	RetriggerRequest bool `json:"retriggerRequest"`
+	RetriggerRequest *bool `json:"retriggerRequest"`
+}
+
+func (this *DiagnosticServerCancellationData) UnmarshalJSON(data []byte) error {
+	type DiagnosticServerCancellationDataUnmarshal DiagnosticServerCancellationData
+	var tmpUnmarshal DiagnosticServerCancellationDataUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.RetriggerRequest == nil {
+		return StructureValidateFailed(
+			"DiagnosticServerCancellationData",
+		)
+	}
+
+	*this = DiagnosticServerCancellationData(tmpUnmarshal)
+	return nil
+}
+
+func (this *DiagnosticServerCancellationData) MarshalJSON() ([]byte, error) {
+
+	if this.RetriggerRequest == nil {
+		return nil, StructureValidateFailed(
+			"DiagnosticServerCancellationData",
+		)
+	}
+
+	type DiagnosticServerCancellationDataMarshal DiagnosticServerCancellationData
+	tmpMarshal := DiagnosticServerCancellationDataMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Diagnostic registration options.  @since 3.17.0
@@ -946,9 +2387,63 @@ type WorkspaceDiagnosticParams struct {
 	PreviousResultIds []PreviousResultId `json:"previousResultIds"`
 }
 
+func (this *WorkspaceDiagnosticParams) UnmarshalJSON(data []byte) error {
+	type WorkspaceDiagnosticParamsUnmarshal WorkspaceDiagnosticParams
+	var tmpUnmarshal WorkspaceDiagnosticParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.PreviousResultIds == nil {
+		return StructureValidateFailed("WorkspaceDiagnosticParams")
+	}
+
+	*this = WorkspaceDiagnosticParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceDiagnosticParams) MarshalJSON() ([]byte, error) {
+
+	if this.PreviousResultIds == nil {
+		return nil, StructureValidateFailed("WorkspaceDiagnosticParams")
+	}
+
+	type WorkspaceDiagnosticParamsMarshal WorkspaceDiagnosticParams
+	tmpMarshal := WorkspaceDiagnosticParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // A workspace diagnostic report.  @since 3.17.0
 type WorkspaceDiagnosticReport struct {
 	Items []WorkspaceDocumentDiagnosticReport `json:"items"`
+}
+
+func (this *WorkspaceDiagnosticReport) UnmarshalJSON(data []byte) error {
+	type WorkspaceDiagnosticReportUnmarshal WorkspaceDiagnosticReport
+	var tmpUnmarshal WorkspaceDiagnosticReportUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Items == nil {
+		return StructureValidateFailed("WorkspaceDiagnosticReport")
+	}
+
+	*this = WorkspaceDiagnosticReport(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceDiagnosticReport) MarshalJSON() ([]byte, error) {
+
+	if this.Items == nil {
+		return nil, StructureValidateFailed("WorkspaceDiagnosticReport")
+	}
+
+	type WorkspaceDiagnosticReportMarshal WorkspaceDiagnosticReport
+	tmpMarshal := WorkspaceDiagnosticReportMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A partial result for a workspace diagnostic report.  @since 3.17.0
@@ -956,14 +2451,86 @@ type WorkspaceDiagnosticReportPartialResult struct {
 	Items []WorkspaceDocumentDiagnosticReport `json:"items"`
 }
 
+func (this *WorkspaceDiagnosticReportPartialResult) UnmarshalJSON(
+	data []byte,
+) error {
+	type WorkspaceDiagnosticReportPartialResultUnmarshal WorkspaceDiagnosticReportPartialResult
+	var tmpUnmarshal WorkspaceDiagnosticReportPartialResultUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Items == nil {
+		return StructureValidateFailed(
+			"WorkspaceDiagnosticReportPartialResult",
+		)
+	}
+
+	*this = WorkspaceDiagnosticReportPartialResult(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceDiagnosticReportPartialResult) MarshalJSON() ([]byte, error) {
+
+	if this.Items == nil {
+		return nil, StructureValidateFailed(
+			"WorkspaceDiagnosticReportPartialResult",
+		)
+	}
+
+	type WorkspaceDiagnosticReportPartialResultMarshal WorkspaceDiagnosticReportPartialResult
+	tmpMarshal := WorkspaceDiagnosticReportPartialResultMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // The params sent in an open notebook document notification.  @since 3.17.0
 type DidOpenNotebookDocumentParams struct {
 
 	// The notebook document that got opened.
-	NotebookDocument NotebookDocument `json:"notebookDocument"`
+	NotebookDocument *NotebookDocument `json:"notebookDocument"`
 
 	// The text documents that represent the content of a notebook cell.
 	CellTextDocuments []TextDocumentItem `json:"cellTextDocuments"`
+}
+
+func (this *DidOpenNotebookDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidOpenNotebookDocumentParamsUnmarshal DidOpenNotebookDocumentParams
+	var tmpUnmarshal DidOpenNotebookDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.NotebookDocument == nil {
+		return StructureValidateFailed("DidOpenNotebookDocumentParams")
+	}
+
+	if tmpUnmarshal.CellTextDocuments == nil {
+		return StructureValidateFailed("DidOpenNotebookDocumentParams")
+	}
+
+	*this = DidOpenNotebookDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidOpenNotebookDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.NotebookDocument == nil {
+		return nil, StructureValidateFailed(
+			"DidOpenNotebookDocumentParams",
+		)
+	}
+
+	if this.CellTextDocuments == nil {
+		return nil, StructureValidateFailed(
+			"DidOpenNotebookDocumentParams",
+		)
+	}
+
+	type DidOpenNotebookDocumentParamsMarshal DidOpenNotebookDocumentParams
+	tmpMarshal := DidOpenNotebookDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The params sent in a change notebook document notification.  @since 3.17.0
@@ -973,7 +2540,7 @@ type DidChangeNotebookDocumentParams struct {
 	// the version after all provided changes have been applied. If only the
 	// text document content of a cell changes the notebook version doesn't
 	// necessarily have to change.
-	NotebookDocument VersionedNotebookDocumentIdentifier `json:"notebookDocument"`
+	NotebookDocument *VersionedNotebookDocumentIdentifier `json:"notebookDocument"`
 
 	// The actual changes to the notebook document.  The changes describe
 	// single state changes to the notebook document. So if there are two
@@ -985,33 +2552,198 @@ type DidChangeNotebookDocumentParams struct {
 	// content - apply the 'notebookDocument/didChange' notifications in the
 	// order you receive them. - apply the `NotebookChangeEvent`s in a
 	// single notification in the order   you receive them.
-	Change NotebookDocumentChangeEvent `json:"change"`
+	Change *NotebookDocumentChangeEvent `json:"change"`
+}
+
+func (this *DidChangeNotebookDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidChangeNotebookDocumentParamsUnmarshal DidChangeNotebookDocumentParams
+	var tmpUnmarshal DidChangeNotebookDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.NotebookDocument == nil {
+		return StructureValidateFailed(
+			"DidChangeNotebookDocumentParams",
+		)
+	}
+
+	if tmpUnmarshal.Change == nil {
+		return StructureValidateFailed(
+			"DidChangeNotebookDocumentParams",
+		)
+	}
+
+	*this = DidChangeNotebookDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidChangeNotebookDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.NotebookDocument == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeNotebookDocumentParams",
+		)
+	}
+
+	if this.Change == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeNotebookDocumentParams",
+		)
+	}
+
+	type DidChangeNotebookDocumentParamsMarshal DidChangeNotebookDocumentParams
+	tmpMarshal := DidChangeNotebookDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The params sent in a save notebook document notification.  @since 3.17.0
 type DidSaveNotebookDocumentParams struct {
 
 	// The notebook document that got saved.
-	NotebookDocument NotebookDocumentIdentifier `json:"notebookDocument"`
+	NotebookDocument *NotebookDocumentIdentifier `json:"notebookDocument"`
+}
+
+func (this *DidSaveNotebookDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidSaveNotebookDocumentParamsUnmarshal DidSaveNotebookDocumentParams
+	var tmpUnmarshal DidSaveNotebookDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.NotebookDocument == nil {
+		return StructureValidateFailed("DidSaveNotebookDocumentParams")
+	}
+
+	*this = DidSaveNotebookDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidSaveNotebookDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.NotebookDocument == nil {
+		return nil, StructureValidateFailed(
+			"DidSaveNotebookDocumentParams",
+		)
+	}
+
+	type DidSaveNotebookDocumentParamsMarshal DidSaveNotebookDocumentParams
+	tmpMarshal := DidSaveNotebookDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The params sent in a close notebook document notification.  @since 3.17.0
 type DidCloseNotebookDocumentParams struct {
 
 	// The notebook document that got closed.
-	NotebookDocument NotebookDocumentIdentifier `json:"notebookDocument"`
+	NotebookDocument *NotebookDocumentIdentifier `json:"notebookDocument"`
 
 	// The text documents that represent the content of a notebook cell that
 	// got closed.
 	CellTextDocuments []TextDocumentIdentifier `json:"cellTextDocuments"`
 }
 
+func (this *DidCloseNotebookDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidCloseNotebookDocumentParamsUnmarshal DidCloseNotebookDocumentParams
+	var tmpUnmarshal DidCloseNotebookDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.NotebookDocument == nil {
+		return StructureValidateFailed("DidCloseNotebookDocumentParams")
+	}
+
+	if tmpUnmarshal.CellTextDocuments == nil {
+		return StructureValidateFailed("DidCloseNotebookDocumentParams")
+	}
+
+	*this = DidCloseNotebookDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidCloseNotebookDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.NotebookDocument == nil {
+		return nil, StructureValidateFailed(
+			"DidCloseNotebookDocumentParams",
+		)
+	}
+
+	if this.CellTextDocuments == nil {
+		return nil, StructureValidateFailed(
+			"DidCloseNotebookDocumentParams",
+		)
+	}
+
+	type DidCloseNotebookDocumentParamsMarshal DidCloseNotebookDocumentParams
+	tmpMarshal := DidCloseNotebookDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type RegistrationParams struct {
 	Registrations []Registration `json:"registrations"`
 }
 
+func (this *RegistrationParams) UnmarshalJSON(data []byte) error {
+	type RegistrationParamsUnmarshal RegistrationParams
+	var tmpUnmarshal RegistrationParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Registrations == nil {
+		return StructureValidateFailed("RegistrationParams")
+	}
+
+	*this = RegistrationParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *RegistrationParams) MarshalJSON() ([]byte, error) {
+
+	if this.Registrations == nil {
+		return nil, StructureValidateFailed("RegistrationParams")
+	}
+
+	type RegistrationParamsMarshal RegistrationParams
+	tmpMarshal := RegistrationParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type UnregistrationParams struct {
 	Unregisterations []Unregistration `json:"unregisterations"`
+}
+
+func (this *UnregistrationParams) UnmarshalJSON(data []byte) error {
+	type UnregistrationParamsUnmarshal UnregistrationParams
+	var tmpUnmarshal UnregistrationParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Unregisterations == nil {
+		return StructureValidateFailed("UnregistrationParams")
+	}
+
+	*this = UnregistrationParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *UnregistrationParams) MarshalJSON() ([]byte, error) {
+
+	if this.Unregisterations == nil {
+		return nil, StructureValidateFailed("UnregistrationParams")
+	}
+
+	type UnregistrationParamsMarshal UnregistrationParams
+	tmpMarshal := UnregistrationParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type InitializeParams struct {
@@ -1027,10 +2759,37 @@ type InitializeParams struct {
 type InitializeResult struct {
 
 	// The capabilities the language server provides.
-	Capabilities ServerCapabilities `json:"capabilities"`
+	Capabilities *ServerCapabilities `json:"capabilities"`
 
 	// Information about the server.  @since 3.15.0
 	ServerInfo *InitializeResult_ServerInfo `json:"serverInfo"`
+}
+
+func (this *InitializeResult) UnmarshalJSON(data []byte) error {
+	type InitializeResultUnmarshal InitializeResult
+	var tmpUnmarshal InitializeResultUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Capabilities == nil {
+		return StructureValidateFailed("InitializeResult")
+	}
+
+	*this = InitializeResult(tmpUnmarshal)
+	return nil
+}
+
+func (this *InitializeResult) MarshalJSON() ([]byte, error) {
+
+	if this.Capabilities == nil {
+		return nil, StructureValidateFailed("InitializeResult")
+	}
+
+	type InitializeResultMarshal InitializeResult
+	tmpMarshal := InitializeResultMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The data type of the ResponseError if the initialize request fails.
@@ -1040,7 +2799,34 @@ type InitializeError struct {
 	// show the message provided by the ResponseError to the user (2) user
 	// selects retry or cancel (3) if user selected retry the initialize
 	// method is sent again.
-	Retry bool `json:"retry"`
+	Retry *bool `json:"retry"`
+}
+
+func (this *InitializeError) UnmarshalJSON(data []byte) error {
+	type InitializeErrorUnmarshal InitializeError
+	var tmpUnmarshal InitializeErrorUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Retry == nil {
+		return StructureValidateFailed("InitializeError")
+	}
+
+	*this = InitializeError(tmpUnmarshal)
+	return nil
+}
+
+func (this *InitializeError) MarshalJSON() ([]byte, error) {
+
+	if this.Retry == nil {
+		return nil, StructureValidateFailed("InitializeError")
+	}
+
+	type InitializeErrorMarshal InitializeError
+	tmpMarshal := InitializeErrorMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type InitializedParams struct {
@@ -1050,7 +2836,36 @@ type InitializedParams struct {
 type DidChangeConfigurationParams struct {
 
 	// The actual changed settings
-	Settings LSPAny `json:"settings"`
+	Settings *LSPAny `json:"settings"`
+}
+
+func (this *DidChangeConfigurationParams) UnmarshalJSON(data []byte) error {
+	type DidChangeConfigurationParamsUnmarshal DidChangeConfigurationParams
+	var tmpUnmarshal DidChangeConfigurationParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Settings == nil {
+		return StructureValidateFailed("DidChangeConfigurationParams")
+	}
+
+	*this = DidChangeConfigurationParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidChangeConfigurationParams) MarshalJSON() ([]byte, error) {
+
+	if this.Settings == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeConfigurationParams",
+		)
+	}
+
+	type DidChangeConfigurationParamsMarshal DidChangeConfigurationParams
+	tmpMarshal := DidChangeConfigurationParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type DidChangeConfigurationRegistrationOptions struct {
@@ -1061,45 +2876,204 @@ type DidChangeConfigurationRegistrationOptions struct {
 type ShowMessageParams struct {
 
 	// The message type. See {@link MessageType}
-	Type MessageType `json:"type"`
+	Type *MessageType `json:"type"`
 
 	// The actual message.
-	Message string `json:"message"`
+	Message *string `json:"message"`
+}
+
+func (this *ShowMessageParams) UnmarshalJSON(data []byte) error {
+	type ShowMessageParamsUnmarshal ShowMessageParams
+	var tmpUnmarshal ShowMessageParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Type == nil {
+		return StructureValidateFailed("ShowMessageParams")
+	}
+
+	if tmpUnmarshal.Message == nil {
+		return StructureValidateFailed("ShowMessageParams")
+	}
+
+	*this = ShowMessageParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ShowMessageParams) MarshalJSON() ([]byte, error) {
+
+	if this.Type == nil {
+		return nil, StructureValidateFailed("ShowMessageParams")
+	}
+
+	if this.Message == nil {
+		return nil, StructureValidateFailed("ShowMessageParams")
+	}
+
+	type ShowMessageParamsMarshal ShowMessageParams
+	tmpMarshal := ShowMessageParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type ShowMessageRequestParams struct {
 
 	// The message type. See {@link MessageType}
-	Type MessageType `json:"type"`
+	Type *MessageType `json:"type"`
 
 	// The actual message.
-	Message string `json:"message"`
+	Message *string `json:"message"`
 
 	// The message action items to present.
-	Actions *[]MessageActionItem `json:"actions"`
+	Actions []MessageActionItem `json:"actions"`
+}
+
+func (this *ShowMessageRequestParams) UnmarshalJSON(data []byte) error {
+	type ShowMessageRequestParamsUnmarshal ShowMessageRequestParams
+	var tmpUnmarshal ShowMessageRequestParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Type == nil {
+		return StructureValidateFailed("ShowMessageRequestParams")
+	}
+
+	if tmpUnmarshal.Message == nil {
+		return StructureValidateFailed("ShowMessageRequestParams")
+	}
+
+	*this = ShowMessageRequestParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ShowMessageRequestParams) MarshalJSON() ([]byte, error) {
+
+	if this.Type == nil {
+		return nil, StructureValidateFailed("ShowMessageRequestParams")
+	}
+
+	if this.Message == nil {
+		return nil, StructureValidateFailed("ShowMessageRequestParams")
+	}
+
+	type ShowMessageRequestParamsMarshal ShowMessageRequestParams
+	tmpMarshal := ShowMessageRequestParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type MessageActionItem struct {
 
 	// A short title like 'Retry', 'Open Log' etc.
-	Title string `json:"title"`
+	Title *string `json:"title"`
+}
+
+func (this *MessageActionItem) UnmarshalJSON(data []byte) error {
+	type MessageActionItemUnmarshal MessageActionItem
+	var tmpUnmarshal MessageActionItemUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Title == nil {
+		return StructureValidateFailed("MessageActionItem")
+	}
+
+	*this = MessageActionItem(tmpUnmarshal)
+	return nil
+}
+
+func (this *MessageActionItem) MarshalJSON() ([]byte, error) {
+
+	if this.Title == nil {
+		return nil, StructureValidateFailed("MessageActionItem")
+	}
+
+	type MessageActionItemMarshal MessageActionItem
+	tmpMarshal := MessageActionItemMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The log message parameters.
 type LogMessageParams struct {
 
 	// The message type. See {@link MessageType}
-	Type MessageType `json:"type"`
+	Type *MessageType `json:"type"`
 
 	// The actual message.
-	Message string `json:"message"`
+	Message *string `json:"message"`
+}
+
+func (this *LogMessageParams) UnmarshalJSON(data []byte) error {
+	type LogMessageParamsUnmarshal LogMessageParams
+	var tmpUnmarshal LogMessageParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Type == nil {
+		return StructureValidateFailed("LogMessageParams")
+	}
+
+	if tmpUnmarshal.Message == nil {
+		return StructureValidateFailed("LogMessageParams")
+	}
+
+	*this = LogMessageParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *LogMessageParams) MarshalJSON() ([]byte, error) {
+
+	if this.Type == nil {
+		return nil, StructureValidateFailed("LogMessageParams")
+	}
+
+	if this.Message == nil {
+		return nil, StructureValidateFailed("LogMessageParams")
+	}
+
+	type LogMessageParamsMarshal LogMessageParams
+	tmpMarshal := LogMessageParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameters sent in an open text document notification
 type DidOpenTextDocumentParams struct {
 
 	// The document that was opened.
-	TextDocument TextDocumentItem `json:"textDocument"`
+	TextDocument *TextDocumentItem `json:"textDocument"`
+}
+
+func (this *DidOpenTextDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidOpenTextDocumentParamsUnmarshal DidOpenTextDocumentParams
+	var tmpUnmarshal DidOpenTextDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DidOpenTextDocumentParams")
+	}
+
+	*this = DidOpenTextDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidOpenTextDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("DidOpenTextDocumentParams")
+	}
+
+	type DidOpenTextDocumentParamsMarshal DidOpenTextDocumentParams
+	tmpMarshal := DidOpenTextDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The change text document notification's parameters.
@@ -1107,7 +3081,7 @@ type DidChangeTextDocumentParams struct {
 
 	// The document that did change. The version number points to the
 	// version after all provided content changes have been applied.
-	TextDocument VersionedTextDocumentIdentifier `json:"textDocument"`
+	TextDocument *VersionedTextDocumentIdentifier `json:"textDocument"`
 
 	// The actual content changes. The content changes describe single state
 	// changes to the document. So if there are two content changes c1 (at
@@ -1122,6 +3096,45 @@ type DidChangeTextDocumentParams struct {
 	ContentChanges []TextDocumentContentChangeEvent `json:"contentChanges"`
 }
 
+func (this *DidChangeTextDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidChangeTextDocumentParamsUnmarshal DidChangeTextDocumentParams
+	var tmpUnmarshal DidChangeTextDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DidChangeTextDocumentParams")
+	}
+
+	if tmpUnmarshal.ContentChanges == nil {
+		return StructureValidateFailed("DidChangeTextDocumentParams")
+	}
+
+	*this = DidChangeTextDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidChangeTextDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeTextDocumentParams",
+		)
+	}
+
+	if this.ContentChanges == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeTextDocumentParams",
+		)
+	}
+
+	type DidChangeTextDocumentParamsMarshal DidChangeTextDocumentParams
+	tmpMarshal := DidChangeTextDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Describe options to be used when registered for text document change events.
 type TextDocumentChangeRegistrationOptions struct {
 
@@ -1130,25 +3143,114 @@ type TextDocumentChangeRegistrationOptions struct {
 	TextDocumentRegistrationOptions
 
 	// How documents are synced to the server.
-	SyncKind TextDocumentSyncKind `json:"syncKind"`
+	SyncKind *TextDocumentSyncKind `json:"syncKind"`
+}
+
+func (this *TextDocumentChangeRegistrationOptions) UnmarshalJSON(
+	data []byte,
+) error {
+	type TextDocumentChangeRegistrationOptionsUnmarshal TextDocumentChangeRegistrationOptions
+	var tmpUnmarshal TextDocumentChangeRegistrationOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.SyncKind == nil {
+		return StructureValidateFailed(
+			"TextDocumentChangeRegistrationOptions",
+		)
+	}
+
+	*this = TextDocumentChangeRegistrationOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *TextDocumentChangeRegistrationOptions) MarshalJSON() ([]byte, error) {
+
+	if this.SyncKind == nil {
+		return nil, StructureValidateFailed(
+			"TextDocumentChangeRegistrationOptions",
+		)
+	}
+
+	type TextDocumentChangeRegistrationOptionsMarshal TextDocumentChangeRegistrationOptions
+	tmpMarshal := TextDocumentChangeRegistrationOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameters sent in a close text document notification
 type DidCloseTextDocumentParams struct {
 
 	// The document that was closed.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
+}
+
+func (this *DidCloseTextDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidCloseTextDocumentParamsUnmarshal DidCloseTextDocumentParams
+	var tmpUnmarshal DidCloseTextDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DidCloseTextDocumentParams")
+	}
+
+	*this = DidCloseTextDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidCloseTextDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed(
+			"DidCloseTextDocumentParams",
+		)
+	}
+
+	type DidCloseTextDocumentParamsMarshal DidCloseTextDocumentParams
+	tmpMarshal := DidCloseTextDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The parameters sent in a save text document notification
 type DidSaveTextDocumentParams struct {
 
 	// The document that was saved.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// Optional the content when saved. Depends on the includeText value
 	// when the save notification was requested.
 	Text *string `json:"text"`
+}
+
+func (this *DidSaveTextDocumentParams) UnmarshalJSON(data []byte) error {
+	type DidSaveTextDocumentParamsUnmarshal DidSaveTextDocumentParams
+	var tmpUnmarshal DidSaveTextDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DidSaveTextDocumentParams")
+	}
+
+	*this = DidSaveTextDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidSaveTextDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("DidSaveTextDocumentParams")
+	}
+
+	type DidSaveTextDocumentParamsMarshal DidSaveTextDocumentParams
+	tmpMarshal := DidSaveTextDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Save registration options.
@@ -1165,10 +3267,49 @@ type TextDocumentSaveRegistrationOptions struct {
 type WillSaveTextDocumentParams struct {
 
 	// The document that will be saved.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The 'TextDocumentSaveReason'.
-	Reason TextDocumentSaveReason `json:"reason"`
+	Reason *TextDocumentSaveReason `json:"reason"`
+}
+
+func (this *WillSaveTextDocumentParams) UnmarshalJSON(data []byte) error {
+	type WillSaveTextDocumentParamsUnmarshal WillSaveTextDocumentParams
+	var tmpUnmarshal WillSaveTextDocumentParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("WillSaveTextDocumentParams")
+	}
+
+	if tmpUnmarshal.Reason == nil {
+		return StructureValidateFailed("WillSaveTextDocumentParams")
+	}
+
+	*this = WillSaveTextDocumentParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *WillSaveTextDocumentParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed(
+			"WillSaveTextDocumentParams",
+		)
+	}
+
+	if this.Reason == nil {
+		return nil, StructureValidateFailed(
+			"WillSaveTextDocumentParams",
+		)
+	}
+
+	type WillSaveTextDocumentParamsMarshal WillSaveTextDocumentParams
+	tmpMarshal := WillSaveTextDocumentParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A text edit applicable to a text document.
@@ -1176,10 +3317,45 @@ type TextEdit struct {
 
 	// The range of the text document to be manipulated. To insert text into
 	// a document create a range where start === end.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The string to be inserted. For delete operations use an empty string.
-	NewText string `json:"newText"`
+	NewText *string `json:"newText"`
+}
+
+func (this *TextEdit) UnmarshalJSON(data []byte) error {
+	type TextEditUnmarshal TextEdit
+	var tmpUnmarshal TextEditUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("TextEdit")
+	}
+
+	if tmpUnmarshal.NewText == nil {
+		return StructureValidateFailed("TextEdit")
+	}
+
+	*this = TextEdit(tmpUnmarshal)
+	return nil
+}
+
+func (this *TextEdit) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("TextEdit")
+	}
+
+	if this.NewText == nil {
+		return nil, StructureValidateFailed("TextEdit")
+	}
+
+	type TextEditMarshal TextEdit
+	tmpMarshal := TextEditMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The watched files change notification's parameters.
@@ -1189,6 +3365,35 @@ type DidChangeWatchedFilesParams struct {
 	Changes []FileEvent `json:"changes"`
 }
 
+func (this *DidChangeWatchedFilesParams) UnmarshalJSON(data []byte) error {
+	type DidChangeWatchedFilesParamsUnmarshal DidChangeWatchedFilesParams
+	var tmpUnmarshal DidChangeWatchedFilesParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Changes == nil {
+		return StructureValidateFailed("DidChangeWatchedFilesParams")
+	}
+
+	*this = DidChangeWatchedFilesParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidChangeWatchedFilesParams) MarshalJSON() ([]byte, error) {
+
+	if this.Changes == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeWatchedFilesParams",
+		)
+	}
+
+	type DidChangeWatchedFilesParamsMarshal DidChangeWatchedFilesParams
+	tmpMarshal := DidChangeWatchedFilesParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Describe options to be used when registered for text document change events.
 type DidChangeWatchedFilesRegistrationOptions struct {
 
@@ -1196,11 +3401,44 @@ type DidChangeWatchedFilesRegistrationOptions struct {
 	Watchers []FileSystemWatcher `json:"watchers"`
 }
 
+func (this *DidChangeWatchedFilesRegistrationOptions) UnmarshalJSON(
+	data []byte,
+) error {
+	type DidChangeWatchedFilesRegistrationOptionsUnmarshal DidChangeWatchedFilesRegistrationOptions
+	var tmpUnmarshal DidChangeWatchedFilesRegistrationOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Watchers == nil {
+		return StructureValidateFailed(
+			"DidChangeWatchedFilesRegistrationOptions",
+		)
+	}
+
+	*this = DidChangeWatchedFilesRegistrationOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *DidChangeWatchedFilesRegistrationOptions) MarshalJSON() ([]byte, error) {
+
+	if this.Watchers == nil {
+		return nil, StructureValidateFailed(
+			"DidChangeWatchedFilesRegistrationOptions",
+		)
+	}
+
+	type DidChangeWatchedFilesRegistrationOptionsMarshal DidChangeWatchedFilesRegistrationOptions
+	tmpMarshal := DidChangeWatchedFilesRegistrationOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // The publish diagnostic notification's parameters.
 type PublishDiagnosticsParams struct {
 
 	// The URI for which diagnostic information is reported.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// Optional the version number of the document the diagnostics are
 	// published for.  @since 3.15.0
@@ -1208,6 +3446,41 @@ type PublishDiagnosticsParams struct {
 
 	// An array of diagnostic information items.
 	Diagnostics []Diagnostic `json:"diagnostics"`
+}
+
+func (this *PublishDiagnosticsParams) UnmarshalJSON(data []byte) error {
+	type PublishDiagnosticsParamsUnmarshal PublishDiagnosticsParams
+	var tmpUnmarshal PublishDiagnosticsParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("PublishDiagnosticsParams")
+	}
+
+	if tmpUnmarshal.Diagnostics == nil {
+		return StructureValidateFailed("PublishDiagnosticsParams")
+	}
+
+	*this = PublishDiagnosticsParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *PublishDiagnosticsParams) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("PublishDiagnosticsParams")
+	}
+
+	if this.Diagnostics == nil {
+		return nil, StructureValidateFailed("PublishDiagnosticsParams")
+	}
+
+	type PublishDiagnosticsParamsMarshal PublishDiagnosticsParams
+	tmpMarshal := PublishDiagnosticsParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Completion parameters
@@ -1237,7 +3510,7 @@ type CompletionItem struct {
 	// default the text that is inserted when selecting this completion.  If
 	// label details are provided the label itself should be an unqualified
 	// name of the completion item.
-	Label string `json:"label"`
+	Label *string `json:"label"`
 
 	// Additional details for the label  @since 3.17.0
 	LabelDetails *CompletionItemLabelDetails `json:"labelDetails"`
@@ -1247,7 +3520,7 @@ type CompletionItem struct {
 	Kind *CompletionItemKind `json:"kind"`
 
 	// Tags for this completion item.  @since 3.15.0
-	Tags *[]CompletionItemTag `json:"tags"`
+	Tags []CompletionItemTag `json:"tags"`
 
 	// A human-readable string with additional information about this item,
 	// like type or symbol information.
@@ -1331,13 +3604,13 @@ type CompletionItem struct {
 	// text edits should be used to change text unrelated to the current
 	// cursor position (for example adding an import statement at the top of
 	// the file if the completion item will insert an unqualified type).
-	AdditionalTextEdits *[]TextEdit `json:"additionalTextEdits"`
+	AdditionalTextEdits []TextEdit `json:"additionalTextEdits"`
 
 	// An optional set of characters that when pressed while this completion
 	// is active will accept it first and then type that character. *Note*
 	// that all commit characters should have `length=1` and that
 	// superfluous characters will be ignored.
-	CommitCharacters *[]string `json:"commitCharacters"`
+	CommitCharacters []string `json:"commitCharacters"`
 
 	// An optional [command](#Command) that is executed *after* inserting
 	// this completion. *Note* that additional modifications to the current
@@ -1351,6 +3624,33 @@ type CompletionItem struct {
 	Data *LSPAny `json:"data"`
 }
 
+func (this *CompletionItem) UnmarshalJSON(data []byte) error {
+	type CompletionItemUnmarshal CompletionItem
+	var tmpUnmarshal CompletionItemUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Label == nil {
+		return StructureValidateFailed("CompletionItem")
+	}
+
+	*this = CompletionItem(tmpUnmarshal)
+	return nil
+}
+
+func (this *CompletionItem) MarshalJSON() ([]byte, error) {
+
+	if this.Label == nil {
+		return nil, StructureValidateFailed("CompletionItem")
+	}
+
+	type CompletionItemMarshal CompletionItem
+	tmpMarshal := CompletionItemMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Represents a collection of [completion items](#CompletionItem) to be
 // presented in the editor.
 type CompletionList struct {
@@ -1358,7 +3658,7 @@ type CompletionList struct {
 	// This list it not complete. Further typing results in recomputing this
 	// list.  Recomputed lists have all their items replaced (not appended)
 	// in the incomplete completion sessions.
-	IsIncomplete bool `json:"isIncomplete"`
+	IsIncomplete *bool `json:"isIncomplete"`
 
 	// In many cases the items of an actual completion result share the same
 	// value for properties like `commitCharacters` or the range of a text
@@ -1373,6 +3673,41 @@ type CompletionList struct {
 
 	// The completion items.
 	Items []CompletionItem `json:"items"`
+}
+
+func (this *CompletionList) UnmarshalJSON(data []byte) error {
+	type CompletionListUnmarshal CompletionList
+	var tmpUnmarshal CompletionListUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.IsIncomplete == nil {
+		return StructureValidateFailed("CompletionList")
+	}
+
+	if tmpUnmarshal.Items == nil {
+		return StructureValidateFailed("CompletionList")
+	}
+
+	*this = CompletionList(tmpUnmarshal)
+	return nil
+}
+
+func (this *CompletionList) MarshalJSON() ([]byte, error) {
+
+	if this.IsIncomplete == nil {
+		return nil, StructureValidateFailed("CompletionList")
+	}
+
+	if this.Items == nil {
+		return nil, StructureValidateFailed("CompletionList")
+	}
+
+	type CompletionListMarshal CompletionList
+	tmpMarshal := CompletionListMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [CompletionRequest](#CompletionRequest).
@@ -1401,11 +3736,38 @@ type HoverParams struct {
 type Hover struct {
 
 	// The hover's content
-	Contents Hover_Contents__Or `json:"contents"`
+	Contents *Hover_Contents__Or `json:"contents"`
 
 	// An optional range inside the text document that is used to visualize
 	// the hover, e.g. by changing the background color.
 	Range *Range `json:"range"`
+}
+
+func (this *Hover) UnmarshalJSON(data []byte) error {
+	type HoverUnmarshal Hover
+	var tmpUnmarshal HoverUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Contents == nil {
+		return StructureValidateFailed("Hover")
+	}
+
+	*this = Hover(tmpUnmarshal)
+	return nil
+}
+
+func (this *Hover) MarshalJSON() ([]byte, error) {
+
+	if this.Contents == nil {
+		return nil, StructureValidateFailed("Hover")
+	}
+
+	type HoverMarshal Hover
+	tmpMarshal := HoverMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [HoverRequest](#HoverRequest).
@@ -1459,6 +3821,33 @@ type SignatureHelp struct {
 	ActiveParameter *uint64 `json:"activeParameter"`
 }
 
+func (this *SignatureHelp) UnmarshalJSON(data []byte) error {
+	type SignatureHelpUnmarshal SignatureHelp
+	var tmpUnmarshal SignatureHelpUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Signatures == nil {
+		return StructureValidateFailed("SignatureHelp")
+	}
+
+	*this = SignatureHelp(tmpUnmarshal)
+	return nil
+}
+
+func (this *SignatureHelp) MarshalJSON() ([]byte, error) {
+
+	if this.Signatures == nil {
+		return nil, StructureValidateFailed("SignatureHelp")
+	}
+
+	type SignatureHelpMarshal SignatureHelp
+	tmpMarshal := SignatureHelpMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Registration options for a [SignatureHelpRequest](#SignatureHelpRequest).
 type SignatureHelpRegistrationOptions struct {
 
@@ -1506,7 +3895,34 @@ type ReferenceParams struct {
 
 	PartialResultParams
 
-	Context ReferenceContext `json:"context"`
+	Context *ReferenceContext `json:"context"`
+}
+
+func (this *ReferenceParams) UnmarshalJSON(data []byte) error {
+	type ReferenceParamsUnmarshal ReferenceParams
+	var tmpUnmarshal ReferenceParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Context == nil {
+		return StructureValidateFailed("ReferenceParams")
+	}
+
+	*this = ReferenceParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ReferenceParams) MarshalJSON() ([]byte, error) {
+
+	if this.Context == nil {
+		return nil, StructureValidateFailed("ReferenceParams")
+	}
+
+	type ReferenceParamsMarshal ReferenceParams
+	tmpMarshal := ReferenceParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [ReferencesRequest](#ReferencesRequest).
@@ -1539,10 +3955,37 @@ type DocumentHighlightParams struct {
 type DocumentHighlight struct {
 
 	// The range this highlight applies to.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The highlight kind, default is [text](#DocumentHighlightKind.Text).
 	Kind *DocumentHighlightKind `json:"kind"`
+}
+
+func (this *DocumentHighlight) UnmarshalJSON(data []byte) error {
+	type DocumentHighlightUnmarshal DocumentHighlight
+	var tmpUnmarshal DocumentHighlightUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("DocumentHighlight")
+	}
+
+	*this = DocumentHighlight(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentHighlight) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("DocumentHighlight")
+	}
+
+	type DocumentHighlightMarshal DocumentHighlight
+	tmpMarshal := DocumentHighlightMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a
@@ -1566,7 +4009,34 @@ type DocumentSymbolParams struct {
 	PartialResultParams
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
+}
+
+func (this *DocumentSymbolParams) UnmarshalJSON(data []byte) error {
+	type DocumentSymbolParamsUnmarshal DocumentSymbolParams
+	var tmpUnmarshal DocumentSymbolParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DocumentSymbolParams")
+	}
+
+	*this = DocumentSymbolParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentSymbolParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("DocumentSymbolParams")
+	}
+
+	type DocumentSymbolParamsMarshal DocumentSymbolParams
+	tmpMarshal := DocumentSymbolParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents information about programming constructs like variables, classes,
@@ -1588,7 +4058,34 @@ type SymbolInformation struct {
 	// range doesn't have to denote a node range in the sense of an abstract
 	// syntax tree. It can therefore not be used to re-construct a hierarchy
 	// of the symbols.
-	Location Location `json:"location"`
+	Location *Location `json:"location"`
+}
+
+func (this *SymbolInformation) UnmarshalJSON(data []byte) error {
+	type SymbolInformationUnmarshal SymbolInformation
+	var tmpUnmarshal SymbolInformationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Location == nil {
+		return StructureValidateFailed("SymbolInformation")
+	}
+
+	*this = SymbolInformation(tmpUnmarshal)
+	return nil
+}
+
+func (this *SymbolInformation) MarshalJSON() ([]byte, error) {
+
+	if this.Location == nil {
+		return nil, StructureValidateFailed("SymbolInformation")
+	}
+
+	type SymbolInformationMarshal SymbolInformation
+	tmpMarshal := SymbolInformationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents programming constructs like variables, classes, interfaces etc.
@@ -1600,16 +4097,16 @@ type DocumentSymbol struct {
 	// The name of this symbol. Will be displayed in the user interface and
 	// therefore must not be an empty string or a string only consisting of
 	// white spaces.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 
 	// More detail for this symbol, e.g the signature of a function.
 	Detail *string `json:"detail"`
 
 	// The kind of this symbol.
-	Kind SymbolKind `json:"kind"`
+	Kind *SymbolKind `json:"kind"`
 
 	// Tags for this document symbol.  @since 3.16.0
-	Tags *[]SymbolTag `json:"tags"`
+	Tags []SymbolTag `json:"tags"`
 
 	// Indicates if this symbol is deprecated.  @deprecated Use tags instead
 	Deprecated *bool `json:"deprecated"`
@@ -1618,15 +4115,66 @@ type DocumentSymbol struct {
 	// whitespace but everything else like comments. This information is
 	// typically used to determine if the clients cursor is inside the
 	// symbol to reveal in the symbol in the UI.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The range that should be selected and revealed when this symbol is
 	// being picked, e.g the name of a function. Must be contained by the
 	// `range`.
-	SelectionRange Range `json:"selectionRange"`
+	SelectionRange *Range `json:"selectionRange"`
 
 	// Children of this symbol, e.g. properties of a class.
-	Children *[]DocumentSymbol `json:"children"`
+	Children []DocumentSymbol `json:"children"`
+}
+
+func (this *DocumentSymbol) UnmarshalJSON(data []byte) error {
+	type DocumentSymbolUnmarshal DocumentSymbol
+	var tmpUnmarshal DocumentSymbolUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Name == nil {
+		return StructureValidateFailed("DocumentSymbol")
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("DocumentSymbol")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("DocumentSymbol")
+	}
+
+	if tmpUnmarshal.SelectionRange == nil {
+		return StructureValidateFailed("DocumentSymbol")
+	}
+
+	*this = DocumentSymbol(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentSymbol) MarshalJSON() ([]byte, error) {
+
+	if this.Name == nil {
+		return nil, StructureValidateFailed("DocumentSymbol")
+	}
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("DocumentSymbol")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("DocumentSymbol")
+	}
+
+	if this.SelectionRange == nil {
+		return nil, StructureValidateFailed("DocumentSymbol")
+	}
+
+	type DocumentSymbolMarshal DocumentSymbol
+	tmpMarshal := DocumentSymbolMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [DocumentSymbolRequest](#DocumentSymbolRequest).
@@ -1649,13 +4197,56 @@ type CodeActionParams struct {
 	PartialResultParams
 
 	// The document in which the command was invoked.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The range for which the command was invoked.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// Context carrying additional information.
-	Context CodeActionContext `json:"context"`
+	Context *CodeActionContext `json:"context"`
+}
+
+func (this *CodeActionParams) UnmarshalJSON(data []byte) error {
+	type CodeActionParamsUnmarshal CodeActionParams
+	var tmpUnmarshal CodeActionParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("CodeActionParams")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("CodeActionParams")
+	}
+
+	if tmpUnmarshal.Context == nil {
+		return StructureValidateFailed("CodeActionParams")
+	}
+
+	*this = CodeActionParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *CodeActionParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("CodeActionParams")
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("CodeActionParams")
+	}
+
+	if this.Context == nil {
+		return nil, StructureValidateFailed("CodeActionParams")
+	}
+
+	type CodeActionParamsMarshal CodeActionParams
+	tmpMarshal := CodeActionParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents a reference to a command. Provides a title which will be used to
@@ -1664,13 +4255,48 @@ type CodeActionParams struct {
 type Command struct {
 
 	// Title of the command, like `save`.
-	Title string `json:"title"`
+	Title *string `json:"title"`
 
 	// The identifier of the actual command handler.
-	Command string `json:"command"`
+	Command *string `json:"command"`
 
 	// Arguments that the command handler should be invoked with.
-	Arguments *[]LSPAny `json:"arguments"`
+	Arguments []LSPAny `json:"arguments"`
+}
+
+func (this *Command) UnmarshalJSON(data []byte) error {
+	type CommandUnmarshal Command
+	var tmpUnmarshal CommandUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Title == nil {
+		return StructureValidateFailed("Command")
+	}
+
+	if tmpUnmarshal.Command == nil {
+		return StructureValidateFailed("Command")
+	}
+
+	*this = Command(tmpUnmarshal)
+	return nil
+}
+
+func (this *Command) MarshalJSON() ([]byte, error) {
+
+	if this.Title == nil {
+		return nil, StructureValidateFailed("Command")
+	}
+
+	if this.Command == nil {
+		return nil, StructureValidateFailed("Command")
+	}
+
+	type CommandMarshal Command
+	tmpMarshal := CommandMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A code action represents a change that can be performed in code, e.g. to fix
@@ -1680,13 +4306,13 @@ type Command struct {
 type CodeAction struct {
 
 	// A short, human-readable, title for this code action.
-	Title string `json:"title"`
+	Title *string `json:"title"`
 
 	// The kind of the code action.  Used to filter code actions.
 	Kind *CodeActionKind `json:"kind"`
 
 	// The diagnostics that this code action resolves.
-	Diagnostics *[]Diagnostic `json:"diagnostics"`
+	Diagnostics []Diagnostic `json:"diagnostics"`
 
 	// Marks this as a preferred action. Preferred actions are used by the
 	// `auto fix` command and can be targeted by keybindings.  A quick fix
@@ -1721,6 +4347,33 @@ type CodeAction struct {
 	Data *LSPAny `json:"data"`
 }
 
+func (this *CodeAction) UnmarshalJSON(data []byte) error {
+	type CodeActionUnmarshal CodeAction
+	var tmpUnmarshal CodeActionUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Title == nil {
+		return StructureValidateFailed("CodeAction")
+	}
+
+	*this = CodeAction(tmpUnmarshal)
+	return nil
+}
+
+func (this *CodeAction) MarshalJSON() ([]byte, error) {
+
+	if this.Title == nil {
+		return nil, StructureValidateFailed("CodeAction")
+	}
+
+	type CodeActionMarshal CodeAction
+	tmpMarshal := CodeActionMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Registration options for a [CodeActionRequest](#CodeActionRequest).
 type CodeActionRegistrationOptions struct {
 
@@ -1742,7 +4395,34 @@ type WorkspaceSymbolParams struct {
 
 	// A query string to filter symbols by. Clients may send an empty string
 	// here to request all symbols.
-	Query string `json:"query"`
+	Query *string `json:"query"`
+}
+
+func (this *WorkspaceSymbolParams) UnmarshalJSON(data []byte) error {
+	type WorkspaceSymbolParamsUnmarshal WorkspaceSymbolParams
+	var tmpUnmarshal WorkspaceSymbolParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Query == nil {
+		return StructureValidateFailed("WorkspaceSymbolParams")
+	}
+
+	*this = WorkspaceSymbolParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceSymbolParams) MarshalJSON() ([]byte, error) {
+
+	if this.Query == nil {
+		return nil, StructureValidateFailed("WorkspaceSymbolParams")
+	}
+
+	type WorkspaceSymbolParamsMarshal WorkspaceSymbolParams
+	tmpMarshal := WorkspaceSymbolParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A special workspace symbol that supports locations without a range.  See also
@@ -1757,11 +4437,38 @@ type WorkspaceSymbol struct {
 	// location without a range depends on the client capability
 	// `workspace.symbol.resolveSupport`.  See SymbolInformation#location
 	// for more details.
-	Location WorkspaceSymbol_Location__Or `json:"location"`
+	Location *WorkspaceSymbol_Location__Or `json:"location"`
 
 	// A data entry field that is preserved on a workspace symbol between a
 	// workspace symbol request and a workspace symbol resolve request.
 	Data *LSPAny `json:"data"`
+}
+
+func (this *WorkspaceSymbol) UnmarshalJSON(data []byte) error {
+	type WorkspaceSymbolUnmarshal WorkspaceSymbol
+	var tmpUnmarshal WorkspaceSymbolUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Location == nil {
+		return StructureValidateFailed("WorkspaceSymbol")
+	}
+
+	*this = WorkspaceSymbol(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceSymbol) MarshalJSON() ([]byte, error) {
+
+	if this.Location == nil {
+		return nil, StructureValidateFailed("WorkspaceSymbol")
+	}
+
+	type WorkspaceSymbolMarshal WorkspaceSymbol
+	tmpMarshal := WorkspaceSymbolMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [WorkspaceSymbolRequest](#WorkspaceSymbolRequest).
@@ -1782,7 +4489,34 @@ type CodeLensParams struct {
 	PartialResultParams
 
 	// The document to request code lens for.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
+}
+
+func (this *CodeLensParams) UnmarshalJSON(data []byte) error {
+	type CodeLensParamsUnmarshal CodeLensParams
+	var tmpUnmarshal CodeLensParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("CodeLensParams")
+	}
+
+	*this = CodeLensParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *CodeLensParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("CodeLensParams")
+	}
+
+	type CodeLensParamsMarshal CodeLensParams
+	tmpMarshal := CodeLensParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A code lens represents a [command](#Command) that should be shown along with
@@ -1794,7 +4528,7 @@ type CodeLens struct {
 
 	// The range in which this code lens is valid. Should only span a single
 	// line.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The command this code lens represents.
 	Command *Command `json:"command"`
@@ -1803,6 +4537,33 @@ type CodeLens struct {
 	// [CodeLensRequest](#CodeLensRequest) and a [CodeLensResolveRequest]
 	// (#CodeLensResolveRequest)
 	Data *LSPAny `json:"data"`
+}
+
+func (this *CodeLens) UnmarshalJSON(data []byte) error {
+	type CodeLensUnmarshal CodeLens
+	var tmpUnmarshal CodeLensUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("CodeLens")
+	}
+
+	*this = CodeLens(tmpUnmarshal)
+	return nil
+}
+
+func (this *CodeLens) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("CodeLens")
+	}
+
+	type CodeLensMarshal CodeLens
+	tmpMarshal := CodeLensMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [CodeLensRequest](#CodeLensRequest).
@@ -1825,7 +4586,34 @@ type DocumentLinkParams struct {
 	PartialResultParams
 
 	// The document to provide document links for.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
+}
+
+func (this *DocumentLinkParams) UnmarshalJSON(data []byte) error {
+	type DocumentLinkParamsUnmarshal DocumentLinkParams
+	var tmpUnmarshal DocumentLinkParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DocumentLinkParams")
+	}
+
+	*this = DocumentLinkParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentLinkParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("DocumentLinkParams")
+	}
+
+	type DocumentLinkParamsMarshal DocumentLinkParams
+	tmpMarshal := DocumentLinkParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A document link is a range in a text document that links to an internal or
@@ -1833,7 +4621,7 @@ type DocumentLinkParams struct {
 type DocumentLink struct {
 
 	// The range this link applies to.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The uri this link points to. If missing a resolve request is sent
 	// later.
@@ -1849,6 +4637,33 @@ type DocumentLink struct {
 	// A data entry field that is preserved on a document link between a
 	// DocumentLinkRequest and a DocumentLinkResolveRequest.
 	Data *LSPAny `json:"data"`
+}
+
+func (this *DocumentLink) UnmarshalJSON(data []byte) error {
+	type DocumentLinkUnmarshal DocumentLink
+	var tmpUnmarshal DocumentLinkUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("DocumentLink")
+	}
+
+	*this = DocumentLink(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentLink) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("DocumentLink")
+	}
+
+	type DocumentLinkMarshal DocumentLink
+	tmpMarshal := DocumentLinkMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [DocumentLinkRequest](#DocumentLinkRequest).
@@ -1869,10 +4684,45 @@ type DocumentFormattingParams struct {
 	WorkDoneProgressParams
 
 	// The document to format.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The format options.
-	Options FormattingOptions `json:"options"`
+	Options *FormattingOptions `json:"options"`
+}
+
+func (this *DocumentFormattingParams) UnmarshalJSON(data []byte) error {
+	type DocumentFormattingParamsUnmarshal DocumentFormattingParams
+	var tmpUnmarshal DocumentFormattingParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DocumentFormattingParams")
+	}
+
+	if tmpUnmarshal.Options == nil {
+		return StructureValidateFailed("DocumentFormattingParams")
+	}
+
+	*this = DocumentFormattingParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentFormattingParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("DocumentFormattingParams")
+	}
+
+	if this.Options == nil {
+		return nil, StructureValidateFailed("DocumentFormattingParams")
+	}
+
+	type DocumentFormattingParamsMarshal DocumentFormattingParams
+	tmpMarshal := DocumentFormattingParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a
@@ -1895,13 +4745,62 @@ type DocumentRangeFormattingParams struct {
 	WorkDoneProgressParams
 
 	// The document to format.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The range to format
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The format options
-	Options FormattingOptions `json:"options"`
+	Options *FormattingOptions `json:"options"`
+}
+
+func (this *DocumentRangeFormattingParams) UnmarshalJSON(data []byte) error {
+	type DocumentRangeFormattingParamsUnmarshal DocumentRangeFormattingParams
+	var tmpUnmarshal DocumentRangeFormattingParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DocumentRangeFormattingParams")
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("DocumentRangeFormattingParams")
+	}
+
+	if tmpUnmarshal.Options == nil {
+		return StructureValidateFailed("DocumentRangeFormattingParams")
+	}
+
+	*this = DocumentRangeFormattingParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentRangeFormattingParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed(
+			"DocumentRangeFormattingParams",
+		)
+	}
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed(
+			"DocumentRangeFormattingParams",
+		)
+	}
+
+	if this.Options == nil {
+		return nil, StructureValidateFailed(
+			"DocumentRangeFormattingParams",
+		)
+	}
+
+	type DocumentRangeFormattingParamsMarshal DocumentRangeFormattingParams
+	tmpMarshal := DocumentRangeFormattingParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a
@@ -1920,21 +4819,80 @@ type DocumentRangeFormattingRegistrationOptions struct {
 type DocumentOnTypeFormattingParams struct {
 
 	// The document to format.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The position around which the on type formatting should happen. This
 	// is not necessarily the exact position where the character denoted by
 	// the property `ch` got typed.
-	Position Position `json:"position"`
+	Position *Position `json:"position"`
 
 	// The character that has been typed that triggered the formatting on
 	// type request. That is not necessarily the last character that got
 	// inserted into the document since the client could auto insert
 	// characters as well (e.g. like automatic brace completion).
-	Ch string `json:"ch"`
+	Ch *string `json:"ch"`
 
 	// The formatting options.
-	Options FormattingOptions `json:"options"`
+	Options *FormattingOptions `json:"options"`
+}
+
+func (this *DocumentOnTypeFormattingParams) UnmarshalJSON(data []byte) error {
+	type DocumentOnTypeFormattingParamsUnmarshal DocumentOnTypeFormattingParams
+	var tmpUnmarshal DocumentOnTypeFormattingParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("DocumentOnTypeFormattingParams")
+	}
+
+	if tmpUnmarshal.Position == nil {
+		return StructureValidateFailed("DocumentOnTypeFormattingParams")
+	}
+
+	if tmpUnmarshal.Ch == nil {
+		return StructureValidateFailed("DocumentOnTypeFormattingParams")
+	}
+
+	if tmpUnmarshal.Options == nil {
+		return StructureValidateFailed("DocumentOnTypeFormattingParams")
+	}
+
+	*this = DocumentOnTypeFormattingParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentOnTypeFormattingParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed(
+			"DocumentOnTypeFormattingParams",
+		)
+	}
+
+	if this.Position == nil {
+		return nil, StructureValidateFailed(
+			"DocumentOnTypeFormattingParams",
+		)
+	}
+
+	if this.Ch == nil {
+		return nil, StructureValidateFailed(
+			"DocumentOnTypeFormattingParams",
+		)
+	}
+
+	if this.Options == nil {
+		return nil, StructureValidateFailed(
+			"DocumentOnTypeFormattingParams",
+		)
+	}
+
+	type DocumentOnTypeFormattingParamsMarshal DocumentOnTypeFormattingParams
+	tmpMarshal := DocumentOnTypeFormattingParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a
@@ -1956,15 +4914,58 @@ type RenameParams struct {
 	WorkDoneProgressParams
 
 	// The document to rename.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The position at which this request was sent.
-	Position Position `json:"position"`
+	Position *Position `json:"position"`
 
 	// The new name of the symbol. If the given name is not valid the
 	// request must return a [ResponseError](#ResponseError) with an
 	// appropriate message set.
-	NewName string `json:"newName"`
+	NewName *string `json:"newName"`
+}
+
+func (this *RenameParams) UnmarshalJSON(data []byte) error {
+	type RenameParamsUnmarshal RenameParams
+	var tmpUnmarshal RenameParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("RenameParams")
+	}
+
+	if tmpUnmarshal.Position == nil {
+		return StructureValidateFailed("RenameParams")
+	}
+
+	if tmpUnmarshal.NewName == nil {
+		return StructureValidateFailed("RenameParams")
+	}
+
+	*this = RenameParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *RenameParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("RenameParams")
+	}
+
+	if this.Position == nil {
+		return nil, StructureValidateFailed("RenameParams")
+	}
+
+	if this.NewName == nil {
+		return nil, StructureValidateFailed("RenameParams")
+	}
+
+	type RenameParamsMarshal RenameParams
+	tmpMarshal := RenameParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [RenameRequest](#RenameRequest).
@@ -1996,10 +4997,37 @@ type ExecuteCommandParams struct {
 	WorkDoneProgressParams
 
 	// The identifier of the actual command handler.
-	Command string `json:"command"`
+	Command *string `json:"command"`
 
 	// Arguments that the command should be invoked with.
-	Arguments *[]LSPAny `json:"arguments"`
+	Arguments []LSPAny `json:"arguments"`
+}
+
+func (this *ExecuteCommandParams) UnmarshalJSON(data []byte) error {
+	type ExecuteCommandParamsUnmarshal ExecuteCommandParams
+	var tmpUnmarshal ExecuteCommandParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Command == nil {
+		return StructureValidateFailed("ExecuteCommandParams")
+	}
+
+	*this = ExecuteCommandParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ExecuteCommandParams) MarshalJSON() ([]byte, error) {
+
+	if this.Command == nil {
+		return nil, StructureValidateFailed("ExecuteCommandParams")
+	}
+
+	type ExecuteCommandParamsMarshal ExecuteCommandParams
+	tmpMarshal := ExecuteCommandParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Registration options for a [ExecuteCommandRequest](#ExecuteCommandRequest).
@@ -2019,7 +5047,34 @@ type ApplyWorkspaceEditParams struct {
 	Label *string `json:"label"`
 
 	// The edits to apply.
-	Edit WorkspaceEdit `json:"edit"`
+	Edit *WorkspaceEdit `json:"edit"`
+}
+
+func (this *ApplyWorkspaceEditParams) UnmarshalJSON(data []byte) error {
+	type ApplyWorkspaceEditParamsUnmarshal ApplyWorkspaceEditParams
+	var tmpUnmarshal ApplyWorkspaceEditParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Edit == nil {
+		return StructureValidateFailed("ApplyWorkspaceEditParams")
+	}
+
+	*this = ApplyWorkspaceEditParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ApplyWorkspaceEditParams) MarshalJSON() ([]byte, error) {
+
+	if this.Edit == nil {
+		return nil, StructureValidateFailed("ApplyWorkspaceEditParams")
+	}
+
+	type ApplyWorkspaceEditParamsMarshal ApplyWorkspaceEditParams
+	tmpMarshal := ApplyWorkspaceEditParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The result returned from the apply workspace edit request.  @since 3.17
@@ -2027,7 +5082,7 @@ type ApplyWorkspaceEditParams struct {
 type ApplyWorkspaceEditResult struct {
 
 	// Indicates whether the edit was applied or not.
-	Applied bool `json:"applied"`
+	Applied *bool `json:"applied"`
 
 	// An optional textual description for why the edit was not applied.
 	// This may be used by the server for diagnostic logging or to provide a
@@ -2041,13 +5096,40 @@ type ApplyWorkspaceEditResult struct {
 	FailedChange *uint64 `json:"failedChange"`
 }
 
+func (this *ApplyWorkspaceEditResult) UnmarshalJSON(data []byte) error {
+	type ApplyWorkspaceEditResultUnmarshal ApplyWorkspaceEditResult
+	var tmpUnmarshal ApplyWorkspaceEditResultUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Applied == nil {
+		return StructureValidateFailed("ApplyWorkspaceEditResult")
+	}
+
+	*this = ApplyWorkspaceEditResult(tmpUnmarshal)
+	return nil
+}
+
+func (this *ApplyWorkspaceEditResult) MarshalJSON() ([]byte, error) {
+
+	if this.Applied == nil {
+		return nil, StructureValidateFailed("ApplyWorkspaceEditResult")
+	}
+
+	type ApplyWorkspaceEditResultMarshal ApplyWorkspaceEditResult
+	tmpMarshal := ApplyWorkspaceEditResultMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type WorkDoneProgressBegin struct {
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// Mandatory title of the progress operation. Used to briefly inform
 	// about the kind of operation being performed.  Examples: "Indexing" or
 	// "Linking dependencies".
-	Title string `json:"title"`
+	Title *string `json:"title"`
 
 	// Controls if a cancel button should show to allow the user to cancel
 	// the long running operation. Clients that don't support cancellation
@@ -2069,8 +5151,43 @@ type WorkDoneProgressBegin struct {
 	Percentage *uint64 `json:"percentage"`
 }
 
+func (this *WorkDoneProgressBegin) UnmarshalJSON(data []byte) error {
+	type WorkDoneProgressBeginUnmarshal WorkDoneProgressBegin
+	var tmpUnmarshal WorkDoneProgressBeginUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("WorkDoneProgressBegin")
+	}
+
+	if tmpUnmarshal.Title == nil {
+		return StructureValidateFailed("WorkDoneProgressBegin")
+	}
+
+	*this = WorkDoneProgressBegin(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkDoneProgressBegin) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("WorkDoneProgressBegin")
+	}
+
+	if this.Title == nil {
+		return nil, StructureValidateFailed("WorkDoneProgressBegin")
+	}
+
+	type WorkDoneProgressBeginMarshal WorkDoneProgressBegin
+	tmpMarshal := WorkDoneProgressBeginMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type WorkDoneProgressReport struct {
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// Controls enablement state of a cancel button.  Clients that don't
 	// support cancellation or don't support controlling the button's
@@ -2092,37 +5209,207 @@ type WorkDoneProgressReport struct {
 	Percentage *uint64 `json:"percentage"`
 }
 
+func (this *WorkDoneProgressReport) UnmarshalJSON(data []byte) error {
+	type WorkDoneProgressReportUnmarshal WorkDoneProgressReport
+	var tmpUnmarshal WorkDoneProgressReportUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("WorkDoneProgressReport")
+	}
+
+	*this = WorkDoneProgressReport(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkDoneProgressReport) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("WorkDoneProgressReport")
+	}
+
+	type WorkDoneProgressReportMarshal WorkDoneProgressReport
+	tmpMarshal := WorkDoneProgressReportMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type WorkDoneProgressEnd struct {
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// Optional, a final message indicating to for example indicate the
 	// outcome of the operation.
 	Message *string `json:"message"`
 }
 
+func (this *WorkDoneProgressEnd) UnmarshalJSON(data []byte) error {
+	type WorkDoneProgressEndUnmarshal WorkDoneProgressEnd
+	var tmpUnmarshal WorkDoneProgressEndUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("WorkDoneProgressEnd")
+	}
+
+	*this = WorkDoneProgressEnd(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkDoneProgressEnd) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("WorkDoneProgressEnd")
+	}
+
+	type WorkDoneProgressEndMarshal WorkDoneProgressEnd
+	tmpMarshal := WorkDoneProgressEndMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type SetTraceParams struct {
-	Value TraceValues `json:"value"`
+	Value *TraceValues `json:"value"`
+}
+
+func (this *SetTraceParams) UnmarshalJSON(data []byte) error {
+	type SetTraceParamsUnmarshal SetTraceParams
+	var tmpUnmarshal SetTraceParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Value == nil {
+		return StructureValidateFailed("SetTraceParams")
+	}
+
+	*this = SetTraceParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *SetTraceParams) MarshalJSON() ([]byte, error) {
+
+	if this.Value == nil {
+		return nil, StructureValidateFailed("SetTraceParams")
+	}
+
+	type SetTraceParamsMarshal SetTraceParams
+	tmpMarshal := SetTraceParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type LogTraceParams struct {
-	Message string `json:"message"`
+	Message *string `json:"message"`
 
 	Verbose *string `json:"verbose"`
+}
+
+func (this *LogTraceParams) UnmarshalJSON(data []byte) error {
+	type LogTraceParamsUnmarshal LogTraceParams
+	var tmpUnmarshal LogTraceParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Message == nil {
+		return StructureValidateFailed("LogTraceParams")
+	}
+
+	*this = LogTraceParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *LogTraceParams) MarshalJSON() ([]byte, error) {
+
+	if this.Message == nil {
+		return nil, StructureValidateFailed("LogTraceParams")
+	}
+
+	type LogTraceParamsMarshal LogTraceParams
+	tmpMarshal := LogTraceParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type CancelParams struct {
 
 	// The request id to cancel.
-	Id CancelParams_Id__Or `json:"id"`
+	Id *CancelParams_Id__Or `json:"id"`
+}
+
+func (this *CancelParams) UnmarshalJSON(data []byte) error {
+	type CancelParamsUnmarshal CancelParams
+	var tmpUnmarshal CancelParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Id == nil {
+		return StructureValidateFailed("CancelParams")
+	}
+
+	*this = CancelParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *CancelParams) MarshalJSON() ([]byte, error) {
+
+	if this.Id == nil {
+		return nil, StructureValidateFailed("CancelParams")
+	}
+
+	type CancelParamsMarshal CancelParams
+	tmpMarshal := CancelParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type ProgressParams struct {
 
 	// The progress token provided by the client or server.
-	Token ProgressToken `json:"token"`
+	Token *ProgressToken `json:"token"`
 
 	// The progress data.
-	Value LSPAny `json:"value"`
+	Value *LSPAny `json:"value"`
+}
+
+func (this *ProgressParams) UnmarshalJSON(data []byte) error {
+	type ProgressParamsUnmarshal ProgressParams
+	var tmpUnmarshal ProgressParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Token == nil {
+		return StructureValidateFailed("ProgressParams")
+	}
+
+	if tmpUnmarshal.Value == nil {
+		return StructureValidateFailed("ProgressParams")
+	}
+
+	*this = ProgressParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *ProgressParams) MarshalJSON() ([]byte, error) {
+
+	if this.Token == nil {
+		return nil, StructureValidateFailed("ProgressParams")
+	}
+
+	if this.Value == nil {
+		return nil, StructureValidateFailed("ProgressParams")
+	}
+
+	type ProgressParamsMarshal ProgressParams
+	tmpMarshal := ProgressParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A parameter literal used in requests to pass a text document and a position
@@ -2130,10 +5417,49 @@ type ProgressParams struct {
 type TextDocumentPositionParams struct {
 
 	// The text document.
-	TextDocument TextDocumentIdentifier `json:"textDocument"`
+	TextDocument *TextDocumentIdentifier `json:"textDocument"`
 
 	// The position inside the text document.
-	Position Position `json:"position"`
+	Position *Position `json:"position"`
+}
+
+func (this *TextDocumentPositionParams) UnmarshalJSON(data []byte) error {
+	type TextDocumentPositionParamsUnmarshal TextDocumentPositionParams
+	var tmpUnmarshal TextDocumentPositionParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("TextDocumentPositionParams")
+	}
+
+	if tmpUnmarshal.Position == nil {
+		return StructureValidateFailed("TextDocumentPositionParams")
+	}
+
+	*this = TextDocumentPositionParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *TextDocumentPositionParams) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed(
+			"TextDocumentPositionParams",
+		)
+	}
+
+	if this.Position == nil {
+		return nil, StructureValidateFailed(
+			"TextDocumentPositionParams",
+		)
+	}
+
+	type TextDocumentPositionParamsMarshal TextDocumentPositionParams
+	tmpMarshal := TextDocumentPositionParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type WorkDoneProgressParams struct {
@@ -2152,19 +5478,62 @@ type LocationLink struct {
 	OriginSelectionRange *Range `json:"originSelectionRange"`
 
 	// The target resource identifier of this link.
-	TargetUri DocumentUri `json:"targetUri"`
+	TargetUri *DocumentUri `json:"targetUri"`
 
 	// The full target range of this link. If the target for example is a
 	// symbol then target range is the range enclosing this symbol not
 	// including leading/trailing whitespace but everything else like
 	// comments. This information is typically used to highlight the range
 	// in the editor.
-	TargetRange Range `json:"targetRange"`
+	TargetRange *Range `json:"targetRange"`
 
 	// The range that should be selected and revealed when this link is
 	// being followed, e.g the name of a function. Must be contained by the
 	// `targetRange`. See also `DocumentSymbol#range`
-	TargetSelectionRange Range `json:"targetSelectionRange"`
+	TargetSelectionRange *Range `json:"targetSelectionRange"`
+}
+
+func (this *LocationLink) UnmarshalJSON(data []byte) error {
+	type LocationLinkUnmarshal LocationLink
+	var tmpUnmarshal LocationLinkUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TargetUri == nil {
+		return StructureValidateFailed("LocationLink")
+	}
+
+	if tmpUnmarshal.TargetRange == nil {
+		return StructureValidateFailed("LocationLink")
+	}
+
+	if tmpUnmarshal.TargetSelectionRange == nil {
+		return StructureValidateFailed("LocationLink")
+	}
+
+	*this = LocationLink(tmpUnmarshal)
+	return nil
+}
+
+func (this *LocationLink) MarshalJSON() ([]byte, error) {
+
+	if this.TargetUri == nil {
+		return nil, StructureValidateFailed("LocationLink")
+	}
+
+	if this.TargetRange == nil {
+		return nil, StructureValidateFailed("LocationLink")
+	}
+
+	if this.TargetSelectionRange == nil {
+		return nil, StructureValidateFailed("LocationLink")
+	}
+
+	type LocationLinkMarshal LocationLink
+	tmpMarshal := LocationLinkMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A range in a text document expressed as (zero-based) start and end positions.
@@ -2177,10 +5546,45 @@ type LocationLink struct {
 type Range struct {
 
 	// The range's start position.
-	Start Position `json:"start"`
+	Start *Position `json:"start"`
 
 	// The range's end position.
-	End Position `json:"end"`
+	End *Position `json:"end"`
+}
+
+func (this *Range) UnmarshalJSON(data []byte) error {
+	type RangeUnmarshal Range
+	var tmpUnmarshal RangeUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Start == nil {
+		return StructureValidateFailed("Range")
+	}
+
+	if tmpUnmarshal.End == nil {
+		return StructureValidateFailed("Range")
+	}
+
+	*this = Range(tmpUnmarshal)
+	return nil
+}
+
+func (this *Range) MarshalJSON() ([]byte, error) {
+
+	if this.Start == nil {
+		return nil, StructureValidateFailed("Range")
+	}
+
+	if this.End == nil {
+		return nil, StructureValidateFailed("Range")
+	}
+
+	type RangeMarshal Range
+	tmpMarshal := RangeMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type ImplementationOptions struct {
@@ -2215,6 +5619,45 @@ type WorkspaceFoldersChangeEvent struct {
 	Removed []WorkspaceFolder `json:"removed"`
 }
 
+func (this *WorkspaceFoldersChangeEvent) UnmarshalJSON(data []byte) error {
+	type WorkspaceFoldersChangeEventUnmarshal WorkspaceFoldersChangeEvent
+	var tmpUnmarshal WorkspaceFoldersChangeEventUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Added == nil {
+		return StructureValidateFailed("WorkspaceFoldersChangeEvent")
+	}
+
+	if tmpUnmarshal.Removed == nil {
+		return StructureValidateFailed("WorkspaceFoldersChangeEvent")
+	}
+
+	*this = WorkspaceFoldersChangeEvent(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceFoldersChangeEvent) MarshalJSON() ([]byte, error) {
+
+	if this.Added == nil {
+		return nil, StructureValidateFailed(
+			"WorkspaceFoldersChangeEvent",
+		)
+	}
+
+	if this.Removed == nil {
+		return nil, StructureValidateFailed(
+			"WorkspaceFoldersChangeEvent",
+		)
+	}
+
+	type WorkspaceFoldersChangeEventMarshal WorkspaceFoldersChangeEvent
+	tmpMarshal := WorkspaceFoldersChangeEventMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type ConfigurationItem struct {
 
 	// The scope to get the configuration section for.
@@ -2228,23 +5671,101 @@ type ConfigurationItem struct {
 type TextDocumentIdentifier struct {
 
 	// The text document's uri.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
+}
+
+func (this *TextDocumentIdentifier) UnmarshalJSON(data []byte) error {
+	type TextDocumentIdentifierUnmarshal TextDocumentIdentifier
+	var tmpUnmarshal TextDocumentIdentifierUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("TextDocumentIdentifier")
+	}
+
+	*this = TextDocumentIdentifier(tmpUnmarshal)
+	return nil
+}
+
+func (this *TextDocumentIdentifier) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("TextDocumentIdentifier")
+	}
+
+	type TextDocumentIdentifierMarshal TextDocumentIdentifier
+	tmpMarshal := TextDocumentIdentifierMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents a color in RGBA space.
 type Color struct {
 
 	// The red component of this color in the range [0-1].
-	Red float64 `json:"red"`
+	Red *float64 `json:"red"`
 
 	// The green component of this color in the range [0-1].
-	Green float64 `json:"green"`
+	Green *float64 `json:"green"`
 
 	// The blue component of this color in the range [0-1].
-	Blue float64 `json:"blue"`
+	Blue *float64 `json:"blue"`
 
 	// The alpha component of this color in the range [0-1].
-	Alpha float64 `json:"alpha"`
+	Alpha *float64 `json:"alpha"`
+}
+
+func (this *Color) UnmarshalJSON(data []byte) error {
+	type ColorUnmarshal Color
+	var tmpUnmarshal ColorUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Red == nil {
+		return StructureValidateFailed("Color")
+	}
+
+	if tmpUnmarshal.Green == nil {
+		return StructureValidateFailed("Color")
+	}
+
+	if tmpUnmarshal.Blue == nil {
+		return StructureValidateFailed("Color")
+	}
+
+	if tmpUnmarshal.Alpha == nil {
+		return StructureValidateFailed("Color")
+	}
+
+	*this = Color(tmpUnmarshal)
+	return nil
+}
+
+func (this *Color) MarshalJSON() ([]byte, error) {
+
+	if this.Red == nil {
+		return nil, StructureValidateFailed("Color")
+	}
+
+	if this.Green == nil {
+		return nil, StructureValidateFailed("Color")
+	}
+
+	if this.Blue == nil {
+		return nil, StructureValidateFailed("Color")
+	}
+
+	if this.Alpha == nil {
+		return nil, StructureValidateFailed("Color")
+	}
+
+	type ColorMarshal Color
+	tmpMarshal := ColorMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type DocumentColorOptions struct {
@@ -2298,13 +5819,48 @@ type Position struct {
 	// greater than the number of lines in a document, it defaults back to
 	// the number of lines in the document. If a line number is negative, it
 	// defaults to 0.
-	Line uint64 `json:"line"`
+	Line *uint64 `json:"line"`
 
 	// Character offset on a line in a document (zero-based).  The meaning
 	// of this offset is determined by the negotiated
 	// `PositionEncodingKind`.  If the character value is greater than the
 	// line length it defaults back to the line length.
-	Character uint64 `json:"character"`
+	Character *uint64 `json:"character"`
+}
+
+func (this *Position) UnmarshalJSON(data []byte) error {
+	type PositionUnmarshal Position
+	var tmpUnmarshal PositionUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Line == nil {
+		return StructureValidateFailed("Position")
+	}
+
+	if tmpUnmarshal.Character == nil {
+		return StructureValidateFailed("Position")
+	}
+
+	*this = Position(tmpUnmarshal)
+	return nil
+}
+
+func (this *Position) MarshalJSON() ([]byte, error) {
+
+	if this.Line == nil {
+		return nil, StructureValidateFailed("Position")
+	}
+
+	if this.Character == nil {
+		return nil, StructureValidateFailed("Position")
+	}
+
+	type PositionMarshal Position
+	tmpMarshal := PositionMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type SelectionRangeOptions struct {
@@ -2330,7 +5886,7 @@ type SemanticTokensOptions struct {
 	WorkDoneProgressOptions
 
 	// The legend used by the server
-	Legend SemanticTokensLegend `json:"legend"`
+	Legend *SemanticTokensLegend `json:"legend"`
 
 	// Server supports providing semantic tokens for a specific range of a
 	// document.
@@ -2340,17 +5896,79 @@ type SemanticTokensOptions struct {
 	Full *SemanticTokensOptions_Full__Or `json:"full"`
 }
 
+func (this *SemanticTokensOptions) UnmarshalJSON(data []byte) error {
+	type SemanticTokensOptionsUnmarshal SemanticTokensOptions
+	var tmpUnmarshal SemanticTokensOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Legend == nil {
+		return StructureValidateFailed("SemanticTokensOptions")
+	}
+
+	*this = SemanticTokensOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensOptions) MarshalJSON() ([]byte, error) {
+
+	if this.Legend == nil {
+		return nil, StructureValidateFailed("SemanticTokensOptions")
+	}
+
+	type SemanticTokensOptionsMarshal SemanticTokensOptions
+	tmpMarshal := SemanticTokensOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // @since 3.16.0
 type SemanticTokensEdit struct {
 
 	// The start offset of the edit.
-	Start uint64 `json:"start"`
+	Start *uint64 `json:"start"`
 
 	// The count of elements to remove.
-	DeleteCount uint64 `json:"deleteCount"`
+	DeleteCount *uint64 `json:"deleteCount"`
 
 	// The elements to insert.
-	Data *[]uint64 `json:"data"`
+	Data []uint64 `json:"data"`
+}
+
+func (this *SemanticTokensEdit) UnmarshalJSON(data []byte) error {
+	type SemanticTokensEditUnmarshal SemanticTokensEdit
+	var tmpUnmarshal SemanticTokensEditUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Start == nil {
+		return StructureValidateFailed("SemanticTokensEdit")
+	}
+
+	if tmpUnmarshal.DeleteCount == nil {
+		return StructureValidateFailed("SemanticTokensEdit")
+	}
+
+	*this = SemanticTokensEdit(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensEdit) MarshalJSON() ([]byte, error) {
+
+	if this.Start == nil {
+		return nil, StructureValidateFailed("SemanticTokensEdit")
+	}
+
+	if this.DeleteCount == nil {
+		return nil, StructureValidateFailed("SemanticTokensEdit")
+	}
+
+	type SemanticTokensEditMarshal SemanticTokensEdit
+	tmpMarshal := SemanticTokensEditMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type LinkedEditingRangeOptions struct {
@@ -2364,7 +5982,34 @@ type LinkedEditingRangeOptions struct {
 type FileCreate struct {
 
 	// A file:// URI for the location of the file/folder being created.
-	Uri string `json:"uri"`
+	Uri *string `json:"uri"`
+}
+
+func (this *FileCreate) UnmarshalJSON(data []byte) error {
+	type FileCreateUnmarshal FileCreate
+	var tmpUnmarshal FileCreateUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("FileCreate")
+	}
+
+	*this = FileCreate(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileCreate) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("FileCreate")
+	}
+
+	type FileCreateMarshal FileCreate
+	tmpMarshal := FileCreateMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Describes textual changes on a text document. A TextDocumentEdit describes
@@ -2375,11 +6020,46 @@ type FileCreate struct {
 type TextDocumentEdit struct {
 
 	// The text document to change.
-	TextDocument OptionalVersionedTextDocumentIdentifier `json:"textDocument"`
+	TextDocument *OptionalVersionedTextDocumentIdentifier `json:"textDocument"`
 
 	// The edits to be applied.  @since 3.16.0 - support for
 	// AnnotatedTextEdit. This is guarded using a client capability.
 	Edits []TextDocumentEdit_Edits_Element__Or `json:"edits"`
+}
+
+func (this *TextDocumentEdit) UnmarshalJSON(data []byte) error {
+	type TextDocumentEditUnmarshal TextDocumentEdit
+	var tmpUnmarshal TextDocumentEditUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TextDocument == nil {
+		return StructureValidateFailed("TextDocumentEdit")
+	}
+
+	if tmpUnmarshal.Edits == nil {
+		return StructureValidateFailed("TextDocumentEdit")
+	}
+
+	*this = TextDocumentEdit(tmpUnmarshal)
+	return nil
+}
+
+func (this *TextDocumentEdit) MarshalJSON() ([]byte, error) {
+
+	if this.TextDocument == nil {
+		return nil, StructureValidateFailed("TextDocumentEdit")
+	}
+
+	if this.Edits == nil {
+		return nil, StructureValidateFailed("TextDocumentEdit")
+	}
+
+	type TextDocumentEditMarshal TextDocumentEdit
+	tmpMarshal := TextDocumentEditMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Create file operation.
@@ -2390,13 +6070,48 @@ type CreateFile struct {
 	ResourceOperation
 
 	// A create
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// The resource to create.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// Additional options
 	Options *CreateFileOptions `json:"options"`
+}
+
+func (this *CreateFile) UnmarshalJSON(data []byte) error {
+	type CreateFileUnmarshal CreateFile
+	var tmpUnmarshal CreateFileUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("CreateFile")
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("CreateFile")
+	}
+
+	*this = CreateFile(tmpUnmarshal)
+	return nil
+}
+
+func (this *CreateFile) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("CreateFile")
+	}
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("CreateFile")
+	}
+
+	type CreateFileMarshal CreateFile
+	tmpMarshal := CreateFileMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Rename file operation
@@ -2407,16 +6122,59 @@ type RenameFile struct {
 	ResourceOperation
 
 	// A rename
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// The old (existing) location.
-	OldUri DocumentUri `json:"oldUri"`
+	OldUri *DocumentUri `json:"oldUri"`
 
 	// The new location.
-	NewUri DocumentUri `json:"newUri"`
+	NewUri *DocumentUri `json:"newUri"`
 
 	// Rename options.
 	Options *RenameFileOptions `json:"options"`
+}
+
+func (this *RenameFile) UnmarshalJSON(data []byte) error {
+	type RenameFileUnmarshal RenameFile
+	var tmpUnmarshal RenameFileUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("RenameFile")
+	}
+
+	if tmpUnmarshal.OldUri == nil {
+		return StructureValidateFailed("RenameFile")
+	}
+
+	if tmpUnmarshal.NewUri == nil {
+		return StructureValidateFailed("RenameFile")
+	}
+
+	*this = RenameFile(tmpUnmarshal)
+	return nil
+}
+
+func (this *RenameFile) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("RenameFile")
+	}
+
+	if this.OldUri == nil {
+		return nil, StructureValidateFailed("RenameFile")
+	}
+
+	if this.NewUri == nil {
+		return nil, StructureValidateFailed("RenameFile")
+	}
+
+	type RenameFileMarshal RenameFile
+	tmpMarshal := RenameFileMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Delete file operation
@@ -2427,13 +6185,48 @@ type DeleteFile struct {
 	ResourceOperation
 
 	// A delete
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// The file to delete.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// Delete options.
 	Options *DeleteFileOptions `json:"options"`
+}
+
+func (this *DeleteFile) UnmarshalJSON(data []byte) error {
+	type DeleteFileUnmarshal DeleteFile
+	var tmpUnmarshal DeleteFileUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("DeleteFile")
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("DeleteFile")
+	}
+
+	*this = DeleteFile(tmpUnmarshal)
+	return nil
+}
+
+func (this *DeleteFile) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("DeleteFile")
+	}
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("DeleteFile")
+	}
+
+	type DeleteFileMarshal DeleteFile
+	tmpMarshal := DeleteFileMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Additional information that describes document changes.  @since 3.16.0
@@ -2441,7 +6234,7 @@ type ChangeAnnotation struct {
 
 	// A human-readable string describing the actual change. The string is
 	// rendered prominent in the user interface.
-	Label string `json:"label"`
+	Label *string `json:"label"`
 
 	// A flag which indicates that user confirmation is needed before
 	// applying the change.
@@ -2452,6 +6245,33 @@ type ChangeAnnotation struct {
 	Description *string `json:"description"`
 }
 
+func (this *ChangeAnnotation) UnmarshalJSON(data []byte) error {
+	type ChangeAnnotationUnmarshal ChangeAnnotation
+	var tmpUnmarshal ChangeAnnotationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Label == nil {
+		return StructureValidateFailed("ChangeAnnotation")
+	}
+
+	*this = ChangeAnnotation(tmpUnmarshal)
+	return nil
+}
+
+func (this *ChangeAnnotation) MarshalJSON() ([]byte, error) {
+
+	if this.Label == nil {
+		return nil, StructureValidateFailed("ChangeAnnotation")
+	}
+
+	type ChangeAnnotationMarshal ChangeAnnotation
+	tmpMarshal := ChangeAnnotationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // A filter to describe in which file operation requests or notifications the
 // server is interested in receiving.  @since 3.16.0
 type FileOperationFilter struct {
@@ -2460,7 +6280,34 @@ type FileOperationFilter struct {
 	Scheme *string `json:"scheme"`
 
 	// The actual file operation pattern.
-	Pattern FileOperationPattern `json:"pattern"`
+	Pattern *FileOperationPattern `json:"pattern"`
+}
+
+func (this *FileOperationFilter) UnmarshalJSON(data []byte) error {
+	type FileOperationFilterUnmarshal FileOperationFilter
+	var tmpUnmarshal FileOperationFilterUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Pattern == nil {
+		return StructureValidateFailed("FileOperationFilter")
+	}
+
+	*this = FileOperationFilter(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileOperationFilter) MarshalJSON() ([]byte, error) {
+
+	if this.Pattern == nil {
+		return nil, StructureValidateFailed("FileOperationFilter")
+	}
+
+	type FileOperationFilterMarshal FileOperationFilter
+	tmpMarshal := FileOperationFilterMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents information on a file/folder rename.  @since 3.16.0
@@ -2468,17 +6315,79 @@ type FileRename struct {
 
 	// A file:// URI for the original location of the file/folder being
 	// renamed.
-	OldUri string `json:"oldUri"`
+	OldUri *string `json:"oldUri"`
 
 	// A file:// URI for the new location of the file/folder being renamed.
-	NewUri string `json:"newUri"`
+	NewUri *string `json:"newUri"`
+}
+
+func (this *FileRename) UnmarshalJSON(data []byte) error {
+	type FileRenameUnmarshal FileRename
+	var tmpUnmarshal FileRenameUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.OldUri == nil {
+		return StructureValidateFailed("FileRename")
+	}
+
+	if tmpUnmarshal.NewUri == nil {
+		return StructureValidateFailed("FileRename")
+	}
+
+	*this = FileRename(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileRename) MarshalJSON() ([]byte, error) {
+
+	if this.OldUri == nil {
+		return nil, StructureValidateFailed("FileRename")
+	}
+
+	if this.NewUri == nil {
+		return nil, StructureValidateFailed("FileRename")
+	}
+
+	type FileRenameMarshal FileRename
+	tmpMarshal := FileRenameMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents information on a file/folder delete.  @since 3.16.0
 type FileDelete struct {
 
 	// A file:// URI for the location of the file/folder being deleted.
-	Uri string `json:"uri"`
+	Uri *string `json:"uri"`
+}
+
+func (this *FileDelete) UnmarshalJSON(data []byte) error {
+	type FileDeleteUnmarshal FileDelete
+	var tmpUnmarshal FileDeleteUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("FileDelete")
+	}
+
+	*this = FileDelete(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileDelete) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("FileDelete")
+	}
+
+	type FileDeleteMarshal FileDelete
+	tmpMarshal := FileDeleteMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type MonikerOptions struct {
@@ -2500,22 +6409,92 @@ type TypeHierarchyOptions struct {
 type InlineValueContext struct {
 
 	// The stack frame (as a DAP Id) where the execution has stopped.
-	FrameId int64 `json:"frameId"`
+	FrameId *int64 `json:"frameId"`
 
 	// The document range where execution has stopped. Typically the end
 	// position of the range denotes the line where the inline values are
 	// shown.
-	StoppedLocation Range `json:"stoppedLocation"`
+	StoppedLocation *Range `json:"stoppedLocation"`
+}
+
+func (this *InlineValueContext) UnmarshalJSON(data []byte) error {
+	type InlineValueContextUnmarshal InlineValueContext
+	var tmpUnmarshal InlineValueContextUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.FrameId == nil {
+		return StructureValidateFailed("InlineValueContext")
+	}
+
+	if tmpUnmarshal.StoppedLocation == nil {
+		return StructureValidateFailed("InlineValueContext")
+	}
+
+	*this = InlineValueContext(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlineValueContext) MarshalJSON() ([]byte, error) {
+
+	if this.FrameId == nil {
+		return nil, StructureValidateFailed("InlineValueContext")
+	}
+
+	if this.StoppedLocation == nil {
+		return nil, StructureValidateFailed("InlineValueContext")
+	}
+
+	type InlineValueContextMarshal InlineValueContext
+	tmpMarshal := InlineValueContextMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Provide inline value as text.  @since 3.17.0
 type InlineValueText struct {
 
 	// The document range for which the inline value applies.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The text of the inline value.
-	Text string `json:"text"`
+	Text *string `json:"text"`
+}
+
+func (this *InlineValueText) UnmarshalJSON(data []byte) error {
+	type InlineValueTextUnmarshal InlineValueText
+	var tmpUnmarshal InlineValueTextUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("InlineValueText")
+	}
+
+	if tmpUnmarshal.Text == nil {
+		return StructureValidateFailed("InlineValueText")
+	}
+
+	*this = InlineValueText(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlineValueText) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("InlineValueText")
+	}
+
+	if this.Text == nil {
+		return nil, StructureValidateFailed("InlineValueText")
+	}
+
+	type InlineValueTextMarshal InlineValueText
+	tmpMarshal := InlineValueTextMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Provide inline value through a variable lookup. If only a range is specified,
@@ -2525,13 +6504,48 @@ type InlineValueVariableLookup struct {
 
 	// The document range for which the inline value applies. The range is
 	// used to extract the variable name from the underlying document.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// If specified the name of the variable to look up.
 	VariableName *string `json:"variableName"`
 
 	// How to perform the lookup.
-	CaseSensitiveLookup bool `json:"caseSensitiveLookup"`
+	CaseSensitiveLookup *bool `json:"caseSensitiveLookup"`
+}
+
+func (this *InlineValueVariableLookup) UnmarshalJSON(data []byte) error {
+	type InlineValueVariableLookupUnmarshal InlineValueVariableLookup
+	var tmpUnmarshal InlineValueVariableLookupUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("InlineValueVariableLookup")
+	}
+
+	if tmpUnmarshal.CaseSensitiveLookup == nil {
+		return StructureValidateFailed("InlineValueVariableLookup")
+	}
+
+	*this = InlineValueVariableLookup(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlineValueVariableLookup) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("InlineValueVariableLookup")
+	}
+
+	if this.CaseSensitiveLookup == nil {
+		return nil, StructureValidateFailed("InlineValueVariableLookup")
+	}
+
+	type InlineValueVariableLookupMarshal InlineValueVariableLookup
+	tmpMarshal := InlineValueVariableLookupMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Provide an inline value through an expression evaluation. If only a range is
@@ -2543,10 +6557,41 @@ type InlineValueEvaluatableExpression struct {
 	// The document range for which the inline value applies. The range is
 	// used to extract the evaluatable expression from the underlying
 	// document.
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// If specified the expression overrides the extracted expression.
 	Expression *string `json:"expression"`
+}
+
+func (this *InlineValueEvaluatableExpression) UnmarshalJSON(data []byte) error {
+	type InlineValueEvaluatableExpressionUnmarshal InlineValueEvaluatableExpression
+	var tmpUnmarshal InlineValueEvaluatableExpressionUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed(
+			"InlineValueEvaluatableExpression",
+		)
+	}
+
+	*this = InlineValueEvaluatableExpression(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlineValueEvaluatableExpression) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed(
+			"InlineValueEvaluatableExpression",
+		)
+	}
+
+	type InlineValueEvaluatableExpressionMarshal InlineValueEvaluatableExpression
+	tmpMarshal := InlineValueEvaluatableExpressionMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Inline value options used during static registration.  @since 3.17.0
@@ -2562,7 +6607,7 @@ type InlineValueOptions struct {
 type InlayHintLabelPart struct {
 
 	// The value of this label part.
-	Value string `json:"value"`
+	Value *string `json:"value"`
 
 	// The tooltip text when you hover over this label part. Depending on
 	// the client capability `inlayHint.resolveSupport` clients might
@@ -2586,6 +6631,33 @@ type InlayHintLabelPart struct {
 	Command *Command `json:"command"`
 }
 
+func (this *InlayHintLabelPart) UnmarshalJSON(data []byte) error {
+	type InlayHintLabelPartUnmarshal InlayHintLabelPart
+	var tmpUnmarshal InlayHintLabelPartUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Value == nil {
+		return StructureValidateFailed("InlayHintLabelPart")
+	}
+
+	*this = InlayHintLabelPart(tmpUnmarshal)
+	return nil
+}
+
+func (this *InlayHintLabelPart) MarshalJSON() ([]byte, error) {
+
+	if this.Value == nil {
+		return nil, StructureValidateFailed("InlayHintLabelPart")
+	}
+
+	type InlayHintLabelPartMarshal InlayHintLabelPart
+	tmpMarshal := InlayHintLabelPartMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // A `MarkupContent` literal represents a string value which content is
 // interpreted base on its kind flag. Currently the protocol supports
 // `plaintext` and `markdown` as markup kinds.  If the kind is `markdown` then
@@ -2602,10 +6674,45 @@ type InlayHintLabelPart struct {
 type MarkupContent struct {
 
 	// The type of the Markup
-	Kind MarkupKind `json:"kind"`
+	Kind *MarkupKind `json:"kind"`
 
 	// The content itself
-	Value string `json:"value"`
+	Value *string `json:"value"`
+}
+
+func (this *MarkupContent) UnmarshalJSON(data []byte) error {
+	type MarkupContentUnmarshal MarkupContent
+	var tmpUnmarshal MarkupContentUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("MarkupContent")
+	}
+
+	if tmpUnmarshal.Value == nil {
+		return StructureValidateFailed("MarkupContent")
+	}
+
+	*this = MarkupContent(tmpUnmarshal)
+	return nil
+}
+
+func (this *MarkupContent) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("MarkupContent")
+	}
+
+	if this.Value == nil {
+		return nil, StructureValidateFailed("MarkupContent")
+	}
+
+	type MarkupContentMarshal MarkupContent
+	tmpMarshal := MarkupContentMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Inlay hint options used during static registration.  @since 3.17.0
@@ -2632,7 +6739,7 @@ type RelatedFullDocumentDiagnosticReport struct {
 	// in a file B which A depends on. An example of such a language is
 	// C/C++ where marco definitions in a file a.cpp and result in errors in
 	// a header file b.hpp.  @since 3.17.0
-	RelatedDocuments *map[DocumentUri]RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
+	RelatedDocuments map[DocumentUri]RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
 }
 
 // An unchanged diagnostic report with a set of related documents.  @since
@@ -2648,14 +6755,14 @@ type RelatedUnchangedDocumentDiagnosticReport struct {
 	// in a file B which A depends on. An example of such a language is
 	// C/C++ where marco definitions in a file a.cpp and result in errors in
 	// a header file b.hpp.  @since 3.17.0
-	RelatedDocuments *map[DocumentUri]RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
+	RelatedDocuments map[DocumentUri]RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
 }
 
 // A diagnostic report with a full set of problems.  @since 3.17.0
 type FullDocumentDiagnosticReport struct {
 
 	// A full document diagnostic report.
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// An optional result id. If provided it will be sent on the next
 	// diagnostic request for the same document.
@@ -2665,6 +6772,45 @@ type FullDocumentDiagnosticReport struct {
 	Items []Diagnostic `json:"items"`
 }
 
+func (this *FullDocumentDiagnosticReport) UnmarshalJSON(data []byte) error {
+	type FullDocumentDiagnosticReportUnmarshal FullDocumentDiagnosticReport
+	var tmpUnmarshal FullDocumentDiagnosticReportUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("FullDocumentDiagnosticReport")
+	}
+
+	if tmpUnmarshal.Items == nil {
+		return StructureValidateFailed("FullDocumentDiagnosticReport")
+	}
+
+	*this = FullDocumentDiagnosticReport(tmpUnmarshal)
+	return nil
+}
+
+func (this *FullDocumentDiagnosticReport) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed(
+			"FullDocumentDiagnosticReport",
+		)
+	}
+
+	if this.Items == nil {
+		return nil, StructureValidateFailed(
+			"FullDocumentDiagnosticReport",
+		)
+	}
+
+	type FullDocumentDiagnosticReportMarshal FullDocumentDiagnosticReport
+	tmpMarshal := FullDocumentDiagnosticReportMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // A diagnostic report indicating that the last returned report is still
 // accurate.  @since 3.17.0
 type UnchangedDocumentDiagnosticReport struct {
@@ -2672,11 +6818,56 @@ type UnchangedDocumentDiagnosticReport struct {
 	// A document diagnostic report indicating no changes to the last
 	// result. A server can only return `unchanged` if result ids are
 	// provided.
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// A result id which will be sent on the next diagnostic request for the
 	// same document.
-	ResultId string `json:"resultId"`
+	ResultId *string `json:"resultId"`
+}
+
+func (this *UnchangedDocumentDiagnosticReport) UnmarshalJSON(
+	data []byte,
+) error {
+	type UnchangedDocumentDiagnosticReportUnmarshal UnchangedDocumentDiagnosticReport
+	var tmpUnmarshal UnchangedDocumentDiagnosticReportUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed(
+			"UnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	if tmpUnmarshal.ResultId == nil {
+		return StructureValidateFailed(
+			"UnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	*this = UnchangedDocumentDiagnosticReport(tmpUnmarshal)
+	return nil
+}
+
+func (this *UnchangedDocumentDiagnosticReport) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed(
+			"UnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	if this.ResultId == nil {
+		return nil, StructureValidateFailed(
+			"UnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	type UnchangedDocumentDiagnosticReportMarshal UnchangedDocumentDiagnosticReport
+	tmpMarshal := UnchangedDocumentDiagnosticReportMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Diagnostic options.  @since 3.17.0
@@ -2694,34 +6885,104 @@ type DiagnosticOptions struct {
 	// code in one file can result in a different diagnostic set in another
 	// file. Inter file dependencies are common for most programming
 	// languages and typically uncommon for linters.
-	InterFileDependencies bool `json:"interFileDependencies"`
+	InterFileDependencies *bool `json:"interFileDependencies"`
 
 	// The server provides support for workspace diagnostics as well.
-	WorkspaceDiagnostics bool `json:"workspaceDiagnostics"`
+	WorkspaceDiagnostics *bool `json:"workspaceDiagnostics"`
+}
+
+func (this *DiagnosticOptions) UnmarshalJSON(data []byte) error {
+	type DiagnosticOptionsUnmarshal DiagnosticOptions
+	var tmpUnmarshal DiagnosticOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.InterFileDependencies == nil {
+		return StructureValidateFailed("DiagnosticOptions")
+	}
+
+	if tmpUnmarshal.WorkspaceDiagnostics == nil {
+		return StructureValidateFailed("DiagnosticOptions")
+	}
+
+	*this = DiagnosticOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *DiagnosticOptions) MarshalJSON() ([]byte, error) {
+
+	if this.InterFileDependencies == nil {
+		return nil, StructureValidateFailed("DiagnosticOptions")
+	}
+
+	if this.WorkspaceDiagnostics == nil {
+		return nil, StructureValidateFailed("DiagnosticOptions")
+	}
+
+	type DiagnosticOptionsMarshal DiagnosticOptions
+	tmpMarshal := DiagnosticOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A previous result id in a workspace pull request.  @since 3.17.0
 type PreviousResultId struct {
 
 	// The URI for which the client knowns a result id.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// The value of the previous result id.
-	Value string `json:"value"`
+	Value *string `json:"value"`
+}
+
+func (this *PreviousResultId) UnmarshalJSON(data []byte) error {
+	type PreviousResultIdUnmarshal PreviousResultId
+	var tmpUnmarshal PreviousResultIdUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("PreviousResultId")
+	}
+
+	if tmpUnmarshal.Value == nil {
+		return StructureValidateFailed("PreviousResultId")
+	}
+
+	*this = PreviousResultId(tmpUnmarshal)
+	return nil
+}
+
+func (this *PreviousResultId) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("PreviousResultId")
+	}
+
+	if this.Value == nil {
+		return nil, StructureValidateFailed("PreviousResultId")
+	}
+
+	type PreviousResultIdMarshal PreviousResultId
+	tmpMarshal := PreviousResultIdMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A notebook document.  @since 3.17.0
 type NotebookDocument struct {
 
 	// The notebook document's uri.
-	Uri URI `json:"uri"`
+	Uri *URI `json:"uri"`
 
 	// The type of the notebook.
-	NotebookType string `json:"notebookType"`
+	NotebookType *string `json:"notebookType"`
 
 	// The version number of this document (it will increase after each
 	// change, including undo/redo).
-	Version int64 `json:"version"`
+	Version *int64 `json:"version"`
 
 	// Additional metadata stored with the notebook document.  Note: should
 	// always be an object literal (e.g. LSPObject)
@@ -2731,31 +6992,178 @@ type NotebookDocument struct {
 	Cells []NotebookCell `json:"cells"`
 }
 
+func (this *NotebookDocument) UnmarshalJSON(data []byte) error {
+	type NotebookDocumentUnmarshal NotebookDocument
+	var tmpUnmarshal NotebookDocumentUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("NotebookDocument")
+	}
+
+	if tmpUnmarshal.NotebookType == nil {
+		return StructureValidateFailed("NotebookDocument")
+	}
+
+	if tmpUnmarshal.Version == nil {
+		return StructureValidateFailed("NotebookDocument")
+	}
+
+	if tmpUnmarshal.Cells == nil {
+		return StructureValidateFailed("NotebookDocument")
+	}
+
+	*this = NotebookDocument(tmpUnmarshal)
+	return nil
+}
+
+func (this *NotebookDocument) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("NotebookDocument")
+	}
+
+	if this.NotebookType == nil {
+		return nil, StructureValidateFailed("NotebookDocument")
+	}
+
+	if this.Version == nil {
+		return nil, StructureValidateFailed("NotebookDocument")
+	}
+
+	if this.Cells == nil {
+		return nil, StructureValidateFailed("NotebookDocument")
+	}
+
+	type NotebookDocumentMarshal NotebookDocument
+	tmpMarshal := NotebookDocumentMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // An item to transfer a text document from the client to the server.
 type TextDocumentItem struct {
 
 	// The text document's uri.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// The text document's language identifier.
-	LanguageId string `json:"languageId"`
+	LanguageId *string `json:"languageId"`
 
 	// The version number of this document (it will increase after each
 	// change, including undo/redo).
-	Version int64 `json:"version"`
+	Version *int64 `json:"version"`
 
 	// The content of the opened text document.
-	Text string `json:"text"`
+	Text *string `json:"text"`
+}
+
+func (this *TextDocumentItem) UnmarshalJSON(data []byte) error {
+	type TextDocumentItemUnmarshal TextDocumentItem
+	var tmpUnmarshal TextDocumentItemUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("TextDocumentItem")
+	}
+
+	if tmpUnmarshal.LanguageId == nil {
+		return StructureValidateFailed("TextDocumentItem")
+	}
+
+	if tmpUnmarshal.Version == nil {
+		return StructureValidateFailed("TextDocumentItem")
+	}
+
+	if tmpUnmarshal.Text == nil {
+		return StructureValidateFailed("TextDocumentItem")
+	}
+
+	*this = TextDocumentItem(tmpUnmarshal)
+	return nil
+}
+
+func (this *TextDocumentItem) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("TextDocumentItem")
+	}
+
+	if this.LanguageId == nil {
+		return nil, StructureValidateFailed("TextDocumentItem")
+	}
+
+	if this.Version == nil {
+		return nil, StructureValidateFailed("TextDocumentItem")
+	}
+
+	if this.Text == nil {
+		return nil, StructureValidateFailed("TextDocumentItem")
+	}
+
+	type TextDocumentItemMarshal TextDocumentItem
+	tmpMarshal := TextDocumentItemMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A versioned notebook document identifier.  @since 3.17.0
 type VersionedNotebookDocumentIdentifier struct {
 
 	// The version number of this notebook document.
-	Version int64 `json:"version"`
+	Version *int64 `json:"version"`
 
 	// The notebook document's uri.
-	Uri URI `json:"uri"`
+	Uri *URI `json:"uri"`
+}
+
+func (this *VersionedNotebookDocumentIdentifier) UnmarshalJSON(
+	data []byte,
+) error {
+	type VersionedNotebookDocumentIdentifierUnmarshal VersionedNotebookDocumentIdentifier
+	var tmpUnmarshal VersionedNotebookDocumentIdentifierUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Version == nil {
+		return StructureValidateFailed(
+			"VersionedNotebookDocumentIdentifier",
+		)
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed(
+			"VersionedNotebookDocumentIdentifier",
+		)
+	}
+
+	*this = VersionedNotebookDocumentIdentifier(tmpUnmarshal)
+	return nil
+}
+
+func (this *VersionedNotebookDocumentIdentifier) MarshalJSON() ([]byte, error) {
+
+	if this.Version == nil {
+		return nil, StructureValidateFailed(
+			"VersionedNotebookDocumentIdentifier",
+		)
+	}
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed(
+			"VersionedNotebookDocumentIdentifier",
+		)
+	}
+
+	type VersionedNotebookDocumentIdentifierMarshal VersionedNotebookDocumentIdentifier
+	tmpMarshal := VersionedNotebookDocumentIdentifierMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A change event for a notebook document.  @since 3.17.0
@@ -2773,7 +7181,36 @@ type NotebookDocumentChangeEvent struct {
 type NotebookDocumentIdentifier struct {
 
 	// The notebook document's uri.
-	Uri URI `json:"uri"`
+	Uri *URI `json:"uri"`
+}
+
+func (this *NotebookDocumentIdentifier) UnmarshalJSON(data []byte) error {
+	type NotebookDocumentIdentifierUnmarshal NotebookDocumentIdentifier
+	var tmpUnmarshal NotebookDocumentIdentifierUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("NotebookDocumentIdentifier")
+	}
+
+	*this = NotebookDocumentIdentifier(tmpUnmarshal)
+	return nil
+}
+
+func (this *NotebookDocumentIdentifier) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed(
+			"NotebookDocumentIdentifier",
+		)
+	}
+
+	type NotebookDocumentIdentifierMarshal NotebookDocumentIdentifier
+	tmpMarshal := NotebookDocumentIdentifierMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // General parameters to to register for an notification or to register a
@@ -2782,13 +7219,48 @@ type Registration struct {
 
 	// The id used to register the request. The id can be used to deregister
 	// the request again.
-	Id string `json:"id"`
+	Id *string `json:"id"`
 
 	// The method / capability to register for.
-	Method string `json:"method"`
+	Method *string `json:"method"`
 
 	// Options necessary for the registration.
 	RegisterOptions *LSPAny `json:"registerOptions"`
+}
+
+func (this *Registration) UnmarshalJSON(data []byte) error {
+	type RegistrationUnmarshal Registration
+	var tmpUnmarshal RegistrationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Id == nil {
+		return StructureValidateFailed("Registration")
+	}
+
+	if tmpUnmarshal.Method == nil {
+		return StructureValidateFailed("Registration")
+	}
+
+	*this = Registration(tmpUnmarshal)
+	return nil
+}
+
+func (this *Registration) MarshalJSON() ([]byte, error) {
+
+	if this.Id == nil {
+		return nil, StructureValidateFailed("Registration")
+	}
+
+	if this.Method == nil {
+		return nil, StructureValidateFailed("Registration")
+	}
+
+	type RegistrationMarshal Registration
+	tmpMarshal := RegistrationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // General parameters to unregister a request or notification.
@@ -2796,10 +7268,45 @@ type Unregistration struct {
 
 	// The id used to unregister the request or notification. Usually an id
 	// provided during the register request.
-	Id string `json:"id"`
+	Id *string `json:"id"`
 
 	// The method to unregister for.
-	Method string `json:"method"`
+	Method *string `json:"method"`
+}
+
+func (this *Unregistration) UnmarshalJSON(data []byte) error {
+	type UnregistrationUnmarshal Unregistration
+	var tmpUnmarshal UnregistrationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Id == nil {
+		return StructureValidateFailed("Unregistration")
+	}
+
+	if tmpUnmarshal.Method == nil {
+		return StructureValidateFailed("Unregistration")
+	}
+
+	*this = Unregistration(tmpUnmarshal)
+	return nil
+}
+
+func (this *Unregistration) MarshalJSON() ([]byte, error) {
+
+	if this.Id == nil {
+		return nil, StructureValidateFailed("Unregistration")
+	}
+
+	if this.Method == nil {
+		return nil, StructureValidateFailed("Unregistration")
+	}
+
+	type UnregistrationMarshal Unregistration
+	tmpMarshal := UnregistrationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // The initialize parameters
@@ -2812,7 +7319,7 @@ type XInitializeParams struct {
 	// The process Id of the parent process that started the server.  Is
 	// `null` if the process has not been started by another process. If the
 	// parent process is not alive then the server should exit.
-	ProcessId *int64 `json:"processId"`
+	ProcessId **int64 `json:"processId"`
 
 	// Information about the client  @since 3.15.0
 	ClientInfo *XInitializeParams_ClientInfo `json:"clientInfo"`
@@ -2830,10 +7337,10 @@ type XInitializeParams struct {
 	// The rootUri of the workspace. Is null if no folder is open. If both
 	// `rootPath` and `rootUri` are set `rootUri` wins.  @deprecated in
 	// favour of workspaceFolders.
-	RootUri *DocumentUri `json:"rootUri"`
+	RootUri **DocumentUri `json:"rootUri"`
 
 	// The capabilities provided by the client (editor or tool)
-	Capabilities ClientCapabilities `json:"capabilities"`
+	Capabilities *ClientCapabilities `json:"capabilities"`
 
 	// User provided initialization options.
 	InitializationOptions *LSPAny `json:"initializationOptions"`
@@ -2842,13 +7349,56 @@ type XInitializeParams struct {
 	Trace *XInitializeParams_Trace__Or `json:"trace"`
 }
 
+func (this *XInitializeParams) UnmarshalJSON(data []byte) error {
+	type XInitializeParamsUnmarshal XInitializeParams
+	var tmpUnmarshal XInitializeParamsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.ProcessId == nil {
+		return StructureValidateFailed("XInitializeParams")
+	}
+
+	if tmpUnmarshal.RootUri == nil {
+		return StructureValidateFailed("XInitializeParams")
+	}
+
+	if tmpUnmarshal.Capabilities == nil {
+		return StructureValidateFailed("XInitializeParams")
+	}
+
+	*this = XInitializeParams(tmpUnmarshal)
+	return nil
+}
+
+func (this *XInitializeParams) MarshalJSON() ([]byte, error) {
+
+	if this.ProcessId == nil {
+		return nil, StructureValidateFailed("XInitializeParams")
+	}
+
+	if this.RootUri == nil {
+		return nil, StructureValidateFailed("XInitializeParams")
+	}
+
+	if this.Capabilities == nil {
+		return nil, StructureValidateFailed("XInitializeParams")
+	}
+
+	type XInitializeParamsMarshal XInitializeParams
+	tmpMarshal := XInitializeParamsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 type WorkspaceFoldersInitializeParams struct {
 
 	// The workspace folders configured in the client when the server
 	// starts.  This property is only available if the client supports
 	// workspace folders. It can be `null` if the client supports workspace
 	// folders but none are configured.  @since 3.6.0
-	WorkspaceFolders *[]WorkspaceFolder `json:"workspaceFolders"`
+	WorkspaceFolders []WorkspaceFolder `json:"workspaceFolders"`
 }
 
 // Defines the capabilities provided by a language server.
@@ -2978,7 +7528,38 @@ type VersionedTextDocumentIdentifier struct {
 	TextDocumentIdentifier
 
 	// The version number of this document.
-	Version int64 `json:"version"`
+	Version *int64 `json:"version"`
+}
+
+func (this *VersionedTextDocumentIdentifier) UnmarshalJSON(data []byte) error {
+	type VersionedTextDocumentIdentifierUnmarshal VersionedTextDocumentIdentifier
+	var tmpUnmarshal VersionedTextDocumentIdentifierUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Version == nil {
+		return StructureValidateFailed(
+			"VersionedTextDocumentIdentifier",
+		)
+	}
+
+	*this = VersionedTextDocumentIdentifier(tmpUnmarshal)
+	return nil
+}
+
+func (this *VersionedTextDocumentIdentifier) MarshalJSON() ([]byte, error) {
+
+	if this.Version == nil {
+		return nil, StructureValidateFailed(
+			"VersionedTextDocumentIdentifier",
+		)
+	}
+
+	type VersionedTextDocumentIdentifierMarshal VersionedTextDocumentIdentifier
+	tmpMarshal := VersionedTextDocumentIdentifierMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Save options.
@@ -2992,21 +7573,83 @@ type SaveOptions struct {
 type FileEvent struct {
 
 	// The file's uri.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// The change type.
-	Type FileChangeType `json:"type"`
+	Type *FileChangeType `json:"type"`
+}
+
+func (this *FileEvent) UnmarshalJSON(data []byte) error {
+	type FileEventUnmarshal FileEvent
+	var tmpUnmarshal FileEventUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed("FileEvent")
+	}
+
+	if tmpUnmarshal.Type == nil {
+		return StructureValidateFailed("FileEvent")
+	}
+
+	*this = FileEvent(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileEvent) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed("FileEvent")
+	}
+
+	if this.Type == nil {
+		return nil, StructureValidateFailed("FileEvent")
+	}
+
+	type FileEventMarshal FileEvent
+	tmpMarshal := FileEventMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type FileSystemWatcher struct {
 
 	// The glob pattern to watch. See {@link GlobPattern glob pattern} for
 	// more detail.  @since 3.17.0 support for relative patterns.
-	GlobPattern GlobPattern `json:"globPattern"`
+	GlobPattern *GlobPattern `json:"globPattern"`
 
 	// The kind of events of interest. If omitted it defaults to
 	// WatchKind.Create | WatchKind.Change | WatchKind.Delete which is 7.
 	Kind *WatchKind `json:"kind"`
+}
+
+func (this *FileSystemWatcher) UnmarshalJSON(data []byte) error {
+	type FileSystemWatcherUnmarshal FileSystemWatcher
+	var tmpUnmarshal FileSystemWatcherUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.GlobPattern == nil {
+		return StructureValidateFailed("FileSystemWatcher")
+	}
+
+	*this = FileSystemWatcher(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileSystemWatcher) MarshalJSON() ([]byte, error) {
+
+	if this.GlobPattern == nil {
+		return nil, StructureValidateFailed("FileSystemWatcher")
+	}
+
+	type FileSystemWatcherMarshal FileSystemWatcher
+	tmpMarshal := FileSystemWatcherMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents a diagnostic, such as a compiler error or warning. Diagnostic
@@ -3014,7 +7657,7 @@ type FileSystemWatcher struct {
 type Diagnostic struct {
 
 	// The range at which the message applies
-	Range Range `json:"range"`
+	Range *Range `json:"range"`
 
 	// The diagnostic's severity. Can be omitted. If omitted it is up to the
 	// client to interpret diagnostics as error, warning, info or hint.
@@ -3033,15 +7676,15 @@ type Diagnostic struct {
 	Source *string `json:"source"`
 
 	// The diagnostic's message. It usually appears in the user interface
-	Message string `json:"message"`
+	Message *string `json:"message"`
 
 	// Additional metadata about the diagnostic.  @since 3.15.0
-	Tags *[]DiagnosticTag `json:"tags"`
+	Tags []DiagnosticTag `json:"tags"`
 
 	// An array of related diagnostic information, e.g. when symbol-names
 	// within a scope collide all definitions can be marked via this
 	// property.
-	RelatedInformation *[]DiagnosticRelatedInformation `json:"relatedInformation"`
+	RelatedInformation []DiagnosticRelatedInformation `json:"relatedInformation"`
 
 	// A data entry field that is preserved between a
 	// `textDocument/publishDiagnostics` notification and
@@ -3049,17 +7692,79 @@ type Diagnostic struct {
 	Data *LSPAny `json:"data"`
 }
 
+func (this *Diagnostic) UnmarshalJSON(data []byte) error {
+	type DiagnosticUnmarshal Diagnostic
+	var tmpUnmarshal DiagnosticUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Range == nil {
+		return StructureValidateFailed("Diagnostic")
+	}
+
+	if tmpUnmarshal.Message == nil {
+		return StructureValidateFailed("Diagnostic")
+	}
+
+	*this = Diagnostic(tmpUnmarshal)
+	return nil
+}
+
+func (this *Diagnostic) MarshalJSON() ([]byte, error) {
+
+	if this.Range == nil {
+		return nil, StructureValidateFailed("Diagnostic")
+	}
+
+	if this.Message == nil {
+		return nil, StructureValidateFailed("Diagnostic")
+	}
+
+	type DiagnosticMarshal Diagnostic
+	tmpMarshal := DiagnosticMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Contains additional information about the context in which a completion
 // request is triggered.
 type CompletionContext struct {
 
 	// How the completion was triggered.
-	TriggerKind CompletionTriggerKind `json:"triggerKind"`
+	TriggerKind *CompletionTriggerKind `json:"triggerKind"`
 
 	// The trigger character (a single character) that has trigger code
 	// complete. Is undefined if `triggerKind !==
 	// CompletionTriggerKind.TriggerCharacter`
 	TriggerCharacter *string `json:"triggerCharacter"`
+}
+
+func (this *CompletionContext) UnmarshalJSON(data []byte) error {
+	type CompletionContextUnmarshal CompletionContext
+	var tmpUnmarshal CompletionContextUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TriggerKind == nil {
+		return StructureValidateFailed("CompletionContext")
+	}
+
+	*this = CompletionContext(tmpUnmarshal)
+	return nil
+}
+
+func (this *CompletionContext) MarshalJSON() ([]byte, error) {
+
+	if this.TriggerKind == nil {
+		return nil, StructureValidateFailed("CompletionContext")
+	}
+
+	type CompletionContextMarshal CompletionContext
+	tmpMarshal := CompletionContextMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Additional details for a completion item label.  @since 3.17.0
@@ -3081,13 +7786,56 @@ type CompletionItemLabelDetails struct {
 type InsertReplaceEdit struct {
 
 	// The string to be inserted.
-	NewText string `json:"newText"`
+	NewText *string `json:"newText"`
 
 	// The range if the insert is requested
-	Insert Range `json:"insert"`
+	Insert *Range `json:"insert"`
 
 	// The range if the replace is requested.
-	Replace Range `json:"replace"`
+	Replace *Range `json:"replace"`
+}
+
+func (this *InsertReplaceEdit) UnmarshalJSON(data []byte) error {
+	type InsertReplaceEditUnmarshal InsertReplaceEdit
+	var tmpUnmarshal InsertReplaceEditUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.NewText == nil {
+		return StructureValidateFailed("InsertReplaceEdit")
+	}
+
+	if tmpUnmarshal.Insert == nil {
+		return StructureValidateFailed("InsertReplaceEdit")
+	}
+
+	if tmpUnmarshal.Replace == nil {
+		return StructureValidateFailed("InsertReplaceEdit")
+	}
+
+	*this = InsertReplaceEdit(tmpUnmarshal)
+	return nil
+}
+
+func (this *InsertReplaceEdit) MarshalJSON() ([]byte, error) {
+
+	if this.NewText == nil {
+		return nil, StructureValidateFailed("InsertReplaceEdit")
+	}
+
+	if this.Insert == nil {
+		return nil, StructureValidateFailed("InsertReplaceEdit")
+	}
+
+	if this.Replace == nil {
+		return nil, StructureValidateFailed("InsertReplaceEdit")
+	}
+
+	type InsertReplaceEditMarshal InsertReplaceEdit
+	tmpMarshal := InsertReplaceEditMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Completion options.
@@ -3106,7 +7854,7 @@ type CompletionOptions struct {
 	// here.  If code complete should automatically be trigger on characters
 	// not being valid inside an identifier (for example `.` in JavaScript)
 	// list them in `triggerCharacters`.
-	TriggerCharacters *[]string `json:"triggerCharacters"`
+	TriggerCharacters []string `json:"triggerCharacters"`
 
 	// The list of all possible characters that commit a completion. This
 	// field can be used if clients don't support individual commit
@@ -3115,7 +7863,7 @@ type CompletionOptions struct {
 	//  If a server provides both `allCommitCharacters` and commit
 	// characters on an individual completion item the ones on the
 	// completion item win.  @since 3.2.0
-	AllCommitCharacters *[]string `json:"allCommitCharacters"`
+	AllCommitCharacters []string `json:"allCommitCharacters"`
 
 	// The server provides support to resolve additional information for a
 	// completion item.
@@ -3139,7 +7887,7 @@ type HoverOptions struct {
 type SignatureHelpContext struct {
 
 	// Action that caused signature help to be triggered.
-	TriggerKind SignatureHelpTriggerKind `json:"triggerKind"`
+	TriggerKind *SignatureHelpTriggerKind `json:"triggerKind"`
 
 	// Character that caused signature help to be triggered.  This is
 	// undefined when `triggerKind !==
@@ -3150,7 +7898,7 @@ type SignatureHelpContext struct {
 	// Retriggers occurs when the signature help is already active and can
 	// be caused by actions such as typing a trigger character, a cursor
 	// move, or document content changes.
-	IsRetrigger bool `json:"isRetrigger"`
+	IsRetrigger *bool `json:"isRetrigger"`
 
 	// The currently active `SignatureHelp`.  The `activeSignatureHelp` has
 	// its `SignatureHelp.activeSignature` field updated based on the user
@@ -3158,23 +7906,85 @@ type SignatureHelpContext struct {
 	ActiveSignatureHelp *SignatureHelp `json:"activeSignatureHelp"`
 }
 
+func (this *SignatureHelpContext) UnmarshalJSON(data []byte) error {
+	type SignatureHelpContextUnmarshal SignatureHelpContext
+	var tmpUnmarshal SignatureHelpContextUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TriggerKind == nil {
+		return StructureValidateFailed("SignatureHelpContext")
+	}
+
+	if tmpUnmarshal.IsRetrigger == nil {
+		return StructureValidateFailed("SignatureHelpContext")
+	}
+
+	*this = SignatureHelpContext(tmpUnmarshal)
+	return nil
+}
+
+func (this *SignatureHelpContext) MarshalJSON() ([]byte, error) {
+
+	if this.TriggerKind == nil {
+		return nil, StructureValidateFailed("SignatureHelpContext")
+	}
+
+	if this.IsRetrigger == nil {
+		return nil, StructureValidateFailed("SignatureHelpContext")
+	}
+
+	type SignatureHelpContextMarshal SignatureHelpContext
+	tmpMarshal := SignatureHelpContextMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Represents the signature of something callable. A signature can have a label,
 // like a function-name, a doc-comment, and a set of parameters.
 type SignatureInformation struct {
 
 	// The label of this signature. Will be shown in the UI.
-	Label string `json:"label"`
+	Label *string `json:"label"`
 
 	// The human-readable doc-comment of this signature. Will be shown in
 	// the UI but can be omitted.
 	Documentation *SignatureInformation_Documentation__Or `json:"documentation"`
 
 	// The parameters of this signature.
-	Parameters *[]ParameterInformation `json:"parameters"`
+	Parameters []ParameterInformation `json:"parameters"`
 
 	// The index of the active parameter.  If provided, this is used in
 	// place of `SignatureHelp.activeParameter`.  @since 3.16.0
 	ActiveParameter *uint64 `json:"activeParameter"`
+}
+
+func (this *SignatureInformation) UnmarshalJSON(data []byte) error {
+	type SignatureInformationUnmarshal SignatureInformation
+	var tmpUnmarshal SignatureInformationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Label == nil {
+		return StructureValidateFailed("SignatureInformation")
+	}
+
+	*this = SignatureInformation(tmpUnmarshal)
+	return nil
+}
+
+func (this *SignatureInformation) MarshalJSON() ([]byte, error) {
+
+	if this.Label == nil {
+		return nil, StructureValidateFailed("SignatureInformation")
+	}
+
+	type SignatureInformationMarshal SignatureInformation
+	tmpMarshal := SignatureInformationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Server Capabilities for a [SignatureHelpRequest](#SignatureHelpRequest).
@@ -3185,13 +7995,13 @@ type SignatureHelpOptions struct {
 	WorkDoneProgressOptions
 
 	// List of characters that trigger signature help automatically.
-	TriggerCharacters *[]string `json:"triggerCharacters"`
+	TriggerCharacters []string `json:"triggerCharacters"`
 
 	// List of characters that re-trigger signature help.  These trigger
 	// characters are only active when signature help is already showing.
 	// All trigger characters are also counted as re-trigger characters.
 	// @since 3.15.0
-	RetriggerCharacters *[]string `json:"retriggerCharacters"`
+	RetriggerCharacters []string `json:"retriggerCharacters"`
 }
 
 // Server Capabilities for a [DefinitionRequest](#DefinitionRequest).
@@ -3206,7 +8016,34 @@ type DefinitionOptions struct {
 type ReferenceContext struct {
 
 	// Include the declaration of the current symbol.
-	IncludeDeclaration bool `json:"includeDeclaration"`
+	IncludeDeclaration *bool `json:"includeDeclaration"`
+}
+
+func (this *ReferenceContext) UnmarshalJSON(data []byte) error {
+	type ReferenceContextUnmarshal ReferenceContext
+	var tmpUnmarshal ReferenceContextUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.IncludeDeclaration == nil {
+		return StructureValidateFailed("ReferenceContext")
+	}
+
+	*this = ReferenceContext(tmpUnmarshal)
+	return nil
+}
+
+func (this *ReferenceContext) MarshalJSON() ([]byte, error) {
+
+	if this.IncludeDeclaration == nil {
+		return nil, StructureValidateFailed("ReferenceContext")
+	}
+
+	type ReferenceContextMarshal ReferenceContext
+	tmpMarshal := ReferenceContextMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Reference options.
@@ -3229,19 +8066,54 @@ type DocumentHighlightOptions struct {
 type BaseSymbolInformation struct {
 
 	// The name of this symbol.
-	Name string `json:"name"`
+	Name *string `json:"name"`
 
 	// The kind of this symbol.
-	Kind SymbolKind `json:"kind"`
+	Kind *SymbolKind `json:"kind"`
 
 	// Tags for this symbol.  @since 3.16.0
-	Tags *[]SymbolTag `json:"tags"`
+	Tags []SymbolTag `json:"tags"`
 
 	// The name of the symbol containing this symbol. This information is
 	// for user interface purposes (e.g. to render a qualifier in the user
 	// interface if necessary). It can't be used to re-infer a hierarchy for
 	// the document symbols.
 	ContainerName *string `json:"containerName"`
+}
+
+func (this *BaseSymbolInformation) UnmarshalJSON(data []byte) error {
+	type BaseSymbolInformationUnmarshal BaseSymbolInformation
+	var tmpUnmarshal BaseSymbolInformationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Name == nil {
+		return StructureValidateFailed("BaseSymbolInformation")
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("BaseSymbolInformation")
+	}
+
+	*this = BaseSymbolInformation(tmpUnmarshal)
+	return nil
+}
+
+func (this *BaseSymbolInformation) MarshalJSON() ([]byte, error) {
+
+	if this.Name == nil {
+		return nil, StructureValidateFailed("BaseSymbolInformation")
+	}
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("BaseSymbolInformation")
+	}
+
+	type BaseSymbolInformationMarshal BaseSymbolInformation
+	tmpMarshal := BaseSymbolInformationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Provider options for a [DocumentSymbolRequest](#DocumentSymbolRequest).
@@ -3271,10 +8143,37 @@ type CodeActionContext struct {
 	// Requested kind of actions to return.  Actions not of this kind are
 	// filtered out by the client before being shown. So servers can omit
 	// computing them.
-	Only *[]CodeActionKind `json:"only"`
+	Only []CodeActionKind `json:"only"`
 
 	// The reason why code actions were requested.  @since 3.17.0
 	TriggerKind *CodeActionTriggerKind `json:"triggerKind"`
+}
+
+func (this *CodeActionContext) UnmarshalJSON(data []byte) error {
+	type CodeActionContextUnmarshal CodeActionContext
+	var tmpUnmarshal CodeActionContextUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Diagnostics == nil {
+		return StructureValidateFailed("CodeActionContext")
+	}
+
+	*this = CodeActionContext(tmpUnmarshal)
+	return nil
+}
+
+func (this *CodeActionContext) MarshalJSON() ([]byte, error) {
+
+	if this.Diagnostics == nil {
+		return nil, StructureValidateFailed("CodeActionContext")
+	}
+
+	type CodeActionContextMarshal CodeActionContext
+	tmpMarshal := CodeActionContextMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Provider options for a [CodeActionRequest](#CodeActionRequest).
@@ -3287,7 +8186,7 @@ type CodeActionOptions struct {
 	// CodeActionKinds that this server may return.  The list of kinds may
 	// be generic, such as `CodeActionKind.Refactor`, or the server may list
 	// out every specific kind they provide.
-	CodeActionKinds *[]CodeActionKind `json:"codeActionKinds"`
+	CodeActionKinds []CodeActionKind `json:"codeActionKinds"`
 
 	// The server provides support to resolve additional information for a
 	// code action.  @since 3.16.0
@@ -3332,10 +8231,10 @@ type DocumentLinkOptions struct {
 type FormattingOptions struct {
 
 	// Size of a tab in spaces.
-	TabSize uint64 `json:"tabSize"`
+	TabSize *uint64 `json:"tabSize"`
 
 	// Prefer spaces over tabs.
-	InsertSpaces bool `json:"insertSpaces"`
+	InsertSpaces *bool `json:"insertSpaces"`
 
 	// Trim trailing whitespace on a line.  @since 3.15.0
 	TrimTrailingWhitespace *bool `json:"trimTrailingWhitespace"`
@@ -3347,6 +8246,41 @@ type FormattingOptions struct {
 	// Trim all newlines after the final newline at the end of the file.
 	// @since 3.15.0
 	TrimFinalNewlines *bool `json:"trimFinalNewlines"`
+}
+
+func (this *FormattingOptions) UnmarshalJSON(data []byte) error {
+	type FormattingOptionsUnmarshal FormattingOptions
+	var tmpUnmarshal FormattingOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TabSize == nil {
+		return StructureValidateFailed("FormattingOptions")
+	}
+
+	if tmpUnmarshal.InsertSpaces == nil {
+		return StructureValidateFailed("FormattingOptions")
+	}
+
+	*this = FormattingOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *FormattingOptions) MarshalJSON() ([]byte, error) {
+
+	if this.TabSize == nil {
+		return nil, StructureValidateFailed("FormattingOptions")
+	}
+
+	if this.InsertSpaces == nil {
+		return nil, StructureValidateFailed("FormattingOptions")
+	}
+
+	type FormattingOptionsMarshal FormattingOptions
+	tmpMarshal := FormattingOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Provider options for a
@@ -3372,10 +8306,41 @@ type DocumentRangeFormattingOptions struct {
 type DocumentOnTypeFormattingOptions struct {
 
 	// A character on which formatting should be triggered, like `{`.
-	FirstTriggerCharacter string `json:"firstTriggerCharacter"`
+	FirstTriggerCharacter *string `json:"firstTriggerCharacter"`
 
 	// More trigger characters.
-	MoreTriggerCharacter *[]string `json:"moreTriggerCharacter"`
+	MoreTriggerCharacter []string `json:"moreTriggerCharacter"`
+}
+
+func (this *DocumentOnTypeFormattingOptions) UnmarshalJSON(data []byte) error {
+	type DocumentOnTypeFormattingOptionsUnmarshal DocumentOnTypeFormattingOptions
+	var tmpUnmarshal DocumentOnTypeFormattingOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.FirstTriggerCharacter == nil {
+		return StructureValidateFailed(
+			"DocumentOnTypeFormattingOptions",
+		)
+	}
+
+	*this = DocumentOnTypeFormattingOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *DocumentOnTypeFormattingOptions) MarshalJSON() ([]byte, error) {
+
+	if this.FirstTriggerCharacter == nil {
+		return nil, StructureValidateFailed(
+			"DocumentOnTypeFormattingOptions",
+		)
+	}
+
+	type DocumentOnTypeFormattingOptionsMarshal DocumentOnTypeFormattingOptions
+	tmpMarshal := DocumentOnTypeFormattingOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Provider options for a [RenameRequest](#RenameRequest).
@@ -3401,6 +8366,33 @@ type ExecuteCommandOptions struct {
 	Commands []string `json:"commands"`
 }
 
+func (this *ExecuteCommandOptions) UnmarshalJSON(data []byte) error {
+	type ExecuteCommandOptionsUnmarshal ExecuteCommandOptions
+	var tmpUnmarshal ExecuteCommandOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Commands == nil {
+		return StructureValidateFailed("ExecuteCommandOptions")
+	}
+
+	*this = ExecuteCommandOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *ExecuteCommandOptions) MarshalJSON() ([]byte, error) {
+
+	if this.Commands == nil {
+		return nil, StructureValidateFailed("ExecuteCommandOptions")
+	}
+
+	type ExecuteCommandOptionsMarshal ExecuteCommandOptions
+	tmpMarshal := ExecuteCommandOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // @since 3.16.0
 type SemanticTokensLegend struct {
 
@@ -3409,6 +8401,41 @@ type SemanticTokensLegend struct {
 
 	// The token modifiers a server uses.
 	TokenModifiers []string `json:"tokenModifiers"`
+}
+
+func (this *SemanticTokensLegend) UnmarshalJSON(data []byte) error {
+	type SemanticTokensLegendUnmarshal SemanticTokensLegend
+	var tmpUnmarshal SemanticTokensLegendUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.TokenTypes == nil {
+		return StructureValidateFailed("SemanticTokensLegend")
+	}
+
+	if tmpUnmarshal.TokenModifiers == nil {
+		return StructureValidateFailed("SemanticTokensLegend")
+	}
+
+	*this = SemanticTokensLegend(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensLegend) MarshalJSON() ([]byte, error) {
+
+	if this.TokenTypes == nil {
+		return nil, StructureValidateFailed("SemanticTokensLegend")
+	}
+
+	if this.TokenModifiers == nil {
+		return nil, StructureValidateFailed("SemanticTokensLegend")
+	}
+
+	type SemanticTokensLegendMarshal SemanticTokensLegend
+	tmpMarshal := SemanticTokensLegendMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A text document identifier to optionally denote a specific version of a text
@@ -3425,7 +8452,40 @@ type OptionalVersionedTextDocumentIdentifier struct {
 	// before) the server can send `null` to indicate that the version is
 	// unknown and the content on disk is the truth (as specified with
 	// document content ownership).
-	Version *int64 `json:"version"`
+	Version **int64 `json:"version"`
+}
+
+func (this *OptionalVersionedTextDocumentIdentifier) UnmarshalJSON(
+	data []byte,
+) error {
+	type OptionalVersionedTextDocumentIdentifierUnmarshal OptionalVersionedTextDocumentIdentifier
+	var tmpUnmarshal OptionalVersionedTextDocumentIdentifierUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Version == nil {
+		return StructureValidateFailed(
+			"OptionalVersionedTextDocumentIdentifier",
+		)
+	}
+
+	*this = OptionalVersionedTextDocumentIdentifier(tmpUnmarshal)
+	return nil
+}
+
+func (this *OptionalVersionedTextDocumentIdentifier) MarshalJSON() ([]byte, error) {
+
+	if this.Version == nil {
+		return nil, StructureValidateFailed(
+			"OptionalVersionedTextDocumentIdentifier",
+		)
+	}
+
+	type OptionalVersionedTextDocumentIdentifierMarshal OptionalVersionedTextDocumentIdentifier
+	tmpMarshal := OptionalVersionedTextDocumentIdentifierMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A special text edit with an additional change annotation.  @since 3.16.0.
@@ -3436,18 +8496,72 @@ type AnnotatedTextEdit struct {
 	TextEdit
 
 	// The actual identifier of the change annotation
-	AnnotationId ChangeAnnotationIdentifier `json:"annotationId"`
+	AnnotationId *ChangeAnnotationIdentifier `json:"annotationId"`
+}
+
+func (this *AnnotatedTextEdit) UnmarshalJSON(data []byte) error {
+	type AnnotatedTextEditUnmarshal AnnotatedTextEdit
+	var tmpUnmarshal AnnotatedTextEditUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.AnnotationId == nil {
+		return StructureValidateFailed("AnnotatedTextEdit")
+	}
+
+	*this = AnnotatedTextEdit(tmpUnmarshal)
+	return nil
+}
+
+func (this *AnnotatedTextEdit) MarshalJSON() ([]byte, error) {
+
+	if this.AnnotationId == nil {
+		return nil, StructureValidateFailed("AnnotatedTextEdit")
+	}
+
+	type AnnotatedTextEditMarshal AnnotatedTextEdit
+	tmpMarshal := AnnotatedTextEditMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A generic resource operation.
 type ResourceOperation struct {
 
 	// The resource operation kind.
-	Kind string `json:"kind"`
+	Kind *string `json:"kind"`
 
 	// An optional annotation identifier describing the operation.  @since
 	// 3.16.0
 	AnnotationId *ChangeAnnotationIdentifier `json:"annotationId"`
+}
+
+func (this *ResourceOperation) UnmarshalJSON(data []byte) error {
+	type ResourceOperationUnmarshal ResourceOperation
+	var tmpUnmarshal ResourceOperationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("ResourceOperation")
+	}
+
+	*this = ResourceOperation(tmpUnmarshal)
+	return nil
+}
+
+func (this *ResourceOperation) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("ResourceOperation")
+	}
+
+	type ResourceOperationMarshal ResourceOperation
+	tmpMarshal := ResourceOperationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Options to create a file.
@@ -3494,7 +8608,7 @@ type FileOperationPattern struct {
 	// `example.0`, `example.1`, …) - `[!...]` to negate a range of
 	// characters to match in a path segment (e.g., `example.[!0-9]` to
 	// match on `example.a`, `example.b`, but not `example.0`)
-	Glob string `json:"glob"`
+	Glob *string `json:"glob"`
 
 	// Whether to match files or folders with this pattern.  Matches both if
 	// undefined.
@@ -3502,6 +8616,33 @@ type FileOperationPattern struct {
 
 	// Additional options used during matching.
 	Options *FileOperationPatternOptions `json:"options"`
+}
+
+func (this *FileOperationPattern) UnmarshalJSON(data []byte) error {
+	type FileOperationPatternUnmarshal FileOperationPattern
+	var tmpUnmarshal FileOperationPatternUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Glob == nil {
+		return StructureValidateFailed("FileOperationPattern")
+	}
+
+	*this = FileOperationPattern(tmpUnmarshal)
+	return nil
+}
+
+func (this *FileOperationPattern) MarshalJSON() ([]byte, error) {
+
+	if this.Glob == nil {
+		return nil, StructureValidateFailed("FileOperationPattern")
+	}
+
+	type FileOperationPatternMarshal FileOperationPattern
+	tmpMarshal := FileOperationPatternMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A full document diagnostic report for a workspace diagnostic result.  @since
@@ -3513,11 +8654,56 @@ type WorkspaceFullDocumentDiagnosticReport struct {
 	FullDocumentDiagnosticReport
 
 	// The URI for which diagnostic information is reported.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version *int64 `json:"version"`
+	Version **int64 `json:"version"`
+}
+
+func (this *WorkspaceFullDocumentDiagnosticReport) UnmarshalJSON(
+	data []byte,
+) error {
+	type WorkspaceFullDocumentDiagnosticReportUnmarshal WorkspaceFullDocumentDiagnosticReport
+	var tmpUnmarshal WorkspaceFullDocumentDiagnosticReportUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed(
+			"WorkspaceFullDocumentDiagnosticReport",
+		)
+	}
+
+	if tmpUnmarshal.Version == nil {
+		return StructureValidateFailed(
+			"WorkspaceFullDocumentDiagnosticReport",
+		)
+	}
+
+	*this = WorkspaceFullDocumentDiagnosticReport(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceFullDocumentDiagnosticReport) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed(
+			"WorkspaceFullDocumentDiagnosticReport",
+		)
+	}
+
+	if this.Version == nil {
+		return nil, StructureValidateFailed(
+			"WorkspaceFullDocumentDiagnosticReport",
+		)
+	}
+
+	type WorkspaceFullDocumentDiagnosticReportMarshal WorkspaceFullDocumentDiagnosticReport
+	tmpMarshal := WorkspaceFullDocumentDiagnosticReportMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // An unchanged document diagnostic report for a workspace diagnostic result.
@@ -3529,11 +8715,56 @@ type WorkspaceUnchangedDocumentDiagnosticReport struct {
 	UnchangedDocumentDiagnosticReport
 
 	// The URI for which diagnostic information is reported.
-	Uri DocumentUri `json:"uri"`
+	Uri *DocumentUri `json:"uri"`
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version *int64 `json:"version"`
+	Version **int64 `json:"version"`
+}
+
+func (this *WorkspaceUnchangedDocumentDiagnosticReport) UnmarshalJSON(
+	data []byte,
+) error {
+	type WorkspaceUnchangedDocumentDiagnosticReportUnmarshal WorkspaceUnchangedDocumentDiagnosticReport
+	var tmpUnmarshal WorkspaceUnchangedDocumentDiagnosticReportUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Uri == nil {
+		return StructureValidateFailed(
+			"WorkspaceUnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	if tmpUnmarshal.Version == nil {
+		return StructureValidateFailed(
+			"WorkspaceUnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	*this = WorkspaceUnchangedDocumentDiagnosticReport(tmpUnmarshal)
+	return nil
+}
+
+func (this *WorkspaceUnchangedDocumentDiagnosticReport) MarshalJSON() ([]byte, error) {
+
+	if this.Uri == nil {
+		return nil, StructureValidateFailed(
+			"WorkspaceUnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	if this.Version == nil {
+		return nil, StructureValidateFailed(
+			"WorkspaceUnchangedDocumentDiagnosticReport",
+		)
+	}
+
+	type WorkspaceUnchangedDocumentDiagnosticReportMarshal WorkspaceUnchangedDocumentDiagnosticReport
+	tmpMarshal := WorkspaceUnchangedDocumentDiagnosticReportMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // LSP object definition. @since 3.17.0
@@ -3546,10 +8777,10 @@ type LSPObject struct {
 type NotebookCell struct {
 
 	// The cell's kind
-	Kind NotebookCellKind `json:"kind"`
+	Kind *NotebookCellKind `json:"kind"`
 
 	// The URI of the cell's text document content.
-	Document DocumentUri `json:"document"`
+	Document *DocumentUri `json:"document"`
 
 	// Additional metadata stored with the cell.  Note: should always be an
 	// object literal (e.g. LSPObject)
@@ -3559,18 +8790,88 @@ type NotebookCell struct {
 	ExecutionSummary *ExecutionSummary `json:"executionSummary"`
 }
 
+func (this *NotebookCell) UnmarshalJSON(data []byte) error {
+	type NotebookCellUnmarshal NotebookCell
+	var tmpUnmarshal NotebookCellUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Kind == nil {
+		return StructureValidateFailed("NotebookCell")
+	}
+
+	if tmpUnmarshal.Document == nil {
+		return StructureValidateFailed("NotebookCell")
+	}
+
+	*this = NotebookCell(tmpUnmarshal)
+	return nil
+}
+
+func (this *NotebookCell) MarshalJSON() ([]byte, error) {
+
+	if this.Kind == nil {
+		return nil, StructureValidateFailed("NotebookCell")
+	}
+
+	if this.Document == nil {
+		return nil, StructureValidateFailed("NotebookCell")
+	}
+
+	type NotebookCellMarshal NotebookCell
+	tmpMarshal := NotebookCellMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // A change describing how to move a `NotebookCell` array from state S to S'.
 // @since 3.17.0
 type NotebookCellArrayChange struct {
 
 	// The start oftest of the cell that changed.
-	Start uint64 `json:"start"`
+	Start *uint64 `json:"start"`
 
 	// The deleted cells
-	DeleteCount uint64 `json:"deleteCount"`
+	DeleteCount *uint64 `json:"deleteCount"`
 
 	// The new cells, if any
-	Cells *[]NotebookCell `json:"cells"`
+	Cells []NotebookCell `json:"cells"`
+}
+
+func (this *NotebookCellArrayChange) UnmarshalJSON(data []byte) error {
+	type NotebookCellArrayChangeUnmarshal NotebookCellArrayChange
+	var tmpUnmarshal NotebookCellArrayChangeUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Start == nil {
+		return StructureValidateFailed("NotebookCellArrayChange")
+	}
+
+	if tmpUnmarshal.DeleteCount == nil {
+		return StructureValidateFailed("NotebookCellArrayChange")
+	}
+
+	*this = NotebookCellArrayChange(tmpUnmarshal)
+	return nil
+}
+
+func (this *NotebookCellArrayChange) MarshalJSON() ([]byte, error) {
+
+	if this.Start == nil {
+		return nil, StructureValidateFailed("NotebookCellArrayChange")
+	}
+
+	if this.DeleteCount == nil {
+		return nil, StructureValidateFailed("NotebookCellArrayChange")
+	}
+
+	type NotebookCellArrayChangeMarshal NotebookCellArrayChange
+	tmpMarshal := NotebookCellArrayChangeMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Defines the capabilities provided by the client.
@@ -3636,6 +8937,35 @@ type NotebookDocumentSyncOptions struct {
 	Save *bool `json:"save"`
 }
 
+func (this *NotebookDocumentSyncOptions) UnmarshalJSON(data []byte) error {
+	type NotebookDocumentSyncOptionsUnmarshal NotebookDocumentSyncOptions
+	var tmpUnmarshal NotebookDocumentSyncOptionsUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.NotebookSelector == nil {
+		return StructureValidateFailed("NotebookDocumentSyncOptions")
+	}
+
+	*this = NotebookDocumentSyncOptions(tmpUnmarshal)
+	return nil
+}
+
+func (this *NotebookDocumentSyncOptions) MarshalJSON() ([]byte, error) {
+
+	if this.NotebookSelector == nil {
+		return nil, StructureValidateFailed(
+			"NotebookDocumentSyncOptions",
+		)
+	}
+
+	type NotebookDocumentSyncOptionsMarshal NotebookDocumentSyncOptions
+	tmpMarshal := NotebookDocumentSyncOptionsMarshal(*this)
+	return json.Marshal(&tmpMarshal)
+}
+
 // Registration options specific to a notebook.  @since 3.17.0
 type NotebookDocumentSyncRegistrationOptions struct {
 
@@ -3689,7 +9019,34 @@ type FileOperationOptions struct {
 type CodeDescription struct {
 
 	// An URI to open with more information about the diagnostic error.
-	Href URI `json:"href"`
+	Href *URI `json:"href"`
+}
+
+func (this *CodeDescription) UnmarshalJSON(data []byte) error {
+	type CodeDescriptionUnmarshal CodeDescription
+	var tmpUnmarshal CodeDescriptionUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Href == nil {
+		return StructureValidateFailed("CodeDescription")
+	}
+
+	*this = CodeDescription(tmpUnmarshal)
+	return nil
+}
+
+func (this *CodeDescription) MarshalJSON() ([]byte, error) {
+
+	if this.Href == nil {
+		return nil, StructureValidateFailed("CodeDescription")
+	}
+
+	type CodeDescriptionMarshal CodeDescription
+	tmpMarshal := CodeDescriptionMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents a related message and source code location for a diagnostic. This
@@ -3698,10 +9055,49 @@ type CodeDescription struct {
 type DiagnosticRelatedInformation struct {
 
 	// The location of this related diagnostic information.
-	Location Location `json:"location"`
+	Location *Location `json:"location"`
 
 	// The message of this related diagnostic information.
-	Message string `json:"message"`
+	Message *string `json:"message"`
+}
+
+func (this *DiagnosticRelatedInformation) UnmarshalJSON(data []byte) error {
+	type DiagnosticRelatedInformationUnmarshal DiagnosticRelatedInformation
+	var tmpUnmarshal DiagnosticRelatedInformationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Location == nil {
+		return StructureValidateFailed("DiagnosticRelatedInformation")
+	}
+
+	if tmpUnmarshal.Message == nil {
+		return StructureValidateFailed("DiagnosticRelatedInformation")
+	}
+
+	*this = DiagnosticRelatedInformation(tmpUnmarshal)
+	return nil
+}
+
+func (this *DiagnosticRelatedInformation) MarshalJSON() ([]byte, error) {
+
+	if this.Location == nil {
+		return nil, StructureValidateFailed(
+			"DiagnosticRelatedInformation",
+		)
+	}
+
+	if this.Message == nil {
+		return nil, StructureValidateFailed(
+			"DiagnosticRelatedInformation",
+		)
+	}
+
+	type DiagnosticRelatedInformationMarshal DiagnosticRelatedInformation
+	tmpMarshal := DiagnosticRelatedInformationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Represents a parameter of a callable-signature. A parameter can have a label
@@ -3715,11 +9111,38 @@ type ParameterInformation struct {
 	// does.  *Note*: a label of type string should be a substring of its
 	// containing signature label. Its intended use case is to highlight the
 	// parameter label part in the `SignatureInformation.label`.
-	Label ParameterInformation_Label__Or `json:"label"`
+	Label *ParameterInformation_Label__Or `json:"label"`
 
 	// The human-readable doc-comment of this parameter. Will be shown in
 	// the UI but can be omitted.
 	Documentation *ParameterInformation_Documentation__Or `json:"documentation"`
+}
+
+func (this *ParameterInformation) UnmarshalJSON(data []byte) error {
+	type ParameterInformationUnmarshal ParameterInformation
+	var tmpUnmarshal ParameterInformationUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Label == nil {
+		return StructureValidateFailed("ParameterInformation")
+	}
+
+	*this = ParameterInformation(tmpUnmarshal)
+	return nil
+}
+
+func (this *ParameterInformation) MarshalJSON() ([]byte, error) {
+
+	if this.Label == nil {
+		return nil, StructureValidateFailed("ParameterInformation")
+	}
+
+	type ParameterInformationMarshal ParameterInformation
+	tmpMarshal := ParameterInformationMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // A notebook cell text document filter denotes a cell text document by
@@ -3729,11 +9152,40 @@ type NotebookCellTextDocumentFilter struct {
 	// A filter that matches against the notebook containing the notebook
 	// cell. If a string value is provided it matches against the notebook
 	// type. '*' matches every notebook.
-	Notebook NotebookCellTextDocumentFilter_Notebook__Or `json:"notebook"`
+	Notebook *NotebookCellTextDocumentFilter_Notebook__Or `json:"notebook"`
 
 	// A language id like `python`.  Will be matched against the language id
 	// of the notebook cell document. '*' matches every language.
 	Language *string `json:"language"`
+}
+
+func (this *NotebookCellTextDocumentFilter) UnmarshalJSON(data []byte) error {
+	type NotebookCellTextDocumentFilterUnmarshal NotebookCellTextDocumentFilter
+	var tmpUnmarshal NotebookCellTextDocumentFilterUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Notebook == nil {
+		return StructureValidateFailed("NotebookCellTextDocumentFilter")
+	}
+
+	*this = NotebookCellTextDocumentFilter(tmpUnmarshal)
+	return nil
+}
+
+func (this *NotebookCellTextDocumentFilter) MarshalJSON() ([]byte, error) {
+
+	if this.Notebook == nil {
+		return nil, StructureValidateFailed(
+			"NotebookCellTextDocumentFilter",
+		)
+	}
+
+	type NotebookCellTextDocumentFilterMarshal NotebookCellTextDocumentFilter
+	tmpMarshal := NotebookCellTextDocumentFilterMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Matching options for the file operation pattern.  @since 3.16.0
@@ -3747,10 +9199,37 @@ type ExecutionSummary struct {
 
 	// A strict monotonically increasing value indicating the execution
 	// order of a cell inside a notebook.
-	ExecutionOrder uint64 `json:"executionOrder"`
+	ExecutionOrder *uint64 `json:"executionOrder"`
 
 	// Whether the execution was successful or not if known by the client.
 	Success *bool `json:"success"`
+}
+
+func (this *ExecutionSummary) UnmarshalJSON(data []byte) error {
+	type ExecutionSummaryUnmarshal ExecutionSummary
+	var tmpUnmarshal ExecutionSummaryUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.ExecutionOrder == nil {
+		return StructureValidateFailed("ExecutionSummary")
+	}
+
+	*this = ExecutionSummary(tmpUnmarshal)
+	return nil
+}
+
+func (this *ExecutionSummary) MarshalJSON() ([]byte, error) {
+
+	if this.ExecutionOrder == nil {
+		return nil, StructureValidateFailed("ExecutionSummary")
+	}
+
+	type ExecutionSummaryMarshal ExecutionSummary
+	tmpMarshal := ExecutionSummaryMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Workspace specific client capabilities.
@@ -3922,7 +9401,40 @@ type NotebookDocumentClientCapabilities struct {
 
 	// Capabilities specific to notebook document synchronization  @since
 	// 3.17.0
-	Synchronization NotebookDocumentSyncClientCapabilities `json:"synchronization"`
+	Synchronization *NotebookDocumentSyncClientCapabilities `json:"synchronization"`
+}
+
+func (this *NotebookDocumentClientCapabilities) UnmarshalJSON(
+	data []byte,
+) error {
+	type NotebookDocumentClientCapabilitiesUnmarshal NotebookDocumentClientCapabilities
+	var tmpUnmarshal NotebookDocumentClientCapabilitiesUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Synchronization == nil {
+		return StructureValidateFailed(
+			"NotebookDocumentClientCapabilities",
+		)
+	}
+
+	*this = NotebookDocumentClientCapabilities(tmpUnmarshal)
+	return nil
+}
+
+func (this *NotebookDocumentClientCapabilities) MarshalJSON() ([]byte, error) {
+
+	if this.Synchronization == nil {
+		return nil, StructureValidateFailed(
+			"NotebookDocumentClientCapabilities",
+		)
+	}
+
+	type NotebookDocumentClientCapabilitiesMarshal NotebookDocumentClientCapabilities
+	tmpMarshal := NotebookDocumentClientCapabilitiesMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type WindowClientCapabilities struct {
@@ -3968,7 +9480,7 @@ type GeneralClientCapabilities struct {
 	// one encoding into another requires the content of the file / line the
 	// conversion is best done where the file is read which is usually on
 	// the server side.  @since 3.17.0
-	PositionEncodings *[]PositionEncodingKind `json:"positionEncodings"`
+	PositionEncodings []PositionEncodingKind `json:"positionEncodings"`
 }
 
 // A relative pattern is a helper to construct glob patterns that are matched
@@ -3978,10 +9490,45 @@ type RelativePattern struct {
 
 	// A workspace folder or a base URI to which this pattern will be
 	// matched against relatively.
-	BaseUri RelativePattern_BaseUri__Or `json:"baseUri"`
+	BaseUri *RelativePattern_BaseUri__Or `json:"baseUri"`
 
 	// The actual glob pattern;
-	Pattern Pattern `json:"pattern"`
+	Pattern *Pattern `json:"pattern"`
+}
+
+func (this *RelativePattern) UnmarshalJSON(data []byte) error {
+	type RelativePatternUnmarshal RelativePattern
+	var tmpUnmarshal RelativePatternUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.BaseUri == nil {
+		return StructureValidateFailed("RelativePattern")
+	}
+
+	if tmpUnmarshal.Pattern == nil {
+		return StructureValidateFailed("RelativePattern")
+	}
+
+	*this = RelativePattern(tmpUnmarshal)
+	return nil
+}
+
+func (this *RelativePattern) MarshalJSON() ([]byte, error) {
+
+	if this.BaseUri == nil {
+		return nil, StructureValidateFailed("RelativePattern")
+	}
+
+	if this.Pattern == nil {
+		return nil, StructureValidateFailed("RelativePattern")
+	}
+
+	type RelativePatternMarshal RelativePattern
+	tmpMarshal := RelativePatternMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 type WorkspaceEditClientCapabilities struct {
@@ -3992,7 +9539,7 @@ type WorkspaceEditClientCapabilities struct {
 	// The resource operations the client supports. Clients should at least
 	// support 'create', 'rename' and 'delete' files and folders.  @since
 	// 3.13.0
-	ResourceOperations *[]ResourceOperationKind `json:"resourceOperations"`
+	ResourceOperations []ResourceOperationKind `json:"resourceOperations"`
 
 	// The failure handling strategy of a client if applying the workspace
 	// edit fails.  @since 3.13.0
@@ -4194,7 +9741,7 @@ type HoverClientCapabilities struct {
 
 	// Client supports the following content formats for the content
 	// property. The order describes the preferred format of the client.
-	ContentFormat *[]MarkupKind `json:"contentFormat"`
+	ContentFormat []MarkupKind `json:"contentFormat"`
 }
 
 // Client Capabilities for a [SignatureHelpRequest](#SignatureHelpRequest).
@@ -4498,7 +10045,7 @@ type SemanticTokensClientCapabilities struct {
 	// `request.range` are both set to true but the server only provides a
 	// range provider the client might not render a minimap correctly or
 	// might even decide to not show any semantic tokens at all.
-	Requests SemanticTokensClientCapabilities_Requests `json:"requests"`
+	Requests *SemanticTokensClientCapabilities_Requests `json:"requests"`
 
 	// The token types that the client supports.
 	TokenTypes []string `json:"tokenTypes"`
@@ -4528,6 +10075,73 @@ type SemanticTokensClientCapabilities struct {
 	// the value is `undefined` then the client behavior is not specified.
 	// @since 3.17.0
 	AugmentsSyntaxTokens *bool `json:"augmentsSyntaxTokens"`
+}
+
+func (this *SemanticTokensClientCapabilities) UnmarshalJSON(data []byte) error {
+	type SemanticTokensClientCapabilitiesUnmarshal SemanticTokensClientCapabilities
+	var tmpUnmarshal SemanticTokensClientCapabilitiesUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Requests == nil {
+		return StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	if tmpUnmarshal.TokenTypes == nil {
+		return StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	if tmpUnmarshal.TokenModifiers == nil {
+		return StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	if tmpUnmarshal.Formats == nil {
+		return StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	*this = SemanticTokensClientCapabilities(tmpUnmarshal)
+	return nil
+}
+
+func (this *SemanticTokensClientCapabilities) MarshalJSON() ([]byte, error) {
+
+	if this.Requests == nil {
+		return nil, StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	if this.TokenTypes == nil {
+		return nil, StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	if this.TokenModifiers == nil {
+		return nil, StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	if this.Formats == nil {
+		return nil, StructureValidateFailed(
+			"SemanticTokensClientCapabilities",
+		)
+	}
+
+	type SemanticTokensClientCapabilitiesMarshal SemanticTokensClientCapabilities
+	tmpMarshal := SemanticTokensClientCapabilitiesMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Client capabilities for the linked editing range request.  @since 3.16.0
@@ -4616,29 +10230,120 @@ type ShowMessageRequestClientCapabilities struct {
 type ShowDocumentClientCapabilities struct {
 
 	// The client has support for the showDocument request.
-	Support bool `json:"support"`
+	Support *bool `json:"support"`
+}
+
+func (this *ShowDocumentClientCapabilities) UnmarshalJSON(data []byte) error {
+	type ShowDocumentClientCapabilitiesUnmarshal ShowDocumentClientCapabilities
+	var tmpUnmarshal ShowDocumentClientCapabilitiesUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Support == nil {
+		return StructureValidateFailed("ShowDocumentClientCapabilities")
+	}
+
+	*this = ShowDocumentClientCapabilities(tmpUnmarshal)
+	return nil
+}
+
+func (this *ShowDocumentClientCapabilities) MarshalJSON() ([]byte, error) {
+
+	if this.Support == nil {
+		return nil, StructureValidateFailed(
+			"ShowDocumentClientCapabilities",
+		)
+	}
+
+	type ShowDocumentClientCapabilitiesMarshal ShowDocumentClientCapabilities
+	tmpMarshal := ShowDocumentClientCapabilitiesMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Client capabilities specific to regular expressions.  @since 3.16.0
 type RegularExpressionsClientCapabilities struct {
 
 	// The engine's name.
-	Engine string `json:"engine"`
+	Engine *string `json:"engine"`
 
 	// The engine's version.
 	Version *string `json:"version"`
+}
+
+func (this *RegularExpressionsClientCapabilities) UnmarshalJSON(
+	data []byte,
+) error {
+	type RegularExpressionsClientCapabilitiesUnmarshal RegularExpressionsClientCapabilities
+	var tmpUnmarshal RegularExpressionsClientCapabilitiesUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Engine == nil {
+		return StructureValidateFailed(
+			"RegularExpressionsClientCapabilities",
+		)
+	}
+
+	*this = RegularExpressionsClientCapabilities(tmpUnmarshal)
+	return nil
+}
+
+func (this *RegularExpressionsClientCapabilities) MarshalJSON() ([]byte, error) {
+
+	if this.Engine == nil {
+		return nil, StructureValidateFailed(
+			"RegularExpressionsClientCapabilities",
+		)
+	}
+
+	type RegularExpressionsClientCapabilitiesMarshal RegularExpressionsClientCapabilities
+	tmpMarshal := RegularExpressionsClientCapabilitiesMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }
 
 // Client capabilities specific to the used markdown parser.  @since 3.16.0
 type MarkdownClientCapabilities struct {
 
 	// The name of the parser.
-	Parser string `json:"parser"`
+	Parser *string `json:"parser"`
 
 	// The version of the parser.
 	Version *string `json:"version"`
 
 	// A list of HTML tags that the client allows / supports in Markdown.
 	// @since 3.17.0
-	AllowedTags *[]string `json:"allowedTags"`
+	AllowedTags []string `json:"allowedTags"`
+}
+
+func (this *MarkdownClientCapabilities) UnmarshalJSON(data []byte) error {
+	type MarkdownClientCapabilitiesUnmarshal MarkdownClientCapabilities
+	var tmpUnmarshal MarkdownClientCapabilitiesUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+
+	if tmpUnmarshal.Parser == nil {
+		return StructureValidateFailed("MarkdownClientCapabilities")
+	}
+
+	*this = MarkdownClientCapabilities(tmpUnmarshal)
+	return nil
+}
+
+func (this *MarkdownClientCapabilities) MarshalJSON() ([]byte, error) {
+
+	if this.Parser == nil {
+		return nil, StructureValidateFailed(
+			"MarkdownClientCapabilities",
+		)
+	}
+
+	type MarkdownClientCapabilitiesMarshal MarkdownClientCapabilities
+	tmpMarshal := MarkdownClientCapabilitiesMarshal(*this)
+	return json.Marshal(&tmpMarshal)
 }

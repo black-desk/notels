@@ -2,11 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/black-desk/notels/internal/utils/logger"
 )
-
-var log = logger.Get("lspgen")
 
 var interfaceTemplate = `// Code generated from metaModel.json by "lspgen". DO NOT EDIT
 
