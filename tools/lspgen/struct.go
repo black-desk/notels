@@ -11,7 +11,7 @@ var structTemplate string = `// Code generated from metaModel.json by "lspgen". 
 {{/* type check to ensure data is []Structure */}}
 {{typeCheck .}}
 
-package protocol
+package lsp
 
 import (
         "encoding/json"

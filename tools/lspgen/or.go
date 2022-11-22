@@ -42,7 +42,7 @@ var OrTemplate string = `// Code generated from metaModel.json by "lspgen". DO N
 {{/* type check to ensure data is []Structure */}}
 {{typeCheck .}}
 
-package protocol
+package lsp
 
 import (
         "encoding/json"

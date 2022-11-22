@@ -11,7 +11,7 @@ var enumTemplate string = `// Code generated from metaModel.json by "lspgen". DO
 {{/* type check to ensure data is []model.Enumeration */}}
 {{typeCheck .}}
 
-package protocol
+package lsp
 
 import (
         "fmt"

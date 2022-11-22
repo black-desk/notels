@@ -32,7 +32,7 @@ var tupleTemplate string = `// Code generated from metaModel.json by "lspgen". D
 {{/* type check to ensure data is []Structure */}}
 {{typeCheck .}}
 
-package protocol
+package lsp
 
 import (
         "encoding/json"
