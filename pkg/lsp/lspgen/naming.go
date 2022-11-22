@@ -29,11 +29,9 @@ func fix(name string) string {
 func typeName(prefix string, current string, t *Type) string {
 	if t.Kind == "reference" {
 		return fix(t.Name)
-	}
-	if t.Kind == "base" {
+	} else if t.Kind == "base" {
 		return baseTypeName(t.Name)
-	}
-	if t.Kind == "array" {
+	} else if t.Kind == "array" {
 		if len(prefix) != 0 {
 			return "[]" + typeName(
 				prefix+"_"+current,
@@ -44,8 +42,7 @@ func typeName(prefix string, current string, t *Type) string {
 			return "[]" + typeName(current, "Element", t.Element)
 
 		}
-	}
-	if t.Kind == "or" {
+	} else if t.Kind == "or" {
 		if len(t.Items) == 2 && t.Items[0].Name == "null" {
 			name := typeName(prefix, current, &t.Items[1])
 			if name[0:1] != "[" {
@@ -53,16 +50,14 @@ func typeName(prefix string, current string, t *Type) string {
 			} else {
 				return name
 			}
-		}
-		if len(t.Items) == 2 && t.Items[1].Name == "null" {
+		} else if len(t.Items) == 2 && t.Items[1].Name == "null" {
 			name := typeName(prefix, current, &t.Items[0])
 			if name[0:1] != "[" {
 				return "*" + name
 			} else {
 				return name
 			}
-		}
-		if len(prefix) != 0 {
+		} else if len(prefix) != 0 {
 			RegisterOr(prefix+"_"+current+"__Or", t)
 			return prefix + "_" + current + "__Or"
 
@@ -70,8 +65,7 @@ func typeName(prefix string, current string, t *Type) string {
 			RegisterOr(current+"__Or", t)
 			return current + "__Or"
 		}
-	}
-	if t.Kind == "map" {
+	} else if t.Kind == "map" {
 		if len(prefix) != 0 {
 			return "map[" + typeName(
 				prefix+"_"+current,
@@ -85,15 +79,12 @@ func typeName(prefix string, current string, t *Type) string {
 				t.Key,
 			) + "]" + typeValueName(current, "Value", t.Value)
 		}
-	}
-	if t.Kind == "literal" {
+	} else if t.Kind == "literal" {
 		RegisterLiteral(prefix+"_"+current, t.Value.(*StructureLiteral))
 		return prefix + "_" + current
-	}
-	if t.Kind == "stringLiteral" {
+	} else if t.Kind == "stringLiteral" {
 		return "string"
-	}
-	if t.Kind == "tuple" {
+	} else if t.Kind == "tuple" {
 		RegisterTuple(prefix+"_"+current, t)
 		return prefix + "_" + current + "_Tuple"
 	}
