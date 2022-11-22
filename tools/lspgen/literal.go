@@ -93,7 +93,7 @@ var structureLiteralTemplateTypeCheck = func([]StructureLiteralWithName) string 
 
 func genLiteral() {
 	fileName := "literal_gen.go"
-	extraTypeGenFile, err := os.OpenFile(
+	genFile, err := os.OpenFile(
 		fileName,
 		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
 		0644,
@@ -103,7 +103,7 @@ func genLiteral() {
 			"name", fileName,
 			"error", err)
 	}
-	defer extraTypeGenFile.Close()
+	defer genFile.Close()
 
 	funcs := map[string]any{
 		"typeCheck":       structureLiteralTemplateTypeCheck,
@@ -114,11 +114,11 @@ func genLiteral() {
 		"hasRequireField": structureTemplateHasRequireField,
 	}
 
-	serverTemplate, err := template.New("structureLiteral").
+	codeTemplate, err := template.New("structureLiteral").
 		Funcs(funcs).
 		Parse(literalTemplate)
 	if err != nil {
-		log.Fatalw("failed to parse template for structs",
+		log.Fatalw("failed to parse template for structure literal",
 			"error", err)
 	}
 
@@ -137,9 +137,9 @@ func genLiteral() {
 		})
 	}
 
-	err = serverTemplate.Execute(extraTypeGenFile, data)
+	err = codeTemplate.Execute(genFile, data)
 	if err != nil {
-		log.Fatalw("failed to execute template for structs",
+		log.Fatalw("failed to execute template for structure literal",
 			"error", err)
 	}
 }

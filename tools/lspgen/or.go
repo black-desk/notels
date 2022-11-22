@@ -94,7 +94,7 @@ var orTemplateTypeCheck = func([]OrTypeWithName) string { return "" }
 
 func genOr() {
 	fileName := "or_gen.go"
-	extraTypeGenFile, err := os.OpenFile(
+	genFile, err := os.OpenFile(
 		fileName,
 		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
 		0644,
@@ -104,7 +104,7 @@ func genOr() {
 			"name", fileName,
 			"error", err)
 	}
-	defer extraTypeGenFile.Close()
+	defer genFile.Close()
 
 	funcs := map[string]any{
 		"typeCheck":       orTemplateTypeCheck,
@@ -114,11 +114,11 @@ func genOr() {
 		"hasRequireField": structureTemplateHasRequireField,
 	}
 
-	serverTemplate, err := template.New("structures").
+	codeTemplate, err := template.New("or").
 		Funcs(funcs).
 		Parse(OrTemplate)
 	if err != nil {
-		log.Fatalw("failed to parse template for structs",
+		log.Fatalw("failed to parse template for or type",
 			"error", err)
 	}
 
@@ -130,18 +130,15 @@ func genOr() {
 	}
 	sort.Strings(keys)
 	for _, k := range keys {
-		if k == "NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Notebook__Or" {
-			log.Info(OrToGenerate[k])
-		}
 		data = append(data, OrTypeWithName{
 			Name:  k,
 			Items: OrToGenerate[k].Items,
 		})
 	}
 
-	err = serverTemplate.Execute(extraTypeGenFile, data)
+	err = codeTemplate.Execute(genFile, data)
 	if err != nil {
-		log.Fatalw("failed to execute template for structs",
+		log.Fatalw("failed to execute template for or type",
 			"error", err)
 	}
 }

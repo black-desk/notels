@@ -115,7 +115,7 @@ func genStruct(metaModel *MetaModel) {
 	log.Info("generating structures")
 
 	fileName := "structures_gen.go"
-	structuresGenFile, err := os.OpenFile(
+	codeFile, err := os.OpenFile(
 		fileName,
 		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
 		0644,
@@ -125,7 +125,7 @@ func genStruct(metaModel *MetaModel) {
 			"name", fileName,
 			"error", err)
 	}
-	defer structuresGenFile.Close()
+	defer codeFile.Close()
 
 	funcs := map[string]any{
 		"typeCheck":       structureTemplateTypeCheck,
@@ -137,20 +137,19 @@ func genStruct(metaModel *MetaModel) {
 		"hasRequireField": structureTemplateHasRequireField,
 	}
 
-	serverTemplate, err := template.New("structures").
+	codeTemplate, err := template.New("structures").
 		Funcs(funcs).
 		Parse(structTemplate)
 	if err != nil {
-		log.Fatalw("failed to parse template for structs",
+		log.Fatalw("failed to parse template for structures",
 			"error", err)
 	}
 
 	data := metaModel.Structures
 
-	err = serverTemplate.Execute(structuresGenFile, data)
+	err = codeTemplate.Execute(codeFile, data)
 	if err != nil {
-		log.Fatalw("failed to execute template for structs",
+		log.Fatalw("failed to execute template for structures",
 			"error", err)
 	}
-
 }

@@ -7,11 +7,11 @@ import (
 	"text/template"
 )
 
-var TuplesTogenerate = map[string]*Type{}
+var TuplesToGenerate = map[string]*Type{}
 
 func RegisterTuple(name string, t *Type) {
-	if _, ok := TuplesTogenerate[name]; !ok {
-		TuplesTogenerate[name] = t
+	if _, ok := TuplesToGenerate[name]; !ok {
+		TuplesToGenerate[name] = t
 		parseTuple(name, t)
 	}
 }
@@ -93,7 +93,7 @@ func genTuple() {
 	log.Info("generating tuples")
 
 	fileName := "tuples_gen.go"
-	structuresGenFile, err := os.OpenFile(
+	genFile, err := os.OpenFile(
 		fileName,
 		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
 		0644,
@@ -103,14 +103,14 @@ func genTuple() {
 			"name", fileName,
 			"error", err)
 	}
-	defer structuresGenFile.Close()
+	defer genFile.Close()
 
 	funcs := map[string]any{
 		"typeCheck":   tupleTemplateTypeCheck,
 		"getTypeName": tupleTemplateGetTypeName,
 	}
 
-	serverTemplate, err := template.New("structures").
+	codeTemplate, err := template.New("structures").
 		Funcs(funcs).
 		Parse(tupleTemplate)
 	if err != nil {
@@ -119,7 +119,7 @@ func genTuple() {
 	}
 
 	keys := []string{}
-	for k := range TuplesTogenerate {
+	for k := range TuplesToGenerate {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
@@ -127,13 +127,13 @@ func genTuple() {
 	for _, k := range keys {
 		data = append(data, tupleTypeWithName{
 			Name: k,
-			T:    TuplesTogenerate[k],
+			T:    TuplesToGenerate[k],
 		})
 	}
 
-	err = serverTemplate.Execute(structuresGenFile, data)
+	err = codeTemplate.Execute(genFile, data)
 	if err != nil {
-		log.Fatalw("failed to execute template for structs",
+		log.Fatalw("failed to execute template for tuples",
 			"error", err)
 	}
 

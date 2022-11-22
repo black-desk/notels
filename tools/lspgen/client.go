@@ -12,7 +12,7 @@ func genClient(metaModel *MetaModel) {
 	log.Info("generating lsp client interface")
 
 	fileName := "client_gen.go"
-	clientGenFile, err := os.OpenFile(
+	genFile, err := os.OpenFile(
 		fileName,
 		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
 		0644,
@@ -22,9 +22,9 @@ func genClient(metaModel *MetaModel) {
 			"name", fileName,
 			"error", err)
 	}
-	defer clientGenFile.Close()
+	defer genFile.Close()
 
-	clientTemplate, err := template.New("client").
+	codeTemplate, err := template.New("client").
 		Funcs(interfaceTemplateFuncs).
 		Parse(clientTemplate)
 	if err != nil {
@@ -45,7 +45,7 @@ func genClient(metaModel *MetaModel) {
 		}
 	}
 
-	err = clientTemplate.Execute(clientGenFile, data)
+	err = codeTemplate.Execute(genFile, data)
 
 	if err != nil {
 		log.Fatalw("failed to execute template for lsp client",

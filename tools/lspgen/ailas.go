@@ -15,16 +15,11 @@ package protocol
 {{end}}
 `
 
-var typeAliasTemplateFuncs = map[string]any{
-	"getName":     MethodNameFromString,
-	"getTypeName": typeName,
-}
-
 func genTypeAliases(metaModel *MetaModel) {
 	log.Info("generating type aliases")
 
 	fileName := "alias_gen.go"
-	aliasGenFile, err := os.OpenFile(
+	codeFile, err := os.OpenFile(
 		fileName,
 		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
 		0644,
@@ -34,21 +29,26 @@ func genTypeAliases(metaModel *MetaModel) {
 			"name", fileName,
 			"error", err)
 	}
-	defer aliasGenFile.Close()
+	defer codeFile.Close()
+
+	funcs := map[string]any{
+		"getName":     MethodNameFromString,
+		"getTypeName": typeName,
+	}
 
 	codeTemplate, err := template.New("alias").
-		Funcs(typeAliasTemplateFuncs).
+		Funcs(funcs).
 		Parse(typeAliasTemplate)
 	if err != nil {
-		log.Fatalw("failed to parse template for enum",
+		log.Fatalw("failed to parse template for type aliases",
 			"error", err)
 	}
 
 	data := metaModel.TypeAliases
 
-	err = codeTemplate.Execute(aliasGenFile, data)
+	err = codeTemplate.Execute(codeFile, data)
 	if err != nil {
-		log.Fatalw("failed to execute template for enum",
+		log.Fatalw("failed to execute template for type aliases",
 			"error", err)
 	}
 }

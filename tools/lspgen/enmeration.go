@@ -77,48 +77,6 @@ var EnumerationValidateFailed = func (name string) error {
 {{end}}
 `
 
-func genEnumerations(metaModel *MetaModel) {
-	log.Info("generating enumerations")
-
-	fileName := "enumerations_gen.go"
-	enumerationGenFile, err := os.OpenFile(
-		fileName,
-		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
-		0644,
-	)
-	if err != nil {
-		log.Fatalw("failed to open file",
-			"name", fileName,
-			"error", err)
-	}
-	defer enumerationGenFile.Close()
-
-	funcs := map[string]any{
-		"typeCheck":    enumTemplateTypeCheck,
-		"getType":      enumTemplateGetType,
-		"getName":      enumTemplateGetName,
-		"getComment":   enumTemplateGetComment,
-		"getEnumName":  enumTemplateGetEnumName,
-		"getEnumValue": enumTemplateGetEnumValue,
-	}
-
-	serverTemplate, err := template.New("enumerations").
-		Funcs(funcs).
-		Parse(enumTemplate)
-	if err != nil {
-		log.Fatalw("failed to parse template for enum",
-			"error", err)
-	}
-
-	data := metaModel.Enumerations
-
-	err = serverTemplate.Execute(enumerationGenFile, data)
-	if err != nil {
-		log.Fatalw("failed to execute template for enum",
-			"error", err)
-	}
-}
-
 var enumTemplateTypeCheck = func([]Enumeration) string {
 	return ""
 }
@@ -132,4 +90,46 @@ var enumTemplateGetEnumName = func(t string, name string) string {
 }
 var enumTemplateGetEnumValue = func(value []byte) string {
 	return string(value)
+}
+
+func genEnumerations(metaModel *MetaModel) {
+	log.Info("generating enumerations")
+
+	fileName := "enumerations_gen.go"
+	codeFile, err := os.OpenFile(
+		fileName,
+		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
+		0644,
+	)
+	if err != nil {
+		log.Fatalw("failed to open file",
+			"name", fileName,
+			"error", err)
+	}
+	defer codeFile.Close()
+
+	funcs := map[string]any{
+		"typeCheck":    enumTemplateTypeCheck,
+		"getType":      enumTemplateGetType,
+		"getName":      enumTemplateGetName,
+		"getComment":   enumTemplateGetComment,
+		"getEnumName":  enumTemplateGetEnumName,
+		"getEnumValue": enumTemplateGetEnumValue,
+	}
+
+	codeTemplate, err := template.New("enumerations").
+		Funcs(funcs).
+		Parse(enumTemplate)
+	if err != nil {
+		log.Fatalw("failed to parse template for enumerations",
+			"error", err)
+	}
+
+	data := metaModel.Enumerations
+
+	err = codeTemplate.Execute(codeFile, data)
+	if err != nil {
+		log.Fatalw("failed to execute template for enumerations",
+			"error", err)
+	}
 }
