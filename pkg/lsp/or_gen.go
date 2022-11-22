@@ -12,9 +12,7 @@ var OrValidateFailed = func(name string) error {
 }
 
 type CancelParams_Id_Or struct {
-
-	// *Integer
-	// *String
+	// Or [ *Integer *String ]
 	V interface{}
 }
 
@@ -58,9 +56,7 @@ func (this *CancelParams_Id_Or) MarshalJSON() ([]byte, error) {
 }
 
 type CompletionItem_Documentation_Or struct {
-
-	// *String
-	// *MarkupContent
+	// Or [ *String *MarkupContent ]
 	V interface{}
 }
 
@@ -104,9 +100,7 @@ func (this *CompletionItem_Documentation_Or) MarshalJSON() ([]byte, error) {
 }
 
 type CompletionItem_TextEdit_Or struct {
-
-	// *TextEdit
-	// *InsertReplaceEdit
+	// Or [ *TextEdit *InsertReplaceEdit ]
 	V interface{}
 }
 
@@ -150,6 +144,7 @@ func (this *CompletionItem_TextEdit_Or) MarshalJSON() ([]byte, error) {
 }
 
 type CompletionList_ItemDefaults_EditRange_Or struct {
+	// Or [ *Range *CompletionList_ItemDefaults_EditRange_Or_1 ]
 	V interface{}
 }
 
@@ -157,11 +152,37 @@ func (this *CompletionList_ItemDefaults_EditRange_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
+	{
+
+		var tmp *Range
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *CompletionList_ItemDefaults_EditRange_Or_1
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
 	return OrValidateFailed("CompletionList_ItemDefaults_EditRange_Or")
 }
 
 func (this *CompletionList_ItemDefaults_EditRange_Or) MarshalJSON() ([]byte, error) {
 	for {
+
+		if _, ok := this.V.(*Range); ok {
+			break
+		}
+
+		if _, ok := this.V.(*CompletionList_ItemDefaults_EditRange_Or_1); ok {
+			break
+		}
 
 		return nil, OrValidateFailed(
 			"CompletionList_ItemDefaults_EditRange_Or",
@@ -171,9 +192,7 @@ func (this *CompletionList_ItemDefaults_EditRange_Or) MarshalJSON() ([]byte, err
 }
 
 type Declaration_Or struct {
-
-	// *Location
-	// []Location
+	// Or [ *Location []Location ]
 	V interface{}
 }
 
@@ -217,9 +236,7 @@ func (this *Declaration_Or) MarshalJSON() ([]byte, error) {
 }
 
 type Definition_Or struct {
-
-	// *Location
-	// []Location
+	// Or [ *Location []Location ]
 	V interface{}
 }
 
@@ -263,9 +280,7 @@ func (this *Definition_Or) MarshalJSON() ([]byte, error) {
 }
 
 type Diagnostic_Code_Or struct {
-
-	// *Integer
-	// *String
+	// Or [ *Integer *String ]
 	V interface{}
 }
 
@@ -309,9 +324,7 @@ func (this *Diagnostic_Code_Or) MarshalJSON() ([]byte, error) {
 }
 
 type DidChangeConfigurationRegistrationOptions_Section_Or struct {
-
-	// *String
-	// []String
+	// Or [ *String []String ]
 	V interface{}
 }
 
@@ -361,9 +374,8 @@ func (this *DidChangeConfigurationRegistrationOptions_Section_Or) MarshalJSON() 
 }
 
 type DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or struct {
-
-	// *FullDocumentDiagnosticReport
-	// *UnchangedDocumentDiagnosticReport
+	// Or [ *FullDocumentDiagnosticReport *UnchangedDocumentDiagnosticReport
+	// ]
 	V interface{}
 }
 
@@ -413,9 +425,8 @@ func (this *DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or) Mar
 }
 
 type DocumentDiagnosticReport_Or struct {
-
-	// *RelatedFullDocumentDiagnosticReport
-	// *RelatedUnchangedDocumentDiagnosticReport
+	// Or [ *RelatedFullDocumentDiagnosticReport
+	// *RelatedUnchangedDocumentDiagnosticReport ]
 	V interface{}
 }
 
@@ -459,9 +470,7 @@ func (this *DocumentDiagnosticReport_Or) MarshalJSON() ([]byte, error) {
 }
 
 type DocumentFilter_Or struct {
-
-	// *TextDocumentFilter
-	// *NotebookCellTextDocumentFilter
+	// Or [ *TextDocumentFilter *NotebookCellTextDocumentFilter ]
 	V interface{}
 }
 
@@ -505,9 +514,7 @@ func (this *DocumentFilter_Or) MarshalJSON() ([]byte, error) {
 }
 
 type GlobPattern_Or struct {
-
-	// *Pattern
-	// *RelativePattern
+	// Or [ *Pattern *RelativePattern ]
 	V interface{}
 }
 
@@ -551,10 +558,7 @@ func (this *GlobPattern_Or) MarshalJSON() ([]byte, error) {
 }
 
 type Hover_Contents_Or struct {
-
-	// *MarkupContent
-	// *MarkedString
-	// []MarkedString
+	// Or [ *MarkupContent *MarkedString []MarkedString ]
 	V interface{}
 }
 
@@ -611,9 +615,7 @@ func (this *Hover_Contents_Or) MarshalJSON() ([]byte, error) {
 }
 
 type InlayHintLabelPart_Tooltip_Or struct {
-
-	// *String
-	// *MarkupContent
+	// Or [ *String *MarkupContent ]
 	V interface{}
 }
 
@@ -657,9 +659,7 @@ func (this *InlayHintLabelPart_Tooltip_Or) MarshalJSON() ([]byte, error) {
 }
 
 type InlayHint_Label_Or struct {
-
-	// *String
-	// []InlayHintLabelPart
+	// Or [ *String []InlayHintLabelPart ]
 	V interface{}
 }
 
@@ -703,9 +703,7 @@ func (this *InlayHint_Label_Or) MarshalJSON() ([]byte, error) {
 }
 
 type InlayHint_Tooltip_Or struct {
-
-	// *String
-	// *MarkupContent
+	// Or [ *String *MarkupContent ]
 	V interface{}
 }
 
@@ -749,10 +747,8 @@ func (this *InlayHint_Tooltip_Or) MarshalJSON() ([]byte, error) {
 }
 
 type InlineValue_Or struct {
-
-	// *InlineValueText
-	// *InlineValueVariableLookup
-	// *InlineValueEvaluatableExpression
+	// Or [ *InlineValueText *InlineValueVariableLookup
+	// *InlineValueEvaluatableExpression ]
 	V interface{}
 }
 
@@ -809,15 +805,8 @@ func (this *InlineValue_Or) MarshalJSON() ([]byte, error) {
 }
 
 type LSPAny_Or struct {
-
-	// *LSPObject
-	// *LSPArray
-	// *String
-	// *Integer
-	// *Uinteger
-	// *Decimal
-	// *Boolean
-	// *Null
+	// Or [ *LSPObject *LSPArray *String *Integer *Uinteger *Decimal
+	// *Boolean *Null ]
 	V interface{}
 }
 
@@ -939,9 +928,7 @@ func (this *LSPAny_Or) MarshalJSON() ([]byte, error) {
 }
 
 type MarkedString_Or struct {
-
-	// *String
-	// *MarkedString_Or_1
+	// Or [ *String *MarkedString_Or_1 ]
 	V interface{}
 }
 
@@ -985,9 +972,7 @@ func (this *MarkedString_Or) MarshalJSON() ([]byte, error) {
 }
 
 type NotebookCellTextDocumentFilter_Notebook_Or struct {
-
-	// *String
-	// *NotebookDocumentFilter
+	// Or [ *String *NotebookDocumentFilter ]
 	V interface{}
 }
 
@@ -1035,10 +1020,8 @@ func (this *NotebookCellTextDocumentFilter_Notebook_Or) MarshalJSON() ([]byte, e
 }
 
 type NotebookDocumentFilter_Or struct {
-
-	// *NotebookDocumentFilter_Or_0
-	// *NotebookDocumentFilter_Or_1
-	// *NotebookDocumentFilter_Or_2
+	// Or [ *NotebookDocumentFilter_Or_0 *NotebookDocumentFilter_Or_1
+	// *NotebookDocumentFilter_Or_2 ]
 	V interface{}
 }
 
@@ -1095,9 +1078,8 @@ func (this *NotebookDocumentFilter_Or) MarshalJSON() ([]byte, error) {
 }
 
 type NotebookDocumentSyncOptions_NotebookSelector_Element_Or struct {
-
-	// *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0
-	// *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1
+	// Or [ *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0
+	// *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1 ]
 	V interface{}
 }
 
@@ -1147,12 +1129,31 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or) MarshalJSON
 }
 
 type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or struct {
+	// Or [ *String *NotebookDocumentFilter ]
 	V interface{}
 }
 
 func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or) UnmarshalJSON(
 	data []byte,
 ) error {
+
+	{
+
+		var tmp *String
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *NotebookDocumentFilter
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
 
 	return OrValidateFailed(
 		"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or",
@@ -1162,6 +1163,14 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_O
 func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or) MarshalJSON() ([]byte, error) {
 	for {
 
+		if _, ok := this.V.(*String); ok {
+			break
+		}
+
+		if _, ok := this.V.(*NotebookDocumentFilter); ok {
+			break
+		}
+
 		return nil, OrValidateFailed(
 			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or",
 		)
@@ -1170,12 +1179,31 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_O
 }
 
 type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or struct {
+	// Or [ *String *NotebookDocumentFilter ]
 	V interface{}
 }
 
 func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or) UnmarshalJSON(
 	data []byte,
 ) error {
+
+	{
+
+		var tmp *String
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *NotebookDocumentFilter
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
 
 	return OrValidateFailed(
 		"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or",
@@ -1185,6 +1213,14 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_O
 func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or) MarshalJSON() ([]byte, error) {
 	for {
 
+		if _, ok := this.V.(*String); ok {
+			break
+		}
+
+		if _, ok := this.V.(*NotebookDocumentFilter); ok {
+			break
+		}
+
 		return nil, OrValidateFailed(
 			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or",
 		)
@@ -1193,9 +1229,7 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_O
 }
 
 type ParameterInformation_Documentation_Or struct {
-
-	// *String
-	// *MarkupContent
+	// Or [ *String *MarkupContent ]
 	V interface{}
 }
 
@@ -1243,9 +1277,7 @@ func (this *ParameterInformation_Documentation_Or) MarshalJSON() ([]byte, error)
 }
 
 type ParameterInformation_Label_Or struct {
-
-	// *String
-	// *ParameterInformation_Label_Or_1_Tuple
+	// Or [ *String *ParameterInformation_Label_Or_1_Tuple ]
 	V interface{}
 }
 
@@ -1289,10 +1321,7 @@ func (this *ParameterInformation_Label_Or) MarshalJSON() ([]byte, error) {
 }
 
 type PrepareRenameResult_Or struct {
-
-	// *Range
-	// *PrepareRenameResult_Or_1
-	// *PrepareRenameResult_Or_2
+	// Or [ *Range *PrepareRenameResult_Or_1 *PrepareRenameResult_Or_2 ]
 	V interface{}
 }
 
@@ -1349,9 +1378,7 @@ func (this *PrepareRenameResult_Or) MarshalJSON() ([]byte, error) {
 }
 
 type ProgressToken_Or struct {
-
-	// *Integer
-	// *String
+	// Or [ *Integer *String ]
 	V interface{}
 }
 
@@ -1395,9 +1422,8 @@ func (this *ProgressToken_Or) MarshalJSON() ([]byte, error) {
 }
 
 type RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or struct {
-
-	// *FullDocumentDiagnosticReport
-	// *UnchangedDocumentDiagnosticReport
+	// Or [ *FullDocumentDiagnosticReport *UnchangedDocumentDiagnosticReport
+	// ]
 	V interface{}
 }
 
@@ -1447,9 +1473,8 @@ func (this *RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or) Marsh
 }
 
 type RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or struct {
-
-	// *FullDocumentDiagnosticReport
-	// *UnchangedDocumentDiagnosticReport
+	// Or [ *FullDocumentDiagnosticReport *UnchangedDocumentDiagnosticReport
+	// ]
 	V interface{}
 }
 
@@ -1499,9 +1524,7 @@ func (this *RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or) 
 }
 
 type RelativePattern_BaseUri_Or struct {
-
-	// *WorkspaceFolder
-	// *URI
+	// Or [ *WorkspaceFolder *URI ]
 	V interface{}
 }
 
@@ -1545,9 +1568,7 @@ func (this *RelativePattern_BaseUri_Or) MarshalJSON() ([]byte, error) {
 }
 
 type SemanticTokensClientCapabilities_Requests_Full_Or struct {
-
-	// *Boolean
-	// *SemanticTokensClientCapabilities_Requests_Full_Or_1
+	// Or [ *Boolean *SemanticTokensClientCapabilities_Requests_Full_Or_1 ]
 	V interface{}
 }
 
@@ -1597,9 +1618,7 @@ func (this *SemanticTokensClientCapabilities_Requests_Full_Or) MarshalJSON() ([]
 }
 
 type SemanticTokensClientCapabilities_Requests_Range_Or struct {
-
-	// *Boolean
-	// *SemanticTokensClientCapabilities_Requests_Range_Or_1
+	// Or [ *Boolean *SemanticTokensClientCapabilities_Requests_Range_Or_1 ]
 	V interface{}
 }
 
@@ -1649,9 +1668,7 @@ func (this *SemanticTokensClientCapabilities_Requests_Range_Or) MarshalJSON() ([
 }
 
 type SemanticTokensOptions_Full_Or struct {
-
-	// *Boolean
-	// *SemanticTokensOptions_Full_Or_1
+	// Or [ *Boolean *SemanticTokensOptions_Full_Or_1 ]
 	V interface{}
 }
 
@@ -1695,9 +1712,7 @@ func (this *SemanticTokensOptions_Full_Or) MarshalJSON() ([]byte, error) {
 }
 
 type SemanticTokensOptions_Range_Or struct {
-
-	// *Boolean
-	// *SemanticTokensOptions_Range_Or_1
+	// Or [ *Boolean *SemanticTokensOptions_Range_Or_1 ]
 	V interface{}
 }
 
@@ -1741,10 +1756,8 @@ func (this *SemanticTokensOptions_Range_Or) MarshalJSON() ([]byte, error) {
 }
 
 type ServerCapabilities_CallHierarchyProvider_Or struct {
-
-	// *Boolean
-	// *CallHierarchyOptions
-	// *CallHierarchyRegistrationOptions
+	// Or [ *Boolean *CallHierarchyOptions *CallHierarchyRegistrationOptions
+	// ]
 	V interface{}
 }
 
@@ -1805,9 +1818,7 @@ func (this *ServerCapabilities_CallHierarchyProvider_Or) MarshalJSON() ([]byte, 
 }
 
 type ServerCapabilities_CodeActionProvider_Or struct {
-
-	// *Boolean
-	// *CodeActionOptions
+	// Or [ *Boolean *CodeActionOptions ]
 	V interface{}
 }
 
@@ -1855,10 +1866,8 @@ func (this *ServerCapabilities_CodeActionProvider_Or) MarshalJSON() ([]byte, err
 }
 
 type ServerCapabilities_ColorProvider_Or struct {
-
-	// *Boolean
-	// *DocumentColorOptions
-	// *DocumentColorRegistrationOptions
+	// Or [ *Boolean *DocumentColorOptions *DocumentColorRegistrationOptions
+	// ]
 	V interface{}
 }
 
@@ -1919,10 +1928,7 @@ func (this *ServerCapabilities_ColorProvider_Or) MarshalJSON() ([]byte, error) {
 }
 
 type ServerCapabilities_DeclarationProvider_Or struct {
-
-	// *Boolean
-	// *DeclarationOptions
-	// *DeclarationRegistrationOptions
+	// Or [ *Boolean *DeclarationOptions *DeclarationRegistrationOptions ]
 	V interface{}
 }
 
@@ -1983,9 +1989,7 @@ func (this *ServerCapabilities_DeclarationProvider_Or) MarshalJSON() ([]byte, er
 }
 
 type ServerCapabilities_DefinitionProvider_Or struct {
-
-	// *Boolean
-	// *DefinitionOptions
+	// Or [ *Boolean *DefinitionOptions ]
 	V interface{}
 }
 
@@ -2033,9 +2037,7 @@ func (this *ServerCapabilities_DefinitionProvider_Or) MarshalJSON() ([]byte, err
 }
 
 type ServerCapabilities_DiagnosticProvider_Or struct {
-
-	// *DiagnosticOptions
-	// *DiagnosticRegistrationOptions
+	// Or [ *DiagnosticOptions *DiagnosticRegistrationOptions ]
 	V interface{}
 }
 
@@ -2083,9 +2085,7 @@ func (this *ServerCapabilities_DiagnosticProvider_Or) MarshalJSON() ([]byte, err
 }
 
 type ServerCapabilities_DocumentFormattingProvider_Or struct {
-
-	// *Boolean
-	// *DocumentFormattingOptions
+	// Or [ *Boolean *DocumentFormattingOptions ]
 	V interface{}
 }
 
@@ -2135,9 +2135,7 @@ func (this *ServerCapabilities_DocumentFormattingProvider_Or) MarshalJSON() ([]b
 }
 
 type ServerCapabilities_DocumentHighlightProvider_Or struct {
-
-	// *Boolean
-	// *DocumentHighlightOptions
+	// Or [ *Boolean *DocumentHighlightOptions ]
 	V interface{}
 }
 
@@ -2187,9 +2185,7 @@ func (this *ServerCapabilities_DocumentHighlightProvider_Or) MarshalJSON() ([]by
 }
 
 type ServerCapabilities_DocumentRangeFormattingProvider_Or struct {
-
-	// *Boolean
-	// *DocumentRangeFormattingOptions
+	// Or [ *Boolean *DocumentRangeFormattingOptions ]
 	V interface{}
 }
 
@@ -2239,9 +2235,7 @@ func (this *ServerCapabilities_DocumentRangeFormattingProvider_Or) MarshalJSON()
 }
 
 type ServerCapabilities_DocumentSymbolProvider_Or struct {
-
-	// *Boolean
-	// *DocumentSymbolOptions
+	// Or [ *Boolean *DocumentSymbolOptions ]
 	V interface{}
 }
 
@@ -2289,10 +2283,7 @@ func (this *ServerCapabilities_DocumentSymbolProvider_Or) MarshalJSON() ([]byte,
 }
 
 type ServerCapabilities_FoldingRangeProvider_Or struct {
-
-	// *Boolean
-	// *FoldingRangeOptions
-	// *FoldingRangeRegistrationOptions
+	// Or [ *Boolean *FoldingRangeOptions *FoldingRangeRegistrationOptions ]
 	V interface{}
 }
 
@@ -2353,9 +2344,7 @@ func (this *ServerCapabilities_FoldingRangeProvider_Or) MarshalJSON() ([]byte, e
 }
 
 type ServerCapabilities_HoverProvider_Or struct {
-
-	// *Boolean
-	// *HoverOptions
+	// Or [ *Boolean *HoverOptions ]
 	V interface{}
 }
 
@@ -2403,10 +2392,8 @@ func (this *ServerCapabilities_HoverProvider_Or) MarshalJSON() ([]byte, error) {
 }
 
 type ServerCapabilities_ImplementationProvider_Or struct {
-
-	// *Boolean
-	// *ImplementationOptions
-	// *ImplementationRegistrationOptions
+	// Or [ *Boolean *ImplementationOptions
+	// *ImplementationRegistrationOptions ]
 	V interface{}
 }
 
@@ -2467,10 +2454,7 @@ func (this *ServerCapabilities_ImplementationProvider_Or) MarshalJSON() ([]byte,
 }
 
 type ServerCapabilities_InlayHintProvider_Or struct {
-
-	// *Boolean
-	// *InlayHintOptions
-	// *InlayHintRegistrationOptions
+	// Or [ *Boolean *InlayHintOptions *InlayHintRegistrationOptions ]
 	V interface{}
 }
 
@@ -2531,10 +2515,7 @@ func (this *ServerCapabilities_InlayHintProvider_Or) MarshalJSON() ([]byte, erro
 }
 
 type ServerCapabilities_InlineValueProvider_Or struct {
-
-	// *Boolean
-	// *InlineValueOptions
-	// *InlineValueRegistrationOptions
+	// Or [ *Boolean *InlineValueOptions *InlineValueRegistrationOptions ]
 	V interface{}
 }
 
@@ -2595,10 +2576,8 @@ func (this *ServerCapabilities_InlineValueProvider_Or) MarshalJSON() ([]byte, er
 }
 
 type ServerCapabilities_LinkedEditingRangeProvider_Or struct {
-
-	// *Boolean
-	// *LinkedEditingRangeOptions
-	// *LinkedEditingRangeRegistrationOptions
+	// Or [ *Boolean *LinkedEditingRangeOptions
+	// *LinkedEditingRangeRegistrationOptions ]
 	V interface{}
 }
 
@@ -2661,10 +2640,7 @@ func (this *ServerCapabilities_LinkedEditingRangeProvider_Or) MarshalJSON() ([]b
 }
 
 type ServerCapabilities_MonikerProvider_Or struct {
-
-	// *Boolean
-	// *MonikerOptions
-	// *MonikerRegistrationOptions
+	// Or [ *Boolean *MonikerOptions *MonikerRegistrationOptions ]
 	V interface{}
 }
 
@@ -2725,9 +2701,8 @@ func (this *ServerCapabilities_MonikerProvider_Or) MarshalJSON() ([]byte, error)
 }
 
 type ServerCapabilities_NotebookDocumentSync_Or struct {
-
-	// *NotebookDocumentSyncOptions
-	// *NotebookDocumentSyncRegistrationOptions
+	// Or [ *NotebookDocumentSyncOptions
+	// *NotebookDocumentSyncRegistrationOptions ]
 	V interface{}
 }
 
@@ -2775,9 +2750,7 @@ func (this *ServerCapabilities_NotebookDocumentSync_Or) MarshalJSON() ([]byte, e
 }
 
 type ServerCapabilities_ReferencesProvider_Or struct {
-
-	// *Boolean
-	// *ReferenceOptions
+	// Or [ *Boolean *ReferenceOptions ]
 	V interface{}
 }
 
@@ -2825,9 +2798,7 @@ func (this *ServerCapabilities_ReferencesProvider_Or) MarshalJSON() ([]byte, err
 }
 
 type ServerCapabilities_RenameProvider_Or struct {
-
-	// *Boolean
-	// *RenameOptions
+	// Or [ *Boolean *RenameOptions ]
 	V interface{}
 }
 
@@ -2875,10 +2846,8 @@ func (this *ServerCapabilities_RenameProvider_Or) MarshalJSON() ([]byte, error) 
 }
 
 type ServerCapabilities_SelectionRangeProvider_Or struct {
-
-	// *Boolean
-	// *SelectionRangeOptions
-	// *SelectionRangeRegistrationOptions
+	// Or [ *Boolean *SelectionRangeOptions
+	// *SelectionRangeRegistrationOptions ]
 	V interface{}
 }
 
@@ -2939,9 +2908,7 @@ func (this *ServerCapabilities_SelectionRangeProvider_Or) MarshalJSON() ([]byte,
 }
 
 type ServerCapabilities_SemanticTokensProvider_Or struct {
-
-	// *SemanticTokensOptions
-	// *SemanticTokensRegistrationOptions
+	// Or [ *SemanticTokensOptions *SemanticTokensRegistrationOptions ]
 	V interface{}
 }
 
@@ -2989,9 +2956,7 @@ func (this *ServerCapabilities_SemanticTokensProvider_Or) MarshalJSON() ([]byte,
 }
 
 type ServerCapabilities_TextDocumentSync_Or struct {
-
-	// *TextDocumentSyncOptions
-	// *TextDocumentSyncKind
+	// Or [ *TextDocumentSyncOptions *TextDocumentSyncKind ]
 	V interface{}
 }
 
@@ -3039,10 +3004,8 @@ func (this *ServerCapabilities_TextDocumentSync_Or) MarshalJSON() ([]byte, error
 }
 
 type ServerCapabilities_TypeDefinitionProvider_Or struct {
-
-	// *Boolean
-	// *TypeDefinitionOptions
-	// *TypeDefinitionRegistrationOptions
+	// Or [ *Boolean *TypeDefinitionOptions
+	// *TypeDefinitionRegistrationOptions ]
 	V interface{}
 }
 
@@ -3103,10 +3066,8 @@ func (this *ServerCapabilities_TypeDefinitionProvider_Or) MarshalJSON() ([]byte,
 }
 
 type ServerCapabilities_TypeHierarchyProvider_Or struct {
-
-	// *Boolean
-	// *TypeHierarchyOptions
-	// *TypeHierarchyRegistrationOptions
+	// Or [ *Boolean *TypeHierarchyOptions *TypeHierarchyRegistrationOptions
+	// ]
 	V interface{}
 }
 
@@ -3167,9 +3128,7 @@ func (this *ServerCapabilities_TypeHierarchyProvider_Or) MarshalJSON() ([]byte, 
 }
 
 type ServerCapabilities_WorkspaceSymbolProvider_Or struct {
-
-	// *Boolean
-	// *WorkspaceSymbolOptions
+	// Or [ *Boolean *WorkspaceSymbolOptions ]
 	V interface{}
 }
 
@@ -3217,9 +3176,7 @@ func (this *ServerCapabilities_WorkspaceSymbolProvider_Or) MarshalJSON() ([]byte
 }
 
 type SignatureInformation_Documentation_Or struct {
-
-	// *String
-	// *MarkupContent
+	// Or [ *String *MarkupContent ]
 	V interface{}
 }
 
@@ -3267,9 +3224,7 @@ func (this *SignatureInformation_Documentation_Or) MarshalJSON() ([]byte, error)
 }
 
 type TextDocumentCodeAction_PartialResult_Element_Or struct {
-
-	// *Command
-	// *CodeAction
+	// Or [ *Command *CodeAction ]
 	V interface{}
 }
 
@@ -3319,9 +3274,7 @@ func (this *TextDocumentCodeAction_PartialResult_Element_Or) MarshalJSON() ([]by
 }
 
 type TextDocumentCodeAction_Result_Element_Or struct {
-
-	// *Command
-	// *CodeAction
+	// Or [ *Command *CodeAction ]
 	V interface{}
 }
 
@@ -3369,10 +3322,7 @@ func (this *TextDocumentCodeAction_Result_Element_Or) MarshalJSON() ([]byte, err
 }
 
 type TextDocumentCompletion_Result_Or struct {
-
-	// []CompletionItem
-	// *CompletionList
-	// *Null
+	// Or [ []CompletionItem *CompletionList *Null ]
 	V interface{}
 }
 
@@ -3429,9 +3379,8 @@ func (this *TextDocumentCompletion_Result_Or) MarshalJSON() ([]byte, error) {
 }
 
 type TextDocumentContentChangeEvent_Or struct {
-
-	// *TextDocumentContentChangeEvent_Or_0
-	// *TextDocumentContentChangeEvent_Or_1
+	// Or [ *TextDocumentContentChangeEvent_Or_0
+	// *TextDocumentContentChangeEvent_Or_1 ]
 	V interface{}
 }
 
@@ -3479,9 +3428,7 @@ func (this *TextDocumentContentChangeEvent_Or) MarshalJSON() ([]byte, error) {
 }
 
 type TextDocumentDeclaration_PartialResult_Or struct {
-
-	// []Location
-	// []DeclarationLink
+	// Or [ []Location []DeclarationLink ]
 	V interface{}
 }
 
@@ -3529,10 +3476,7 @@ func (this *TextDocumentDeclaration_PartialResult_Or) MarshalJSON() ([]byte, err
 }
 
 type TextDocumentDeclaration_Result_Or struct {
-
-	// *Declaration
-	// []DeclarationLink
-	// *Null
+	// Or [ *Declaration []DeclarationLink *Null ]
 	V interface{}
 }
 
@@ -3593,9 +3537,7 @@ func (this *TextDocumentDeclaration_Result_Or) MarshalJSON() ([]byte, error) {
 }
 
 type TextDocumentDefinition_PartialResult_Or struct {
-
-	// []Location
-	// []DefinitionLink
+	// Or [ []Location []DefinitionLink ]
 	V interface{}
 }
 
@@ -3643,10 +3585,7 @@ func (this *TextDocumentDefinition_PartialResult_Or) MarshalJSON() ([]byte, erro
 }
 
 type TextDocumentDefinition_Result_Or struct {
-
-	// *Definition
-	// []DefinitionLink
-	// *Null
+	// Or [ *Definition []DefinitionLink *Null ]
 	V interface{}
 }
 
@@ -3703,9 +3642,7 @@ func (this *TextDocumentDefinition_Result_Or) MarshalJSON() ([]byte, error) {
 }
 
 type TextDocumentDocumentSymbol_PartialResult_Or struct {
-
-	// []SymbolInformation
-	// []DocumentSymbol
+	// Or [ []SymbolInformation []DocumentSymbol ]
 	V interface{}
 }
 
@@ -3753,10 +3690,7 @@ func (this *TextDocumentDocumentSymbol_PartialResult_Or) MarshalJSON() ([]byte, 
 }
 
 type TextDocumentDocumentSymbol_Result_Or struct {
-
-	// []SymbolInformation
-	// []DocumentSymbol
-	// *Null
+	// Or [ []SymbolInformation []DocumentSymbol *Null ]
 	V interface{}
 }
 
@@ -3817,9 +3751,7 @@ func (this *TextDocumentDocumentSymbol_Result_Or) MarshalJSON() ([]byte, error) 
 }
 
 type TextDocumentEdit_Edits_Element_Or struct {
-
-	// *TextEdit
-	// *AnnotatedTextEdit
+	// Or [ *TextEdit *AnnotatedTextEdit ]
 	V interface{}
 }
 
@@ -3867,10 +3799,8 @@ func (this *TextDocumentEdit_Edits_Element_Or) MarshalJSON() ([]byte, error) {
 }
 
 type TextDocumentFilter_Or struct {
-
-	// *TextDocumentFilter_Or_0
-	// *TextDocumentFilter_Or_1
-	// *TextDocumentFilter_Or_2
+	// Or [ *TextDocumentFilter_Or_0 *TextDocumentFilter_Or_1
+	// *TextDocumentFilter_Or_2 ]
 	V interface{}
 }
 
@@ -3927,9 +3857,7 @@ func (this *TextDocumentFilter_Or) MarshalJSON() ([]byte, error) {
 }
 
 type TextDocumentImplementation_PartialResult_Or struct {
-
-	// []Location
-	// []DefinitionLink
+	// Or [ []Location []DefinitionLink ]
 	V interface{}
 }
 
@@ -3977,10 +3905,7 @@ func (this *TextDocumentImplementation_PartialResult_Or) MarshalJSON() ([]byte, 
 }
 
 type TextDocumentImplementation_Result_Or struct {
-
-	// *Definition
-	// []DefinitionLink
-	// *Null
+	// Or [ *Definition []DefinitionLink *Null ]
 	V interface{}
 }
 
@@ -4041,9 +3966,7 @@ func (this *TextDocumentImplementation_Result_Or) MarshalJSON() ([]byte, error) 
 }
 
 type TextDocumentSemanticTokensFullDelta_PartialResult_Or struct {
-
-	// *SemanticTokensPartialResult
-	// *SemanticTokensDeltaPartialResult
+	// Or [ *SemanticTokensPartialResult *SemanticTokensDeltaPartialResult ]
 	V interface{}
 }
 
@@ -4093,10 +4016,7 @@ func (this *TextDocumentSemanticTokensFullDelta_PartialResult_Or) MarshalJSON() 
 }
 
 type TextDocumentSemanticTokensFullDelta_Result_Or struct {
-
-	// *SemanticTokens
-	// *SemanticTokensDelta
-	// *Null
+	// Or [ *SemanticTokens *SemanticTokensDelta *Null ]
 	V interface{}
 }
 
@@ -4157,9 +4077,7 @@ func (this *TextDocumentSemanticTokensFullDelta_Result_Or) MarshalJSON() ([]byte
 }
 
 type TextDocumentSyncOptions_Save_Or struct {
-
-	// *Boolean
-	// *SaveOptions
+	// Or [ *Boolean *SaveOptions ]
 	V interface{}
 }
 
@@ -4203,9 +4121,7 @@ func (this *TextDocumentSyncOptions_Save_Or) MarshalJSON() ([]byte, error) {
 }
 
 type TextDocumentTypeDefinition_PartialResult_Or struct {
-
-	// []Location
-	// []DefinitionLink
+	// Or [ []Location []DefinitionLink ]
 	V interface{}
 }
 
@@ -4253,10 +4169,7 @@ func (this *TextDocumentTypeDefinition_PartialResult_Or) MarshalJSON() ([]byte, 
 }
 
 type TextDocumentTypeDefinition_Result_Or struct {
-
-	// *Definition
-	// []DefinitionLink
-	// *Null
+	// Or [ *Definition []DefinitionLink *Null ]
 	V interface{}
 }
 
@@ -4317,9 +4230,8 @@ func (this *TextDocumentTypeDefinition_Result_Or) MarshalJSON() ([]byte, error) 
 }
 
 type WorkspaceDocumentDiagnosticReport_Or struct {
-
-	// *WorkspaceFullDocumentDiagnosticReport
-	// *WorkspaceUnchangedDocumentDiagnosticReport
+	// Or [ *WorkspaceFullDocumentDiagnosticReport
+	// *WorkspaceUnchangedDocumentDiagnosticReport ]
 	V interface{}
 }
 
@@ -4367,11 +4279,7 @@ func (this *WorkspaceDocumentDiagnosticReport_Or) MarshalJSON() ([]byte, error) 
 }
 
 type WorkspaceEdit_DocumentChanges_Element_Or struct {
-
-	// *TextDocumentEdit
-	// *CreateFile
-	// *RenameFile
-	// *DeleteFile
+	// Or [ *TextDocumentEdit *CreateFile *RenameFile *DeleteFile ]
 	V interface{}
 }
 
@@ -4445,9 +4353,7 @@ func (this *WorkspaceEdit_DocumentChanges_Element_Or) MarshalJSON() ([]byte, err
 }
 
 type WorkspaceFoldersServerCapabilities_ChangeNotifications_Or struct {
-
-	// *String
-	// *Boolean
+	// Or [ *String *Boolean ]
 	V interface{}
 }
 
@@ -4497,9 +4403,7 @@ func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications_Or) MarshalJS
 }
 
 type WorkspaceSymbol_Location_Or struct {
-
-	// *Location
-	// *WorkspaceSymbol_Location_Or_1
+	// Or [ *Location *WorkspaceSymbol_Location_Or_1 ]
 	V interface{}
 }
 
@@ -4543,9 +4447,7 @@ func (this *WorkspaceSymbol_Location_Or) MarshalJSON() ([]byte, error) {
 }
 
 type WorkspaceSymbol_PartialResult_Or struct {
-
-	// []SymbolInformation
-	// []WorkspaceSymbol
+	// Or [ []SymbolInformation []WorkspaceSymbol ]
 	V interface{}
 }
 
@@ -4589,10 +4491,7 @@ func (this *WorkspaceSymbol_PartialResult_Or) MarshalJSON() ([]byte, error) {
 }
 
 type WorkspaceSymbol_Result_Or struct {
-
-	// []SymbolInformation
-	// []WorkspaceSymbol
-	// *Null
+	// Or [ []SymbolInformation []WorkspaceSymbol *Null ]
 	V interface{}
 }
 
@@ -4644,80 +4543,6 @@ func (this *WorkspaceSymbol_Result_Or) MarshalJSON() ([]byte, error) {
 		}
 
 		return nil, OrValidateFailed("WorkspaceSymbol_Result_Or")
-	}
-	return json.Marshal(this.V)
-}
-
-type XInitializeParams_Trace_Or struct {
-
-	// *string
-	// *string
-	// *string
-	// *string
-	V interface{}
-}
-
-func (this *XInitializeParams_Trace_Or) UnmarshalJSON(data []byte) error {
-
-	{
-
-		var tmp *string
-		if err := json.Unmarshal(data, &tmp); err == nil {
-			this.V = tmp
-			return nil
-		}
-	}
-
-	{
-
-		var tmp *string
-		if err := json.Unmarshal(data, &tmp); err == nil {
-			this.V = tmp
-			return nil
-		}
-	}
-
-	{
-
-		var tmp *string
-		if err := json.Unmarshal(data, &tmp); err == nil {
-			this.V = tmp
-			return nil
-		}
-	}
-
-	{
-
-		var tmp *string
-		if err := json.Unmarshal(data, &tmp); err == nil {
-			this.V = tmp
-			return nil
-		}
-	}
-
-	return OrValidateFailed("XInitializeParams_Trace_Or")
-}
-
-func (this *XInitializeParams_Trace_Or) MarshalJSON() ([]byte, error) {
-	for {
-
-		if _, ok := this.V.(*string); ok {
-			break
-		}
-
-		if _, ok := this.V.(*string); ok {
-			break
-		}
-
-		if _, ok := this.V.(*string); ok {
-			break
-		}
-
-		if _, ok := this.V.(*string); ok {
-			break
-		}
-
-		return nil, OrValidateFailed("XInitializeParams_Trace_Or")
 	}
 	return json.Marshal(this.V)
 }

@@ -7346,7 +7346,7 @@ type XInitializeParams struct {
 	InitializationOptions *LSPAny `json:"initializationOptions"`
 
 	// The initial trace setting. If omitted trace is disabled ('off').
-	Trace *XInitializeParams_Trace_Or `json:"trace"`
+	Trace *TraceValue `json:"trace"`
 }
 
 func (this *XInitializeParams) UnmarshalJSON(data []byte) error {

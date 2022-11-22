@@ -34,14 +34,14 @@ func genClient(metaModel *MetaModel) {
 
 	data := []any{}
 
-	for _, req := range metaModel.Requests {
-		if req.MessageDirection != "clientToServer" {
-			data = append(data, req)
+	for i := range metaModel.Requests {
+		if metaModel.Requests[i].MessageDirection != "clientToServer" {
+			data = append(data, &metaModel.Requests[i])
 		}
 	}
-	for _, notif := range metaModel.Notifications {
-		if notif.MessageDirection != "clientToServer" {
-			data = append(data, notif)
+	for i := range metaModel.Notifications {
+		if metaModel.Notifications[i].MessageDirection != "clientToServer" {
+			data = append(data, &metaModel.Notifications[i])
 		}
 	}
 

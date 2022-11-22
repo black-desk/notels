@@ -104,5 +104,5 @@ type Property struct {
 	Optional      bool   `json:"optional"`
 	Proposed      bool   `json:"proposed"`
 	Since         string `json:"since"`
-	Type          Type   `json:"type"`
+	Type          *Type  `json:"type"`
 }

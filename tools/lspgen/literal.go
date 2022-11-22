@@ -22,7 +22,7 @@ func RegisterLiteral(name string, s *StructureLiteral) {
 
 func parseLiteral(name string, s *StructureLiteral) {
 	for _, field := range *s.Properties {
-		typeName(name, MethodNameFromString(field.Name), &field.Type)
+		typeName(name, MethodNameFromString(field.Name), field.Type)
 	}
 }
 

@@ -15,9 +15,7 @@ type OrTypeWithName struct {
 }
 
 func RegisterOr(name string, t *Type) {
-	if name == "NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or" {
-		log.Info(OrToGenerate[name])
-	}
+	log.Info(name, OrToGenerate["CompletionList_ItemDefaults_EditRange_Or"])
 	if t.Items == nil || len(t.Items) < 2 {
 		log.Fatalw("Or type should have Items field")
 		panic("")
@@ -25,10 +23,14 @@ func RegisterOr(name string, t *Type) {
 	if _, ok := OrToGenerate[name]; !ok {
 		OrToGenerate[name] = t
 		parseOr(name, t)
+	} else if t != OrToGenerate[name] {
+		log.Fatalw("unexpected situation",
+			"name", name,
+			"t", t,
+			"OrToGenerate[name]", OrToGenerate[name])
+		panic("")
 	}
-	if name == "NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or" {
-		log.Info(OrToGenerate[name])
-	}
+	log.Info(name, OrToGenerate["CompletionList_ItemDefaults_EditRange_Or"])
 }
 
 func parseOr(name string, t *Type) {
@@ -56,8 +58,7 @@ var OrValidateFailed = func (name string) error {
 {{range .}}
         {{$name := .Name}}
         type {{$name}} struct {
-                {{range $i, $item := .Items}}{{$texti:=printf "%v" $i}}
-                // {{getTypeName $name $texti $item}} {{end}}
+                // Or [ {{range $i, $item := .Items}}{{$texti:=printf "%v" $i}}{{getTypeName $name $texti $item}} {{end}}]
                 V interface{}
         }
         

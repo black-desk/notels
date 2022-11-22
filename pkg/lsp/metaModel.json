@@ -7759,25 +7759,8 @@
                                 {
                                         "name": "trace",
                                         "type": {
-                                                "kind": "or",
-                                                "items": [
-                                                        {
-                                                                "kind": "stringLiteral",
-                                                                "value": "off"
-                                                        },
-                                                        {
-                                                                "kind": "stringLiteral",
-                                                                "value": "messages"
-                                                        },
-                                                        {
-                                                                "kind": "stringLiteral",
-                                                                "value": "compact"
-                                                        },
-                                                        {
-                                                                "kind": "stringLiteral",
-                                                                "value": "verbose"
-                                                        }
-                                                ]
+                                                "kind": "reference",
+                                                "name": "TraceValue"
                                         },
                                         "optional": true,
                                         "documentation": "The initial trace setting. If omitted trace is disabled ('off')."
@@ -12578,6 +12561,27 @@
                 }
         ],
         "enumerations": [
+                {
+                        "name": "TraceValue",
+                        "type": {
+                                "kind": "base",
+                                "name": "string"
+                        },
+                        "values": [
+                                {
+                                        "name": "off",
+                                        "value": "off"
+                                },
+                                {
+                                        "name": "messages",
+                                        "value": "messages"
+                                },
+                                {
+                                        "name": "verbose",
+                                        "value": "verbose"
+                                }
+                        ]
+                },
                 {
                         "name": "SemanticTokenTypes",
                         "type": {

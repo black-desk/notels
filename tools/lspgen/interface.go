@@ -32,9 +32,9 @@ var interfaceTemplateFuncs = map[string]any{
 var interfaceTemplateGetComment = Comment
 var interfaceTemplateGetMethodName = func(input any) string {
 	switch v := input.(type) {
-	case Request:
+	case *Request:
 		return MethodNameFromString(v.Method)
-	case Notification:
+	case *Notification:
 		return MethodNameFromString(v.Method)
 	default:
 		log.Fatalw("unexpected type",
@@ -45,8 +45,8 @@ var interfaceTemplateGetMethodName = func(input any) string {
 
 var interfaceTemplateGetMethodArgs = func(input any) string {
 	result := "(\nctx context.Context"
-	switch v := input.(type) {
-	case Request:
+	switch v := (input).(type) {
+	case *Request:
 		if v.Params != nil {
 			if len(v.Params) != 1 {
 				panic("should not happen")
@@ -57,7 +57,7 @@ var interfaceTemplateGetMethodArgs = func(input any) string {
 		}
 		result += ",\n)"
 		return result
-	case Notification:
+	case *Notification:
 		if v.Params != nil {
 			if len(v.Params) != 1 {
 				panic("should not happen")
@@ -77,7 +77,7 @@ var interfaceTemplateGetMethodArgs = func(input any) string {
 var interfaceTemplateGetMethodReturn = func(input any) string {
 	result := "(\nerr error"
 	switch v := input.(type) {
-	case Request:
+	case *Request:
 		if v.ErrorData != nil {
 			result += fmt.Sprintf(",\nerrorData %s",
 				typeName(MethodNameFromString(v.Method),
@@ -96,7 +96,7 @@ var interfaceTemplateGetMethodReturn = func(input any) string {
 		}
 		result += ",\n)"
 		return result
-	case Notification:
+	case *Notification:
 		result += ",\n)"
 		return result
 	default:
@@ -115,12 +115,12 @@ var interfaceTemplateGetRegistrationMethodName = func(input any) string {
 
 func getRegistrationMethodNameFromMessage(input any) string {
 	switch v := input.(type) {
-	case Request:
+	case *Request:
 		if v.RegistrationOptions != nil {
 			// genType(v.RegistrationOptions)
 		}
 		return v.RegistrationMethod
-	case Notification:
+	case *Notification:
 		return v.RegistrationMethod
 	default:
 		log.Fatalw("unexpected type",

@@ -11,6 +11,56 @@ var EnumerationValidateFailed = func(name string) error {
 	return fmt.Errorf("enumeration \"%s\"validate failed", name)
 }
 
+type TraceValue String
+
+const (
+	TraceValueOff = "off"
+
+	TraceValueMessages = "messages"
+
+	TraceValueVerbose = "verbose"
+)
+
+var _TraceValue = []TraceValue{
+	TraceValueOff,
+	TraceValueMessages,
+	TraceValueVerbose,
+}
+
+func (this *TraceValue) UnmarshalJSON(data []byte) error {
+	type TraceValueUnmarshal TraceValue
+	var tmpUnmarshal TraceValueUnmarshal
+	err := json.Unmarshal(data, &tmpUnmarshal)
+	if err != nil {
+		return err
+	}
+	tmp := TraceValue(tmpUnmarshal)
+	for _, x := range _TraceValue {
+		if tmp == x {
+			this = &tmp
+			return nil
+		}
+	}
+	return EnumerationValidateFailed("TraceValue")
+}
+
+func (this *TraceValue) MarshalJSON() ([]byte, error) {
+	if err := func() error {
+		for _, x := range _TraceValue {
+			if *this == x {
+				return nil
+			}
+		}
+		return EnumerationValidateFailed("TraceValue")
+	}(); err != nil {
+		return nil, err
+	}
+
+	type TraceValueMarshal TraceValue
+	tmpMarshal := TraceValueMarshal(*this)
+	return json.Marshal(tmpMarshal)
+}
+
 // A set of predefined token types. This set is not fixed an clients can specify
 // additional token types via the corresponding client capabilities.  @since
 // 3.16.0
