@@ -15,7 +15,6 @@ type OrTypeWithName struct {
 }
 
 func RegisterOr(name string, t *Type) {
-	log.Info(name, OrToGenerate["CompletionList_ItemDefaults_EditRange_Or"])
 	if t.Items == nil || len(t.Items) < 2 {
 		log.Fatalw("Or type should have Items field")
 		panic("")
@@ -30,7 +29,6 @@ func RegisterOr(name string, t *Type) {
 			"OrToGenerate[name]", OrToGenerate[name])
 		panic("")
 	}
-	log.Info(name, OrToGenerate["CompletionList_ItemDefaults_EditRange_Or"])
 }
 
 func parseOr(name string, t *Type) {
