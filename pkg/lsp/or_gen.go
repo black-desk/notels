@@ -1277,7 +1277,7 @@ func (this *ParameterInformation_Documentation_Or) MarshalJSON() ([]byte, error)
 }
 
 type ParameterInformation_Label_Or struct {
-	// Or [ *String *ParameterInformation_Label_Or_1_Tuple ]
+	// Or [ *String *ParameterInformation_Label_Or_1 ]
 	V interface{}
 }
 
@@ -1294,7 +1294,7 @@ func (this *ParameterInformation_Label_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *ParameterInformation_Label_Or_1_Tuple
+		var tmp *ParameterInformation_Label_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1311,7 +1311,7 @@ func (this *ParameterInformation_Label_Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		if _, ok := this.V.(*ParameterInformation_Label_Or_1_Tuple); ok {
+		if _, ok := this.V.(*ParameterInformation_Label_Or_1); ok {
 			break
 		}
 

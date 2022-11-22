@@ -86,7 +86,7 @@ func typeName(prefix string, current string, t *Type) string {
 		return "string"
 	} else if t.Kind == "tuple" {
 		RegisterTuple(prefix+"_"+current, t)
-		return prefix + "_" + current + "_Tuple"
+		return prefix + "_" + current
 	}
 	log.Fatalw("unexpected kind",
 		"kind", t.Kind,

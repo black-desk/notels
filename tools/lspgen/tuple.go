@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"sort"
+	"text/template"
+)
 
 var TuplesTogenerate = map[string]*Type{}
 
@@ -15,6 +20,11 @@ func parseTuple(name string, t *Type) {
 	for i, item := range t.Items {
 		typeName(name, fmt.Sprint(i), &item)
 	}
+}
+
+type tupleTypeWithName struct {
+	Name string
+	T    *Type
 }
 
 var tupleTemplate string = `// Code generated from metaModel.json by "lspgen". DO NOT EDIT
@@ -36,37 +46,95 @@ var TupleValidateFailed = func (name string) error {
 {{range .}}
         {{$name := .Name}}
         type {{$name}} struct {
+                {{range $i, $item := .T.Items}}
+                        {{$current:=printf "%v" $i}}
+                        TupleItem{{$current}} {{getTypeName $name $current $item}}
+                {{end}}
         }
         
         func (this *{{$name}}) UnmarshalJSON(data []byte) error {
-                {{range $i, $item := .Items}}
-                        {
-                                {{$texti:=printf "%v" $i}}
-                                var tmp {{getTypeName $name $texti $item}}
-                                if err:=json.Unmarshal(data, &tmp);err==nil{
-                                        this.V = tmp
-                                        return nil
-                                }
+                var msg = []json.RawMessage{}
+                if err := json.Unmarshal(data, &msg); err != nil{
+                        return err
+                }
+
+                var tmpUnmarshal {{$name}}
+                {{range $i, $item := .T.Items}}
+                        {{$current:=printf "%v" $i}}
+                        if err:=json.Unmarshal(msg[{{$current}}], &tmpUnmarshal.TupleItem{{$current}});err!=nil{
+                                return err
                         }
                 {{end}}
-                return OrValidateFailed("{{$name}}")
+                *this = tmpUnmarshal
+                return nil
         }
 
         func (this *{{$name}}) MarshalJSON() ([]byte, error) {
-                for {
-                        {{range $i, $item := .Items}}
-                                {{$texti:=printf "%v" $i}}
-                                if _,ok:=this.V.({{getTypeName $name $texti $item}});ok {
-                                        break;
+                var msg = []json.RawMessage{}
+                {{range $i, $item := .T.Items}}
+                        {{$current:=printf "%v" $i}}
+                        {
+                                bytes, err:=json.Marshal(this.TupleItem{{$current}})
+                                if err != nil {
+                                        return nil, err
                                 }
-                        {{end}}
-                        return nil, OrValidateFailed("{{$name}}")
-                }
-                return json.Marshal(this.V)
+                                msg = append(msg, bytes)
+                        }
+                {{end}}
+                return json.Marshal(msg)
         }
 {{end}}
 `
 
+var tupleTemplateTypeCheck = func([]tupleTypeWithName) string { return "" }
+var tupleTemplateGetTypeName = typeName
+
 func genTuple() {
+	log.Info("generating tuples")
+
+	fileName := "tuples_gen.go"
+	structuresGenFile, err := os.OpenFile(
+		fileName,
+		os.O_CREATE|os.O_WRONLY|os.O_TRUNC,
+		0644,
+	)
+	if err != nil {
+		log.Fatalw("failed to open file",
+			"name", fileName,
+			"error", err)
+	}
+	defer structuresGenFile.Close()
+
+	funcs := map[string]any{
+		"typeCheck":   tupleTemplateTypeCheck,
+		"getTypeName": tupleTemplateGetTypeName,
+	}
+
+	serverTemplate, err := template.New("structures").
+		Funcs(funcs).
+		Parse(tupleTemplate)
+	if err != nil {
+		log.Fatalw("failed to parse template for structs",
+			"error", err)
+	}
+
+	keys := []string{}
+	for k := range TuplesTogenerate {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	data := []tupleTypeWithName{}
+	for _, k := range keys {
+		data = append(data, tupleTypeWithName{
+			Name: k,
+			T:    TuplesTogenerate[k],
+		})
+	}
+
+	err = serverTemplate.Execute(structuresGenFile, data)
+	if err != nil {
+		log.Fatalw("failed to execute template for structs",
+			"error", err)
+	}
 
 }
