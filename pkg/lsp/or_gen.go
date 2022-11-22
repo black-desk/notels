@@ -11,14 +11,14 @@ var OrValidateFailed = func(name string) error {
 	return fmt.Errorf("or type \"%s\"validate failed", name)
 }
 
-type CancelParams_Id__Or struct {
+type CancelParams_Id_Or struct {
 
 	// *Integer
 	// *String
 	V interface{}
 }
 
-func (this *CancelParams_Id__Or) UnmarshalJSON(data []byte) error {
+func (this *CancelParams_Id_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -38,10 +38,10 @@ func (this *CancelParams_Id__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("CancelParams_Id__Or")
+	return OrValidateFailed("CancelParams_Id_Or")
 }
 
-func (this *CancelParams_Id__Or) MarshalJSON() ([]byte, error) {
+func (this *CancelParams_Id_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Integer); ok {
@@ -52,19 +52,19 @@ func (this *CancelParams_Id__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("CancelParams_Id__Or")
+		return nil, OrValidateFailed("CancelParams_Id_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type CompletionItem_Documentation__Or struct {
+type CompletionItem_Documentation_Or struct {
 
 	// *String
 	// *MarkupContent
 	V interface{}
 }
 
-func (this *CompletionItem_Documentation__Or) UnmarshalJSON(data []byte) error {
+func (this *CompletionItem_Documentation_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -84,10 +84,10 @@ func (this *CompletionItem_Documentation__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("CompletionItem_Documentation__Or")
+	return OrValidateFailed("CompletionItem_Documentation_Or")
 }
 
-func (this *CompletionItem_Documentation__Or) MarshalJSON() ([]byte, error) {
+func (this *CompletionItem_Documentation_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -98,19 +98,19 @@ func (this *CompletionItem_Documentation__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("CompletionItem_Documentation__Or")
+		return nil, OrValidateFailed("CompletionItem_Documentation_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type CompletionItem_TextEdit__Or struct {
+type CompletionItem_TextEdit_Or struct {
 
 	// *TextEdit
 	// *InsertReplaceEdit
 	V interface{}
 }
 
-func (this *CompletionItem_TextEdit__Or) UnmarshalJSON(data []byte) error {
+func (this *CompletionItem_TextEdit_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -130,10 +130,10 @@ func (this *CompletionItem_TextEdit__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("CompletionItem_TextEdit__Or")
+	return OrValidateFailed("CompletionItem_TextEdit_Or")
 }
 
-func (this *CompletionItem_TextEdit__Or) MarshalJSON() ([]byte, error) {
+func (this *CompletionItem_TextEdit_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*TextEdit); ok {
@@ -144,40 +144,40 @@ func (this *CompletionItem_TextEdit__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("CompletionItem_TextEdit__Or")
+		return nil, OrValidateFailed("CompletionItem_TextEdit_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type CompletionList_ItemDefaults_EditRange__Or struct {
+type CompletionList_ItemDefaults_EditRange_Or struct {
 	V interface{}
 }
 
-func (this *CompletionList_ItemDefaults_EditRange__Or) UnmarshalJSON(
+func (this *CompletionList_ItemDefaults_EditRange_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
-	return OrValidateFailed("CompletionList_ItemDefaults_EditRange__Or")
+	return OrValidateFailed("CompletionList_ItemDefaults_EditRange_Or")
 }
 
-func (this *CompletionList_ItemDefaults_EditRange__Or) MarshalJSON() ([]byte, error) {
+func (this *CompletionList_ItemDefaults_EditRange_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		return nil, OrValidateFailed(
-			"CompletionList_ItemDefaults_EditRange__Or",
+			"CompletionList_ItemDefaults_EditRange_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type Declaration__Or struct {
+type Declaration_Or struct {
 
 	// *Location
 	// []Location
 	V interface{}
 }
 
-func (this *Declaration__Or) UnmarshalJSON(data []byte) error {
+func (this *Declaration_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -197,10 +197,10 @@ func (this *Declaration__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("Declaration__Or")
+	return OrValidateFailed("Declaration_Or")
 }
 
-func (this *Declaration__Or) MarshalJSON() ([]byte, error) {
+func (this *Declaration_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Location); ok {
@@ -211,19 +211,19 @@ func (this *Declaration__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("Declaration__Or")
+		return nil, OrValidateFailed("Declaration_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type Definition__Or struct {
+type Definition_Or struct {
 
 	// *Location
 	// []Location
 	V interface{}
 }
 
-func (this *Definition__Or) UnmarshalJSON(data []byte) error {
+func (this *Definition_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -243,10 +243,10 @@ func (this *Definition__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("Definition__Or")
+	return OrValidateFailed("Definition_Or")
 }
 
-func (this *Definition__Or) MarshalJSON() ([]byte, error) {
+func (this *Definition_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Location); ok {
@@ -257,19 +257,19 @@ func (this *Definition__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("Definition__Or")
+		return nil, OrValidateFailed("Definition_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type Diagnostic_Code__Or struct {
+type Diagnostic_Code_Or struct {
 
 	// *Integer
 	// *String
 	V interface{}
 }
 
-func (this *Diagnostic_Code__Or) UnmarshalJSON(data []byte) error {
+func (this *Diagnostic_Code_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -289,10 +289,10 @@ func (this *Diagnostic_Code__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("Diagnostic_Code__Or")
+	return OrValidateFailed("Diagnostic_Code_Or")
 }
 
-func (this *Diagnostic_Code__Or) MarshalJSON() ([]byte, error) {
+func (this *Diagnostic_Code_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Integer); ok {
@@ -303,19 +303,19 @@ func (this *Diagnostic_Code__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("Diagnostic_Code__Or")
+		return nil, OrValidateFailed("Diagnostic_Code_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type DidChangeConfigurationRegistrationOptions_Section__Or struct {
+type DidChangeConfigurationRegistrationOptions_Section_Or struct {
 
 	// *String
 	// []String
 	V interface{}
 }
 
-func (this *DidChangeConfigurationRegistrationOptions_Section__Or) UnmarshalJSON(
+func (this *DidChangeConfigurationRegistrationOptions_Section_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -338,11 +338,11 @@ func (this *DidChangeConfigurationRegistrationOptions_Section__Or) UnmarshalJSON
 	}
 
 	return OrValidateFailed(
-		"DidChangeConfigurationRegistrationOptions_Section__Or",
+		"DidChangeConfigurationRegistrationOptions_Section_Or",
 	)
 }
 
-func (this *DidChangeConfigurationRegistrationOptions_Section__Or) MarshalJSON() ([]byte, error) {
+func (this *DidChangeConfigurationRegistrationOptions_Section_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -354,20 +354,20 @@ func (this *DidChangeConfigurationRegistrationOptions_Section__Or) MarshalJSON()
 		}
 
 		return nil, OrValidateFailed(
-			"DidChangeConfigurationRegistrationOptions_Section__Or",
+			"DidChangeConfigurationRegistrationOptions_Section_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or struct {
+type DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or struct {
 
 	// *FullDocumentDiagnosticReport
 	// *UnchangedDocumentDiagnosticReport
 	V interface{}
 }
 
-func (this *DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or) UnmarshalJSON(
+func (this *DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -390,11 +390,11 @@ func (this *DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or) Un
 	}
 
 	return OrValidateFailed(
-		"DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or",
+		"DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or",
 	)
 }
 
-func (this *DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or) MarshalJSON() ([]byte, error) {
+func (this *DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*FullDocumentDiagnosticReport); ok {
@@ -406,20 +406,20 @@ func (this *DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or) Ma
 		}
 
 		return nil, OrValidateFailed(
-			"DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or",
+			"DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type DocumentDiagnosticReport__Or struct {
+type DocumentDiagnosticReport_Or struct {
 
 	// *RelatedFullDocumentDiagnosticReport
 	// *RelatedUnchangedDocumentDiagnosticReport
 	V interface{}
 }
 
-func (this *DocumentDiagnosticReport__Or) UnmarshalJSON(data []byte) error {
+func (this *DocumentDiagnosticReport_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -439,10 +439,10 @@ func (this *DocumentDiagnosticReport__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("DocumentDiagnosticReport__Or")
+	return OrValidateFailed("DocumentDiagnosticReport_Or")
 }
 
-func (this *DocumentDiagnosticReport__Or) MarshalJSON() ([]byte, error) {
+func (this *DocumentDiagnosticReport_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*RelatedFullDocumentDiagnosticReport); ok {
@@ -453,19 +453,19 @@ func (this *DocumentDiagnosticReport__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("DocumentDiagnosticReport__Or")
+		return nil, OrValidateFailed("DocumentDiagnosticReport_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type DocumentFilter__Or struct {
+type DocumentFilter_Or struct {
 
 	// *TextDocumentFilter
 	// *NotebookCellTextDocumentFilter
 	V interface{}
 }
 
-func (this *DocumentFilter__Or) UnmarshalJSON(data []byte) error {
+func (this *DocumentFilter_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -485,10 +485,10 @@ func (this *DocumentFilter__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("DocumentFilter__Or")
+	return OrValidateFailed("DocumentFilter_Or")
 }
 
-func (this *DocumentFilter__Or) MarshalJSON() ([]byte, error) {
+func (this *DocumentFilter_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*TextDocumentFilter); ok {
@@ -499,19 +499,19 @@ func (this *DocumentFilter__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("DocumentFilter__Or")
+		return nil, OrValidateFailed("DocumentFilter_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type GlobPattern__Or struct {
+type GlobPattern_Or struct {
 
 	// *Pattern
 	// *RelativePattern
 	V interface{}
 }
 
-func (this *GlobPattern__Or) UnmarshalJSON(data []byte) error {
+func (this *GlobPattern_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -531,10 +531,10 @@ func (this *GlobPattern__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("GlobPattern__Or")
+	return OrValidateFailed("GlobPattern_Or")
 }
 
-func (this *GlobPattern__Or) MarshalJSON() ([]byte, error) {
+func (this *GlobPattern_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Pattern); ok {
@@ -545,12 +545,12 @@ func (this *GlobPattern__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("GlobPattern__Or")
+		return nil, OrValidateFailed("GlobPattern_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type Hover_Contents__Or struct {
+type Hover_Contents_Or struct {
 
 	// *MarkupContent
 	// *MarkedString
@@ -558,7 +558,7 @@ type Hover_Contents__Or struct {
 	V interface{}
 }
 
-func (this *Hover_Contents__Or) UnmarshalJSON(data []byte) error {
+func (this *Hover_Contents_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -587,10 +587,10 @@ func (this *Hover_Contents__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("Hover_Contents__Or")
+	return OrValidateFailed("Hover_Contents_Or")
 }
 
-func (this *Hover_Contents__Or) MarshalJSON() ([]byte, error) {
+func (this *Hover_Contents_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*MarkupContent); ok {
@@ -605,19 +605,19 @@ func (this *Hover_Contents__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("Hover_Contents__Or")
+		return nil, OrValidateFailed("Hover_Contents_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type InlayHintLabelPart_Tooltip__Or struct {
+type InlayHintLabelPart_Tooltip_Or struct {
 
 	// *String
 	// *MarkupContent
 	V interface{}
 }
 
-func (this *InlayHintLabelPart_Tooltip__Or) UnmarshalJSON(data []byte) error {
+func (this *InlayHintLabelPart_Tooltip_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -637,10 +637,10 @@ func (this *InlayHintLabelPart_Tooltip__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("InlayHintLabelPart_Tooltip__Or")
+	return OrValidateFailed("InlayHintLabelPart_Tooltip_Or")
 }
 
-func (this *InlayHintLabelPart_Tooltip__Or) MarshalJSON() ([]byte, error) {
+func (this *InlayHintLabelPart_Tooltip_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -651,19 +651,19 @@ func (this *InlayHintLabelPart_Tooltip__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("InlayHintLabelPart_Tooltip__Or")
+		return nil, OrValidateFailed("InlayHintLabelPart_Tooltip_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type InlayHint_Label__Or struct {
+type InlayHint_Label_Or struct {
 
 	// *String
 	// []InlayHintLabelPart
 	V interface{}
 }
 
-func (this *InlayHint_Label__Or) UnmarshalJSON(data []byte) error {
+func (this *InlayHint_Label_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -683,10 +683,10 @@ func (this *InlayHint_Label__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("InlayHint_Label__Or")
+	return OrValidateFailed("InlayHint_Label_Or")
 }
 
-func (this *InlayHint_Label__Or) MarshalJSON() ([]byte, error) {
+func (this *InlayHint_Label_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -697,19 +697,19 @@ func (this *InlayHint_Label__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("InlayHint_Label__Or")
+		return nil, OrValidateFailed("InlayHint_Label_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type InlayHint_Tooltip__Or struct {
+type InlayHint_Tooltip_Or struct {
 
 	// *String
 	// *MarkupContent
 	V interface{}
 }
 
-func (this *InlayHint_Tooltip__Or) UnmarshalJSON(data []byte) error {
+func (this *InlayHint_Tooltip_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -729,10 +729,10 @@ func (this *InlayHint_Tooltip__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("InlayHint_Tooltip__Or")
+	return OrValidateFailed("InlayHint_Tooltip_Or")
 }
 
-func (this *InlayHint_Tooltip__Or) MarshalJSON() ([]byte, error) {
+func (this *InlayHint_Tooltip_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -743,12 +743,12 @@ func (this *InlayHint_Tooltip__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("InlayHint_Tooltip__Or")
+		return nil, OrValidateFailed("InlayHint_Tooltip_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type InlineValue__Or struct {
+type InlineValue_Or struct {
 
 	// *InlineValueText
 	// *InlineValueVariableLookup
@@ -756,7 +756,7 @@ type InlineValue__Or struct {
 	V interface{}
 }
 
-func (this *InlineValue__Or) UnmarshalJSON(data []byte) error {
+func (this *InlineValue_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -785,10 +785,10 @@ func (this *InlineValue__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("InlineValue__Or")
+	return OrValidateFailed("InlineValue_Or")
 }
 
-func (this *InlineValue__Or) MarshalJSON() ([]byte, error) {
+func (this *InlineValue_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*InlineValueText); ok {
@@ -803,12 +803,12 @@ func (this *InlineValue__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("InlineValue__Or")
+		return nil, OrValidateFailed("InlineValue_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type LSPAny__Or struct {
+type LSPAny_Or struct {
 
 	// *LSPObject
 	// *LSPArray
@@ -821,7 +821,7 @@ type LSPAny__Or struct {
 	V interface{}
 }
 
-func (this *LSPAny__Or) UnmarshalJSON(data []byte) error {
+func (this *LSPAny_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -895,10 +895,10 @@ func (this *LSPAny__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("LSPAny__Or")
+	return OrValidateFailed("LSPAny_Or")
 }
 
-func (this *LSPAny__Or) MarshalJSON() ([]byte, error) {
+func (this *LSPAny_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*LSPObject); ok {
@@ -933,19 +933,19 @@ func (this *LSPAny__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("LSPAny__Or")
+		return nil, OrValidateFailed("LSPAny_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type MarkedString__Or struct {
+type MarkedString_Or struct {
 
 	// *String
-	// *MarkedString__Or_1
+	// *MarkedString_Or_1
 	V interface{}
 }
 
-func (this *MarkedString__Or) UnmarshalJSON(data []byte) error {
+func (this *MarkedString_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -958,40 +958,40 @@ func (this *MarkedString__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *MarkedString__Or_1
+		var tmp *MarkedString_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("MarkedString__Or")
+	return OrValidateFailed("MarkedString_Or")
 }
 
-func (this *MarkedString__Or) MarshalJSON() ([]byte, error) {
+func (this *MarkedString_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
 			break
 		}
 
-		if _, ok := this.V.(*MarkedString__Or_1); ok {
+		if _, ok := this.V.(*MarkedString_Or_1); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("MarkedString__Or")
+		return nil, OrValidateFailed("MarkedString_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type NotebookCellTextDocumentFilter_Notebook__Or struct {
+type NotebookCellTextDocumentFilter_Notebook_Or struct {
 
 	// *String
 	// *NotebookDocumentFilter
 	V interface{}
 }
 
-func (this *NotebookCellTextDocumentFilter_Notebook__Or) UnmarshalJSON(
+func (this *NotebookCellTextDocumentFilter_Notebook_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1013,10 +1013,10 @@ func (this *NotebookCellTextDocumentFilter_Notebook__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("NotebookCellTextDocumentFilter_Notebook__Or")
+	return OrValidateFailed("NotebookCellTextDocumentFilter_Notebook_Or")
 }
 
-func (this *NotebookCellTextDocumentFilter_Notebook__Or) MarshalJSON() ([]byte, error) {
+func (this *NotebookCellTextDocumentFilter_Notebook_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -1028,25 +1028,25 @@ func (this *NotebookCellTextDocumentFilter_Notebook__Or) MarshalJSON() ([]byte, 
 		}
 
 		return nil, OrValidateFailed(
-			"NotebookCellTextDocumentFilter_Notebook__Or",
+			"NotebookCellTextDocumentFilter_Notebook_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type NotebookDocumentFilter__Or struct {
+type NotebookDocumentFilter_Or struct {
 
-	// *NotebookDocumentFilter__Or_0
-	// *NotebookDocumentFilter__Or_1
-	// *NotebookDocumentFilter__Or_2
+	// *NotebookDocumentFilter_Or_0
+	// *NotebookDocumentFilter_Or_1
+	// *NotebookDocumentFilter_Or_2
 	V interface{}
 }
 
-func (this *NotebookDocumentFilter__Or) UnmarshalJSON(data []byte) error {
+func (this *NotebookDocumentFilter_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *NotebookDocumentFilter__Or_0
+		var tmp *NotebookDocumentFilter_Or_0
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1055,7 +1055,7 @@ func (this *NotebookDocumentFilter__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *NotebookDocumentFilter__Or_1
+		var tmp *NotebookDocumentFilter_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1064,50 +1064,50 @@ func (this *NotebookDocumentFilter__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *NotebookDocumentFilter__Or_2
+		var tmp *NotebookDocumentFilter_Or_2
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("NotebookDocumentFilter__Or")
+	return OrValidateFailed("NotebookDocumentFilter_Or")
 }
 
-func (this *NotebookDocumentFilter__Or) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentFilter_Or) MarshalJSON() ([]byte, error) {
 	for {
 
-		if _, ok := this.V.(*NotebookDocumentFilter__Or_0); ok {
+		if _, ok := this.V.(*NotebookDocumentFilter_Or_0); ok {
 			break
 		}
 
-		if _, ok := this.V.(*NotebookDocumentFilter__Or_1); ok {
+		if _, ok := this.V.(*NotebookDocumentFilter_Or_1); ok {
 			break
 		}
 
-		if _, ok := this.V.(*NotebookDocumentFilter__Or_2); ok {
+		if _, ok := this.V.(*NotebookDocumentFilter_Or_2); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("NotebookDocumentFilter__Or")
+		return nil, OrValidateFailed("NotebookDocumentFilter_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type NotebookDocumentSyncOptions_NotebookSelector_Element__Or struct {
+type NotebookDocumentSyncOptions_NotebookSelector_Element_Or struct {
 
-	// *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0
-	// *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1
+	// *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0
+	// *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1
 	V interface{}
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or) UnmarshalJSON(
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
 	{
 
-		var tmp *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0
+		var tmp *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1116,7 +1116,7 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or) UnmarshalJ
 
 	{
 
-		var tmp *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1
+		var tmp *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1124,82 +1124,82 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or) UnmarshalJ
 	}
 
 	return OrValidateFailed(
-		"NotebookDocumentSyncOptions_NotebookSelector_Element__Or",
+		"NotebookDocumentSyncOptions_NotebookSelector_Element_Or",
 	)
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or) MarshalJSON() ([]byte, error) {
 	for {
 
-		if _, ok := this.V.(*NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0); ok {
+		if _, ok := this.V.(*NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0); ok {
 			break
 		}
 
-		if _, ok := this.V.(*NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1); ok {
+		if _, ok := this.V.(*NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1); ok {
 			break
 		}
 
 		return nil, OrValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Notebook__Or struct {
+type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or struct {
 	V interface{}
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Notebook__Or) UnmarshalJSON(
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
 	return OrValidateFailed(
-		"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Notebook__Or",
+		"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or",
 	)
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Notebook__Or) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		return nil, OrValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Notebook__Or",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or struct {
+type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or struct {
 	V interface{}
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or) UnmarshalJSON(
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
 	return OrValidateFailed(
-		"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or",
+		"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or",
 	)
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		return nil, OrValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ParameterInformation_Documentation__Or struct {
+type ParameterInformation_Documentation_Or struct {
 
 	// *String
 	// *MarkupContent
 	V interface{}
 }
 
-func (this *ParameterInformation_Documentation__Or) UnmarshalJSON(
+func (this *ParameterInformation_Documentation_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1221,10 +1221,10 @@ func (this *ParameterInformation_Documentation__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ParameterInformation_Documentation__Or")
+	return OrValidateFailed("ParameterInformation_Documentation_Or")
 }
 
-func (this *ParameterInformation_Documentation__Or) MarshalJSON() ([]byte, error) {
+func (this *ParameterInformation_Documentation_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -1236,20 +1236,20 @@ func (this *ParameterInformation_Documentation__Or) MarshalJSON() ([]byte, error
 		}
 
 		return nil, OrValidateFailed(
-			"ParameterInformation_Documentation__Or",
+			"ParameterInformation_Documentation_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ParameterInformation_Label__Or struct {
+type ParameterInformation_Label_Or struct {
 
 	// *String
-	// *ParameterInformation_Label__Or_1_Tuple
+	// *ParameterInformation_Label_Or_1_Tuple
 	V interface{}
 }
 
-func (this *ParameterInformation_Label__Or) UnmarshalJSON(data []byte) error {
+func (this *ParameterInformation_Label_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -1262,41 +1262,41 @@ func (this *ParameterInformation_Label__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *ParameterInformation_Label__Or_1_Tuple
+		var tmp *ParameterInformation_Label_Or_1_Tuple
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("ParameterInformation_Label__Or")
+	return OrValidateFailed("ParameterInformation_Label_Or")
 }
 
-func (this *ParameterInformation_Label__Or) MarshalJSON() ([]byte, error) {
+func (this *ParameterInformation_Label_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
 			break
 		}
 
-		if _, ok := this.V.(*ParameterInformation_Label__Or_1_Tuple); ok {
+		if _, ok := this.V.(*ParameterInformation_Label_Or_1_Tuple); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("ParameterInformation_Label__Or")
+		return nil, OrValidateFailed("ParameterInformation_Label_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type PrepareRenameResult__Or struct {
+type PrepareRenameResult_Or struct {
 
 	// *Range
-	// *PrepareRenameResult__Or_1
-	// *PrepareRenameResult__Or_2
+	// *PrepareRenameResult_Or_1
+	// *PrepareRenameResult_Or_2
 	V interface{}
 }
 
-func (this *PrepareRenameResult__Or) UnmarshalJSON(data []byte) error {
+func (this *PrepareRenameResult_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -1309,7 +1309,7 @@ func (this *PrepareRenameResult__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *PrepareRenameResult__Or_1
+		var tmp *PrepareRenameResult_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1318,44 +1318,44 @@ func (this *PrepareRenameResult__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *PrepareRenameResult__Or_2
+		var tmp *PrepareRenameResult_Or_2
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("PrepareRenameResult__Or")
+	return OrValidateFailed("PrepareRenameResult_Or")
 }
 
-func (this *PrepareRenameResult__Or) MarshalJSON() ([]byte, error) {
+func (this *PrepareRenameResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Range); ok {
 			break
 		}
 
-		if _, ok := this.V.(*PrepareRenameResult__Or_1); ok {
+		if _, ok := this.V.(*PrepareRenameResult_Or_1); ok {
 			break
 		}
 
-		if _, ok := this.V.(*PrepareRenameResult__Or_2); ok {
+		if _, ok := this.V.(*PrepareRenameResult_Or_2); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("PrepareRenameResult__Or")
+		return nil, OrValidateFailed("PrepareRenameResult_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type ProgressToken__Or struct {
+type ProgressToken_Or struct {
 
 	// *Integer
 	// *String
 	V interface{}
 }
 
-func (this *ProgressToken__Or) UnmarshalJSON(data []byte) error {
+func (this *ProgressToken_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -1375,10 +1375,10 @@ func (this *ProgressToken__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("ProgressToken__Or")
+	return OrValidateFailed("ProgressToken_Or")
 }
 
-func (this *ProgressToken__Or) MarshalJSON() ([]byte, error) {
+func (this *ProgressToken_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Integer); ok {
@@ -1389,19 +1389,19 @@ func (this *ProgressToken__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("ProgressToken__Or")
+		return nil, OrValidateFailed("ProgressToken_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or struct {
+type RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or struct {
 
 	// *FullDocumentDiagnosticReport
 	// *UnchangedDocumentDiagnosticReport
 	V interface{}
 }
 
-func (this *RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or) UnmarshalJSON(
+func (this *RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1424,11 +1424,11 @@ func (this *RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or) Unma
 	}
 
 	return OrValidateFailed(
-		"RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or",
+		"RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or",
 	)
 }
 
-func (this *RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or) MarshalJSON() ([]byte, error) {
+func (this *RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*FullDocumentDiagnosticReport); ok {
@@ -1440,20 +1440,20 @@ func (this *RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or) Mars
 		}
 
 		return nil, OrValidateFailed(
-			"RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or",
+			"RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or struct {
+type RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or struct {
 
 	// *FullDocumentDiagnosticReport
 	// *UnchangedDocumentDiagnosticReport
 	V interface{}
 }
 
-func (this *RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or) UnmarshalJSON(
+func (this *RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1476,11 +1476,11 @@ func (this *RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or)
 	}
 
 	return OrValidateFailed(
-		"RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or",
+		"RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or",
 	)
 }
 
-func (this *RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or) MarshalJSON() ([]byte, error) {
+func (this *RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*FullDocumentDiagnosticReport); ok {
@@ -1492,20 +1492,20 @@ func (this *RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or)
 		}
 
 		return nil, OrValidateFailed(
-			"RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or",
+			"RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type RelativePattern_BaseUri__Or struct {
+type RelativePattern_BaseUri_Or struct {
 
 	// *WorkspaceFolder
 	// *URI
 	V interface{}
 }
 
-func (this *RelativePattern_BaseUri__Or) UnmarshalJSON(data []byte) error {
+func (this *RelativePattern_BaseUri_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -1525,10 +1525,10 @@ func (this *RelativePattern_BaseUri__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("RelativePattern_BaseUri__Or")
+	return OrValidateFailed("RelativePattern_BaseUri_Or")
 }
 
-func (this *RelativePattern_BaseUri__Or) MarshalJSON() ([]byte, error) {
+func (this *RelativePattern_BaseUri_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*WorkspaceFolder); ok {
@@ -1539,19 +1539,19 @@ func (this *RelativePattern_BaseUri__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("RelativePattern_BaseUri__Or")
+		return nil, OrValidateFailed("RelativePattern_BaseUri_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type SemanticTokensClientCapabilities_Requests_Full__Or struct {
+type SemanticTokensClientCapabilities_Requests_Full_Or struct {
 
 	// *Boolean
-	// *SemanticTokensClientCapabilities_Requests_Full__Or_1
+	// *SemanticTokensClientCapabilities_Requests_Full_Or_1
 	V interface{}
 }
 
-func (this *SemanticTokensClientCapabilities_Requests_Full__Or) UnmarshalJSON(
+func (this *SemanticTokensClientCapabilities_Requests_Full_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1566,7 +1566,7 @@ func (this *SemanticTokensClientCapabilities_Requests_Full__Or) UnmarshalJSON(
 
 	{
 
-		var tmp *SemanticTokensClientCapabilities_Requests_Full__Or_1
+		var tmp *SemanticTokensClientCapabilities_Requests_Full_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1574,36 +1574,36 @@ func (this *SemanticTokensClientCapabilities_Requests_Full__Or) UnmarshalJSON(
 	}
 
 	return OrValidateFailed(
-		"SemanticTokensClientCapabilities_Requests_Full__Or",
+		"SemanticTokensClientCapabilities_Requests_Full_Or",
 	)
 }
 
-func (this *SemanticTokensClientCapabilities_Requests_Full__Or) MarshalJSON() ([]byte, error) {
+func (this *SemanticTokensClientCapabilities_Requests_Full_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
 			break
 		}
 
-		if _, ok := this.V.(*SemanticTokensClientCapabilities_Requests_Full__Or_1); ok {
+		if _, ok := this.V.(*SemanticTokensClientCapabilities_Requests_Full_Or_1); ok {
 			break
 		}
 
 		return nil, OrValidateFailed(
-			"SemanticTokensClientCapabilities_Requests_Full__Or",
+			"SemanticTokensClientCapabilities_Requests_Full_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type SemanticTokensClientCapabilities_Requests_Range__Or struct {
+type SemanticTokensClientCapabilities_Requests_Range_Or struct {
 
 	// *Boolean
-	// *SemanticTokensClientCapabilities_Requests_Range__Or_1
+	// *SemanticTokensClientCapabilities_Requests_Range_Or_1
 	V interface{}
 }
 
-func (this *SemanticTokensClientCapabilities_Requests_Range__Or) UnmarshalJSON(
+func (this *SemanticTokensClientCapabilities_Requests_Range_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1618,7 +1618,7 @@ func (this *SemanticTokensClientCapabilities_Requests_Range__Or) UnmarshalJSON(
 
 	{
 
-		var tmp *SemanticTokensClientCapabilities_Requests_Range__Or_1
+		var tmp *SemanticTokensClientCapabilities_Requests_Range_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -1626,36 +1626,36 @@ func (this *SemanticTokensClientCapabilities_Requests_Range__Or) UnmarshalJSON(
 	}
 
 	return OrValidateFailed(
-		"SemanticTokensClientCapabilities_Requests_Range__Or",
+		"SemanticTokensClientCapabilities_Requests_Range_Or",
 	)
 }
 
-func (this *SemanticTokensClientCapabilities_Requests_Range__Or) MarshalJSON() ([]byte, error) {
+func (this *SemanticTokensClientCapabilities_Requests_Range_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
 			break
 		}
 
-		if _, ok := this.V.(*SemanticTokensClientCapabilities_Requests_Range__Or_1); ok {
+		if _, ok := this.V.(*SemanticTokensClientCapabilities_Requests_Range_Or_1); ok {
 			break
 		}
 
 		return nil, OrValidateFailed(
-			"SemanticTokensClientCapabilities_Requests_Range__Or",
+			"SemanticTokensClientCapabilities_Requests_Range_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type SemanticTokensOptions_Full__Or struct {
+type SemanticTokensOptions_Full_Or struct {
 
 	// *Boolean
-	// *SemanticTokensOptions_Full__Or_1
+	// *SemanticTokensOptions_Full_Or_1
 	V interface{}
 }
 
-func (this *SemanticTokensOptions_Full__Or) UnmarshalJSON(data []byte) error {
+func (this *SemanticTokensOptions_Full_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -1668,40 +1668,40 @@ func (this *SemanticTokensOptions_Full__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *SemanticTokensOptions_Full__Or_1
+		var tmp *SemanticTokensOptions_Full_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("SemanticTokensOptions_Full__Or")
+	return OrValidateFailed("SemanticTokensOptions_Full_Or")
 }
 
-func (this *SemanticTokensOptions_Full__Or) MarshalJSON() ([]byte, error) {
+func (this *SemanticTokensOptions_Full_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
 			break
 		}
 
-		if _, ok := this.V.(*SemanticTokensOptions_Full__Or_1); ok {
+		if _, ok := this.V.(*SemanticTokensOptions_Full_Or_1); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("SemanticTokensOptions_Full__Or")
+		return nil, OrValidateFailed("SemanticTokensOptions_Full_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type SemanticTokensOptions_Range__Or struct {
+type SemanticTokensOptions_Range_Or struct {
 
 	// *Boolean
-	// *SemanticTokensOptions_Range__Or_1
+	// *SemanticTokensOptions_Range_Or_1
 	V interface{}
 }
 
-func (this *SemanticTokensOptions_Range__Or) UnmarshalJSON(data []byte) error {
+func (this *SemanticTokensOptions_Range_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -1714,33 +1714,33 @@ func (this *SemanticTokensOptions_Range__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *SemanticTokensOptions_Range__Or_1
+		var tmp *SemanticTokensOptions_Range_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("SemanticTokensOptions_Range__Or")
+	return OrValidateFailed("SemanticTokensOptions_Range_Or")
 }
 
-func (this *SemanticTokensOptions_Range__Or) MarshalJSON() ([]byte, error) {
+func (this *SemanticTokensOptions_Range_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
 			break
 		}
 
-		if _, ok := this.V.(*SemanticTokensOptions_Range__Or_1); ok {
+		if _, ok := this.V.(*SemanticTokensOptions_Range_Or_1); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("SemanticTokensOptions_Range__Or")
+		return nil, OrValidateFailed("SemanticTokensOptions_Range_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_CallHierarchyProvider__Or struct {
+type ServerCapabilities_CallHierarchyProvider_Or struct {
 
 	// *Boolean
 	// *CallHierarchyOptions
@@ -1748,7 +1748,7 @@ type ServerCapabilities_CallHierarchyProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_CallHierarchyProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_CallHierarchyProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1779,10 +1779,10 @@ func (this *ServerCapabilities_CallHierarchyProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_CallHierarchyProvider__Or")
+	return OrValidateFailed("ServerCapabilities_CallHierarchyProvider_Or")
 }
 
-func (this *ServerCapabilities_CallHierarchyProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_CallHierarchyProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -1798,20 +1798,20 @@ func (this *ServerCapabilities_CallHierarchyProvider__Or) MarshalJSON() ([]byte,
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_CallHierarchyProvider__Or",
+			"ServerCapabilities_CallHierarchyProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_CodeActionProvider__Or struct {
+type ServerCapabilities_CodeActionProvider_Or struct {
 
 	// *Boolean
 	// *CodeActionOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_CodeActionProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_CodeActionProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1833,10 +1833,10 @@ func (this *ServerCapabilities_CodeActionProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_CodeActionProvider__Or")
+	return OrValidateFailed("ServerCapabilities_CodeActionProvider_Or")
 }
 
-func (this *ServerCapabilities_CodeActionProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_CodeActionProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -1848,13 +1848,13 @@ func (this *ServerCapabilities_CodeActionProvider__Or) MarshalJSON() ([]byte, er
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_CodeActionProvider__Or",
+			"ServerCapabilities_CodeActionProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_ColorProvider__Or struct {
+type ServerCapabilities_ColorProvider_Or struct {
 
 	// *Boolean
 	// *DocumentColorOptions
@@ -1862,7 +1862,7 @@ type ServerCapabilities_ColorProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_ColorProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_ColorProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1893,10 +1893,10 @@ func (this *ServerCapabilities_ColorProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_ColorProvider__Or")
+	return OrValidateFailed("ServerCapabilities_ColorProvider_Or")
 }
 
-func (this *ServerCapabilities_ColorProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_ColorProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -1912,13 +1912,13 @@ func (this *ServerCapabilities_ColorProvider__Or) MarshalJSON() ([]byte, error) 
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_ColorProvider__Or",
+			"ServerCapabilities_ColorProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_DeclarationProvider__Or struct {
+type ServerCapabilities_DeclarationProvider_Or struct {
 
 	// *Boolean
 	// *DeclarationOptions
@@ -1926,7 +1926,7 @@ type ServerCapabilities_DeclarationProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_DeclarationProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_DeclarationProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -1957,10 +1957,10 @@ func (this *ServerCapabilities_DeclarationProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_DeclarationProvider__Or")
+	return OrValidateFailed("ServerCapabilities_DeclarationProvider_Or")
 }
 
-func (this *ServerCapabilities_DeclarationProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_DeclarationProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -1976,20 +1976,20 @@ func (this *ServerCapabilities_DeclarationProvider__Or) MarshalJSON() ([]byte, e
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_DeclarationProvider__Or",
+			"ServerCapabilities_DeclarationProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_DefinitionProvider__Or struct {
+type ServerCapabilities_DefinitionProvider_Or struct {
 
 	// *Boolean
 	// *DefinitionOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_DefinitionProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_DefinitionProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2011,10 +2011,10 @@ func (this *ServerCapabilities_DefinitionProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_DefinitionProvider__Or")
+	return OrValidateFailed("ServerCapabilities_DefinitionProvider_Or")
 }
 
-func (this *ServerCapabilities_DefinitionProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_DefinitionProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2026,20 +2026,20 @@ func (this *ServerCapabilities_DefinitionProvider__Or) MarshalJSON() ([]byte, er
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_DefinitionProvider__Or",
+			"ServerCapabilities_DefinitionProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_DiagnosticProvider__Or struct {
+type ServerCapabilities_DiagnosticProvider_Or struct {
 
 	// *DiagnosticOptions
 	// *DiagnosticRegistrationOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_DiagnosticProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_DiagnosticProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2061,10 +2061,10 @@ func (this *ServerCapabilities_DiagnosticProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_DiagnosticProvider__Or")
+	return OrValidateFailed("ServerCapabilities_DiagnosticProvider_Or")
 }
 
-func (this *ServerCapabilities_DiagnosticProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_DiagnosticProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*DiagnosticOptions); ok {
@@ -2076,20 +2076,20 @@ func (this *ServerCapabilities_DiagnosticProvider__Or) MarshalJSON() ([]byte, er
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_DiagnosticProvider__Or",
+			"ServerCapabilities_DiagnosticProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_DocumentFormattingProvider__Or struct {
+type ServerCapabilities_DocumentFormattingProvider_Or struct {
 
 	// *Boolean
 	// *DocumentFormattingOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_DocumentFormattingProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_DocumentFormattingProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2112,11 +2112,11 @@ func (this *ServerCapabilities_DocumentFormattingProvider__Or) UnmarshalJSON(
 	}
 
 	return OrValidateFailed(
-		"ServerCapabilities_DocumentFormattingProvider__Or",
+		"ServerCapabilities_DocumentFormattingProvider_Or",
 	)
 }
 
-func (this *ServerCapabilities_DocumentFormattingProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_DocumentFormattingProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2128,20 +2128,20 @@ func (this *ServerCapabilities_DocumentFormattingProvider__Or) MarshalJSON() ([]
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_DocumentFormattingProvider__Or",
+			"ServerCapabilities_DocumentFormattingProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_DocumentHighlightProvider__Or struct {
+type ServerCapabilities_DocumentHighlightProvider_Or struct {
 
 	// *Boolean
 	// *DocumentHighlightOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_DocumentHighlightProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_DocumentHighlightProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2164,11 +2164,11 @@ func (this *ServerCapabilities_DocumentHighlightProvider__Or) UnmarshalJSON(
 	}
 
 	return OrValidateFailed(
-		"ServerCapabilities_DocumentHighlightProvider__Or",
+		"ServerCapabilities_DocumentHighlightProvider_Or",
 	)
 }
 
-func (this *ServerCapabilities_DocumentHighlightProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_DocumentHighlightProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2180,20 +2180,20 @@ func (this *ServerCapabilities_DocumentHighlightProvider__Or) MarshalJSON() ([]b
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_DocumentHighlightProvider__Or",
+			"ServerCapabilities_DocumentHighlightProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_DocumentRangeFormattingProvider__Or struct {
+type ServerCapabilities_DocumentRangeFormattingProvider_Or struct {
 
 	// *Boolean
 	// *DocumentRangeFormattingOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_DocumentRangeFormattingProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_DocumentRangeFormattingProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2216,11 +2216,11 @@ func (this *ServerCapabilities_DocumentRangeFormattingProvider__Or) UnmarshalJSO
 	}
 
 	return OrValidateFailed(
-		"ServerCapabilities_DocumentRangeFormattingProvider__Or",
+		"ServerCapabilities_DocumentRangeFormattingProvider_Or",
 	)
 }
 
-func (this *ServerCapabilities_DocumentRangeFormattingProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_DocumentRangeFormattingProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2232,20 +2232,20 @@ func (this *ServerCapabilities_DocumentRangeFormattingProvider__Or) MarshalJSON(
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_DocumentRangeFormattingProvider__Or",
+			"ServerCapabilities_DocumentRangeFormattingProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_DocumentSymbolProvider__Or struct {
+type ServerCapabilities_DocumentSymbolProvider_Or struct {
 
 	// *Boolean
 	// *DocumentSymbolOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_DocumentSymbolProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_DocumentSymbolProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2267,10 +2267,10 @@ func (this *ServerCapabilities_DocumentSymbolProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_DocumentSymbolProvider__Or")
+	return OrValidateFailed("ServerCapabilities_DocumentSymbolProvider_Or")
 }
 
-func (this *ServerCapabilities_DocumentSymbolProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_DocumentSymbolProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2282,13 +2282,13 @@ func (this *ServerCapabilities_DocumentSymbolProvider__Or) MarshalJSON() ([]byte
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_DocumentSymbolProvider__Or",
+			"ServerCapabilities_DocumentSymbolProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_FoldingRangeProvider__Or struct {
+type ServerCapabilities_FoldingRangeProvider_Or struct {
 
 	// *Boolean
 	// *FoldingRangeOptions
@@ -2296,7 +2296,7 @@ type ServerCapabilities_FoldingRangeProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_FoldingRangeProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_FoldingRangeProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2327,10 +2327,10 @@ func (this *ServerCapabilities_FoldingRangeProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_FoldingRangeProvider__Or")
+	return OrValidateFailed("ServerCapabilities_FoldingRangeProvider_Or")
 }
 
-func (this *ServerCapabilities_FoldingRangeProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_FoldingRangeProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2346,20 +2346,20 @@ func (this *ServerCapabilities_FoldingRangeProvider__Or) MarshalJSON() ([]byte, 
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_FoldingRangeProvider__Or",
+			"ServerCapabilities_FoldingRangeProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_HoverProvider__Or struct {
+type ServerCapabilities_HoverProvider_Or struct {
 
 	// *Boolean
 	// *HoverOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_HoverProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_HoverProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2381,10 +2381,10 @@ func (this *ServerCapabilities_HoverProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_HoverProvider__Or")
+	return OrValidateFailed("ServerCapabilities_HoverProvider_Or")
 }
 
-func (this *ServerCapabilities_HoverProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_HoverProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2396,13 +2396,13 @@ func (this *ServerCapabilities_HoverProvider__Or) MarshalJSON() ([]byte, error) 
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_HoverProvider__Or",
+			"ServerCapabilities_HoverProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_ImplementationProvider__Or struct {
+type ServerCapabilities_ImplementationProvider_Or struct {
 
 	// *Boolean
 	// *ImplementationOptions
@@ -2410,7 +2410,7 @@ type ServerCapabilities_ImplementationProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_ImplementationProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_ImplementationProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2441,10 +2441,10 @@ func (this *ServerCapabilities_ImplementationProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_ImplementationProvider__Or")
+	return OrValidateFailed("ServerCapabilities_ImplementationProvider_Or")
 }
 
-func (this *ServerCapabilities_ImplementationProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_ImplementationProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2460,13 +2460,13 @@ func (this *ServerCapabilities_ImplementationProvider__Or) MarshalJSON() ([]byte
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_ImplementationProvider__Or",
+			"ServerCapabilities_ImplementationProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_InlayHintProvider__Or struct {
+type ServerCapabilities_InlayHintProvider_Or struct {
 
 	// *Boolean
 	// *InlayHintOptions
@@ -2474,7 +2474,7 @@ type ServerCapabilities_InlayHintProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_InlayHintProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_InlayHintProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2505,10 +2505,10 @@ func (this *ServerCapabilities_InlayHintProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_InlayHintProvider__Or")
+	return OrValidateFailed("ServerCapabilities_InlayHintProvider_Or")
 }
 
-func (this *ServerCapabilities_InlayHintProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_InlayHintProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2524,13 +2524,13 @@ func (this *ServerCapabilities_InlayHintProvider__Or) MarshalJSON() ([]byte, err
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_InlayHintProvider__Or",
+			"ServerCapabilities_InlayHintProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_InlineValueProvider__Or struct {
+type ServerCapabilities_InlineValueProvider_Or struct {
 
 	// *Boolean
 	// *InlineValueOptions
@@ -2538,7 +2538,7 @@ type ServerCapabilities_InlineValueProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_InlineValueProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_InlineValueProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2569,10 +2569,10 @@ func (this *ServerCapabilities_InlineValueProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_InlineValueProvider__Or")
+	return OrValidateFailed("ServerCapabilities_InlineValueProvider_Or")
 }
 
-func (this *ServerCapabilities_InlineValueProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_InlineValueProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2588,13 +2588,13 @@ func (this *ServerCapabilities_InlineValueProvider__Or) MarshalJSON() ([]byte, e
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_InlineValueProvider__Or",
+			"ServerCapabilities_InlineValueProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_LinkedEditingRangeProvider__Or struct {
+type ServerCapabilities_LinkedEditingRangeProvider_Or struct {
 
 	// *Boolean
 	// *LinkedEditingRangeOptions
@@ -2602,7 +2602,7 @@ type ServerCapabilities_LinkedEditingRangeProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_LinkedEditingRangeProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_LinkedEditingRangeProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2634,11 +2634,11 @@ func (this *ServerCapabilities_LinkedEditingRangeProvider__Or) UnmarshalJSON(
 	}
 
 	return OrValidateFailed(
-		"ServerCapabilities_LinkedEditingRangeProvider__Or",
+		"ServerCapabilities_LinkedEditingRangeProvider_Or",
 	)
 }
 
-func (this *ServerCapabilities_LinkedEditingRangeProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_LinkedEditingRangeProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2654,13 +2654,13 @@ func (this *ServerCapabilities_LinkedEditingRangeProvider__Or) MarshalJSON() ([]
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_LinkedEditingRangeProvider__Or",
+			"ServerCapabilities_LinkedEditingRangeProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_MonikerProvider__Or struct {
+type ServerCapabilities_MonikerProvider_Or struct {
 
 	// *Boolean
 	// *MonikerOptions
@@ -2668,7 +2668,7 @@ type ServerCapabilities_MonikerProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_MonikerProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_MonikerProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2699,10 +2699,10 @@ func (this *ServerCapabilities_MonikerProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_MonikerProvider__Or")
+	return OrValidateFailed("ServerCapabilities_MonikerProvider_Or")
 }
 
-func (this *ServerCapabilities_MonikerProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_MonikerProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2718,20 +2718,20 @@ func (this *ServerCapabilities_MonikerProvider__Or) MarshalJSON() ([]byte, error
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_MonikerProvider__Or",
+			"ServerCapabilities_MonikerProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_NotebookDocumentSync__Or struct {
+type ServerCapabilities_NotebookDocumentSync_Or struct {
 
 	// *NotebookDocumentSyncOptions
 	// *NotebookDocumentSyncRegistrationOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_NotebookDocumentSync__Or) UnmarshalJSON(
+func (this *ServerCapabilities_NotebookDocumentSync_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2753,10 +2753,10 @@ func (this *ServerCapabilities_NotebookDocumentSync__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_NotebookDocumentSync__Or")
+	return OrValidateFailed("ServerCapabilities_NotebookDocumentSync_Or")
 }
 
-func (this *ServerCapabilities_NotebookDocumentSync__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_NotebookDocumentSync_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*NotebookDocumentSyncOptions); ok {
@@ -2768,20 +2768,20 @@ func (this *ServerCapabilities_NotebookDocumentSync__Or) MarshalJSON() ([]byte, 
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_NotebookDocumentSync__Or",
+			"ServerCapabilities_NotebookDocumentSync_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_ReferencesProvider__Or struct {
+type ServerCapabilities_ReferencesProvider_Or struct {
 
 	// *Boolean
 	// *ReferenceOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_ReferencesProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_ReferencesProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2803,10 +2803,10 @@ func (this *ServerCapabilities_ReferencesProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_ReferencesProvider__Or")
+	return OrValidateFailed("ServerCapabilities_ReferencesProvider_Or")
 }
 
-func (this *ServerCapabilities_ReferencesProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_ReferencesProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2818,20 +2818,20 @@ func (this *ServerCapabilities_ReferencesProvider__Or) MarshalJSON() ([]byte, er
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_ReferencesProvider__Or",
+			"ServerCapabilities_ReferencesProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_RenameProvider__Or struct {
+type ServerCapabilities_RenameProvider_Or struct {
 
 	// *Boolean
 	// *RenameOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_RenameProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_RenameProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2853,10 +2853,10 @@ func (this *ServerCapabilities_RenameProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_RenameProvider__Or")
+	return OrValidateFailed("ServerCapabilities_RenameProvider_Or")
 }
 
-func (this *ServerCapabilities_RenameProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_RenameProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2868,13 +2868,13 @@ func (this *ServerCapabilities_RenameProvider__Or) MarshalJSON() ([]byte, error)
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_RenameProvider__Or",
+			"ServerCapabilities_RenameProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_SelectionRangeProvider__Or struct {
+type ServerCapabilities_SelectionRangeProvider_Or struct {
 
 	// *Boolean
 	// *SelectionRangeOptions
@@ -2882,7 +2882,7 @@ type ServerCapabilities_SelectionRangeProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_SelectionRangeProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_SelectionRangeProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2913,10 +2913,10 @@ func (this *ServerCapabilities_SelectionRangeProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_SelectionRangeProvider__Or")
+	return OrValidateFailed("ServerCapabilities_SelectionRangeProvider_Or")
 }
 
-func (this *ServerCapabilities_SelectionRangeProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_SelectionRangeProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -2932,20 +2932,20 @@ func (this *ServerCapabilities_SelectionRangeProvider__Or) MarshalJSON() ([]byte
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_SelectionRangeProvider__Or",
+			"ServerCapabilities_SelectionRangeProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_SemanticTokensProvider__Or struct {
+type ServerCapabilities_SemanticTokensProvider_Or struct {
 
 	// *SemanticTokensOptions
 	// *SemanticTokensRegistrationOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_SemanticTokensProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_SemanticTokensProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -2967,10 +2967,10 @@ func (this *ServerCapabilities_SemanticTokensProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_SemanticTokensProvider__Or")
+	return OrValidateFailed("ServerCapabilities_SemanticTokensProvider_Or")
 }
 
-func (this *ServerCapabilities_SemanticTokensProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_SemanticTokensProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*SemanticTokensOptions); ok {
@@ -2982,20 +2982,20 @@ func (this *ServerCapabilities_SemanticTokensProvider__Or) MarshalJSON() ([]byte
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_SemanticTokensProvider__Or",
+			"ServerCapabilities_SemanticTokensProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_TextDocumentSync__Or struct {
+type ServerCapabilities_TextDocumentSync_Or struct {
 
 	// *TextDocumentSyncOptions
 	// *TextDocumentSyncKind
 	V interface{}
 }
 
-func (this *ServerCapabilities_TextDocumentSync__Or) UnmarshalJSON(
+func (this *ServerCapabilities_TextDocumentSync_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3017,10 +3017,10 @@ func (this *ServerCapabilities_TextDocumentSync__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_TextDocumentSync__Or")
+	return OrValidateFailed("ServerCapabilities_TextDocumentSync_Or")
 }
 
-func (this *ServerCapabilities_TextDocumentSync__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_TextDocumentSync_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*TextDocumentSyncOptions); ok {
@@ -3032,13 +3032,13 @@ func (this *ServerCapabilities_TextDocumentSync__Or) MarshalJSON() ([]byte, erro
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_TextDocumentSync__Or",
+			"ServerCapabilities_TextDocumentSync_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_TypeDefinitionProvider__Or struct {
+type ServerCapabilities_TypeDefinitionProvider_Or struct {
 
 	// *Boolean
 	// *TypeDefinitionOptions
@@ -3046,7 +3046,7 @@ type ServerCapabilities_TypeDefinitionProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_TypeDefinitionProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_TypeDefinitionProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3077,10 +3077,10 @@ func (this *ServerCapabilities_TypeDefinitionProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_TypeDefinitionProvider__Or")
+	return OrValidateFailed("ServerCapabilities_TypeDefinitionProvider_Or")
 }
 
-func (this *ServerCapabilities_TypeDefinitionProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_TypeDefinitionProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -3096,13 +3096,13 @@ func (this *ServerCapabilities_TypeDefinitionProvider__Or) MarshalJSON() ([]byte
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_TypeDefinitionProvider__Or",
+			"ServerCapabilities_TypeDefinitionProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_TypeHierarchyProvider__Or struct {
+type ServerCapabilities_TypeHierarchyProvider_Or struct {
 
 	// *Boolean
 	// *TypeHierarchyOptions
@@ -3110,7 +3110,7 @@ type ServerCapabilities_TypeHierarchyProvider__Or struct {
 	V interface{}
 }
 
-func (this *ServerCapabilities_TypeHierarchyProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_TypeHierarchyProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3141,10 +3141,10 @@ func (this *ServerCapabilities_TypeHierarchyProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("ServerCapabilities_TypeHierarchyProvider__Or")
+	return OrValidateFailed("ServerCapabilities_TypeHierarchyProvider_Or")
 }
 
-func (this *ServerCapabilities_TypeHierarchyProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_TypeHierarchyProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -3160,20 +3160,20 @@ func (this *ServerCapabilities_TypeHierarchyProvider__Or) MarshalJSON() ([]byte,
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_TypeHierarchyProvider__Or",
+			"ServerCapabilities_TypeHierarchyProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type ServerCapabilities_WorkspaceSymbolProvider__Or struct {
+type ServerCapabilities_WorkspaceSymbolProvider_Or struct {
 
 	// *Boolean
 	// *WorkspaceSymbolOptions
 	V interface{}
 }
 
-func (this *ServerCapabilities_WorkspaceSymbolProvider__Or) UnmarshalJSON(
+func (this *ServerCapabilities_WorkspaceSymbolProvider_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3195,12 +3195,10 @@ func (this *ServerCapabilities_WorkspaceSymbolProvider__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed(
-		"ServerCapabilities_WorkspaceSymbolProvider__Or",
-	)
+	return OrValidateFailed("ServerCapabilities_WorkspaceSymbolProvider_Or")
 }
 
-func (this *ServerCapabilities_WorkspaceSymbolProvider__Or) MarshalJSON() ([]byte, error) {
+func (this *ServerCapabilities_WorkspaceSymbolProvider_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -3212,20 +3210,20 @@ func (this *ServerCapabilities_WorkspaceSymbolProvider__Or) MarshalJSON() ([]byt
 		}
 
 		return nil, OrValidateFailed(
-			"ServerCapabilities_WorkspaceSymbolProvider__Or",
+			"ServerCapabilities_WorkspaceSymbolProvider_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type SignatureInformation_Documentation__Or struct {
+type SignatureInformation_Documentation_Or struct {
 
 	// *String
 	// *MarkupContent
 	V interface{}
 }
 
-func (this *SignatureInformation_Documentation__Or) UnmarshalJSON(
+func (this *SignatureInformation_Documentation_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3247,10 +3245,10 @@ func (this *SignatureInformation_Documentation__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("SignatureInformation_Documentation__Or")
+	return OrValidateFailed("SignatureInformation_Documentation_Or")
 }
 
-func (this *SignatureInformation_Documentation__Or) MarshalJSON() ([]byte, error) {
+func (this *SignatureInformation_Documentation_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -3262,20 +3260,20 @@ func (this *SignatureInformation_Documentation__Or) MarshalJSON() ([]byte, error
 		}
 
 		return nil, OrValidateFailed(
-			"SignatureInformation_Documentation__Or",
+			"SignatureInformation_Documentation_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentCodeAction_PartialResult_Element__Or struct {
+type TextDocumentCodeAction_PartialResult_Element_Or struct {
 
 	// *Command
 	// *CodeAction
 	V interface{}
 }
 
-func (this *TextDocumentCodeAction_PartialResult_Element__Or) UnmarshalJSON(
+func (this *TextDocumentCodeAction_PartialResult_Element_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3298,11 +3296,11 @@ func (this *TextDocumentCodeAction_PartialResult_Element__Or) UnmarshalJSON(
 	}
 
 	return OrValidateFailed(
-		"TextDocumentCodeAction_PartialResult_Element__Or",
+		"TextDocumentCodeAction_PartialResult_Element_Or",
 	)
 }
 
-func (this *TextDocumentCodeAction_PartialResult_Element__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentCodeAction_PartialResult_Element_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Command); ok {
@@ -3314,20 +3312,20 @@ func (this *TextDocumentCodeAction_PartialResult_Element__Or) MarshalJSON() ([]b
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentCodeAction_PartialResult_Element__Or",
+			"TextDocumentCodeAction_PartialResult_Element_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentCodeAction_Result_Element__Or struct {
+type TextDocumentCodeAction_Result_Element_Or struct {
 
 	// *Command
 	// *CodeAction
 	V interface{}
 }
 
-func (this *TextDocumentCodeAction_Result_Element__Or) UnmarshalJSON(
+func (this *TextDocumentCodeAction_Result_Element_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3349,10 +3347,10 @@ func (this *TextDocumentCodeAction_Result_Element__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentCodeAction_Result_Element__Or")
+	return OrValidateFailed("TextDocumentCodeAction_Result_Element_Or")
 }
 
-func (this *TextDocumentCodeAction_Result_Element__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentCodeAction_Result_Element_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Command); ok {
@@ -3364,13 +3362,13 @@ func (this *TextDocumentCodeAction_Result_Element__Or) MarshalJSON() ([]byte, er
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentCodeAction_Result_Element__Or",
+			"TextDocumentCodeAction_Result_Element_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentCompletion_Result__Or struct {
+type TextDocumentCompletion_Result_Or struct {
 
 	// []CompletionItem
 	// *CompletionList
@@ -3378,9 +3376,7 @@ type TextDocumentCompletion_Result__Or struct {
 	V interface{}
 }
 
-func (this *TextDocumentCompletion_Result__Or) UnmarshalJSON(
-	data []byte,
-) error {
+func (this *TextDocumentCompletion_Result_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -3409,10 +3405,10 @@ func (this *TextDocumentCompletion_Result__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentCompletion_Result__Or")
+	return OrValidateFailed("TextDocumentCompletion_Result_Or")
 }
 
-func (this *TextDocumentCompletion_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentCompletion_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]CompletionItem); ok {
@@ -3427,27 +3423,25 @@ func (this *TextDocumentCompletion_Result__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed(
-			"TextDocumentCompletion_Result__Or",
-		)
+		return nil, OrValidateFailed("TextDocumentCompletion_Result_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentContentChangeEvent__Or struct {
+type TextDocumentContentChangeEvent_Or struct {
 
-	// *TextDocumentContentChangeEvent__Or_0
-	// *TextDocumentContentChangeEvent__Or_1
+	// *TextDocumentContentChangeEvent_Or_0
+	// *TextDocumentContentChangeEvent_Or_1
 	V interface{}
 }
 
-func (this *TextDocumentContentChangeEvent__Or) UnmarshalJSON(
+func (this *TextDocumentContentChangeEvent_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
 	{
 
-		var tmp *TextDocumentContentChangeEvent__Or_0
+		var tmp *TextDocumentContentChangeEvent_Or_0
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -3456,42 +3450,42 @@ func (this *TextDocumentContentChangeEvent__Or) UnmarshalJSON(
 
 	{
 
-		var tmp *TextDocumentContentChangeEvent__Or_1
+		var tmp *TextDocumentContentChangeEvent_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("TextDocumentContentChangeEvent__Or")
+	return OrValidateFailed("TextDocumentContentChangeEvent_Or")
 }
 
-func (this *TextDocumentContentChangeEvent__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentContentChangeEvent_Or) MarshalJSON() ([]byte, error) {
 	for {
 
-		if _, ok := this.V.(*TextDocumentContentChangeEvent__Or_0); ok {
+		if _, ok := this.V.(*TextDocumentContentChangeEvent_Or_0); ok {
 			break
 		}
 
-		if _, ok := this.V.(*TextDocumentContentChangeEvent__Or_1); ok {
+		if _, ok := this.V.(*TextDocumentContentChangeEvent_Or_1); ok {
 			break
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentContentChangeEvent__Or",
+			"TextDocumentContentChangeEvent_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentDeclaration_PartialResult__Or struct {
+type TextDocumentDeclaration_PartialResult_Or struct {
 
 	// []Location
 	// []DeclarationLink
 	V interface{}
 }
 
-func (this *TextDocumentDeclaration_PartialResult__Or) UnmarshalJSON(
+func (this *TextDocumentDeclaration_PartialResult_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3513,10 +3507,10 @@ func (this *TextDocumentDeclaration_PartialResult__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentDeclaration_PartialResult__Or")
+	return OrValidateFailed("TextDocumentDeclaration_PartialResult_Or")
 }
 
-func (this *TextDocumentDeclaration_PartialResult__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentDeclaration_PartialResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]Location); ok {
@@ -3528,13 +3522,13 @@ func (this *TextDocumentDeclaration_PartialResult__Or) MarshalJSON() ([]byte, er
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentDeclaration_PartialResult__Or",
+			"TextDocumentDeclaration_PartialResult_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentDeclaration_Result__Or struct {
+type TextDocumentDeclaration_Result_Or struct {
 
 	// *Declaration
 	// []DeclarationLink
@@ -3542,7 +3536,7 @@ type TextDocumentDeclaration_Result__Or struct {
 	V interface{}
 }
 
-func (this *TextDocumentDeclaration_Result__Or) UnmarshalJSON(
+func (this *TextDocumentDeclaration_Result_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3573,10 +3567,10 @@ func (this *TextDocumentDeclaration_Result__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentDeclaration_Result__Or")
+	return OrValidateFailed("TextDocumentDeclaration_Result_Or")
 }
 
-func (this *TextDocumentDeclaration_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentDeclaration_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Declaration); ok {
@@ -3592,20 +3586,20 @@ func (this *TextDocumentDeclaration_Result__Or) MarshalJSON() ([]byte, error) {
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentDeclaration_Result__Or",
+			"TextDocumentDeclaration_Result_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentDefinition_PartialResult__Or struct {
+type TextDocumentDefinition_PartialResult_Or struct {
 
 	// []Location
 	// []DefinitionLink
 	V interface{}
 }
 
-func (this *TextDocumentDefinition_PartialResult__Or) UnmarshalJSON(
+func (this *TextDocumentDefinition_PartialResult_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3627,10 +3621,10 @@ func (this *TextDocumentDefinition_PartialResult__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentDefinition_PartialResult__Or")
+	return OrValidateFailed("TextDocumentDefinition_PartialResult_Or")
 }
 
-func (this *TextDocumentDefinition_PartialResult__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentDefinition_PartialResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]Location); ok {
@@ -3642,13 +3636,13 @@ func (this *TextDocumentDefinition_PartialResult__Or) MarshalJSON() ([]byte, err
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentDefinition_PartialResult__Or",
+			"TextDocumentDefinition_PartialResult_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentDefinition_Result__Or struct {
+type TextDocumentDefinition_Result_Or struct {
 
 	// *Definition
 	// []DefinitionLink
@@ -3656,9 +3650,7 @@ type TextDocumentDefinition_Result__Or struct {
 	V interface{}
 }
 
-func (this *TextDocumentDefinition_Result__Or) UnmarshalJSON(
-	data []byte,
-) error {
+func (this *TextDocumentDefinition_Result_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -3687,10 +3679,10 @@ func (this *TextDocumentDefinition_Result__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentDefinition_Result__Or")
+	return OrValidateFailed("TextDocumentDefinition_Result_Or")
 }
 
-func (this *TextDocumentDefinition_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentDefinition_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Definition); ok {
@@ -3705,21 +3697,19 @@ func (this *TextDocumentDefinition_Result__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed(
-			"TextDocumentDefinition_Result__Or",
-		)
+		return nil, OrValidateFailed("TextDocumentDefinition_Result_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentDocumentSymbol_PartialResult__Or struct {
+type TextDocumentDocumentSymbol_PartialResult_Or struct {
 
 	// []SymbolInformation
 	// []DocumentSymbol
 	V interface{}
 }
 
-func (this *TextDocumentDocumentSymbol_PartialResult__Or) UnmarshalJSON(
+func (this *TextDocumentDocumentSymbol_PartialResult_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3741,10 +3731,10 @@ func (this *TextDocumentDocumentSymbol_PartialResult__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentDocumentSymbol_PartialResult__Or")
+	return OrValidateFailed("TextDocumentDocumentSymbol_PartialResult_Or")
 }
 
-func (this *TextDocumentDocumentSymbol_PartialResult__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentDocumentSymbol_PartialResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]SymbolInformation); ok {
@@ -3756,13 +3746,13 @@ func (this *TextDocumentDocumentSymbol_PartialResult__Or) MarshalJSON() ([]byte,
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentDocumentSymbol_PartialResult__Or",
+			"TextDocumentDocumentSymbol_PartialResult_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentDocumentSymbol_Result__Or struct {
+type TextDocumentDocumentSymbol_Result_Or struct {
 
 	// []SymbolInformation
 	// []DocumentSymbol
@@ -3770,7 +3760,7 @@ type TextDocumentDocumentSymbol_Result__Or struct {
 	V interface{}
 }
 
-func (this *TextDocumentDocumentSymbol_Result__Or) UnmarshalJSON(
+func (this *TextDocumentDocumentSymbol_Result_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3801,10 +3791,10 @@ func (this *TextDocumentDocumentSymbol_Result__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentDocumentSymbol_Result__Or")
+	return OrValidateFailed("TextDocumentDocumentSymbol_Result_Or")
 }
 
-func (this *TextDocumentDocumentSymbol_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentDocumentSymbol_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]SymbolInformation); ok {
@@ -3820,20 +3810,20 @@ func (this *TextDocumentDocumentSymbol_Result__Or) MarshalJSON() ([]byte, error)
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentDocumentSymbol_Result__Or",
+			"TextDocumentDocumentSymbol_Result_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentEdit_Edits_Element__Or struct {
+type TextDocumentEdit_Edits_Element_Or struct {
 
 	// *TextEdit
 	// *AnnotatedTextEdit
 	V interface{}
 }
 
-func (this *TextDocumentEdit_Edits_Element__Or) UnmarshalJSON(
+func (this *TextDocumentEdit_Edits_Element_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3855,10 +3845,10 @@ func (this *TextDocumentEdit_Edits_Element__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentEdit_Edits_Element__Or")
+	return OrValidateFailed("TextDocumentEdit_Edits_Element_Or")
 }
 
-func (this *TextDocumentEdit_Edits_Element__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentEdit_Edits_Element_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*TextEdit); ok {
@@ -3870,25 +3860,25 @@ func (this *TextDocumentEdit_Edits_Element__Or) MarshalJSON() ([]byte, error) {
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentEdit_Edits_Element__Or",
+			"TextDocumentEdit_Edits_Element_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentFilter__Or struct {
+type TextDocumentFilter_Or struct {
 
-	// *TextDocumentFilter__Or_0
-	// *TextDocumentFilter__Or_1
-	// *TextDocumentFilter__Or_2
+	// *TextDocumentFilter_Or_0
+	// *TextDocumentFilter_Or_1
+	// *TextDocumentFilter_Or_2
 	V interface{}
 }
 
-func (this *TextDocumentFilter__Or) UnmarshalJSON(data []byte) error {
+func (this *TextDocumentFilter_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *TextDocumentFilter__Or_0
+		var tmp *TextDocumentFilter_Or_0
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -3897,7 +3887,7 @@ func (this *TextDocumentFilter__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *TextDocumentFilter__Or_1
+		var tmp *TextDocumentFilter_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
@@ -3906,44 +3896,44 @@ func (this *TextDocumentFilter__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *TextDocumentFilter__Or_2
+		var tmp *TextDocumentFilter_Or_2
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("TextDocumentFilter__Or")
+	return OrValidateFailed("TextDocumentFilter_Or")
 }
 
-func (this *TextDocumentFilter__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentFilter_Or) MarshalJSON() ([]byte, error) {
 	for {
 
-		if _, ok := this.V.(*TextDocumentFilter__Or_0); ok {
+		if _, ok := this.V.(*TextDocumentFilter_Or_0); ok {
 			break
 		}
 
-		if _, ok := this.V.(*TextDocumentFilter__Or_1); ok {
+		if _, ok := this.V.(*TextDocumentFilter_Or_1); ok {
 			break
 		}
 
-		if _, ok := this.V.(*TextDocumentFilter__Or_2); ok {
+		if _, ok := this.V.(*TextDocumentFilter_Or_2); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("TextDocumentFilter__Or")
+		return nil, OrValidateFailed("TextDocumentFilter_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentImplementation_PartialResult__Or struct {
+type TextDocumentImplementation_PartialResult_Or struct {
 
 	// []Location
 	// []DefinitionLink
 	V interface{}
 }
 
-func (this *TextDocumentImplementation_PartialResult__Or) UnmarshalJSON(
+func (this *TextDocumentImplementation_PartialResult_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3965,10 +3955,10 @@ func (this *TextDocumentImplementation_PartialResult__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentImplementation_PartialResult__Or")
+	return OrValidateFailed("TextDocumentImplementation_PartialResult_Or")
 }
 
-func (this *TextDocumentImplementation_PartialResult__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentImplementation_PartialResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]Location); ok {
@@ -3980,13 +3970,13 @@ func (this *TextDocumentImplementation_PartialResult__Or) MarshalJSON() ([]byte,
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentImplementation_PartialResult__Or",
+			"TextDocumentImplementation_PartialResult_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentImplementation_Result__Or struct {
+type TextDocumentImplementation_Result_Or struct {
 
 	// *Definition
 	// []DefinitionLink
@@ -3994,7 +3984,7 @@ type TextDocumentImplementation_Result__Or struct {
 	V interface{}
 }
 
-func (this *TextDocumentImplementation_Result__Or) UnmarshalJSON(
+func (this *TextDocumentImplementation_Result_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4025,10 +4015,10 @@ func (this *TextDocumentImplementation_Result__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentImplementation_Result__Or")
+	return OrValidateFailed("TextDocumentImplementation_Result_Or")
 }
 
-func (this *TextDocumentImplementation_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentImplementation_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Definition); ok {
@@ -4044,20 +4034,20 @@ func (this *TextDocumentImplementation_Result__Or) MarshalJSON() ([]byte, error)
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentImplementation_Result__Or",
+			"TextDocumentImplementation_Result_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentSemanticTokensFullDelta_PartialResult__Or struct {
+type TextDocumentSemanticTokensFullDelta_PartialResult_Or struct {
 
 	// *SemanticTokensPartialResult
 	// *SemanticTokensDeltaPartialResult
 	V interface{}
 }
 
-func (this *TextDocumentSemanticTokensFullDelta_PartialResult__Or) UnmarshalJSON(
+func (this *TextDocumentSemanticTokensFullDelta_PartialResult_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4080,11 +4070,11 @@ func (this *TextDocumentSemanticTokensFullDelta_PartialResult__Or) UnmarshalJSON
 	}
 
 	return OrValidateFailed(
-		"TextDocumentSemanticTokensFullDelta_PartialResult__Or",
+		"TextDocumentSemanticTokensFullDelta_PartialResult_Or",
 	)
 }
 
-func (this *TextDocumentSemanticTokensFullDelta_PartialResult__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentSemanticTokensFullDelta_PartialResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*SemanticTokensPartialResult); ok {
@@ -4096,13 +4086,13 @@ func (this *TextDocumentSemanticTokensFullDelta_PartialResult__Or) MarshalJSON()
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentSemanticTokensFullDelta_PartialResult__Or",
+			"TextDocumentSemanticTokensFullDelta_PartialResult_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentSemanticTokensFullDelta_Result__Or struct {
+type TextDocumentSemanticTokensFullDelta_Result_Or struct {
 
 	// *SemanticTokens
 	// *SemanticTokensDelta
@@ -4110,7 +4100,7 @@ type TextDocumentSemanticTokensFullDelta_Result__Or struct {
 	V interface{}
 }
 
-func (this *TextDocumentSemanticTokensFullDelta_Result__Or) UnmarshalJSON(
+func (this *TextDocumentSemanticTokensFullDelta_Result_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4141,12 +4131,10 @@ func (this *TextDocumentSemanticTokensFullDelta_Result__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed(
-		"TextDocumentSemanticTokensFullDelta_Result__Or",
-	)
+	return OrValidateFailed("TextDocumentSemanticTokensFullDelta_Result_Or")
 }
 
-func (this *TextDocumentSemanticTokensFullDelta_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentSemanticTokensFullDelta_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*SemanticTokens); ok {
@@ -4162,20 +4150,20 @@ func (this *TextDocumentSemanticTokensFullDelta_Result__Or) MarshalJSON() ([]byt
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentSemanticTokensFullDelta_Result__Or",
+			"TextDocumentSemanticTokensFullDelta_Result_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentSyncOptions_Save__Or struct {
+type TextDocumentSyncOptions_Save_Or struct {
 
 	// *Boolean
 	// *SaveOptions
 	V interface{}
 }
 
-func (this *TextDocumentSyncOptions_Save__Or) UnmarshalJSON(data []byte) error {
+func (this *TextDocumentSyncOptions_Save_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -4195,10 +4183,10 @@ func (this *TextDocumentSyncOptions_Save__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("TextDocumentSyncOptions_Save__Or")
+	return OrValidateFailed("TextDocumentSyncOptions_Save_Or")
 }
 
-func (this *TextDocumentSyncOptions_Save__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentSyncOptions_Save_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Boolean); ok {
@@ -4209,19 +4197,19 @@ func (this *TextDocumentSyncOptions_Save__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("TextDocumentSyncOptions_Save__Or")
+		return nil, OrValidateFailed("TextDocumentSyncOptions_Save_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentTypeDefinition_PartialResult__Or struct {
+type TextDocumentTypeDefinition_PartialResult_Or struct {
 
 	// []Location
 	// []DefinitionLink
 	V interface{}
 }
 
-func (this *TextDocumentTypeDefinition_PartialResult__Or) UnmarshalJSON(
+func (this *TextDocumentTypeDefinition_PartialResult_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4243,10 +4231,10 @@ func (this *TextDocumentTypeDefinition_PartialResult__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentTypeDefinition_PartialResult__Or")
+	return OrValidateFailed("TextDocumentTypeDefinition_PartialResult_Or")
 }
 
-func (this *TextDocumentTypeDefinition_PartialResult__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentTypeDefinition_PartialResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]Location); ok {
@@ -4258,13 +4246,13 @@ func (this *TextDocumentTypeDefinition_PartialResult__Or) MarshalJSON() ([]byte,
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentTypeDefinition_PartialResult__Or",
+			"TextDocumentTypeDefinition_PartialResult_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type TextDocumentTypeDefinition_Result__Or struct {
+type TextDocumentTypeDefinition_Result_Or struct {
 
 	// *Definition
 	// []DefinitionLink
@@ -4272,7 +4260,7 @@ type TextDocumentTypeDefinition_Result__Or struct {
 	V interface{}
 }
 
-func (this *TextDocumentTypeDefinition_Result__Or) UnmarshalJSON(
+func (this *TextDocumentTypeDefinition_Result_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4303,10 +4291,10 @@ func (this *TextDocumentTypeDefinition_Result__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentTypeDefinition_Result__Or")
+	return OrValidateFailed("TextDocumentTypeDefinition_Result_Or")
 }
 
-func (this *TextDocumentTypeDefinition_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentTypeDefinition_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Definition); ok {
@@ -4322,20 +4310,20 @@ func (this *TextDocumentTypeDefinition_Result__Or) MarshalJSON() ([]byte, error)
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentTypeDefinition_Result__Or",
+			"TextDocumentTypeDefinition_Result_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type WorkspaceDocumentDiagnosticReport__Or struct {
+type WorkspaceDocumentDiagnosticReport_Or struct {
 
 	// *WorkspaceFullDocumentDiagnosticReport
 	// *WorkspaceUnchangedDocumentDiagnosticReport
 	V interface{}
 }
 
-func (this *WorkspaceDocumentDiagnosticReport__Or) UnmarshalJSON(
+func (this *WorkspaceDocumentDiagnosticReport_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4357,10 +4345,10 @@ func (this *WorkspaceDocumentDiagnosticReport__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("WorkspaceDocumentDiagnosticReport__Or")
+	return OrValidateFailed("WorkspaceDocumentDiagnosticReport_Or")
 }
 
-func (this *WorkspaceDocumentDiagnosticReport__Or) MarshalJSON() ([]byte, error) {
+func (this *WorkspaceDocumentDiagnosticReport_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*WorkspaceFullDocumentDiagnosticReport); ok {
@@ -4372,13 +4360,13 @@ func (this *WorkspaceDocumentDiagnosticReport__Or) MarshalJSON() ([]byte, error)
 		}
 
 		return nil, OrValidateFailed(
-			"WorkspaceDocumentDiagnosticReport__Or",
+			"WorkspaceDocumentDiagnosticReport_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type WorkspaceEdit_DocumentChanges_Element__Or struct {
+type WorkspaceEdit_DocumentChanges_Element_Or struct {
 
 	// *TextDocumentEdit
 	// *CreateFile
@@ -4387,7 +4375,7 @@ type WorkspaceEdit_DocumentChanges_Element__Or struct {
 	V interface{}
 }
 
-func (this *WorkspaceEdit_DocumentChanges_Element__Or) UnmarshalJSON(
+func (this *WorkspaceEdit_DocumentChanges_Element_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4427,10 +4415,10 @@ func (this *WorkspaceEdit_DocumentChanges_Element__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("WorkspaceEdit_DocumentChanges_Element__Or")
+	return OrValidateFailed("WorkspaceEdit_DocumentChanges_Element_Or")
 }
 
-func (this *WorkspaceEdit_DocumentChanges_Element__Or) MarshalJSON() ([]byte, error) {
+func (this *WorkspaceEdit_DocumentChanges_Element_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*TextDocumentEdit); ok {
@@ -4450,20 +4438,20 @@ func (this *WorkspaceEdit_DocumentChanges_Element__Or) MarshalJSON() ([]byte, er
 		}
 
 		return nil, OrValidateFailed(
-			"WorkspaceEdit_DocumentChanges_Element__Or",
+			"WorkspaceEdit_DocumentChanges_Element_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type WorkspaceFoldersServerCapabilities_ChangeNotifications__Or struct {
+type WorkspaceFoldersServerCapabilities_ChangeNotifications_Or struct {
 
 	// *String
 	// *Boolean
 	V interface{}
 }
 
-func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications__Or) UnmarshalJSON(
+func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -4486,11 +4474,11 @@ func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications__Or) Unmarsha
 	}
 
 	return OrValidateFailed(
-		"WorkspaceFoldersServerCapabilities_ChangeNotifications__Or",
+		"WorkspaceFoldersServerCapabilities_ChangeNotifications_Or",
 	)
 }
 
-func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications__Or) MarshalJSON() ([]byte, error) {
+func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*String); ok {
@@ -4502,20 +4490,20 @@ func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications__Or) MarshalJ
 		}
 
 		return nil, OrValidateFailed(
-			"WorkspaceFoldersServerCapabilities_ChangeNotifications__Or",
+			"WorkspaceFoldersServerCapabilities_ChangeNotifications_Or",
 		)
 	}
 	return json.Marshal(this.V)
 }
 
-type WorkspaceSymbol_Location__Or struct {
+type WorkspaceSymbol_Location_Or struct {
 
 	// *Location
-	// *WorkspaceSymbol_Location__Or_1
+	// *WorkspaceSymbol_Location_Or_1
 	V interface{}
 }
 
-func (this *WorkspaceSymbol_Location__Or) UnmarshalJSON(data []byte) error {
+func (this *WorkspaceSymbol_Location_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -4528,42 +4516,40 @@ func (this *WorkspaceSymbol_Location__Or) UnmarshalJSON(data []byte) error {
 
 	{
 
-		var tmp *WorkspaceSymbol_Location__Or_1
+		var tmp *WorkspaceSymbol_Location_Or_1
 		if err := json.Unmarshal(data, &tmp); err == nil {
 			this.V = tmp
 			return nil
 		}
 	}
 
-	return OrValidateFailed("WorkspaceSymbol_Location__Or")
+	return OrValidateFailed("WorkspaceSymbol_Location_Or")
 }
 
-func (this *WorkspaceSymbol_Location__Or) MarshalJSON() ([]byte, error) {
+func (this *WorkspaceSymbol_Location_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Location); ok {
 			break
 		}
 
-		if _, ok := this.V.(*WorkspaceSymbol_Location__Or_1); ok {
+		if _, ok := this.V.(*WorkspaceSymbol_Location_Or_1); ok {
 			break
 		}
 
-		return nil, OrValidateFailed("WorkspaceSymbol_Location__Or")
+		return nil, OrValidateFailed("WorkspaceSymbol_Location_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type WorkspaceSymbol_PartialResult__Or struct {
+type WorkspaceSymbol_PartialResult_Or struct {
 
 	// []SymbolInformation
 	// []WorkspaceSymbol
 	V interface{}
 }
 
-func (this *WorkspaceSymbol_PartialResult__Or) UnmarshalJSON(
-	data []byte,
-) error {
+func (this *WorkspaceSymbol_PartialResult_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -4583,10 +4569,10 @@ func (this *WorkspaceSymbol_PartialResult__Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("WorkspaceSymbol_PartialResult__Or")
+	return OrValidateFailed("WorkspaceSymbol_PartialResult_Or")
 }
 
-func (this *WorkspaceSymbol_PartialResult__Or) MarshalJSON() ([]byte, error) {
+func (this *WorkspaceSymbol_PartialResult_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]SymbolInformation); ok {
@@ -4597,14 +4583,12 @@ func (this *WorkspaceSymbol_PartialResult__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed(
-			"WorkspaceSymbol_PartialResult__Or",
-		)
+		return nil, OrValidateFailed("WorkspaceSymbol_PartialResult_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type WorkspaceSymbol_Result__Or struct {
+type WorkspaceSymbol_Result_Or struct {
 
 	// []SymbolInformation
 	// []WorkspaceSymbol
@@ -4612,7 +4596,7 @@ type WorkspaceSymbol_Result__Or struct {
 	V interface{}
 }
 
-func (this *WorkspaceSymbol_Result__Or) UnmarshalJSON(data []byte) error {
+func (this *WorkspaceSymbol_Result_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -4641,10 +4625,10 @@ func (this *WorkspaceSymbol_Result__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("WorkspaceSymbol_Result__Or")
+	return OrValidateFailed("WorkspaceSymbol_Result_Or")
 }
 
-func (this *WorkspaceSymbol_Result__Or) MarshalJSON() ([]byte, error) {
+func (this *WorkspaceSymbol_Result_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.([]SymbolInformation); ok {
@@ -4659,12 +4643,12 @@ func (this *WorkspaceSymbol_Result__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("WorkspaceSymbol_Result__Or")
+		return nil, OrValidateFailed("WorkspaceSymbol_Result_Or")
 	}
 	return json.Marshal(this.V)
 }
 
-type XInitializeParams_Trace__Or struct {
+type XInitializeParams_Trace_Or struct {
 
 	// *string
 	// *string
@@ -4673,7 +4657,7 @@ type XInitializeParams_Trace__Or struct {
 	V interface{}
 }
 
-func (this *XInitializeParams_Trace__Or) UnmarshalJSON(data []byte) error {
+func (this *XInitializeParams_Trace_Or) UnmarshalJSON(data []byte) error {
 
 	{
 
@@ -4711,10 +4695,10 @@ func (this *XInitializeParams_Trace__Or) UnmarshalJSON(data []byte) error {
 		}
 	}
 
-	return OrValidateFailed("XInitializeParams_Trace__Or")
+	return OrValidateFailed("XInitializeParams_Trace_Or")
 }
 
-func (this *XInitializeParams_Trace__Or) MarshalJSON() ([]byte, error) {
+func (this *XInitializeParams_Trace_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*string); ok {
@@ -4733,7 +4717,7 @@ func (this *XInitializeParams_Trace__Or) MarshalJSON() ([]byte, error) {
 			break
 		}
 
-		return nil, OrValidateFailed("XInitializeParams_Trace__Or")
+		return nil, OrValidateFailed("XInitializeParams_Trace_Or")
 	}
 	return json.Marshal(this.V)
 }

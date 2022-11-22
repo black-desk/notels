@@ -19,8 +19,8 @@ type LspServer interface {
 		params *ImplementationParams,
 	) (
 		err error,
-		result TextDocumentImplementation_Result__Or,
-		partialResult TextDocumentImplementation_PartialResult__Or,
+		result TextDocumentImplementation_Result_Or,
+		partialResult TextDocumentImplementation_PartialResult_Or,
 	) //jsonrpc2gen:"textDocument/implementation"
 
 	// A request to resolve the type definition locations of a symbol at a
@@ -33,8 +33,8 @@ type LspServer interface {
 		params *TypeDefinitionParams,
 	) (
 		err error,
-		result TextDocumentTypeDefinition_Result__Or,
-		partialResult TextDocumentTypeDefinition_PartialResult__Or,
+		result TextDocumentTypeDefinition_Result_Or,
+		partialResult TextDocumentTypeDefinition_PartialResult_Or,
 	) //jsonrpc2gen:"textDocument/typeDefinition"
 
 	// A request to list all color symbols found in a given text document.
@@ -89,8 +89,8 @@ type LspServer interface {
 		params *DeclarationParams,
 	) (
 		err error,
-		result TextDocumentDeclaration_Result__Or,
-		partialResult TextDocumentDeclaration_PartialResult__Or,
+		result TextDocumentDeclaration_Result_Or,
+		partialResult TextDocumentDeclaration_PartialResult_Or,
 	) //jsonrpc2gen:"textDocument/declaration"
 
 	// A request to provide selection ranges in a document. The request's
@@ -157,8 +157,8 @@ type LspServer interface {
 		params *SemanticTokensDeltaParams,
 	) (
 		err error,
-		result TextDocumentSemanticTokensFullDelta_Result__Or,
-		partialResult TextDocumentSemanticTokensFullDelta_PartialResult__Or,
+		result TextDocumentSemanticTokensFullDelta_Result_Or,
+		partialResult TextDocumentSemanticTokensFullDelta_PartialResult_Or,
 	) //jsonrpc2gen:"textDocument/semanticTokens/full/delta"
 
 	// @since 3.16.0
@@ -401,7 +401,7 @@ type LspServer interface {
 		params *CompletionParams,
 	) (
 		err error,
-		result TextDocumentCompletion_Result__Or,
+		result TextDocumentCompletion_Result_Or,
 		partialResult []CompletionItem,
 	) //jsonrpc2gen:"textDocument/completion"
 
@@ -449,8 +449,8 @@ type LspServer interface {
 		params *DefinitionParams,
 	) (
 		err error,
-		result TextDocumentDefinition_Result__Or,
-		partialResult TextDocumentDefinition_PartialResult__Or,
+		result TextDocumentDefinition_Result_Or,
+		partialResult TextDocumentDefinition_PartialResult_Or,
 	) //jsonrpc2gen:"textDocument/definition"
 
 	// A request to resolve project-wide references for the symbol denoted
@@ -490,8 +490,8 @@ type LspServer interface {
 		params *DocumentSymbolParams,
 	) (
 		err error,
-		result TextDocumentDocumentSymbol_Result__Or,
-		partialResult TextDocumentDocumentSymbol_PartialResult__Or,
+		result TextDocumentDocumentSymbol_Result_Or,
+		partialResult TextDocumentDocumentSymbol_PartialResult_Or,
 	) //jsonrpc2gen:"textDocument/documentSymbol"
 
 	// A request to provide commands for the given text document and range.
@@ -500,8 +500,8 @@ type LspServer interface {
 		params *CodeActionParams,
 	) (
 		err error,
-		result []TextDocumentCodeAction_Result_Element__Or,
-		partialResult []TextDocumentCodeAction_PartialResult_Element__Or,
+		result []TextDocumentCodeAction_Result_Element_Or,
+		partialResult []TextDocumentCodeAction_PartialResult_Element_Or,
 	) //jsonrpc2gen:"textDocument/codeAction"
 
 	// Request to resolve additional information for a given code action.The
@@ -528,8 +528,8 @@ type LspServer interface {
 		params *WorkspaceSymbolParams,
 	) (
 		err error,
-		result WorkspaceSymbol_Result__Or,
-		partialResult WorkspaceSymbol_PartialResult__Or,
+		result WorkspaceSymbol_Result_Or,
+		partialResult WorkspaceSymbol_PartialResult_Or,
 	) //jsonrpc2gen:"workspace/symbol"
 
 	// A request to resolve the range inside the workspace symbol's

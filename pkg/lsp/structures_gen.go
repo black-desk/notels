@@ -1618,7 +1618,7 @@ type WorkspaceEdit struct {
 	// client capability.  If a client neither supports `documentChanges`
 	// nor `workspace.workspaceEdit.resourceOperations` then only plain
 	// `TextEdit`s using the `changes` property are supported.
-	DocumentChanges []WorkspaceEdit_DocumentChanges_Element__Or `json:"documentChanges"`
+	DocumentChanges []WorkspaceEdit_DocumentChanges_Element_Or `json:"documentChanges"`
 
 	// A map of change annotations that can be referenced in
 	// `AnnotatedTextEdit`s or create, rename and delete file / folder
@@ -2156,7 +2156,7 @@ type InlayHint struct {
 	// The label of this hint. A human readable string or an array of
 	// InlayHintLabelPart label parts.  *Note* that neither the string nor
 	// the label part can be empty.
-	Label *InlayHint_Label__Or `json:"label"`
+	Label *InlayHint_Label_Or `json:"label"`
 
 	// The kind of this hint. Can be omitted in which case the client should
 	// fall back to a reasonable default.
@@ -2169,7 +2169,7 @@ type InlayHint struct {
 	TextEdits []TextEdit `json:"textEdits"`
 
 	// The tooltip text when you hover over this item.
-	Tooltip *InlayHint_Tooltip__Or `json:"tooltip"`
+	Tooltip *InlayHint_Tooltip_Or `json:"tooltip"`
 
 	// Render padding before the hint.  Note: Padding should use the
 	// editor's background color, not the background color of the hint
@@ -2284,7 +2284,7 @@ func (this *DocumentDiagnosticParams) MarshalJSON() ([]byte, error) {
 
 // A partial result for a document diagnostic report.  @since 3.17.0
 type DocumentDiagnosticReportPartialResult struct {
-	RelatedDocuments map[DocumentUri]DocumentDiagnosticReportPartialResult_RelatedDocuments_Value__Or `json:"relatedDocuments"`
+	RelatedDocuments map[DocumentUri]DocumentDiagnosticReportPartialResult_RelatedDocuments_Value_Or `json:"relatedDocuments"`
 }
 
 func (this *DocumentDiagnosticReportPartialResult) UnmarshalJSON(
@@ -2869,7 +2869,7 @@ func (this *DidChangeConfigurationParams) MarshalJSON() ([]byte, error) {
 }
 
 type DidChangeConfigurationRegistrationOptions struct {
-	Section *DidChangeConfigurationRegistrationOptions_Section__Or `json:"section"`
+	Section *DidChangeConfigurationRegistrationOptions_Section_Or `json:"section"`
 }
 
 // The parameters of a notification message.
@@ -3527,7 +3527,7 @@ type CompletionItem struct {
 	Detail *String `json:"detail"`
 
 	// A human-readable string that represents a doc-comment.
-	Documentation *CompletionItem_Documentation__Or `json:"documentation"`
+	Documentation *CompletionItem_Documentation_Or `json:"documentation"`
 
 	// Indicates if this item is deprecated. @deprecated Use `tags` instead.
 	Deprecated *Boolean `json:"deprecated"`
@@ -3586,7 +3586,7 @@ type CompletionItem struct {
 	// must be a prefix of the edit's replace range, that means it must be
 	// contained and starting at the same position.  @since 3.16.0
 	// additional type `InsertReplaceEdit`
-	TextEdit *CompletionItem_TextEdit__Or `json:"textEdit"`
+	TextEdit *CompletionItem_TextEdit_Or `json:"textEdit"`
 
 	// The edit text used if the completion item is part of a CompletionList
 	// and CompletionList defines an item default for the text edit range.
@@ -3736,7 +3736,7 @@ type HoverParams struct {
 type Hover struct {
 
 	// The hover's content
-	Contents *Hover_Contents__Or `json:"contents"`
+	Contents *Hover_Contents_Or `json:"contents"`
 
 	// An optional range inside the text document that is used to visualize
 	// the hover, e.g. by changing the background color.
@@ -4437,7 +4437,7 @@ type WorkspaceSymbol struct {
 	// location without a range depends on the client capability
 	// `workspace.symbol.resolveSupport`.  See SymbolInformation#location
 	// for more details.
-	Location *WorkspaceSymbol_Location__Or `json:"location"`
+	Location *WorkspaceSymbol_Location_Or `json:"location"`
 
 	// A data entry field that is preserved on a workspace symbol between a
 	// workspace symbol request and a workspace symbol resolve request.
@@ -5338,7 +5338,7 @@ func (this *LogTraceParams) MarshalJSON() ([]byte, error) {
 type CancelParams struct {
 
 	// The request id to cancel.
-	Id *CancelParams_Id__Or `json:"id"`
+	Id *CancelParams_Id_Or `json:"id"`
 }
 
 func (this *CancelParams) UnmarshalJSON(data []byte) error {
@@ -5890,10 +5890,10 @@ type SemanticTokensOptions struct {
 
 	// Server supports providing semantic tokens for a specific range of a
 	// document.
-	Range *SemanticTokensOptions_Range__Or `json:"range"`
+	Range *SemanticTokensOptions_Range_Or `json:"range"`
 
 	// Server supports providing semantic tokens for a full document.
-	Full *SemanticTokensOptions_Full__Or `json:"full"`
+	Full *SemanticTokensOptions_Full_Or `json:"full"`
 }
 
 func (this *SemanticTokensOptions) UnmarshalJSON(data []byte) error {
@@ -6024,7 +6024,7 @@ type TextDocumentEdit struct {
 
 	// The edits to be applied.  @since 3.16.0 - support for
 	// AnnotatedTextEdit. This is guarded using a client capability.
-	Edits []TextDocumentEdit_Edits_Element__Or `json:"edits"`
+	Edits []TextDocumentEdit_Edits_Element_Or `json:"edits"`
 }
 
 func (this *TextDocumentEdit) UnmarshalJSON(data []byte) error {
@@ -6612,7 +6612,7 @@ type InlayHintLabelPart struct {
 	// The tooltip text when you hover over this label part. Depending on
 	// the client capability `inlayHint.resolveSupport` clients might
 	// resolve this property late using the resolve request.
-	Tooltip *InlayHintLabelPart_Tooltip__Or `json:"tooltip"`
+	Tooltip *InlayHintLabelPart_Tooltip_Or `json:"tooltip"`
 
 	// An optional source code location that represents this label part.
 	// The editor will use this location for the hover and for code
@@ -6739,7 +6739,7 @@ type RelatedFullDocumentDiagnosticReport struct {
 	// in a file B which A depends on. An example of such a language is
 	// C/C++ where marco definitions in a file a.cpp and result in errors in
 	// a header file b.hpp.  @since 3.17.0
-	RelatedDocuments map[DocumentUri]RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
+	RelatedDocuments map[DocumentUri]RelatedFullDocumentDiagnosticReport_RelatedDocuments_Value_Or `json:"relatedDocuments"`
 }
 
 // An unchanged diagnostic report with a set of related documents.  @since
@@ -6755,7 +6755,7 @@ type RelatedUnchangedDocumentDiagnosticReport struct {
 	// in a file B which A depends on. An example of such a language is
 	// C/C++ where marco definitions in a file a.cpp and result in errors in
 	// a header file b.hpp.  @since 3.17.0
-	RelatedDocuments map[DocumentUri]RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value__Or `json:"relatedDocuments"`
+	RelatedDocuments map[DocumentUri]RelatedUnchangedDocumentDiagnosticReport_RelatedDocuments_Value_Or `json:"relatedDocuments"`
 }
 
 // A diagnostic report with a full set of problems.  @since 3.17.0
@@ -7346,7 +7346,7 @@ type XInitializeParams struct {
 	InitializationOptions *LSPAny `json:"initializationOptions"`
 
 	// The initial trace setting. If omitted trace is disabled ('off').
-	Trace *XInitializeParams_Trace__Or `json:"trace"`
+	Trace *XInitializeParams_Trace_Or `json:"trace"`
 }
 
 func (this *XInitializeParams) UnmarshalJSON(data []byte) error {
@@ -7414,45 +7414,45 @@ type ServerCapabilities struct {
 	// Defines how text documents are synced. Is either a detailed structure
 	// defining each notification or for backwards compatibility the
 	// TextDocumentSyncKind number.
-	TextDocumentSync *ServerCapabilities_TextDocumentSync__Or `json:"textDocumentSync"`
+	TextDocumentSync *ServerCapabilities_TextDocumentSync_Or `json:"textDocumentSync"`
 
 	// Defines how notebook documents are synced.  @since 3.17.0
-	NotebookDocumentSync *ServerCapabilities_NotebookDocumentSync__Or `json:"notebookDocumentSync"`
+	NotebookDocumentSync *ServerCapabilities_NotebookDocumentSync_Or `json:"notebookDocumentSync"`
 
 	// The server provides completion support.
 	CompletionProvider *CompletionOptions `json:"completionProvider"`
 
 	// The server provides hover support.
-	HoverProvider *ServerCapabilities_HoverProvider__Or `json:"hoverProvider"`
+	HoverProvider *ServerCapabilities_HoverProvider_Or `json:"hoverProvider"`
 
 	// The server provides signature help support.
 	SignatureHelpProvider *SignatureHelpOptions `json:"signatureHelpProvider"`
 
 	// The server provides Goto Declaration support.
-	DeclarationProvider *ServerCapabilities_DeclarationProvider__Or `json:"declarationProvider"`
+	DeclarationProvider *ServerCapabilities_DeclarationProvider_Or `json:"declarationProvider"`
 
 	// The server provides goto definition support.
-	DefinitionProvider *ServerCapabilities_DefinitionProvider__Or `json:"definitionProvider"`
+	DefinitionProvider *ServerCapabilities_DefinitionProvider_Or `json:"definitionProvider"`
 
 	// The server provides Goto Type Definition support.
-	TypeDefinitionProvider *ServerCapabilities_TypeDefinitionProvider__Or `json:"typeDefinitionProvider"`
+	TypeDefinitionProvider *ServerCapabilities_TypeDefinitionProvider_Or `json:"typeDefinitionProvider"`
 
 	// The server provides Goto Implementation support.
-	ImplementationProvider *ServerCapabilities_ImplementationProvider__Or `json:"implementationProvider"`
+	ImplementationProvider *ServerCapabilities_ImplementationProvider_Or `json:"implementationProvider"`
 
 	// The server provides find references support.
-	ReferencesProvider *ServerCapabilities_ReferencesProvider__Or `json:"referencesProvider"`
+	ReferencesProvider *ServerCapabilities_ReferencesProvider_Or `json:"referencesProvider"`
 
 	// The server provides document highlight support.
-	DocumentHighlightProvider *ServerCapabilities_DocumentHighlightProvider__Or `json:"documentHighlightProvider"`
+	DocumentHighlightProvider *ServerCapabilities_DocumentHighlightProvider_Or `json:"documentHighlightProvider"`
 
 	// The server provides document symbol support.
-	DocumentSymbolProvider *ServerCapabilities_DocumentSymbolProvider__Or `json:"documentSymbolProvider"`
+	DocumentSymbolProvider *ServerCapabilities_DocumentSymbolProvider_Or `json:"documentSymbolProvider"`
 
 	// The server provides code actions. CodeActionOptions may only be
 	// specified if the client states that it supports
 	// `codeActionLiteralSupport` in its initial `initialize` request.
-	CodeActionProvider *ServerCapabilities_CodeActionProvider__Or `json:"codeActionProvider"`
+	CodeActionProvider *ServerCapabilities_CodeActionProvider_Or `json:"codeActionProvider"`
 
 	// The server provides code lens.
 	CodeLensProvider *CodeLensOptions `json:"codeLensProvider"`
@@ -7461,16 +7461,16 @@ type ServerCapabilities struct {
 	DocumentLinkProvider *DocumentLinkOptions `json:"documentLinkProvider"`
 
 	// The server provides color provider support.
-	ColorProvider *ServerCapabilities_ColorProvider__Or `json:"colorProvider"`
+	ColorProvider *ServerCapabilities_ColorProvider_Or `json:"colorProvider"`
 
 	// The server provides workspace symbol support.
-	WorkspaceSymbolProvider *ServerCapabilities_WorkspaceSymbolProvider__Or `json:"workspaceSymbolProvider"`
+	WorkspaceSymbolProvider *ServerCapabilities_WorkspaceSymbolProvider_Or `json:"workspaceSymbolProvider"`
 
 	// The server provides document formatting.
-	DocumentFormattingProvider *ServerCapabilities_DocumentFormattingProvider__Or `json:"documentFormattingProvider"`
+	DocumentFormattingProvider *ServerCapabilities_DocumentFormattingProvider_Or `json:"documentFormattingProvider"`
 
 	// The server provides document range formatting.
-	DocumentRangeFormattingProvider *ServerCapabilities_DocumentRangeFormattingProvider__Or `json:"documentRangeFormattingProvider"`
+	DocumentRangeFormattingProvider *ServerCapabilities_DocumentRangeFormattingProvider_Or `json:"documentRangeFormattingProvider"`
 
 	// The server provides document formatting on typing.
 	DocumentOnTypeFormattingProvider *DocumentOnTypeFormattingOptions `json:"documentOnTypeFormattingProvider"`
@@ -7478,40 +7478,40 @@ type ServerCapabilities struct {
 	// The server provides rename support. RenameOptions may only be
 	// specified if the client states that it supports `prepareSupport` in
 	// its initial `initialize` request.
-	RenameProvider *ServerCapabilities_RenameProvider__Or `json:"renameProvider"`
+	RenameProvider *ServerCapabilities_RenameProvider_Or `json:"renameProvider"`
 
 	// The server provides folding provider support.
-	FoldingRangeProvider *ServerCapabilities_FoldingRangeProvider__Or `json:"foldingRangeProvider"`
+	FoldingRangeProvider *ServerCapabilities_FoldingRangeProvider_Or `json:"foldingRangeProvider"`
 
 	// The server provides selection range support.
-	SelectionRangeProvider *ServerCapabilities_SelectionRangeProvider__Or `json:"selectionRangeProvider"`
+	SelectionRangeProvider *ServerCapabilities_SelectionRangeProvider_Or `json:"selectionRangeProvider"`
 
 	// The server provides execute command support.
 	ExecuteCommandProvider *ExecuteCommandOptions `json:"executeCommandProvider"`
 
 	// The server provides call hierarchy support.  @since 3.16.0
-	CallHierarchyProvider *ServerCapabilities_CallHierarchyProvider__Or `json:"callHierarchyProvider"`
+	CallHierarchyProvider *ServerCapabilities_CallHierarchyProvider_Or `json:"callHierarchyProvider"`
 
 	// The server provides linked editing range support.  @since 3.16.0
-	LinkedEditingRangeProvider *ServerCapabilities_LinkedEditingRangeProvider__Or `json:"linkedEditingRangeProvider"`
+	LinkedEditingRangeProvider *ServerCapabilities_LinkedEditingRangeProvider_Or `json:"linkedEditingRangeProvider"`
 
 	// The server provides semantic tokens support.  @since 3.16.0
-	SemanticTokensProvider *ServerCapabilities_SemanticTokensProvider__Or `json:"semanticTokensProvider"`
+	SemanticTokensProvider *ServerCapabilities_SemanticTokensProvider_Or `json:"semanticTokensProvider"`
 
 	// The server provides moniker support.  @since 3.16.0
-	MonikerProvider *ServerCapabilities_MonikerProvider__Or `json:"monikerProvider"`
+	MonikerProvider *ServerCapabilities_MonikerProvider_Or `json:"monikerProvider"`
 
 	// The server provides type hierarchy support.  @since 3.17.0
-	TypeHierarchyProvider *ServerCapabilities_TypeHierarchyProvider__Or `json:"typeHierarchyProvider"`
+	TypeHierarchyProvider *ServerCapabilities_TypeHierarchyProvider_Or `json:"typeHierarchyProvider"`
 
 	// The server provides inline values.  @since 3.17.0
-	InlineValueProvider *ServerCapabilities_InlineValueProvider__Or `json:"inlineValueProvider"`
+	InlineValueProvider *ServerCapabilities_InlineValueProvider_Or `json:"inlineValueProvider"`
 
 	// The server provides inlay hints.  @since 3.17.0
-	InlayHintProvider *ServerCapabilities_InlayHintProvider__Or `json:"inlayHintProvider"`
+	InlayHintProvider *ServerCapabilities_InlayHintProvider_Or `json:"inlayHintProvider"`
 
 	// The server has support for pull model diagnostics.  @since 3.17.0
-	DiagnosticProvider *ServerCapabilities_DiagnosticProvider__Or `json:"diagnosticProvider"`
+	DiagnosticProvider *ServerCapabilities_DiagnosticProvider_Or `json:"diagnosticProvider"`
 
 	// Workspace specific server capabilities.
 	Workspace *ServerCapabilities_Workspace `json:"workspace"`
@@ -7664,7 +7664,7 @@ type Diagnostic struct {
 	Severity *DiagnosticSeverity `json:"severity"`
 
 	// The diagnostic's code, which usually appear in the user interface.
-	Code *Diagnostic_Code__Or `json:"code"`
+	Code *Diagnostic_Code_Or `json:"code"`
 
 	// An optional property to describe the error code. Requires the code
 	// field (above) to be present/not null.  @since 3.16.0
@@ -7950,7 +7950,7 @@ type SignatureInformation struct {
 
 	// The human-readable doc-comment of this signature. Will be shown in
 	// the UI but can be omitted.
-	Documentation *SignatureInformation_Documentation__Or `json:"documentation"`
+	Documentation *SignatureInformation_Documentation_Or `json:"documentation"`
 
 	// The parameters of this signature.
 	Parameters []ParameterInformation `json:"parameters"`
@@ -8919,7 +8919,7 @@ type TextDocumentSyncOptions struct {
 
 	// If present save notifications are sent to the server. If omitted the
 	// notification should not be sent.
-	Save *TextDocumentSyncOptions_Save__Or `json:"save"`
+	Save *TextDocumentSyncOptions_Save_Or `json:"save"`
 }
 
 // Options specific to a notebook plus its cells to be synced to the server.  If
@@ -8930,7 +8930,7 @@ type TextDocumentSyncOptions struct {
 type NotebookDocumentSyncOptions struct {
 
 	// The notebooks to be synced
-	NotebookSelector []NotebookDocumentSyncOptions_NotebookSelector_Element__Or `json:"notebookSelector"`
+	NotebookSelector []NotebookDocumentSyncOptions_NotebookSelector_Element_Or `json:"notebookSelector"`
 
 	// Whether save notification should be forwarded to the server. Will
 	// only be honored if mode === `notebook`.
@@ -8988,7 +8988,7 @@ type WorkspaceFoldersServerCapabilities struct {
 	// ID under which the notification is registered on the client side. The
 	// ID can be used to unregister for these events using the
 	// `client/unregisterCapability` request.
-	ChangeNotifications *WorkspaceFoldersServerCapabilities_ChangeNotifications__Or `json:"changeNotifications"`
+	ChangeNotifications *WorkspaceFoldersServerCapabilities_ChangeNotifications_Or `json:"changeNotifications"`
 }
 
 // Options for notifications/requests for user operations on files.  @since
@@ -9111,11 +9111,11 @@ type ParameterInformation struct {
 	// does.  *Note*: a label of type string should be a substring of its
 	// containing signature label. Its intended use case is to highlight the
 	// parameter label part in the `SignatureInformation.label`.
-	Label *ParameterInformation_Label__Or `json:"label"`
+	Label *ParameterInformation_Label_Or `json:"label"`
 
 	// The human-readable doc-comment of this parameter. Will be shown in
 	// the UI but can be omitted.
-	Documentation *ParameterInformation_Documentation__Or `json:"documentation"`
+	Documentation *ParameterInformation_Documentation_Or `json:"documentation"`
 }
 
 func (this *ParameterInformation) UnmarshalJSON(data []byte) error {
@@ -9152,7 +9152,7 @@ type NotebookCellTextDocumentFilter struct {
 	// A filter that matches against the notebook containing the notebook
 	// cell. If a string value is provided it matches against the notebook
 	// type. '*' matches every notebook.
-	Notebook *NotebookCellTextDocumentFilter_Notebook__Or `json:"notebook"`
+	Notebook *NotebookCellTextDocumentFilter_Notebook_Or `json:"notebook"`
 
 	// A language id like `python`.  Will be matched against the language id
 	// of the notebook cell document. '*' matches every language.
@@ -9490,7 +9490,7 @@ type RelativePattern struct {
 
 	// A workspace folder or a base URI to which this pattern will be
 	// matched against relatively.
-	BaseUri *RelativePattern_BaseUri__Or `json:"baseUri"`
+	BaseUri *RelativePattern_BaseUri_Or `json:"baseUri"`
 
 	// The actual glob pattern;
 	Pattern *Pattern `json:"pattern"`

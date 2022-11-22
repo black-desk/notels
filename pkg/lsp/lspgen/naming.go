@@ -58,12 +58,12 @@ func typeName(prefix string, current string, t *Type) string {
 				return name
 			}
 		} else if len(prefix) != 0 {
-			RegisterOr(prefix+"_"+current+"__Or", t)
-			return prefix + "_" + current + "__Or"
+			RegisterOr(prefix+"_"+current+"_Or", t)
+			return prefix + "_" + current + "_Or"
 
 		} else {
-			RegisterOr(current+"__Or", t)
-			return current + "__Or"
+			RegisterOr(current+"_Or", t)
+			return current + "_Or"
 		}
 	} else if t.Kind == "map" {
 		if len(prefix) != 0 {

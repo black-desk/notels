@@ -376,7 +376,7 @@ type CompletionList_ItemDefaults struct {
 	CommitCharacters []String `json:"commitCharacters"`
 
 	// A default edit range.  @since 3.17.0
-	EditRange *CompletionList_ItemDefaults_EditRange__Or `json:"editRange"`
+	EditRange *CompletionList_ItemDefaults_EditRange_Or `json:"editRange"`
 
 	// A default insert text format.  @since 3.17.0
 	InsertTextFormat *InsertTextFormat `json:"insertTextFormat"`
@@ -388,17 +388,17 @@ type CompletionList_ItemDefaults struct {
 	Data *LSPAny `json:"data"`
 }
 
-type CompletionList_ItemDefaults_EditRange__Or_1 struct {
+type CompletionList_ItemDefaults_EditRange_Or_1 struct {
 	Insert *Range `json:"insert"`
 
 	Replace *Range `json:"replace"`
 }
 
-func (this *CompletionList_ItemDefaults_EditRange__Or_1) UnmarshalJSON(
+func (this *CompletionList_ItemDefaults_EditRange_Or_1) UnmarshalJSON(
 	data []byte,
 ) error {
-	type CompletionList_ItemDefaults_EditRange__Or_1Unmarshal CompletionList_ItemDefaults_EditRange__Or_1
-	var tmpUnmarshal CompletionList_ItemDefaults_EditRange__Or_1Unmarshal
+	type CompletionList_ItemDefaults_EditRange_Or_1Unmarshal CompletionList_ItemDefaults_EditRange_Or_1
+	var tmpUnmarshal CompletionList_ItemDefaults_EditRange_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -406,36 +406,36 @@ func (this *CompletionList_ItemDefaults_EditRange__Or_1) UnmarshalJSON(
 
 	if tmpUnmarshal.Insert == nil {
 		return StructureLiteralValidateFailed(
-			"CompletionList_ItemDefaults_EditRange__Or_1",
+			"CompletionList_ItemDefaults_EditRange_Or_1",
 		)
 	}
 
 	if tmpUnmarshal.Replace == nil {
 		return StructureLiteralValidateFailed(
-			"CompletionList_ItemDefaults_EditRange__Or_1",
+			"CompletionList_ItemDefaults_EditRange_Or_1",
 		)
 	}
 
-	*this = CompletionList_ItemDefaults_EditRange__Or_1(tmpUnmarshal)
+	*this = CompletionList_ItemDefaults_EditRange_Or_1(tmpUnmarshal)
 	return nil
 }
 
-func (this *CompletionList_ItemDefaults_EditRange__Or_1) MarshalJSON() ([]byte, error) {
+func (this *CompletionList_ItemDefaults_EditRange_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Insert == nil {
 		return nil, StructureLiteralValidateFailed(
-			"CompletionList_ItemDefaults_EditRange__Or_1",
+			"CompletionList_ItemDefaults_EditRange_Or_1",
 		)
 	}
 
 	if this.Replace == nil {
 		return nil, StructureLiteralValidateFailed(
-			"CompletionList_ItemDefaults_EditRange__Or_1",
+			"CompletionList_ItemDefaults_EditRange_Or_1",
 		)
 	}
 
-	type CompletionList_ItemDefaults_EditRange__Or_1Marshal CompletionList_ItemDefaults_EditRange__Or_1
-	tmpMarshal := CompletionList_ItemDefaults_EditRange__Or_1Marshal(*this)
+	type CompletionList_ItemDefaults_EditRange_Or_1Marshal CompletionList_ItemDefaults_EditRange_Or_1
+	tmpMarshal := CompletionList_ItemDefaults_EditRange_Or_1Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
@@ -649,44 +649,44 @@ func (this *InlayHintClientCapabilities_ResolveSupport) MarshalJSON() ([]byte, e
 	return json.Marshal(&tmpMarshal)
 }
 
-type MarkedString__Or_1 struct {
+type MarkedString_Or_1 struct {
 	Language *String `json:"language"`
 
 	Value *String `json:"value"`
 }
 
-func (this *MarkedString__Or_1) UnmarshalJSON(data []byte) error {
-	type MarkedString__Or_1Unmarshal MarkedString__Or_1
-	var tmpUnmarshal MarkedString__Or_1Unmarshal
+func (this *MarkedString_Or_1) UnmarshalJSON(data []byte) error {
+	type MarkedString_Or_1Unmarshal MarkedString_Or_1
+	var tmpUnmarshal MarkedString_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
 	}
 
 	if tmpUnmarshal.Language == nil {
-		return StructureLiteralValidateFailed("MarkedString__Or_1")
+		return StructureLiteralValidateFailed("MarkedString_Or_1")
 	}
 
 	if tmpUnmarshal.Value == nil {
-		return StructureLiteralValidateFailed("MarkedString__Or_1")
+		return StructureLiteralValidateFailed("MarkedString_Or_1")
 	}
 
-	*this = MarkedString__Or_1(tmpUnmarshal)
+	*this = MarkedString_Or_1(tmpUnmarshal)
 	return nil
 }
 
-func (this *MarkedString__Or_1) MarshalJSON() ([]byte, error) {
+func (this *MarkedString_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Language == nil {
-		return nil, StructureLiteralValidateFailed("MarkedString__Or_1")
+		return nil, StructureLiteralValidateFailed("MarkedString_Or_1")
 	}
 
 	if this.Value == nil {
-		return nil, StructureLiteralValidateFailed("MarkedString__Or_1")
+		return nil, StructureLiteralValidateFailed("MarkedString_Or_1")
 	}
 
-	type MarkedString__Or_1Marshal MarkedString__Or_1
-	tmpMarshal := MarkedString__Or_1Marshal(*this)
+	type MarkedString_Or_1Marshal MarkedString_Or_1
+	tmpMarshal := MarkedString_Or_1Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
@@ -803,7 +803,7 @@ func (this *NotebookDocumentChangeEvent_Cells_TextContent_Element) MarshalJSON()
 	return json.Marshal(&tmpMarshal)
 }
 
-type NotebookDocumentFilter__Or_0 struct {
+type NotebookDocumentFilter_Or_0 struct {
 
 	// The type of the enclosing notebook.
 	NotebookType *String `json:"notebookType"`
@@ -815,9 +815,9 @@ type NotebookDocumentFilter__Or_0 struct {
 	Pattern *String `json:"pattern"`
 }
 
-func (this *NotebookDocumentFilter__Or_0) UnmarshalJSON(data []byte) error {
-	type NotebookDocumentFilter__Or_0Unmarshal NotebookDocumentFilter__Or_0
-	var tmpUnmarshal NotebookDocumentFilter__Or_0Unmarshal
+func (this *NotebookDocumentFilter_Or_0) UnmarshalJSON(data []byte) error {
+	type NotebookDocumentFilter_Or_0Unmarshal NotebookDocumentFilter_Or_0
+	var tmpUnmarshal NotebookDocumentFilter_Or_0Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -825,28 +825,28 @@ func (this *NotebookDocumentFilter__Or_0) UnmarshalJSON(data []byte) error {
 
 	if tmpUnmarshal.NotebookType == nil {
 		return StructureLiteralValidateFailed(
-			"NotebookDocumentFilter__Or_0",
+			"NotebookDocumentFilter_Or_0",
 		)
 	}
 
-	*this = NotebookDocumentFilter__Or_0(tmpUnmarshal)
+	*this = NotebookDocumentFilter_Or_0(tmpUnmarshal)
 	return nil
 }
 
-func (this *NotebookDocumentFilter__Or_0) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentFilter_Or_0) MarshalJSON() ([]byte, error) {
 
 	if this.NotebookType == nil {
 		return nil, StructureLiteralValidateFailed(
-			"NotebookDocumentFilter__Or_0",
+			"NotebookDocumentFilter_Or_0",
 		)
 	}
 
-	type NotebookDocumentFilter__Or_0Marshal NotebookDocumentFilter__Or_0
-	tmpMarshal := NotebookDocumentFilter__Or_0Marshal(*this)
+	type NotebookDocumentFilter_Or_0Marshal NotebookDocumentFilter_Or_0
+	tmpMarshal := NotebookDocumentFilter_Or_0Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type NotebookDocumentFilter__Or_1 struct {
+type NotebookDocumentFilter_Or_1 struct {
 
 	// The type of the enclosing notebook.
 	NotebookType *String `json:"notebookType"`
@@ -858,9 +858,9 @@ type NotebookDocumentFilter__Or_1 struct {
 	Pattern *String `json:"pattern"`
 }
 
-func (this *NotebookDocumentFilter__Or_1) UnmarshalJSON(data []byte) error {
-	type NotebookDocumentFilter__Or_1Unmarshal NotebookDocumentFilter__Or_1
-	var tmpUnmarshal NotebookDocumentFilter__Or_1Unmarshal
+func (this *NotebookDocumentFilter_Or_1) UnmarshalJSON(data []byte) error {
+	type NotebookDocumentFilter_Or_1Unmarshal NotebookDocumentFilter_Or_1
+	var tmpUnmarshal NotebookDocumentFilter_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -868,28 +868,28 @@ func (this *NotebookDocumentFilter__Or_1) UnmarshalJSON(data []byte) error {
 
 	if tmpUnmarshal.Scheme == nil {
 		return StructureLiteralValidateFailed(
-			"NotebookDocumentFilter__Or_1",
+			"NotebookDocumentFilter_Or_1",
 		)
 	}
 
-	*this = NotebookDocumentFilter__Or_1(tmpUnmarshal)
+	*this = NotebookDocumentFilter_Or_1(tmpUnmarshal)
 	return nil
 }
 
-func (this *NotebookDocumentFilter__Or_1) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentFilter_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Scheme == nil {
 		return nil, StructureLiteralValidateFailed(
-			"NotebookDocumentFilter__Or_1",
+			"NotebookDocumentFilter_Or_1",
 		)
 	}
 
-	type NotebookDocumentFilter__Or_1Marshal NotebookDocumentFilter__Or_1
-	tmpMarshal := NotebookDocumentFilter__Or_1Marshal(*this)
+	type NotebookDocumentFilter_Or_1Marshal NotebookDocumentFilter_Or_1
+	tmpMarshal := NotebookDocumentFilter_Or_1Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type NotebookDocumentFilter__Or_2 struct {
+type NotebookDocumentFilter_Or_2 struct {
 
 	// The type of the enclosing notebook.
 	NotebookType *String `json:"notebookType"`
@@ -901,9 +901,9 @@ type NotebookDocumentFilter__Or_2 struct {
 	Pattern *String `json:"pattern"`
 }
 
-func (this *NotebookDocumentFilter__Or_2) UnmarshalJSON(data []byte) error {
-	type NotebookDocumentFilter__Or_2Unmarshal NotebookDocumentFilter__Or_2
-	var tmpUnmarshal NotebookDocumentFilter__Or_2Unmarshal
+func (this *NotebookDocumentFilter_Or_2) UnmarshalJSON(data []byte) error {
+	type NotebookDocumentFilter_Or_2Unmarshal NotebookDocumentFilter_Or_2
+	var tmpUnmarshal NotebookDocumentFilter_Or_2Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -911,42 +911,42 @@ func (this *NotebookDocumentFilter__Or_2) UnmarshalJSON(data []byte) error {
 
 	if tmpUnmarshal.Pattern == nil {
 		return StructureLiteralValidateFailed(
-			"NotebookDocumentFilter__Or_2",
+			"NotebookDocumentFilter_Or_2",
 		)
 	}
 
-	*this = NotebookDocumentFilter__Or_2(tmpUnmarshal)
+	*this = NotebookDocumentFilter_Or_2(tmpUnmarshal)
 	return nil
 }
 
-func (this *NotebookDocumentFilter__Or_2) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentFilter_Or_2) MarshalJSON() ([]byte, error) {
 
 	if this.Pattern == nil {
 		return nil, StructureLiteralValidateFailed(
-			"NotebookDocumentFilter__Or_2",
+			"NotebookDocumentFilter_Or_2",
 		)
 	}
 
-	type NotebookDocumentFilter__Or_2Marshal NotebookDocumentFilter__Or_2
-	tmpMarshal := NotebookDocumentFilter__Or_2Marshal(*this)
+	type NotebookDocumentFilter_Or_2Marshal NotebookDocumentFilter_Or_2
+	tmpMarshal := NotebookDocumentFilter_Or_2Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0 struct {
+type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0 struct {
 
 	// The notebook to be synced If a string value is provided it matches
 	// against the notebook type. '*' matches every notebook.
-	Notebook *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Notebook__Or `json:"notebook"`
+	Notebook *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Notebook_Or `json:"notebook"`
 
 	// The cells of the matching notebook to be synced.
-	Cells []NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element `json:"cells"`
+	Cells []NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element `json:"cells"`
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0) UnmarshalJSON(
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0) UnmarshalJSON(
 	data []byte,
 ) error {
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0Unmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0
-	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0Unmarshal
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0Unmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0
+	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -954,40 +954,40 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0) Unmarsha
 
 	if tmpUnmarshal.Notebook == nil {
 		return StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0",
 		)
 	}
 
-	*this = NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0(
+	*this = NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0(
 		tmpUnmarshal,
 	)
 	return nil
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0) MarshalJSON() ([]byte, error) {
 
 	if this.Notebook == nil {
 		return nil, StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0",
 		)
 	}
 
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0Marshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0
-	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0Marshal(
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0Marshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0
+	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0Marshal(
 		*this,
 	)
 	return json.Marshal(&tmpMarshal)
 }
 
-type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element struct {
+type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element struct {
 	Language *String `json:"language"`
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element) UnmarshalJSON(
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element) UnmarshalJSON(
 	data []byte,
 ) error {
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_ElementUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element
-	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_ElementUnmarshal
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_ElementUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element
+	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_ElementUnmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -995,46 +995,46 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Ele
 
 	if tmpUnmarshal.Language == nil {
 		return StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element",
 		)
 	}
 
-	*this = NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element(
+	*this = NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element(
 		tmpUnmarshal,
 	)
 	return nil
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element) MarshalJSON() ([]byte, error) {
 
 	if this.Language == nil {
 		return nil, StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element",
 		)
 	}
 
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_ElementMarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_Element
-	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element__Or_0_Cells_ElementMarshal(
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_ElementMarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_Element
+	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element_Or_0_Cells_ElementMarshal(
 		*this,
 	)
 	return json.Marshal(&tmpMarshal)
 }
 
-type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1 struct {
+type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1 struct {
 
 	// The notebook to be synced If a string value is provided it matches
 	// against the notebook type. '*' matches every notebook.
-	Notebook *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Notebook__Or `json:"notebook"`
+	Notebook *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or `json:"notebook"`
 
 	// The cells of the matching notebook to be synced.
-	Cells []NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element `json:"cells"`
+	Cells []NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element `json:"cells"`
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1) UnmarshalJSON(
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1) UnmarshalJSON(
 	data []byte,
 ) error {
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1Unmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1
-	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1Unmarshal
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1Unmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1
+	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -1042,40 +1042,40 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1) Unmarsha
 
 	if tmpUnmarshal.Cells == nil {
 		return StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1",
 		)
 	}
 
-	*this = NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1(
+	*this = NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1(
 		tmpUnmarshal,
 	)
 	return nil
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Cells == nil {
 		return nil, StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1",
 		)
 	}
 
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1Marshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1
-	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1Marshal(
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1Marshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1
+	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1Marshal(
 		*this,
 	)
 	return json.Marshal(&tmpMarshal)
 }
 
-type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element struct {
+type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element struct {
 	Language *String `json:"language"`
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element) UnmarshalJSON(
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element) UnmarshalJSON(
 	data []byte,
 ) error {
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_ElementUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element
-	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_ElementUnmarshal
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_ElementUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element
+	var tmpUnmarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_ElementUnmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -1083,40 +1083,40 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Ele
 
 	if tmpUnmarshal.Language == nil {
 		return StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element",
 		)
 	}
 
-	*this = NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element(
+	*this = NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element(
 		tmpUnmarshal,
 	)
 	return nil
 }
 
-func (this *NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element) MarshalJSON() ([]byte, error) {
+func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element) MarshalJSON() ([]byte, error) {
 
 	if this.Language == nil {
 		return nil, StructureLiteralValidateFailed(
-			"NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element",
+			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element",
 		)
 	}
 
-	type NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_ElementMarshal NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_Element
-	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element__Or_1_Cells_ElementMarshal(
+	type NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_ElementMarshal NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_Element
+	tmpMarshal := NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Cells_ElementMarshal(
 		*this,
 	)
 	return json.Marshal(&tmpMarshal)
 }
 
-type PrepareRenameResult__Or_1 struct {
+type PrepareRenameResult_Or_1 struct {
 	Range *Range `json:"range"`
 
 	Placeholder *String `json:"placeholder"`
 }
 
-func (this *PrepareRenameResult__Or_1) UnmarshalJSON(data []byte) error {
-	type PrepareRenameResult__Or_1Unmarshal PrepareRenameResult__Or_1
-	var tmpUnmarshal PrepareRenameResult__Or_1Unmarshal
+func (this *PrepareRenameResult_Or_1) UnmarshalJSON(data []byte) error {
+	type PrepareRenameResult_Or_1Unmarshal PrepareRenameResult_Or_1
+	var tmpUnmarshal PrepareRenameResult_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -1124,46 +1124,46 @@ func (this *PrepareRenameResult__Or_1) UnmarshalJSON(data []byte) error {
 
 	if tmpUnmarshal.Range == nil {
 		return StructureLiteralValidateFailed(
-			"PrepareRenameResult__Or_1",
+			"PrepareRenameResult_Or_1",
 		)
 	}
 
 	if tmpUnmarshal.Placeholder == nil {
 		return StructureLiteralValidateFailed(
-			"PrepareRenameResult__Or_1",
+			"PrepareRenameResult_Or_1",
 		)
 	}
 
-	*this = PrepareRenameResult__Or_1(tmpUnmarshal)
+	*this = PrepareRenameResult_Or_1(tmpUnmarshal)
 	return nil
 }
 
-func (this *PrepareRenameResult__Or_1) MarshalJSON() ([]byte, error) {
+func (this *PrepareRenameResult_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Range == nil {
 		return nil, StructureLiteralValidateFailed(
-			"PrepareRenameResult__Or_1",
+			"PrepareRenameResult_Or_1",
 		)
 	}
 
 	if this.Placeholder == nil {
 		return nil, StructureLiteralValidateFailed(
-			"PrepareRenameResult__Or_1",
+			"PrepareRenameResult_Or_1",
 		)
 	}
 
-	type PrepareRenameResult__Or_1Marshal PrepareRenameResult__Or_1
-	tmpMarshal := PrepareRenameResult__Or_1Marshal(*this)
+	type PrepareRenameResult_Or_1Marshal PrepareRenameResult_Or_1
+	tmpMarshal := PrepareRenameResult_Or_1Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type PrepareRenameResult__Or_2 struct {
+type PrepareRenameResult_Or_2 struct {
 	DefaultBehavior *Boolean `json:"defaultBehavior"`
 }
 
-func (this *PrepareRenameResult__Or_2) UnmarshalJSON(data []byte) error {
-	type PrepareRenameResult__Or_2Unmarshal PrepareRenameResult__Or_2
-	var tmpUnmarshal PrepareRenameResult__Or_2Unmarshal
+func (this *PrepareRenameResult_Or_2) UnmarshalJSON(data []byte) error {
+	type PrepareRenameResult_Or_2Unmarshal PrepareRenameResult_Or_2
+	var tmpUnmarshal PrepareRenameResult_Or_2Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -1171,24 +1171,24 @@ func (this *PrepareRenameResult__Or_2) UnmarshalJSON(data []byte) error {
 
 	if tmpUnmarshal.DefaultBehavior == nil {
 		return StructureLiteralValidateFailed(
-			"PrepareRenameResult__Or_2",
+			"PrepareRenameResult_Or_2",
 		)
 	}
 
-	*this = PrepareRenameResult__Or_2(tmpUnmarshal)
+	*this = PrepareRenameResult_Or_2(tmpUnmarshal)
 	return nil
 }
 
-func (this *PrepareRenameResult__Or_2) MarshalJSON() ([]byte, error) {
+func (this *PrepareRenameResult_Or_2) MarshalJSON() ([]byte, error) {
 
 	if this.DefaultBehavior == nil {
 		return nil, StructureLiteralValidateFailed(
-			"PrepareRenameResult__Or_2",
+			"PrepareRenameResult_Or_2",
 		)
 	}
 
-	type PrepareRenameResult__Or_2Marshal PrepareRenameResult__Or_2
-	tmpMarshal := PrepareRenameResult__Or_2Marshal(*this)
+	type PrepareRenameResult_Or_2Marshal PrepareRenameResult_Or_2
+	tmpMarshal := PrepareRenameResult_Or_2Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
@@ -1237,30 +1237,30 @@ type SemanticTokensClientCapabilities_Requests struct {
 
 	// The client will send the `textDocument/semanticTokens/range` request
 	// if the server provides a corresponding handler.
-	Range *SemanticTokensClientCapabilities_Requests_Range__Or `json:"range"`
+	Range *SemanticTokensClientCapabilities_Requests_Range_Or `json:"range"`
 
 	// The client will send the `textDocument/semanticTokens/full` request
 	// if the server provides a corresponding handler.
-	Full *SemanticTokensClientCapabilities_Requests_Full__Or `json:"full"`
+	Full *SemanticTokensClientCapabilities_Requests_Full_Or `json:"full"`
 }
 
-type SemanticTokensClientCapabilities_Requests_Full__Or_1 struct {
+type SemanticTokensClientCapabilities_Requests_Full_Or_1 struct {
 
 	// The client will send the `textDocument/semanticTokens/full/delta`
 	// request if the server provides a corresponding handler.
 	Delta *Boolean `json:"delta"`
 }
 
-type SemanticTokensClientCapabilities_Requests_Range__Or_1 struct {
+type SemanticTokensClientCapabilities_Requests_Range_Or_1 struct {
 }
 
-type SemanticTokensOptions_Full__Or_1 struct {
+type SemanticTokensOptions_Full_Or_1 struct {
 
 	// The server supports deltas for full documents.
 	Delta *Boolean `json:"delta"`
 }
 
-type SemanticTokensOptions_Range__Or_1 struct {
+type SemanticTokensOptions_Range_Or_1 struct {
 }
 
 type ServerCapabilities_Workspace struct {
@@ -1301,7 +1301,7 @@ type SignatureHelpClientCapabilities_SignatureInformation_ParameterInformation s
 	LabelOffsetSupport *Boolean `json:"labelOffsetSupport"`
 }
 
-type TextDocumentContentChangeEvent__Or_0 struct {
+type TextDocumentContentChangeEvent_Or_0 struct {
 
 	// The range of the document that changed.
 	Range *Range `json:"range"`
@@ -1314,11 +1314,11 @@ type TextDocumentContentChangeEvent__Or_0 struct {
 	Text *String `json:"text"`
 }
 
-func (this *TextDocumentContentChangeEvent__Or_0) UnmarshalJSON(
+func (this *TextDocumentContentChangeEvent_Or_0) UnmarshalJSON(
 	data []byte,
 ) error {
-	type TextDocumentContentChangeEvent__Or_0Unmarshal TextDocumentContentChangeEvent__Or_0
-	var tmpUnmarshal TextDocumentContentChangeEvent__Or_0Unmarshal
+	type TextDocumentContentChangeEvent_Or_0Unmarshal TextDocumentContentChangeEvent_Or_0
+	var tmpUnmarshal TextDocumentContentChangeEvent_Or_0Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -1326,50 +1326,50 @@ func (this *TextDocumentContentChangeEvent__Or_0) UnmarshalJSON(
 
 	if tmpUnmarshal.Range == nil {
 		return StructureLiteralValidateFailed(
-			"TextDocumentContentChangeEvent__Or_0",
+			"TextDocumentContentChangeEvent_Or_0",
 		)
 	}
 
 	if tmpUnmarshal.Text == nil {
 		return StructureLiteralValidateFailed(
-			"TextDocumentContentChangeEvent__Or_0",
+			"TextDocumentContentChangeEvent_Or_0",
 		)
 	}
 
-	*this = TextDocumentContentChangeEvent__Or_0(tmpUnmarshal)
+	*this = TextDocumentContentChangeEvent_Or_0(tmpUnmarshal)
 	return nil
 }
 
-func (this *TextDocumentContentChangeEvent__Or_0) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentContentChangeEvent_Or_0) MarshalJSON() ([]byte, error) {
 
 	if this.Range == nil {
 		return nil, StructureLiteralValidateFailed(
-			"TextDocumentContentChangeEvent__Or_0",
+			"TextDocumentContentChangeEvent_Or_0",
 		)
 	}
 
 	if this.Text == nil {
 		return nil, StructureLiteralValidateFailed(
-			"TextDocumentContentChangeEvent__Or_0",
+			"TextDocumentContentChangeEvent_Or_0",
 		)
 	}
 
-	type TextDocumentContentChangeEvent__Or_0Marshal TextDocumentContentChangeEvent__Or_0
-	tmpMarshal := TextDocumentContentChangeEvent__Or_0Marshal(*this)
+	type TextDocumentContentChangeEvent_Or_0Marshal TextDocumentContentChangeEvent_Or_0
+	tmpMarshal := TextDocumentContentChangeEvent_Or_0Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type TextDocumentContentChangeEvent__Or_1 struct {
+type TextDocumentContentChangeEvent_Or_1 struct {
 
 	// The new text of the whole document.
 	Text *String `json:"text"`
 }
 
-func (this *TextDocumentContentChangeEvent__Or_1) UnmarshalJSON(
+func (this *TextDocumentContentChangeEvent_Or_1) UnmarshalJSON(
 	data []byte,
 ) error {
-	type TextDocumentContentChangeEvent__Or_1Unmarshal TextDocumentContentChangeEvent__Or_1
-	var tmpUnmarshal TextDocumentContentChangeEvent__Or_1Unmarshal
+	type TextDocumentContentChangeEvent_Or_1Unmarshal TextDocumentContentChangeEvent_Or_1
+	var tmpUnmarshal TextDocumentContentChangeEvent_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -1377,28 +1377,28 @@ func (this *TextDocumentContentChangeEvent__Or_1) UnmarshalJSON(
 
 	if tmpUnmarshal.Text == nil {
 		return StructureLiteralValidateFailed(
-			"TextDocumentContentChangeEvent__Or_1",
+			"TextDocumentContentChangeEvent_Or_1",
 		)
 	}
 
-	*this = TextDocumentContentChangeEvent__Or_1(tmpUnmarshal)
+	*this = TextDocumentContentChangeEvent_Or_1(tmpUnmarshal)
 	return nil
 }
 
-func (this *TextDocumentContentChangeEvent__Or_1) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentContentChangeEvent_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Text == nil {
 		return nil, StructureLiteralValidateFailed(
-			"TextDocumentContentChangeEvent__Or_1",
+			"TextDocumentContentChangeEvent_Or_1",
 		)
 	}
 
-	type TextDocumentContentChangeEvent__Or_1Marshal TextDocumentContentChangeEvent__Or_1
-	tmpMarshal := TextDocumentContentChangeEvent__Or_1Marshal(*this)
+	type TextDocumentContentChangeEvent_Or_1Marshal TextDocumentContentChangeEvent_Or_1
+	tmpMarshal := TextDocumentContentChangeEvent_Or_1Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type TextDocumentFilter__Or_0 struct {
+type TextDocumentFilter_Or_0 struct {
 
 	// A language id, like `typescript`.
 	Language *String `json:"language"`
@@ -1410,38 +1410,36 @@ type TextDocumentFilter__Or_0 struct {
 	Pattern *String `json:"pattern"`
 }
 
-func (this *TextDocumentFilter__Or_0) UnmarshalJSON(data []byte) error {
-	type TextDocumentFilter__Or_0Unmarshal TextDocumentFilter__Or_0
-	var tmpUnmarshal TextDocumentFilter__Or_0Unmarshal
+func (this *TextDocumentFilter_Or_0) UnmarshalJSON(data []byte) error {
+	type TextDocumentFilter_Or_0Unmarshal TextDocumentFilter_Or_0
+	var tmpUnmarshal TextDocumentFilter_Or_0Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
 	}
 
 	if tmpUnmarshal.Language == nil {
-		return StructureLiteralValidateFailed(
-			"TextDocumentFilter__Or_0",
-		)
+		return StructureLiteralValidateFailed("TextDocumentFilter_Or_0")
 	}
 
-	*this = TextDocumentFilter__Or_0(tmpUnmarshal)
+	*this = TextDocumentFilter_Or_0(tmpUnmarshal)
 	return nil
 }
 
-func (this *TextDocumentFilter__Or_0) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentFilter_Or_0) MarshalJSON() ([]byte, error) {
 
 	if this.Language == nil {
 		return nil, StructureLiteralValidateFailed(
-			"TextDocumentFilter__Or_0",
+			"TextDocumentFilter_Or_0",
 		)
 	}
 
-	type TextDocumentFilter__Or_0Marshal TextDocumentFilter__Or_0
-	tmpMarshal := TextDocumentFilter__Or_0Marshal(*this)
+	type TextDocumentFilter_Or_0Marshal TextDocumentFilter_Or_0
+	tmpMarshal := TextDocumentFilter_Or_0Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type TextDocumentFilter__Or_1 struct {
+type TextDocumentFilter_Or_1 struct {
 
 	// A language id, like `typescript`.
 	Language *String `json:"language"`
@@ -1453,38 +1451,36 @@ type TextDocumentFilter__Or_1 struct {
 	Pattern *String `json:"pattern"`
 }
 
-func (this *TextDocumentFilter__Or_1) UnmarshalJSON(data []byte) error {
-	type TextDocumentFilter__Or_1Unmarshal TextDocumentFilter__Or_1
-	var tmpUnmarshal TextDocumentFilter__Or_1Unmarshal
+func (this *TextDocumentFilter_Or_1) UnmarshalJSON(data []byte) error {
+	type TextDocumentFilter_Or_1Unmarshal TextDocumentFilter_Or_1
+	var tmpUnmarshal TextDocumentFilter_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
 	}
 
 	if tmpUnmarshal.Scheme == nil {
-		return StructureLiteralValidateFailed(
-			"TextDocumentFilter__Or_1",
-		)
+		return StructureLiteralValidateFailed("TextDocumentFilter_Or_1")
 	}
 
-	*this = TextDocumentFilter__Or_1(tmpUnmarshal)
+	*this = TextDocumentFilter_Or_1(tmpUnmarshal)
 	return nil
 }
 
-func (this *TextDocumentFilter__Or_1) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentFilter_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Scheme == nil {
 		return nil, StructureLiteralValidateFailed(
-			"TextDocumentFilter__Or_1",
+			"TextDocumentFilter_Or_1",
 		)
 	}
 
-	type TextDocumentFilter__Or_1Marshal TextDocumentFilter__Or_1
-	tmpMarshal := TextDocumentFilter__Or_1Marshal(*this)
+	type TextDocumentFilter_Or_1Marshal TextDocumentFilter_Or_1
+	tmpMarshal := TextDocumentFilter_Or_1Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
-type TextDocumentFilter__Or_2 struct {
+type TextDocumentFilter_Or_2 struct {
 
 	// A language id, like `typescript`.
 	Language *String `json:"language"`
@@ -1496,34 +1492,32 @@ type TextDocumentFilter__Or_2 struct {
 	Pattern *String `json:"pattern"`
 }
 
-func (this *TextDocumentFilter__Or_2) UnmarshalJSON(data []byte) error {
-	type TextDocumentFilter__Or_2Unmarshal TextDocumentFilter__Or_2
-	var tmpUnmarshal TextDocumentFilter__Or_2Unmarshal
+func (this *TextDocumentFilter_Or_2) UnmarshalJSON(data []byte) error {
+	type TextDocumentFilter_Or_2Unmarshal TextDocumentFilter_Or_2
+	var tmpUnmarshal TextDocumentFilter_Or_2Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
 	}
 
 	if tmpUnmarshal.Pattern == nil {
-		return StructureLiteralValidateFailed(
-			"TextDocumentFilter__Or_2",
-		)
+		return StructureLiteralValidateFailed("TextDocumentFilter_Or_2")
 	}
 
-	*this = TextDocumentFilter__Or_2(tmpUnmarshal)
+	*this = TextDocumentFilter_Or_2(tmpUnmarshal)
 	return nil
 }
 
-func (this *TextDocumentFilter__Or_2) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentFilter_Or_2) MarshalJSON() ([]byte, error) {
 
 	if this.Pattern == nil {
 		return nil, StructureLiteralValidateFailed(
-			"TextDocumentFilter__Or_2",
+			"TextDocumentFilter_Or_2",
 		)
 	}
 
-	type TextDocumentFilter__Or_2Marshal TextDocumentFilter__Or_2
-	tmpMarshal := TextDocumentFilter__Or_2Marshal(*this)
+	type TextDocumentFilter_Or_2Marshal TextDocumentFilter_Or_2
+	tmpMarshal := TextDocumentFilter_Or_2Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
@@ -1627,13 +1621,13 @@ func (this *WorkspaceSymbolClientCapabilities_TagSupport) MarshalJSON() ([]byte,
 	return json.Marshal(&tmpMarshal)
 }
 
-type WorkspaceSymbol_Location__Or_1 struct {
+type WorkspaceSymbol_Location_Or_1 struct {
 	Uri *DocumentUri `json:"uri"`
 }
 
-func (this *WorkspaceSymbol_Location__Or_1) UnmarshalJSON(data []byte) error {
-	type WorkspaceSymbol_Location__Or_1Unmarshal WorkspaceSymbol_Location__Or_1
-	var tmpUnmarshal WorkspaceSymbol_Location__Or_1Unmarshal
+func (this *WorkspaceSymbol_Location_Or_1) UnmarshalJSON(data []byte) error {
+	type WorkspaceSymbol_Location_Or_1Unmarshal WorkspaceSymbol_Location_Or_1
+	var tmpUnmarshal WorkspaceSymbol_Location_Or_1Unmarshal
 	err := json.Unmarshal(data, &tmpUnmarshal)
 	if err != nil {
 		return err
@@ -1641,24 +1635,24 @@ func (this *WorkspaceSymbol_Location__Or_1) UnmarshalJSON(data []byte) error {
 
 	if tmpUnmarshal.Uri == nil {
 		return StructureLiteralValidateFailed(
-			"WorkspaceSymbol_Location__Or_1",
+			"WorkspaceSymbol_Location_Or_1",
 		)
 	}
 
-	*this = WorkspaceSymbol_Location__Or_1(tmpUnmarshal)
+	*this = WorkspaceSymbol_Location_Or_1(tmpUnmarshal)
 	return nil
 }
 
-func (this *WorkspaceSymbol_Location__Or_1) MarshalJSON() ([]byte, error) {
+func (this *WorkspaceSymbol_Location_Or_1) MarshalJSON() ([]byte, error) {
 
 	if this.Uri == nil {
 		return nil, StructureLiteralValidateFailed(
-			"WorkspaceSymbol_Location__Or_1",
+			"WorkspaceSymbol_Location_Or_1",
 		)
 	}
 
-	type WorkspaceSymbol_Location__Or_1Marshal WorkspaceSymbol_Location__Or_1
-	tmpMarshal := WorkspaceSymbol_Location__Or_1Marshal(*this)
+	type WorkspaceSymbol_Location_Or_1Marshal WorkspaceSymbol_Location_Or_1
+	tmpMarshal := WorkspaceSymbol_Location_Or_1Marshal(*this)
 	return json.Marshal(&tmpMarshal)
 }
 
