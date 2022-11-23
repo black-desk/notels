@@ -6,7 +6,7 @@ import (
 	"text/template"
 )
 
-var serverTemplate = fmt.Sprintf(interfaceTemplate, "adaptor", "LspServer")
+var serverTemplate = fmt.Sprintf(interfaceTemplate, "LspServer")
 
 func genServer(metaModel *MetaModel) {
 	log.Info("generating lsp server interface")

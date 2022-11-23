@@ -6,7 +6,7 @@ import (
 	"text/template"
 )
 
-var clientTemplate = fmt.Sprintf(interfaceTemplate, "proxy", "LspClient")
+var clientTemplate = fmt.Sprintf(interfaceTemplate, "LspClient")
 
 func genClient(metaModel *MetaModel) {
 	log.Info("generating lsp client interface")

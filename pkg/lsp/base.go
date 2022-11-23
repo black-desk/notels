@@ -1,8 +1,7 @@
 package lsp
 
 import (
-	"encoding/json"
-	"fmt"
+	"github.com/black-desk/notels/pkg/jsonrpc2"
 )
 
 type URI string
@@ -17,24 +16,8 @@ type Decimal float64
 
 type RegExp string
 
-type String string
+type String = jsonrpc2.String
 
-type Boolean bool
+type Boolean = jsonrpc2.Boolean
 
-type Null struct{}
-
-func (this *Null) UnmarshalJSON(data []byte) error {
-	var tmp *int
-	if err := json.Unmarshal(data, &tmp); err != nil {
-		return err
-	}
-	if tmp != nil {
-		return fmt.Errorf("Null should always be null")
-	}
-	return nil
-}
-
-func (this *Null) MarshalJSON() ([]byte, error) {
-	var tmp *int = nil
-	return json.Marshal(tmp)
-}
+type Null = jsonrpc2.Null

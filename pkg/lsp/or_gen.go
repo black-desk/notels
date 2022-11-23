@@ -11,6 +11,102 @@ var OrValidateFailed = func(name string) error {
 	return fmt.Errorf("or type \"%s\"validate failed", name)
 }
 
+type CallHierarchyIncomingCalls_Result_Or struct {
+	// Or [ []CallHierarchyIncomingCall *Null ]
+	V interface{}
+}
+
+func (this *CallHierarchyIncomingCalls_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []CallHierarchyIncomingCall
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("CallHierarchyIncomingCalls_Result_Or")
+}
+
+func (this *CallHierarchyIncomingCalls_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]CallHierarchyIncomingCall); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"CallHierarchyIncomingCalls_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type CallHierarchyOutgoingCalls_Result_Or struct {
+	// Or [ []CallHierarchyOutgoingCall *Null ]
+	V interface{}
+}
+
+func (this *CallHierarchyOutgoingCalls_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []CallHierarchyOutgoingCall
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("CallHierarchyOutgoingCalls_Result_Or")
+}
+
+func (this *CallHierarchyOutgoingCalls_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]CallHierarchyOutgoingCall); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"CallHierarchyOutgoingCalls_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
 type CancelParams_Id_Or struct {
 	// Or [ *Integer *String ]
 	V interface{}
@@ -1223,6 +1319,56 @@ func (this *NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_O
 
 		return nil, OrValidateFailed(
 			"NotebookDocumentSyncOptions_NotebookSelector_Element_Or_1_Notebook_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type OptionalVersionedTextDocumentIdentifier_Version_Or struct {
+	// Or [ *Integer *Null ]
+	V interface{}
+}
+
+func (this *OptionalVersionedTextDocumentIdentifier_Version_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *Integer
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed(
+		"OptionalVersionedTextDocumentIdentifier_Version_Or",
+	)
+}
+
+func (this *OptionalVersionedTextDocumentIdentifier_Version_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*Integer); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"OptionalVersionedTextDocumentIdentifier_Version_Or",
 		)
 	}
 	return json.Marshal(this.V)
@@ -3273,12 +3419,56 @@ func (this *TextDocumentCodeAction_PartialResult_Element_Or) MarshalJSON() ([]by
 	return json.Marshal(this.V)
 }
 
-type TextDocumentCodeAction_Result_Element_Or struct {
+type TextDocumentCodeAction_Result_Or struct {
+	// Or [ []TextDocumentCodeAction_Result_Or_0_Element_Or *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentCodeAction_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp []TextDocumentCodeAction_Result_Or_0_Element_Or
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentCodeAction_Result_Or")
+}
+
+func (this *TextDocumentCodeAction_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TextDocumentCodeAction_Result_Or_0_Element_Or); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentCodeAction_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentCodeAction_Result_Or_0_Element_Or struct {
 	// Or [ *Command *CodeAction ]
 	V interface{}
 }
 
-func (this *TextDocumentCodeAction_Result_Element_Or) UnmarshalJSON(
+func (this *TextDocumentCodeAction_Result_Or_0_Element_Or) UnmarshalJSON(
 	data []byte,
 ) error {
 
@@ -3300,10 +3490,10 @@ func (this *TextDocumentCodeAction_Result_Element_Or) UnmarshalJSON(
 		}
 	}
 
-	return OrValidateFailed("TextDocumentCodeAction_Result_Element_Or")
+	return OrValidateFailed("TextDocumentCodeAction_Result_Or_0_Element_Or")
 }
 
-func (this *TextDocumentCodeAction_Result_Element_Or) MarshalJSON() ([]byte, error) {
+func (this *TextDocumentCodeAction_Result_Or_0_Element_Or) MarshalJSON() ([]byte, error) {
 	for {
 
 		if _, ok := this.V.(*Command); ok {
@@ -3315,8 +3505,52 @@ func (this *TextDocumentCodeAction_Result_Element_Or) MarshalJSON() ([]byte, err
 		}
 
 		return nil, OrValidateFailed(
-			"TextDocumentCodeAction_Result_Element_Or",
+			"TextDocumentCodeAction_Result_Or_0_Element_Or",
 		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentCodeLens_Result_Or struct {
+	// Or [ []CodeLens *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentCodeLens_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp []CodeLens
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentCodeLens_Result_Or")
+}
+
+func (this *TextDocumentCodeLens_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]CodeLens); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentCodeLens_Result_Or")
 	}
 	return json.Marshal(this.V)
 }
@@ -3641,6 +3875,102 @@ func (this *TextDocumentDefinition_Result_Or) MarshalJSON() ([]byte, error) {
 	return json.Marshal(this.V)
 }
 
+type TextDocumentDocumentHighlight_Result_Or struct {
+	// Or [ []DocumentHighlight *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentDocumentHighlight_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []DocumentHighlight
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentDocumentHighlight_Result_Or")
+}
+
+func (this *TextDocumentDocumentHighlight_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]DocumentHighlight); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentDocumentHighlight_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentDocumentLink_Result_Or struct {
+	// Or [ []DocumentLink *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentDocumentLink_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []DocumentLink
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentDocumentLink_Result_Or")
+}
+
+func (this *TextDocumentDocumentLink_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]DocumentLink); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentDocumentLink_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
 type TextDocumentDocumentSymbol_PartialResult_Or struct {
 	// Or [ []SymbolInformation []DocumentSymbol ]
 	V interface{}
@@ -3856,6 +4186,142 @@ func (this *TextDocumentFilter_Or) MarshalJSON() ([]byte, error) {
 	return json.Marshal(this.V)
 }
 
+type TextDocumentFoldingRange_Result_Or struct {
+	// Or [ []FoldingRange *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentFoldingRange_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []FoldingRange
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentFoldingRange_Result_Or")
+}
+
+func (this *TextDocumentFoldingRange_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]FoldingRange); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentFoldingRange_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentFormatting_Result_Or struct {
+	// Or [ []TextEdit *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentFormatting_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp []TextEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentFormatting_Result_Or")
+}
+
+func (this *TextDocumentFormatting_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TextEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentFormatting_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentHover_Result_Or struct {
+	// Or [ *Hover *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentHover_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp *Hover
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentHover_Result_Or")
+}
+
+func (this *TextDocumentHover_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*Hover); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentHover_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
 type TextDocumentImplementation_PartialResult_Or struct {
 	// Or [ []Location []DefinitionLink ]
 	V interface{}
@@ -3960,6 +4426,616 @@ func (this *TextDocumentImplementation_Result_Or) MarshalJSON() ([]byte, error) 
 
 		return nil, OrValidateFailed(
 			"TextDocumentImplementation_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentInlayHint_Result_Or struct {
+	// Or [ []InlayHint *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentInlayHint_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp []InlayHint
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentInlayHint_Result_Or")
+}
+
+func (this *TextDocumentInlayHint_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]InlayHint); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentInlayHint_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentInlineValue_Result_Or struct {
+	// Or [ []InlineValue *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentInlineValue_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []InlineValue
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentInlineValue_Result_Or")
+}
+
+func (this *TextDocumentInlineValue_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]InlineValue); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentInlineValue_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentLinkedEditingRange_Result_Or struct {
+	// Or [ *LinkedEditingRanges *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentLinkedEditingRange_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *LinkedEditingRanges
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentLinkedEditingRange_Result_Or")
+}
+
+func (this *TextDocumentLinkedEditingRange_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*LinkedEditingRanges); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentLinkedEditingRange_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentMoniker_Result_Or struct {
+	// Or [ []Moniker *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentMoniker_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp []Moniker
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentMoniker_Result_Or")
+}
+
+func (this *TextDocumentMoniker_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]Moniker); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentMoniker_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentOnTypeFormatting_Result_Or struct {
+	// Or [ []TextEdit *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentOnTypeFormatting_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []TextEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentOnTypeFormatting_Result_Or")
+}
+
+func (this *TextDocumentOnTypeFormatting_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TextEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentOnTypeFormatting_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentPrepareCallHierarchy_Result_Or struct {
+	// Or [ []CallHierarchyItem *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentPrepareCallHierarchy_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []CallHierarchyItem
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentPrepareCallHierarchy_Result_Or")
+}
+
+func (this *TextDocumentPrepareCallHierarchy_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]CallHierarchyItem); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentPrepareCallHierarchy_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentPrepareRename_Result_Or struct {
+	// Or [ *PrepareRenameResult *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentPrepareRename_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *PrepareRenameResult
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentPrepareRename_Result_Or")
+}
+
+func (this *TextDocumentPrepareRename_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*PrepareRenameResult); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentPrepareRename_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentPrepareTypeHierarchy_Result_Or struct {
+	// Or [ []TypeHierarchyItem *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentPrepareTypeHierarchy_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []TypeHierarchyItem
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentPrepareTypeHierarchy_Result_Or")
+}
+
+func (this *TextDocumentPrepareTypeHierarchy_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TypeHierarchyItem); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentPrepareTypeHierarchy_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentRangeFormatting_Result_Or struct {
+	// Or [ []TextEdit *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentRangeFormatting_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []TextEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentRangeFormatting_Result_Or")
+}
+
+func (this *TextDocumentRangeFormatting_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TextEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentRangeFormatting_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentReferences_Result_Or struct {
+	// Or [ []Location *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentReferences_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp []Location
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentReferences_Result_Or")
+}
+
+func (this *TextDocumentReferences_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]Location); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentReferences_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentRegistrationOptions_DocumentSelector_Or struct {
+	// Or [ *DocumentSelector *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentRegistrationOptions_DocumentSelector_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *DocumentSelector
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed(
+		"TextDocumentRegistrationOptions_DocumentSelector_Or",
+	)
+}
+
+func (this *TextDocumentRegistrationOptions_DocumentSelector_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*DocumentSelector); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentRegistrationOptions_DocumentSelector_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentRename_Result_Or struct {
+	// Or [ *WorkspaceEdit *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentRename_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp *WorkspaceEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentRename_Result_Or")
+}
+
+func (this *TextDocumentRename_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*WorkspaceEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TextDocumentRename_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentSelectionRange_Result_Or struct {
+	// Or [ []SelectionRange *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentSelectionRange_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []SelectionRange
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentSelectionRange_Result_Or")
+}
+
+func (this *TextDocumentSelectionRange_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]SelectionRange); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentSelectionRange_Result_Or",
 		)
 	}
 	return json.Marshal(this.V)
@@ -4071,6 +5147,150 @@ func (this *TextDocumentSemanticTokensFullDelta_Result_Or) MarshalJSON() ([]byte
 
 		return nil, OrValidateFailed(
 			"TextDocumentSemanticTokensFullDelta_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentSemanticTokensFull_Result_Or struct {
+	// Or [ *SemanticTokens *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentSemanticTokensFull_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *SemanticTokens
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentSemanticTokensFull_Result_Or")
+}
+
+func (this *TextDocumentSemanticTokensFull_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*SemanticTokens); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentSemanticTokensFull_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentSemanticTokensRange_Result_Or struct {
+	// Or [ *SemanticTokens *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentSemanticTokensRange_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *SemanticTokens
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentSemanticTokensRange_Result_Or")
+}
+
+func (this *TextDocumentSemanticTokensRange_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*SemanticTokens); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentSemanticTokensRange_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TextDocumentSignatureHelp_Result_Or struct {
+	// Or [ *SignatureHelp *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentSignatureHelp_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *SignatureHelp
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentSignatureHelp_Result_Or")
+}
+
+func (this *TextDocumentSignatureHelp_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*SignatureHelp); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentSignatureHelp_Result_Or",
 		)
 	}
 	return json.Marshal(this.V)
@@ -4229,6 +5449,194 @@ func (this *TextDocumentTypeDefinition_Result_Or) MarshalJSON() ([]byte, error) 
 	return json.Marshal(this.V)
 }
 
+type TextDocumentWillSaveWaitUntil_Result_Or struct {
+	// Or [ []TextEdit *Null ]
+	V interface{}
+}
+
+func (this *TextDocumentWillSaveWaitUntil_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []TextEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TextDocumentWillSaveWaitUntil_Result_Or")
+}
+
+func (this *TextDocumentWillSaveWaitUntil_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TextEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TextDocumentWillSaveWaitUntil_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type TypeHierarchySubtypes_Result_Or struct {
+	// Or [ []TypeHierarchyItem *Null ]
+	V interface{}
+}
+
+func (this *TypeHierarchySubtypes_Result_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp []TypeHierarchyItem
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TypeHierarchySubtypes_Result_Or")
+}
+
+func (this *TypeHierarchySubtypes_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TypeHierarchyItem); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("TypeHierarchySubtypes_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type TypeHierarchySupertypes_Result_Or struct {
+	// Or [ []TypeHierarchyItem *Null ]
+	V interface{}
+}
+
+func (this *TypeHierarchySupertypes_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []TypeHierarchyItem
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("TypeHierarchySupertypes_Result_Or")
+}
+
+func (this *TypeHierarchySupertypes_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]TypeHierarchyItem); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"TypeHierarchySupertypes_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type WindowShowMessageRequest_Result_Or struct {
+	// Or [ *MessageActionItem *Null ]
+	V interface{}
+}
+
+func (this *WindowShowMessageRequest_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *MessageActionItem
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("WindowShowMessageRequest_Result_Or")
+}
+
+func (this *WindowShowMessageRequest_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*MessageActionItem); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WindowShowMessageRequest_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
 type WorkspaceDocumentDiagnosticReport_Or struct {
 	// Or [ *WorkspaceFullDocumentDiagnosticReport
 	// *WorkspaceUnchangedDocumentDiagnosticReport ]
@@ -4352,6 +5760,104 @@ func (this *WorkspaceEdit_DocumentChanges_Element_Or) MarshalJSON() ([]byte, err
 	return json.Marshal(this.V)
 }
 
+type WorkspaceExecuteCommand_Result_Or struct {
+	// Or [ *LSPAny *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceExecuteCommand_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *LSPAny
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("WorkspaceExecuteCommand_Result_Or")
+}
+
+func (this *WorkspaceExecuteCommand_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*LSPAny); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceExecuteCommand_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type WorkspaceFoldersInitializeParams_WorkspaceFolders_Or struct {
+	// Or [ []WorkspaceFolder *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceFoldersInitializeParams_WorkspaceFolders_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []WorkspaceFolder
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed(
+		"WorkspaceFoldersInitializeParams_WorkspaceFolders_Or",
+	)
+}
+
+func (this *WorkspaceFoldersInitializeParams_WorkspaceFolders_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]WorkspaceFolder); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceFoldersInitializeParams_WorkspaceFolders_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
 type WorkspaceFoldersServerCapabilities_ChangeNotifications_Or struct {
 	// Or [ *String *Boolean ]
 	V interface{}
@@ -4397,6 +5903,56 @@ func (this *WorkspaceFoldersServerCapabilities_ChangeNotifications_Or) MarshalJS
 
 		return nil, OrValidateFailed(
 			"WorkspaceFoldersServerCapabilities_ChangeNotifications_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type WorkspaceFullDocumentDiagnosticReport_Version_Or struct {
+	// Or [ *Integer *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceFullDocumentDiagnosticReport_Version_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *Integer
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed(
+		"WorkspaceFullDocumentDiagnosticReport_Version_Or",
+	)
+}
+
+func (this *WorkspaceFullDocumentDiagnosticReport_Version_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*Integer); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceFullDocumentDiagnosticReport_Version_Or",
 		)
 	}
 	return json.Marshal(this.V)
@@ -4543,6 +6099,380 @@ func (this *WorkspaceSymbol_Result_Or) MarshalJSON() ([]byte, error) {
 		}
 
 		return nil, OrValidateFailed("WorkspaceSymbol_Result_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type WorkspaceUnchangedDocumentDiagnosticReport_Version_Or struct {
+	// Or [ *Integer *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceUnchangedDocumentDiagnosticReport_Version_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *Integer
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed(
+		"WorkspaceUnchangedDocumentDiagnosticReport_Version_Or",
+	)
+}
+
+func (this *WorkspaceUnchangedDocumentDiagnosticReport_Version_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*Integer); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceUnchangedDocumentDiagnosticReport_Version_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type WorkspaceWillCreateFiles_Result_Or struct {
+	// Or [ *WorkspaceEdit *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceWillCreateFiles_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *WorkspaceEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("WorkspaceWillCreateFiles_Result_Or")
+}
+
+func (this *WorkspaceWillCreateFiles_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*WorkspaceEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceWillCreateFiles_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type WorkspaceWillDeleteFiles_Result_Or struct {
+	// Or [ *WorkspaceEdit *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceWillDeleteFiles_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *WorkspaceEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("WorkspaceWillDeleteFiles_Result_Or")
+}
+
+func (this *WorkspaceWillDeleteFiles_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*WorkspaceEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceWillDeleteFiles_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type WorkspaceWillRenameFiles_Result_Or struct {
+	// Or [ *WorkspaceEdit *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceWillRenameFiles_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp *WorkspaceEdit
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("WorkspaceWillRenameFiles_Result_Or")
+}
+
+func (this *WorkspaceWillRenameFiles_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*WorkspaceEdit); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceWillRenameFiles_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type WorkspaceWorkspaceFolders_Result_Or struct {
+	// Or [ []WorkspaceFolder *Null ]
+	V interface{}
+}
+
+func (this *WorkspaceWorkspaceFolders_Result_Or) UnmarshalJSON(
+	data []byte,
+) error {
+
+	{
+
+		var tmp []WorkspaceFolder
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("WorkspaceWorkspaceFolders_Result_Or")
+}
+
+func (this *WorkspaceWorkspaceFolders_Result_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.([]WorkspaceFolder); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed(
+			"WorkspaceWorkspaceFolders_Result_Or",
+		)
+	}
+	return json.Marshal(this.V)
+}
+
+type XInitializeParams_ProcessId_Or struct {
+	// Or [ *Integer *Null ]
+	V interface{}
+}
+
+func (this *XInitializeParams_ProcessId_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp *Integer
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("XInitializeParams_ProcessId_Or")
+}
+
+func (this *XInitializeParams_ProcessId_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*Integer); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("XInitializeParams_ProcessId_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type XInitializeParams_RootPath_Or struct {
+	// Or [ *String *Null ]
+	V interface{}
+}
+
+func (this *XInitializeParams_RootPath_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp *String
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("XInitializeParams_RootPath_Or")
+}
+
+func (this *XInitializeParams_RootPath_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*String); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("XInitializeParams_RootPath_Or")
+	}
+	return json.Marshal(this.V)
+}
+
+type XInitializeParams_RootUri_Or struct {
+	// Or [ *DocumentUri *Null ]
+	V interface{}
+}
+
+func (this *XInitializeParams_RootUri_Or) UnmarshalJSON(data []byte) error {
+
+	{
+
+		var tmp *DocumentUri
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	{
+
+		var tmp *Null
+		if err := json.Unmarshal(data, &tmp); err == nil {
+			this.V = tmp
+			return nil
+		}
+	}
+
+	return OrValidateFailed("XInitializeParams_RootUri_Or")
+}
+
+func (this *XInitializeParams_RootUri_Or) MarshalJSON() ([]byte, error) {
+	for {
+
+		if _, ok := this.V.(*DocumentUri); ok {
+			break
+		}
+
+		if _, ok := this.V.(*Null); ok {
+			break
+		}
+
+		return nil, OrValidateFailed("XInitializeParams_RootUri_Or")
 	}
 	return json.Marshal(this.V)
 }
