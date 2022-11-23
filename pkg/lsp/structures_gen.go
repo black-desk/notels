@@ -437,7 +437,7 @@ type TextDocumentRegistrationOptions struct {
 	// A document selector to identify the scope of the registration. If set
 	// to null the document selector provided on the client side will be
 	// used.
-	DocumentSelector **DocumentSelector `json:"documentSelector"`
+	DocumentSelector *TextDocumentRegistrationOptions_DocumentSelector_Or `json:"documentSelector"`
 }
 
 func (this *TextDocumentRegistrationOptions) UnmarshalJSON(data []byte) error {
@@ -7313,7 +7313,7 @@ type XInitializeParams struct {
 	// The process Id of the parent process that started the server.  Is
 	// `null` if the process has not been started by another process. If the
 	// parent process is not alive then the server should exit.
-	ProcessId **Integer `json:"processId"`
+	ProcessId *XInitializeParams_ProcessId_Or `json:"processId"`
 
 	// Information about the client  @since 3.15.0
 	ClientInfo *XInitializeParams_ClientInfo `json:"clientInfo"`
@@ -7326,12 +7326,12 @@ type XInitializeParams struct {
 
 	// The rootPath of the workspace. Is null if no folder is open.
 	// @deprecated in favour of rootUri.
-	RootPath **String `json:"rootPath"`
+	RootPath *XInitializeParams_RootPath_Or `json:"rootPath"`
 
 	// The rootUri of the workspace. Is null if no folder is open. If both
 	// `rootPath` and `rootUri` are set `rootUri` wins.  @deprecated in
 	// favour of workspaceFolders.
-	RootUri **DocumentUri `json:"rootUri"`
+	RootUri *XInitializeParams_RootUri_Or `json:"rootUri"`
 
 	// The capabilities provided by the client (editor or tool)
 	Capabilities *ClientCapabilities `json:"capabilities"`
@@ -7392,7 +7392,7 @@ type WorkspaceFoldersInitializeParams struct {
 	// starts.  This property is only available if the client supports
 	// workspace folders. It can be `null` if the client supports workspace
 	// folders but none are configured.  @since 3.6.0
-	WorkspaceFolders []WorkspaceFolder `json:"workspaceFolders"`
+	WorkspaceFolders *WorkspaceFoldersInitializeParams_WorkspaceFolders_Or `json:"workspaceFolders"`
 }
 
 // Defines the capabilities provided by a language server.
@@ -8443,7 +8443,7 @@ type OptionalVersionedTextDocumentIdentifier struct {
 	// before) the server can send `null` to indicate that the version is
 	// unknown and the content on disk is the truth (as specified with
 	// document content ownership).
-	Version **Integer `json:"version"`
+	Version *OptionalVersionedTextDocumentIdentifier_Version_Or `json:"version"`
 }
 
 func (this *OptionalVersionedTextDocumentIdentifier) UnmarshalJSON(
@@ -8649,7 +8649,7 @@ type WorkspaceFullDocumentDiagnosticReport struct {
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version **Integer `json:"version"`
+	Version *WorkspaceFullDocumentDiagnosticReport_Version_Or `json:"version"`
 }
 
 func (this *WorkspaceFullDocumentDiagnosticReport) UnmarshalJSON(
@@ -8710,7 +8710,7 @@ type WorkspaceUnchangedDocumentDiagnosticReport struct {
 
 	// The version number for which the diagnostics are reported. If the
 	// document is not marked as open `null` can be provided.
-	Version **Integer `json:"version"`
+	Version *WorkspaceUnchangedDocumentDiagnosticReport_Version_Or `json:"version"`
 }
 
 func (this *WorkspaceUnchangedDocumentDiagnosticReport) UnmarshalJSON(

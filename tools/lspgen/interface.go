@@ -10,15 +10,18 @@ package lsp
 
 import (
         "context"
+        "github.com/black-desk/notels/pkg/jsonrpc2"
 )
 
-//jsonrpc2gen:%s
-type %s interface {
+//jsonrpc2gen: %[1]s adaptor
+//jsonrpc2gen: %[1]s proxy
+type %[1]s interface {
         {{range .}}
                 {{getComment .Documentation}} {{getRegistrationMethodName .}}
-                {{getMethodName .}}{{getMethodArgs .}}{{getMethodReturn .}} //jsonrpc2gen:"{{.Method}}"
+                {{getMethodName .}}{{getMethodArgs .}}{{getMethodReturn .}} // jsonrpc2gen:{{getMessageType .}}"{{.Method}}"
         {{end}}
 }
+
 `
 
 var interfaceTemplateFuncs = map[string]any{
@@ -27,6 +30,7 @@ var interfaceTemplateFuncs = map[string]any{
 	"getMethodArgs":             interfaceTemplateGetMethodArgs,
 	"getMethodReturn":           interfaceTemplateGetMethodReturn,
 	"getRegistrationMethodName": interfaceTemplateGetRegistrationMethodName,
+	"getMessageType":            interfaceTemplateGetMessageType,
 }
 
 var interfaceTemplateGetComment = Comment
@@ -75,29 +79,34 @@ var interfaceTemplateGetMethodArgs = func(input any) string {
 	}
 }
 var interfaceTemplateGetMethodReturn = func(input any) string {
-	result := "(\nerr error"
+	result := "(\n"
 	switch v := input.(type) {
 	case *Request:
-		if v.ErrorData != nil {
-			result += fmt.Sprintf(",\nerrorData %s",
-				typeName(MethodNameFromString(v.Method),
-					"ErrorData", v.ErrorData))
-		}
-		if v.Result != nil &&
-			!(v.Result.Kind == "base" && v.Result.Name == "null") {
-			result += fmt.Sprintf(",\nresult %s",
-				typeName(MethodNameFromString(v.Method),
-					"Result", v.Result))
-		}
 		if v.PartialResult != nil {
-			result += fmt.Sprintf(",\npartialResult %s",
-				typeName(MethodNameFromString(v.Method),
-					"PartialResult", v.PartialResult))
+			typeName(MethodNameFromString(v.Method),
+				"PartialResult", v.PartialResult)
 		}
-		result += ",\n)"
+		if v.Result != nil {
+			name := typeName(MethodNameFromString(v.Method),
+				"Result", v.Result)
+			if name[0:1] != "[" {
+				name = "*" + name
+			}
+			result += fmt.Sprintf("result %s,\n", name)
+		}
+		if v.ErrorData != nil {
+			name := typeName(MethodNameFromString(v.Method),
+				"ErrorData", v.ErrorData)
+			if name[0:1] != "[" {
+				name = "*" + name
+			}
+			result += fmt.Sprintf("errorData %s,\n", name)
+		}
+		result += "code jsonrpc2.Code,\n"
+		result += "err error,\n)"
 		return result
 	case *Notification:
-		result += ",\n)"
+		result += "err error,\n)"
 		return result
 	default:
 		log.Fatalw("unexpected type", "input", input)
@@ -127,6 +136,19 @@ func getRegistrationMethodNameFromMessage(input any) string {
 				"RegistrationOptions", v.RegistrationOptions)
 		}
 		return v.RegistrationMethod
+	default:
+		log.Fatalw("unexpected type",
+			"input", input)
+		panic("")
+	}
+}
+
+var interfaceTemplateGetMessageType = func(input any) string {
+	switch input.(type) {
+	case *Request:
+		return "request"
+	case *Notification:
+		return "notification"
 	default:
 		log.Fatalw("unexpected type",
 			"input", input)
