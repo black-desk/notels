@@ -168,13 +168,6 @@ type LspServer interface {
 		partialResult SemanticTokensPartialResult,
 	) //jsonrpc2gen:"textDocument/semanticTokens/range"
 
-	// @since 3.16.0
-	WorkspaceSemanticTokensRefresh(
-		ctx context.Context,
-	) (
-		err error,
-	) //jsonrpc2gen:"workspace/semanticTokens/refresh"
-
 	// A request to provide ranges that can be edited together.  @since
 	// 3.16.0
 	TextDocumentLinkedEditingRange(
@@ -276,13 +269,6 @@ type LspServer interface {
 		partialResult []InlineValue,
 	) //jsonrpc2gen:"textDocument/inlineValue"
 
-	// @since 3.17.0
-	WorkspaceInlineValueRefresh(
-		ctx context.Context,
-	) (
-		err error,
-	) //jsonrpc2gen:"workspace/inlineValue/refresh"
-
 	// A request to provide inlay hints in a document. The request's
 	// parameter is of type {@link InlayHintsParams}, the response is of
 	// type {@link InlayHint InlayHint[]} or a Thenable that resolves to
@@ -308,13 +294,6 @@ type LspServer interface {
 		result InlayHint,
 	) //jsonrpc2gen:"inlayHint/resolve"
 
-	// @since 3.17.0
-	WorkspaceInlayHintRefresh(
-		ctx context.Context,
-	) (
-		err error,
-	) //jsonrpc2gen:"workspace/inlayHint/refresh"
-
 	// The document diagnostic request definition.  @since 3.17.0
 	TextDocumentDiagnostic(
 		ctx context.Context,
@@ -336,13 +315,6 @@ type LspServer interface {
 		result WorkspaceDiagnosticReport,
 		partialResult WorkspaceDiagnosticReportPartialResult,
 	) //jsonrpc2gen:"workspace/diagnostic"
-
-	// The diagnostic refresh request definition.  @since 3.17.0
-	WorkspaceDiagnosticRefresh(
-		ctx context.Context,
-	) (
-		err error,
-	) //jsonrpc2gen:"workspace/diagnostic/refresh"
 
 	// The initialize request is sent from the client to the server. It is
 	// sent once as the request after starting up the server. The requests
