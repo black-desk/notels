@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/black-desk/lib/go v0.0.0-20221203182044-8018d783e7f1
+	github.com/google/uuid v1.3.0
 	github.com/spf13/cobra v1.6.1
 )
 
