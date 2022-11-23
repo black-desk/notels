@@ -61,6 +61,7 @@ func main() {
 	genClient(&metaModel)
 	genServer(&metaModel)
 
+	genAnd()
 	genOr()
 	genLiteral()
 	genTuple()

@@ -117,10 +117,15 @@ func getRegistrationMethodNameFromMessage(input any) string {
 	switch v := input.(type) {
 	case *Request:
 		if v.RegistrationOptions != nil {
-			// genType(v.RegistrationOptions)
+			typeName(MethodNameFromString(v.Method),
+				"RegistrationOptions", v.RegistrationOptions)
 		}
 		return v.RegistrationMethod
 	case *Notification:
+		if v.RegistrationOptions != nil {
+			typeName(MethodNameFromString(v.Method),
+				"RegistrationOptions", v.RegistrationOptions)
+		}
 		return v.RegistrationMethod
 	default:
 		log.Fatalw("unexpected type",
