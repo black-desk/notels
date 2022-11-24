@@ -1,11 +1,11 @@
-.PHONY: cloc check-license
+.PHONY: generate
+all: notels CLOC
 
-all:
+notels:
 	go build .
 
-cloc:
-	cloc . --not-match-f='_gen.go$$' --exclude-ext='md,json'
+CLOC:
+	cloc . --not-match-f='_gen.go$$' --exclude-ext='md,json' > CLOC
 
-check-license:
-	go run github.com/google/go-licenses@latest report .
-	go run github.com/google/go-licenses@latest check .
+generate:
+	go generate ./...
