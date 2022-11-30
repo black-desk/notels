@@ -1,6 +1,9 @@
 package jsonrpc2
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 type Error interface {
 	Error() string
@@ -8,14 +11,31 @@ type Error interface {
 	Data() json.RawMessage
 }
 
+type ErrorImpl struct {
+	msg  string
+	code Code
+	data json.RawMessage
+}
+
 func AnalysisError(
 	err error,
 	errorData json.RawMessage,
-        code Code,
+	code Code,
 	methodErr error,
 	paramsUnmarshal bool,
 	call bool,
 	errorDataUnmarshal bool,
 ) Error {
-        return nil
+	var Err ErrorImpl
+	if err != nil {
+		if !paramsUnmarshal {
+			if syntax, ok := err.(*json.SyntaxError); ok {
+				Err.code = ParseErrorCode
+			} else if err.(*json.Error) {
+
+			}
+			Err.msg = fmt.Sprintf("%v", err)
+		}
+	}
+	return nil
 }
