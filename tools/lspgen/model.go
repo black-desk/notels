@@ -96,7 +96,7 @@ type StructureLiteral struct {
 	Since      string      `json:"since"`
 }
 
-type String string
+type StringLiteral string
 
 type Property struct {
 	Documentation string `json:"documentation"`

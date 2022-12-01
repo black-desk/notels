@@ -141,7 +141,7 @@ var _ TypeValue = &Type{}
 var _ TypeValue = &StructureLiteral{}
 
 func _() {
-	var s String
+	var s StringLiteral
 	var _ TypeValue = &s
 }
 
@@ -154,7 +154,7 @@ func toTypeValue(data json.RawMessage) TypeValue {
 	if err == nil {
 		return &tmpStructureLiteral
 	}
-	var tmpString String
+	var tmpString StringLiteral
 	err = json.Unmarshal(data, &tmpString)
 	if err == nil {
 		return &tmpString
@@ -168,7 +168,7 @@ func toTypeValue(data json.RawMessage) TypeValue {
 }
 
 // isTypeValue implements TypeValue
-func (*String) isTypeValue() {
+func (*StringLiteral) isTypeValue() {
 	panic("unimplemented")
 }
 

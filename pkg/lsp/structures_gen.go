@@ -5111,7 +5111,7 @@ func (this *ApplyWorkspaceEditResult) MarshalJSON() ([]byte, error) {
 }
 
 type WorkDoneProgressBegin struct {
-	Kind *string `json:"kind"`
+	Kind *WorkDoneProgressBegin_Kind_StringLiteral `json:"kind"`
 
 	// Mandatory title of the progress operation. Used to briefly inform
 	// about the kind of operation being performed.  Examples: "Indexing" or
@@ -5174,7 +5174,7 @@ func (this *WorkDoneProgressBegin) MarshalJSON() ([]byte, error) {
 }
 
 type WorkDoneProgressReport struct {
-	Kind *string `json:"kind"`
+	Kind *WorkDoneProgressReport_Kind_StringLiteral `json:"kind"`
 
 	// Controls enablement state of a cancel button.  Clients that don't
 	// support cancellation or don't support controlling the button's
@@ -5224,7 +5224,7 @@ func (this *WorkDoneProgressReport) MarshalJSON() ([]byte, error) {
 }
 
 type WorkDoneProgressEnd struct {
-	Kind *string `json:"kind"`
+	Kind *WorkDoneProgressEnd_Kind_StringLiteral `json:"kind"`
 
 	// Optional, a final message indicating to for example indicate the
 	// outcome of the operation.
@@ -6064,7 +6064,7 @@ type CreateFile struct {
 	ResourceOperation
 
 	// A create
-	Kind *string `json:"kind"`
+	Kind *CreateFile_Kind_StringLiteral `json:"kind"`
 
 	// The resource to create.
 	Uri *DocumentUri `json:"uri"`
@@ -6116,7 +6116,7 @@ type RenameFile struct {
 	ResourceOperation
 
 	// A rename
-	Kind *string `json:"kind"`
+	Kind *RenameFile_Kind_StringLiteral `json:"kind"`
 
 	// The old (existing) location.
 	OldUri *DocumentUri `json:"oldUri"`
@@ -6179,7 +6179,7 @@ type DeleteFile struct {
 	ResourceOperation
 
 	// A delete
-	Kind *string `json:"kind"`
+	Kind *DeleteFile_Kind_StringLiteral `json:"kind"`
 
 	// The file to delete.
 	Uri *DocumentUri `json:"uri"`
@@ -6756,7 +6756,7 @@ type RelatedUnchangedDocumentDiagnosticReport struct {
 type FullDocumentDiagnosticReport struct {
 
 	// A full document diagnostic report.
-	Kind *string `json:"kind"`
+	Kind *FullDocumentDiagnosticReport_Kind_StringLiteral `json:"kind"`
 
 	// An optional result id. If provided it will be sent on the next
 	// diagnostic request for the same document.
@@ -6812,7 +6812,7 @@ type UnchangedDocumentDiagnosticReport struct {
 	// A document diagnostic report indicating no changes to the last
 	// result. A server can only return `unchanged` if result ids are
 	// provided.
-	Kind *string `json:"kind"`
+	Kind *UnchangedDocumentDiagnosticReport_Kind_StringLiteral `json:"kind"`
 
 	// A result id which will be sent on the next diagnostic request for the
 	// same document.
