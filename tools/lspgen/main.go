@@ -65,6 +65,7 @@ func main() {
 	genOr()
 	genLiteral()
 	genTuple()
+	genStringLiteral()
 
 	log.Info("done")
 }

@@ -86,7 +86,8 @@ func typeName(prefix string, current string, t *Type) string {
 		RegisterLiteral(prefix+"_"+current, t.Value.(*StructureLiteral))
 		return prefix + "_" + current
 	} else if t.Kind == "stringLiteral" {
-		return "string"
+                RegisterStringLiteral(prefix+"_"+current+"_StringLiteral",t.Value.(*StringLiteral))
+		return prefix+"_"+current+"_StringLiteral"
 	} else if t.Kind == "tuple" {
 		RegisterTuple(prefix+"_"+current, t)
 		return prefix + "_" + current
@@ -101,8 +102,7 @@ func typeValueName(prefix string, current string, tv TypeValue) string {
 	switch v := tv.(type) {
 	case *Type:
 		return typeName(prefix, current, v)
-	case *String:
-		return "string"
+	// case *StringLiteral:
 	// case *StructureLiteral:
 	default:
 		log.Fatalw("unexpected kind",
