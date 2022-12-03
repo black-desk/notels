@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/black-desk/notels/internal/utils/logger"
+	"github.com/black-desk/lib/go/logger"
 )
 
 const (

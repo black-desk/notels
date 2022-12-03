@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/black-desk/notels/internal/utils/logger"
+	"github.com/black-desk/lib/go/logger"
 )
 
 var log = logger.Get("jsonrpc2gen")

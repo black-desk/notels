@@ -3,9 +3,10 @@ module github.com/black-desk/notels
 go 1.19
 
 require (
+	github.com/black-desk/lib/go v0.0.0-20221203181450-f2cd98fea14d
 	github.com/google/uuid v1.3.0
 	github.com/spf13/cobra v1.6.1
-	go.uber.org/zap v1.23.0
+	go.uber.org/zap v1.24.0
 )
 
 require (
