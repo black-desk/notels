@@ -43,6 +43,13 @@ type LspClient interface {
 		err error,
 	) //jsonrpc2gen:"window/workDoneProgress/create"
 
+	// @since 3.16.0
+	WorkspaceSemanticTokensRefresh(
+		ctx context.Context,
+	) (
+		err error,
+	) //jsonrpc2gen:"workspace/semanticTokens/refresh"
+
 	// A request to show a document. This request might open an external
 	// program depending on the value of the URI to open. For example a
 	// request to open `https://code.visualstudio.com/` will very likely
@@ -54,6 +61,27 @@ type LspClient interface {
 		err error,
 		result ShowDocumentResult,
 	) //jsonrpc2gen:"window/showDocument"
+
+	// @since 3.17.0
+	WorkspaceInlineValueRefresh(
+		ctx context.Context,
+	) (
+		err error,
+	) //jsonrpc2gen:"workspace/inlineValue/refresh"
+
+	// @since 3.17.0
+	WorkspaceInlayHintRefresh(
+		ctx context.Context,
+	) (
+		err error,
+	) //jsonrpc2gen:"workspace/inlayHint/refresh"
+
+	// The diagnostic refresh request definition.  @since 3.17.0
+	WorkspaceDiagnosticRefresh(
+		ctx context.Context,
+	) (
+		err error,
+	) //jsonrpc2gen:"workspace/diagnostic/refresh"
 
 	// The `client/registerCapability` request is sent from the server to
 	// the client to register a new capability handler on the client side.

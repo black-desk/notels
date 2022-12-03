@@ -388,15 +388,15 @@ type ColorPresentation struct {
 	// selecting this color presentation.
 	Label *String `json:"label"`
 
-	// An [edit](#TextEdit) which is applied to a document when selecting
-	// this presentation for the color.  When `falsy` the
-	// [label](#ColorPresentation.label) is used.
+	// An {@link TextEdit edit} which is applied to a document when
+	// selecting this presentation for the color.  When `falsy` the {@link
+	// ColorPresentation.label label} is used.
 	TextEdit *TextEdit `json:"textEdit"`
 
-	// An optional array of additional [text edits](#TextEdit) that are
+	// An optional array of additional {@link TextEdit text edits} that are
 	// applied when selecting this color presentation. Edits must not
-	// overlap with the main [edit](#ColorPresentation.textEdit) nor with
-	// themselves.
+	// overlap with the main {@link ColorPresentation.textEdit edit} nor
+	// with themselves.
 	AdditionalTextEdits []TextEdit `json:"additionalTextEdits"`
 }
 
@@ -536,9 +536,8 @@ type FoldingRange struct {
 
 	// Describes the kind of the folding range such as `comment' or
 	// 'region'. The kind is used to categorize folding ranges and used by
-	// commands like 'Fold all comments'. See
-	// [FoldingRangeKind](#FoldingRangeKind) for an enumeration of
-	// standardized kinds.
+	// commands like 'Fold all comments'. See {@link FoldingRangeKind} for
+	// an enumeration of standardized kinds.
 	Kind *FoldingRangeKind `json:"kind"`
 
 	// The text that the client should show when the specified range is
@@ -676,7 +675,7 @@ func (this *SelectionRangeParams) MarshalJSON() ([]byte, error) {
 // range may have a parent selection range that contains it.
 type SelectionRange struct {
 
-	// The [range](#Range) of this selection range.
+	// The {@link Range range} of this selection range.
 	Range *Range `json:"range"`
 
 	// The parent selection range containing this range. Therefore
@@ -832,7 +831,7 @@ type CallHierarchyItem struct {
 
 	// The range that should be selected and revealed when this symbol is
 	// being picked, e.g. the name of a function. Must be contained by the
-	// [`range`](#CallHierarchyItem.range).
+	// {@link CallHierarchyItem.range `range`}.
 	SelectionRange *Range `json:"selectionRange"`
 
 	// A data entry field that is preserved between a call hierarchy prepare
@@ -965,7 +964,7 @@ type CallHierarchyIncomingCall struct {
 	From *CallHierarchyItem `json:"from"`
 
 	// The ranges at which the calls appear. This is relative to the caller
-	// denoted by [`this.from`](#CallHierarchyIncomingCall.from).
+	// denoted by {@link CallHierarchyIncomingCall.from `this.from`}.
 	FromRanges []Range `json:"fromRanges"`
 }
 
@@ -1055,9 +1054,10 @@ type CallHierarchyOutgoingCall struct {
 	To *CallHierarchyItem `json:"to"`
 
 	// The range at which this item is called. This is the range relative to
-	// the caller, e.g the item passed to
-	// [`provideCallHierarchyOutgoingCalls`](#CallHierarchyItemProvider.provideCallHierarchyOutgoingCalls)
-	// and not [`this.to`](#CallHierarchyOutgoingCall.to).
+	// the caller, e.g the item passed to {@link
+	// CallHierarchyItemProvider.provideCallHierarchyOutgoingCalls
+	// `provideCallHierarchyOutgoingCalls`} and not {@link
+	// CallHierarchyOutgoingCall.to `this.to`}.
 	FromRanges []Range `json:"fromRanges"`
 }
 
@@ -1849,7 +1849,7 @@ type TypeHierarchyItem struct {
 
 	// The range that should be selected and revealed when this symbol is
 	// being picked, e.g. the name of a function. Must be contained by the
-	// [`range`](#TypeHierarchyItem.range).
+	// {@link TypeHierarchyItem.range `range`}.
 	SelectionRange *Range `json:"selectionRange"`
 
 	// A data entry field that is preserved between a type hierarchy prepare
@@ -3532,18 +3532,18 @@ type CompletionItem struct {
 	Preselect *Boolean `json:"preselect"`
 
 	// A string that should be used when comparing this item with other
-	// items. When `falsy` the [label](#CompletionItem.label) is used.
+	// items. When `falsy` the {@link CompletionItem.label label} is used.
 	SortText *String `json:"sortText"`
 
 	// A string that should be used when filtering a set of completion
-	// items. When `falsy` the [label](#CompletionItem.label) is used.
+	// items. When `falsy` the {@link CompletionItem.label label} is used.
 	FilterText *String `json:"filterText"`
 
 	// A string that should be inserted into a document when selecting this
-	// completion. When `falsy` the [label](#CompletionItem.label) is used.
-	// The `insertText` is subject to interpretation by the client side.
-	// Some tools might not take the string literally. For example VS Code
-	// when code complete is requested in this example `con<cursor
+	// completion. When `falsy` the {@link CompletionItem.label label} is
+	// used.  The `insertText` is subject to interpretation by the client
+	// side. Some tools might not take the string literally. For example VS
+	// Code when code complete is requested in this example `con<cursor
 	// position>` and a completion item with an `insertText` of `console` is
 	// provided it will only insert `sole`. Therefore it is recommended to
 	// use `textEdit` instead since it avoids additional client side
@@ -3563,14 +3563,14 @@ type CompletionItem struct {
 	// 3.16.0
 	InsertTextMode *InsertTextMode `json:"insertTextMode"`
 
-	// An [edit](#TextEdit) which is applied to a document when selecting
-	// this completion. When an edit is provided the value of
-	// [insertText](#CompletionItem.insertText) is ignored.  Most editors
-	// support two different operations when accepting a completion item.
-	// One is to insert a completion text and the other is to replace an
-	// existing text with a completion text. Since this can usually not be
-	// predetermined by a server it can report both ranges. Clients need to
-	// signal support for `InsertReplaceEdits` via the
+	// An {@link TextEdit edit} which is applied to a document when
+	// selecting this completion. When an edit is provided the value of
+	// {@link CompletionItem.insertText insertText} is ignored.  Most
+	// editors support two different operations when accepting a completion
+	// item. One is to insert a completion text and the other is to replace
+	// an existing text with a completion text. Since this can usually not
+	// be predetermined by a server it can report both ranges. Clients need
+	// to signal support for `InsertReplaceEdits` via the
 	// `textDocument.completion.insertReplaceSupport` client capability
 	// property.  *Note 1:* The text edit's range as well as both ranges
 	// from an insert replace edit must be a [single line] and they must
@@ -3590,13 +3590,13 @@ type CompletionItem struct {
 	// 3.17.0
 	TextEditText *String `json:"textEditText"`
 
-	// An optional array of additional [text edits](#TextEdit) that are
+	// An optional array of additional {@link TextEdit text edits} that are
 	// applied when selecting this completion. Edits must not overlap
-	// (including the same insert position) with the main
-	// [edit](#CompletionItem.textEdit) nor with themselves.  Additional
-	// text edits should be used to change text unrelated to the current
-	// cursor position (for example adding an import statement at the top of
-	// the file if the completion item will insert an unqualified type).
+	// (including the same insert position) with the main {@link
+	// CompletionItem.textEdit edit} nor with themselves.  Additional text
+	// edits should be used to change text unrelated to the current cursor
+	// position (for example adding an import statement at the top of the
+	// file if the completion item will insert an unqualified type).
 	AdditionalTextEdits []TextEdit `json:"additionalTextEdits"`
 
 	// An optional set of characters that when pressed while this completion
@@ -3605,15 +3605,14 @@ type CompletionItem struct {
 	// superfluous characters will be ignored.
 	CommitCharacters []String `json:"commitCharacters"`
 
-	// An optional [command](#Command) that is executed *after* inserting
-	// this completion. *Note* that additional modifications to the current
-	// document should be described with the
-	// [additionalTextEdits](#CompletionItem.additionalTextEdits)-property.
+	// An optional {@link Command command} that is executed *after*
+	// inserting this completion. *Note* that additional modifications to
+	// the current document should be described with the {@link
+	// CompletionItem.additionalTextEdits additionalTextEdits}-property.
 	Command *Command `json:"command"`
 
 	// A data entry field that is preserved on a completion item between a
-	// [CompletionRequest](#CompletionRequest) and a
-	// [CompletionResolveRequest](#CompletionResolveRequest).
+	// {@link CompletionRequest} and a {@link CompletionResolveRequest}.
 	Data *LSPAny `json:"data"`
 }
 
@@ -3644,7 +3643,7 @@ func (this *CompletionItem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&tmpMarshal)
 }
 
-// Represents a collection of [completion items](#CompletionItem) to be
+// Represents a collection of {@link CompletionItem completion items} to be
 // presented in the editor.
 type CompletionList struct {
 
@@ -3950,7 +3949,8 @@ type DocumentHighlight struct {
 	// The range this highlight applies to.
 	Range *Range `json:"range"`
 
-	// The highlight kind, default is [text](#DocumentHighlightKind.Text).
+	// The highlight kind, default is {@link DocumentHighlightKind.Text
+	// text}.
 	Kind *DocumentHighlightKind `json:"kind"`
 }
 
@@ -4511,11 +4511,11 @@ func (this *CodeLensParams) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&tmpMarshal)
 }
 
-// A code lens represents a [command](#Command) that should be shown along with
-// source text, like the number of references, a way to run tests, etc.  A code
-// lens is _unresolved_ when no command is associated to it. For performance
-// reasons the creation of a code lens and resolving should be done in two
-// stages.
+// A code lens represents a {@link Command command} that should be shown along
+// with source text, like the number of references, a way to run tests, etc.  A
+// code lens is _unresolved_ when no command is associated to it. For
+// performance reasons the creation of a code lens and resolving should be done
+// in two stages.
 type CodeLens struct {
 
 	// The range in which this code lens is valid. Should only span a single
@@ -4526,7 +4526,7 @@ type CodeLens struct {
 	Command *Command `json:"command"`
 
 	// A data entry field that is preserved on a code lens item between a
-	// [CodeLensRequest](#CodeLensRequest) and a [CodeLensResolveRequest]
+	// {@link CodeLensRequest} and a [CodeLensResolveRequest]
 	// (#CodeLensResolveRequest)
 	Data *LSPAny `json:"data"`
 }
@@ -5463,7 +5463,7 @@ type PartialResultParams struct {
 }
 
 // Represents the connection of two locations. Provides additional metadata over
-// normal [locations](#Location), including an origin range.
+// normal {@link Location locations}, including an origin range.
 type LocationLink struct {
 
 	// Span of the origin of this link.  Used as the underlined span for
@@ -8122,8 +8122,8 @@ type DocumentSymbolOptions struct {
 	Label *String `json:"label"`
 }
 
-// Contains additional diagnostic information about the context in which a [code
-// action](#CodeActionProvider.provideCodeActions) is run.
+// Contains additional diagnostic information about the context in which a
+// {@link CodeActionProvider.provideCodeActions code action} is run.
 type CodeActionContext struct {
 
 	// An array of diagnostics known on the client side overlapping the
