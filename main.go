@@ -1,5 +1,7 @@
 package main
 
+import "github.com/black-desk/notels/cmd"
+
 func main() {
-        println("hello world")
+	cmd.Execute()
 }
