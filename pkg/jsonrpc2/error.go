@@ -17,5 +17,6 @@ func AnalysisError(
 	call bool,
 	errorDataUnmarshal bool,
 ) Error {
+        // TODO(black_desk): Not implementd yet.
         return nil
 }
