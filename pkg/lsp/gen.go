@@ -6,5 +6,10 @@ package lsp
 
 // Generate lsp protocol types and interface
 
-//go:generate go run github.com/black-desk/notels/tools/lspgen
+//go:generate go run ../../tools/lspgen
+//go:generate go run github.com/segmentio/golines@latest -m 80 -t 8 --no-ignore-generated --shorten-comments -w .
+
+// Generate jsonrpc2 adaptor and proxy struct in rpc package
+
+//go:generate go run ../../tools/jsonrpc2gen github.com/black-desk/notels/pkg/lsp
 //go:generate go run github.com/segmentio/golines@latest -m 80 -t 8 --no-ignore-generated --shorten-comments -w .

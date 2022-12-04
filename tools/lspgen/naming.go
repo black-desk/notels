@@ -46,21 +46,7 @@ func typeName(prefix string, current string, t *Type) string {
 		RegisterAnd(prefix+"_"+current+"_And", t)
 		return prefix + "_" + current + "_And"
 	} else if t.Kind == "or" {
-		if len(t.Items) == 2 && t.Items[0].Name == "null" {
-			name := typeName(prefix, current, &t.Items[1])
-			if name[0:1] != "[" {
-				return "*" + name
-			} else {
-				return name
-			}
-		} else if len(t.Items) == 2 && t.Items[1].Name == "null" {
-			name := typeName(prefix, current, &t.Items[0])
-			if name[0:1] != "[" {
-				return "*" + name
-			} else {
-				return name
-			}
-		} else if len(prefix) != 0 {
+		if len(prefix) != 0 {
 			RegisterOr(prefix+"_"+current+"_Or", t)
 			return prefix + "_" + current + "_Or"
 

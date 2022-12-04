@@ -3,6 +3,8 @@ package lsp
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/black-desk/notels/pkg/jsonrpc2"
 )
 
 type URI string
@@ -17,9 +19,9 @@ type Decimal float64
 
 type RegExp string
 
-type String string
+type String = jsonrpc2.String
 
-type Boolean bool
+type Boolean = jsonrpc2.Boolean
 
 type Null struct{}
 
