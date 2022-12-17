@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"sync"
 
 	. "github.com/black-desk/lib/go/errwrap"
 )
@@ -17,25 +18,68 @@ type JsonRPCReadWriteCloser interface {
 type Conn struct {
 	jsonRPCReadWriteCloser JsonRPCReadWriteCloser
 
-	err error
+	lastErr      error
+	lastErrMutex sync.Mutex
 
-	ctx    context.Context
-	cancel context.CancelFunc
+	Ctx    context.Context
+	Cancel context.CancelFunc
 
 	messageToRead  chan json.RawMessage
 	messageToWrite chan json.RawMessage
+
+	requests  chan *Request
+	responses chan *Response
 }
 
 func NewConn(jsonRPCReadWriteCloser JsonRPCReadWriteCloser) *Conn {
 	ctx, cancel := context.WithCancel(context.Background())
 	return &Conn{
 		jsonRPCReadWriteCloser: jsonRPCReadWriteCloser,
-		err:                    nil,
-		ctx:                    ctx,
-		cancel:                 cancel,
+		lastErr:                nil,
+		lastErrMutex:           sync.Mutex{},
+		Ctx:                    ctx,
+		Cancel:                 cancel,
 		messageToRead:          make(chan json.RawMessage),
 		messageToWrite:         make(chan json.RawMessage),
+		requests:               make(chan *Request),
+		responses:              make(chan *Response),
 	}
+}
+
+func (c *Conn) Requests() <-chan *Request {
+	return c.requests
+}
+
+func (c *Conn) Responses() <-chan *Response {
+	return c.responses
+}
+
+func (c *Conn) WriteRequest(req *Request) error {
+	if err := validate.Struct(req); err != nil {
+		return Trace(err)
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		return Trace(err)
+	}
+
+	c.messageToWrite <- msg
+	return nil
+}
+
+func (c *Conn) WriteResponse(resp *Response) error {
+	if err := validate.Struct(resp); err != nil {
+		return Trace(err)
+	}
+
+	msg, err := json.Marshal(resp)
+	if err != nil {
+		return Trace(err)
+	}
+
+	c.messageToWrite <- msg
+	return nil
 }
 
 func (c *Conn) Run() error {
@@ -44,23 +88,25 @@ func (c *Conn) Run() error {
 	go c.startHandleWrite()
 	go c.startDispatch()
 
-	<-c.ctx.Done()
-	return Trace(c.err)
+	<-c.Ctx.Done()
+	close(c.messageToRead)
+	close(c.messageToWrite)
+	close(c.requests)
+	close(c.responses)
+	return Trace(c.lastErr)
 }
 
 func (c *Conn) startHandleRead() {
 	for {
 		select {
-		case <-c.ctx.Done():
+		case <-c.Ctx.Done():
 			log.Infof("stop read message")
 			return
 		default:
-			msg, err := c.jsonRPCReadWriteCloser.Read(c.ctx)
-			c.handleJsonRPCReadWriteCloserError(err)
-			if c.err != nil {
-				continue
+			msg, err := c.jsonRPCReadWriteCloser.Read(c.Ctx)
+			if c.handleJsonRPCReadWriteCloserError(Trace(err)) {
+				c.messageToRead <- msg
 			}
-			c.messageToRead <- msg
 		}
 	}
 }
@@ -68,12 +114,12 @@ func (c *Conn) startHandleRead() {
 func (c *Conn) startHandleWrite() {
 	for {
 		select {
-		case <-c.ctx.Done():
-			log.Infof("stop write message")
+		case <-c.Ctx.Done():
+			log.With(c.Ctx).Infof("stop write message")
 			return
 		case msg := <-c.messageToWrite:
-			err := c.jsonRPCReadWriteCloser.Write(c.ctx, msg)
-			c.handleJsonRPCReadWriteCloserError(err)
+			err := c.jsonRPCReadWriteCloser.Write(c.Ctx, msg)
+			c.handleJsonRPCReadWriteCloserError(Trace(err))
 		}
 	}
 }
@@ -81,37 +127,41 @@ func (c *Conn) startHandleWrite() {
 func (c *Conn) startDispatch() {
 	for {
 		select {
-		case <-c.ctx.Done():
-			log.Infof("stop dispatch message")
+		case <-c.Ctx.Done():
+			log.With(c.Ctx).Infof("stop dispatch message")
 			return
 		case msg := <-c.messageToRead:
 			err := c.dispatchMessage(msg)
 			if err != nil {
-				c.handleDispatchMessageError(Trace(err))
+				log.With(c.Ctx).Errorf(
+					"failed to dispatch message %v: %v",
+					msg, err)
 			}
 		}
 	}
 }
 
-func (c *Conn) handleJsonRPCReadWriteCloserError(err error) {
+func (c *Conn) handleJsonRPCReadWriteCloserError(err error) bool {
 	if err == nil {
-		return
+		return true
 	}
 
 	if errors.Is(err, ErrNoMessageToRead) {
-		return
+		return true
 	}
 
 	if !errors.Is(err, context.Canceled) {
-		if c.err != nil {
-			panic(
-				"connection error reset detected",
-			)
-		}
-		c.err = Trace(err)
+		c.lastErrMutex.Lock()
+		defer c.lastErrMutex.Unlock()
+		log.With(c.Ctx).
+			Debugf("set connection error then cancel context")
+		c.lastErr = Trace(err)
+		c.Cancel()
+		log.With(c.Ctx).Debug("done")
 	}
 
-	c.cancel()
+	return false
+
 }
 
 func (c *Conn) dispatchMessage(msg json.RawMessage) error {
@@ -119,12 +169,14 @@ func (c *Conn) dispatchMessage(msg json.RawMessage) error {
 	var resp Response
 
 	if messageAs(msg, &req) {
+		c.requests <- &req
+		return nil
 	}
 
 	if messageAs(msg, &resp) {
+		c.responses <- &resp
+		return nil
 	}
 
-	return nil
+	return Trace(ErrInvalidMessage)
 }
-
-func (c *Conn) handleDispatchMessageError(err error) {}

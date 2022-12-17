@@ -6,6 +6,7 @@ var (
 	ErrNoMessageToRead            = errNoMessageToRead()
 	ErrInvalidID                  = errInvalidID()
 	ErrUnsupportedProtocolVersion = errUnsupportedProtocolVersion()
+	ErrInvalidMessage             = errInvalidMessage()
 )
 
 func errNoMessageToRead() error {
@@ -18,4 +19,10 @@ func errInvalidID() error {
 
 func errUnsupportedProtocolVersion() error {
 	return errors.New("Unsupported JSON-RPC protocol version")
+}
+
+func errInvalidMessage() error {
+	return errors.New(
+		"Invalid JSON-RPC 2.0 message, check your JsonRPCReadWriteCloser implementation",
+	)
 }
