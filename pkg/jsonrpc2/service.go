@@ -13,18 +13,15 @@ type Service struct {
 	conns      []*Conn
 	connsMutex sync.Mutex
 
-	methods map[string]interface{}
-
-	pendingCall map[string]chan<- Response
+	methods map[string]*reflect.Value
 }
 
 func NewService(impl any) *Service {
 	ret := &Service{
-		impl:        impl,
-		conns:       []*Conn{},
-		connsMutex:  sync.Mutex{},
-		methods:     map[string]interface{}{},
-		pendingCall: map[string]chan<- Response{},
+		impl:       impl,
+		conns:      []*Conn{},
+		connsMutex: sync.Mutex{},
+		methods:    map[string]*reflect.Value{},
 	}
 
 	ret.initMethods()
@@ -40,7 +37,7 @@ func (s *Service) initMethods() {
 		field := rt.Field(i)
 		if !fieldValue.IsNil() {
 			if name, ok := parseStructTag(field); ok {
-				s.methods[name] = fieldValue
+				s.methods[name] = &fieldValue
 			}
 		}
 	}
@@ -76,13 +73,7 @@ func parseStructTag(rsf reflect.StructField) (string, bool) {
 
 func (s *Service) Run(ctx context.Context) {
 	for {
-		select {
-		case <-ctx.Done():
-			log.Infof("stop json rpc service")
-			return
-		default:
-			s.checkAllConn(ctx)
-		}
+		s.checkAllConn(ctx)
 	}
 }
 
@@ -106,22 +97,21 @@ func (s *Service) checkAllConn(ctx context.Context) {
 			return
 		case req := <-conn.Requests():
 			go s.handleRequest(
-				context.WithValue(
-					conn.Ctx,
-					"conn", conn),
-				req)
-		case resp := <-conn.Responses():
-			go s.dispatchResponse(
-				context.WithValue(
-					conn.Ctx,
-					"conn", conn),
-				resp)
+				context.WithValue(conn.Ctx, "conn", conn),
+				conn, req)
 		}
 	}
 }
 
-func (s *Service) handleRequest(ctx context.Context, req *Request) {
-}
+func (s *Service) handleRequest(ctx context.Context, conn *Conn, req *Request) {
+	method, ok := s.methods[req.Method]
+	if !ok {
+		s.returnMethodNotFound(ctx, conn, req.Id)
+		return
+	}
 
-func (s *Service) dispatchResponse(ctx context.Context, resp *Response) {
+	numIn := reflect.TypeOf(method).NumIn()
+	// func(ctx context.Context, param *struct{}) (result*struct{}, error)
+
+	method.Call()
 }

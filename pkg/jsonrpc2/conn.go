@@ -10,7 +10,7 @@ import (
 )
 
 type JsonRPCReadWriteCloser interface {
-	Read(context.Context) (json.RawMessage, error)
+	Read(context.Context) (json.RawMessage, chan<- json.RawMessage, error)
 	Write(context.Context, json.RawMessage) error
 	Close() error
 }
@@ -24,11 +24,14 @@ type Conn struct {
 	Ctx    context.Context
 	Cancel context.CancelFunc
 
-	messageToRead  chan json.RawMessage
-	messageToWrite chan json.RawMessage
+	messageToRead       chan json.RawMessage
+	messageToWrite      chan json.RawMessage
+	messageToWriteMutex sync.Mutex
 
-	requests  chan *Request
-	responses chan *Response
+	requests chan *Request
+
+	pendingCall sync.Map
+	waitGroup   sync.WaitGroup
 }
 
 func NewConn(jsonRPCReadWriteCloser JsonRPCReadWriteCloser) *Conn {
@@ -42,7 +45,7 @@ func NewConn(jsonRPCReadWriteCloser JsonRPCReadWriteCloser) *Conn {
 		messageToRead:          make(chan json.RawMessage),
 		messageToWrite:         make(chan json.RawMessage),
 		requests:               make(chan *Request),
-		responses:              make(chan *Response),
+		pendingCall:            sync.Map{},
 	}
 }
 
@@ -50,13 +53,42 @@ func (c *Conn) Requests() <-chan *Request {
 	return c.requests
 }
 
-func (c *Conn) Responses() <-chan *Response {
-	return c.responses
-}
-
 func (c *Conn) WriteRequest(req *Request) error {
 	if err := validate.Struct(req); err != nil {
 		return Trace(err)
+	}
+
+	if req.IsNotification() {
+		panic(
+			"should not pass notification message to WriteRequest, use WriteNotification",
+		)
+	}
+
+	msg, err := json.Marshal(req)
+	if err != nil {
+		return Trace(err)
+	}
+
+	_, loaded := c.pendingCall.LoadOrStore(
+		req.Id.toHashKey(), make(chan *Response))
+
+	if loaded {
+		panic("JSON-RPC 2.0 ID reused")
+	}
+
+	c.messageToWrite <- msg
+	return nil
+}
+
+func (c *Conn) WriteNotification(req *Request) error {
+	if err := validate.Struct(req); err != nil {
+		return Trace(err)
+	}
+
+	if !req.IsNotification() {
+		panic(
+			"should not pass method call message to WriteNotification, use WriteRequest",
+		)
 	}
 
 	msg, err := json.Marshal(req)
@@ -82,21 +114,28 @@ func (c *Conn) WriteResponse(resp *Response) error {
 	return nil
 }
 
+func (c *Conn) write(msg json.RawMessage) {
+	c.waitGroup.Add(1)
+	go func() {
+		defer c.waitGroup.Done()
+		c.messageToWrite <- msg
+	}()
+}
+
 func (c *Conn) Run() error {
+	c.waitGroup.Add(3)
 
 	go c.startHandleRead()
 	go c.startHandleWrite()
 	go c.startDispatch()
 
-	<-c.Ctx.Done()
-	close(c.messageToRead)
-	close(c.messageToWrite)
-	close(c.requests)
-	close(c.responses)
+	c.waitGroup.Wait()
 	return Trace(c.lastErr)
 }
 
 func (c *Conn) startHandleRead() {
+	defer close(c.messageToRead)
+	defer c.waitGroup.Done()
 	for {
 		select {
 		case <-c.Ctx.Done():
@@ -112,6 +151,7 @@ func (c *Conn) startHandleRead() {
 }
 
 func (c *Conn) startHandleWrite() {
+	defer c.waitGroup.Done()
 	for {
 		select {
 		case <-c.Ctx.Done():
@@ -125,6 +165,8 @@ func (c *Conn) startHandleWrite() {
 }
 
 func (c *Conn) startDispatch() {
+	defer close(c.requests)
+	defer c.waitGroup.Done()
 	for {
 		select {
 		case <-c.Ctx.Done():
@@ -174,7 +216,15 @@ func (c *Conn) dispatchMessage(msg json.RawMessage) error {
 	}
 
 	if messageAs(msg, &resp) {
-		c.responses <- &resp
+		respChan, loaded := c.pendingCall.LoadAndDelete(
+			resp.Id.toHashKey())
+
+		if !loaded {
+			log.Warnf("Unexceptional JSON-RPC 2.0 ID %v", resp.Id)
+			return nil
+		}
+
+		respChan.(chan *Response) <- &resp
 		return nil
 	}
 
