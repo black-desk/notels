@@ -10,7 +10,7 @@ import (
 )
 
 type JsonRPCReadWriteCloser interface {
-	Read(context.Context) (json.RawMessage, chan<- json.RawMessage, error)
+	Read(context.Context) (json.RawMessage, error)
 	Write(context.Context, json.RawMessage) error
 	Close() error
 }
@@ -21,7 +21,7 @@ type Conn struct {
 	lastErr      error
 	lastErrMutex sync.Mutex
 
-	Ctx    context.Context
+	ctx    context.Context
 	Cancel context.CancelFunc
 
 	messageToRead       chan json.RawMessage
@@ -40,7 +40,7 @@ func NewConn(jsonRPCReadWriteCloser JsonRPCReadWriteCloser) *Conn {
 		jsonRPCReadWriteCloser: jsonRPCReadWriteCloser,
 		lastErr:                nil,
 		lastErrMutex:           sync.Mutex{},
-		Ctx:                    ctx,
+		ctx:                    ctx,
 		Cancel:                 cancel,
 		messageToRead:          make(chan json.RawMessage),
 		messageToWrite:         make(chan json.RawMessage),
@@ -138,11 +138,11 @@ func (c *Conn) startHandleRead() {
 	defer c.waitGroup.Done()
 	for {
 		select {
-		case <-c.Ctx.Done():
+		case <-c.ctx.Done():
 			log.Infof("stop read message")
 			return
 		default:
-			msg, err := c.jsonRPCReadWriteCloser.Read(c.Ctx)
+			msg, err := c.jsonRPCReadWriteCloser.Read(c.ctx)
 			if c.handleJsonRPCReadWriteCloserError(Trace(err)) {
 				c.messageToRead <- msg
 			}
@@ -154,11 +154,11 @@ func (c *Conn) startHandleWrite() {
 	defer c.waitGroup.Done()
 	for {
 		select {
-		case <-c.Ctx.Done():
-			log.With(c.Ctx).Infof("stop write message")
+		case <-c.ctx.Done():
+			log.With(c.ctx).Infof("stop write message")
 			return
 		case msg := <-c.messageToWrite:
-			err := c.jsonRPCReadWriteCloser.Write(c.Ctx, msg)
+			err := c.jsonRPCReadWriteCloser.Write(c.ctx, msg)
 			c.handleJsonRPCReadWriteCloserError(Trace(err))
 		}
 	}
@@ -169,13 +169,13 @@ func (c *Conn) startDispatch() {
 	defer c.waitGroup.Done()
 	for {
 		select {
-		case <-c.Ctx.Done():
-			log.With(c.Ctx).Infof("stop dispatch message")
+		case <-c.ctx.Done():
+			log.With(c.ctx).Infof("stop dispatch message")
 			return
 		case msg := <-c.messageToRead:
 			err := c.dispatchMessage(msg)
 			if err != nil {
-				log.With(c.Ctx).Errorf(
+				log.With(c.ctx).Errorf(
 					"failed to dispatch message %v: %v",
 					msg, err)
 			}
@@ -195,11 +195,11 @@ func (c *Conn) handleJsonRPCReadWriteCloserError(err error) bool {
 	if !errors.Is(err, context.Canceled) {
 		c.lastErrMutex.Lock()
 		defer c.lastErrMutex.Unlock()
-		log.With(c.Ctx).
+		log.With(c.ctx).
 			Debugf("set connection error then cancel context")
 		c.lastErr = Trace(err)
 		c.Cancel()
-		log.With(c.Ctx).Debug("done")
+		log.With(c.ctx).Debug("done")
 	}
 
 	return false

@@ -3,11 +3,8 @@ package jsonrpc2
 import (
 	"encoding/json"
 
-	"github.com/black-desk/lib/go/logger"
 	"github.com/go-playground/validator/v10"
 )
-
-var log = logger.Get("jsonrpc2")
 
 var validate = newValidator()
 

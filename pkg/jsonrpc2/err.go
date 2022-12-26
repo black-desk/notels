@@ -1,12 +1,15 @@
 package jsonrpc2
 
-import "errors"
+import (
+	"errors"
+)
 
 var (
 	ErrNoMessageToRead            = errNoMessageToRead()
 	ErrInvalidID                  = errInvalidID()
 	ErrUnsupportedProtocolVersion = errUnsupportedProtocolVersion()
 	ErrInvalidMessage             = errInvalidMessage()
+	ErrMethodNotFound             = errMethodNotFound()
 )
 
 func errNoMessageToRead() error {
@@ -25,4 +28,8 @@ func errInvalidMessage() error {
 	return errors.New(
 		"Invalid JSON-RPC 2.0 message, check your JsonRPCReadWriteCloser implementation",
 	)
+}
+
+func errMethodNotFound() error {
+	return errors.New("No such method or method not available now")
 }

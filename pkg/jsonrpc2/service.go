@@ -1,27 +1,24 @@
 package jsonrpc2
 
 import (
-	"context"
+	"encoding/json"
 	"reflect"
 	"strings"
-	"sync"
 )
 
 type Service struct {
 	impl any
 
-	conns      []*Conn
-	connsMutex sync.Mutex
+	conn *Conn
 
 	methods map[string]*reflect.Value
 }
 
-func NewService(impl any) *Service {
+func NewService(impl any, conn *Conn) *Service {
 	ret := &Service{
-		impl:       impl,
-		conns:      []*Conn{},
-		connsMutex: sync.Mutex{},
-		methods:    map[string]*reflect.Value{},
+		impl:    impl,
+		conn:    conn,
+		methods: map[string]*reflect.Value{},
 	}
 
 	ret.initMethods()
@@ -71,42 +68,21 @@ func parseStructTag(rsf reflect.StructField) (string, bool) {
 	return name, true
 }
 
-func (s *Service) Run(ctx context.Context) {
+func (s *Service) Run() {
 	for {
-		s.checkAllConn(ctx)
-	}
-}
-
-func (s *Service) Listen(conn *Conn) {
-	s.connsMutex.Lock()
-	defer s.connsMutex.Unlock()
-	s.conns = append(s.conns, conn)
-}
-
-func (s *Service) checkAllConn(ctx context.Context) {
-	for i, conn := range s.conns {
 		select {
-		case <-ctx.Done():
+		case <-s.conn.ctx.Done():
 			return
-		case <-conn.Ctx.Done():
-			s.connsMutex.Lock()
-			defer s.connsMutex.Unlock()
-			log.With(ctx).
-				Debugf("Not listen on conn %v any more", conn)
-			s.conns = append(s.conns[:i], s.conns[i+1:]...)
-			return
-		case req := <-conn.Requests():
-			go s.handleRequest(
-				context.WithValue(conn.Ctx, "conn", conn),
-				conn, req)
+		case req := <-s.conn.Requests():
+			go s.handleRequest(req)
 		}
 	}
 }
 
-func (s *Service) handleRequest(ctx context.Context, conn *Conn, req *Request) {
+func (s *Service) handleRequest(req *Request) {
 	method, ok := s.methods[req.Method]
 	if !ok {
-		s.returnMethodNotFound(ctx, conn, req.Id)
+		s.respond(req, nil, newMethodNotFound(req.Method))
 		return
 	}
 
@@ -114,4 +90,7 @@ func (s *Service) handleRequest(ctx context.Context, conn *Conn, req *Request) {
 	// func(ctx context.Context, param *struct{}) (result*struct{}, error)
 
 	method.Call()
+}
+
+func (s *Service) respond(req *Request, result json.RawMessage, err *Error) {
 }
