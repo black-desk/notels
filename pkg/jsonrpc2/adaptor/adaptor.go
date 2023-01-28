@@ -10,7 +10,7 @@ type Adaptor struct {
 	methods map[string]jsonrpc2.Method
 }
 
-func New(opts ...option) (adaptor *Adaptor, err error) {
+func New(opts ...func(*Adaptor) *Adaptor) (adaptor *Adaptor, err error) {
 	result := &Adaptor{
 		impl: nil,
 	}
@@ -42,8 +42,8 @@ func New(opts ...option) (adaptor *Adaptor, err error) {
 	return
 }
 
-func (a *Adaptor) setupMethods() (err error){
-        return
+func (a *Adaptor) setupMethods() (err error) {
+	return
 }
 
 func (a *Adaptor) Method(name string) jsonrpc2.Method {

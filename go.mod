@@ -3,10 +3,10 @@ module github.com/black-desk/notels
 go 1.19
 
 require (
-	github.com/black-desk/lib/go v0.0.0-20230116013927-2327a9b882af
+	github.com/black-desk/lib/go v0.0.0-20230131032456-c78f9ec7faf2
 	github.com/golang/mock v1.6.0
-	github.com/onsi/ginkgo/v2 v2.7.0
-	github.com/onsi/gomega v1.25.0
+	github.com/onsi/ginkgo/v2 v2.7.1
+	github.com/onsi/gomega v1.26.0
 	github.com/spf13/cobra v1.6.1
 )
 
